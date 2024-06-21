@@ -126,7 +126,7 @@ public:
     ~MongoCollection();
 
     /*! Execute query */
-    mongoc_cursor_t* ExecuteQuery(const bson_t* b);
+    mongoc_cursor_t* ExecuteQuery(const bson_t* b, const bson_t* opts = nullptr);
 
     /*! Query the records number */
     vint QueryRecordsCount();

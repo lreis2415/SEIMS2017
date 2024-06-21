@@ -11,7 +11,7 @@
 #ifndef SEIMS_MODEL_MAIN_H
 #define SEIMS_MODEL_MAIN_H
 
-/// include build-in libs
+// include build-in libs
 #include <string>
 #include <ctime>
 #include <memory>
@@ -20,15 +20,15 @@
 #include "db_mongoc.h"
 #include "data_raster.hpp"
 
-/// include utility classes and const definition of SEIMS
+// include utility classes and const definition of SEIMS
 #include "seims.h"
-/// include data related
+// include data related
 #ifdef USE_MONGODB
 #include "DataCenterMongoDB.h"
 #endif /* USE_MONGODB */
 #include "SettingsInput.h"
 #include "SettingsOutput.h"
-/// include module_setting related
+// include module_setting related
 #include "ModuleFactory.h"
 
 /*!

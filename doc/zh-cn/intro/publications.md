@@ -1,4 +1,4 @@
-1.4 Publications {#publications}
+成果发表 {#publications}
 ==================================
 
 [TOC]

@@ -1,6 +1,6 @@
-1.3 Terminology {#terminology}
+术语 {#terminology}
 ==================================
 
 [TOC]
 
-Coming soon...
+计划中...

@@ -16,7 +16,7 @@
 
 /*!
  * \defgroup SNO_WB
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Calculate snow water balance
  *
  */

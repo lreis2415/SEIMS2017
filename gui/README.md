@@ -1,4 +1,0 @@
-SEIMS GUI
-=========
-
-TODO

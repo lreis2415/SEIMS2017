@@ -32,7 +32,7 @@
 #include "clsSubbasin.h"
 
 /** \defgroup GWA_RE
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Reservoir Method to calculate groundwater balance and baseflow of longterm model
  *
  */

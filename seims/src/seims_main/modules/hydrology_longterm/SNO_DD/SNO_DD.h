@@ -18,7 +18,7 @@
 
 /*!
  * \defgroup SNO_DD
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Calculate snow melt by Degree-Day method
  *
  */

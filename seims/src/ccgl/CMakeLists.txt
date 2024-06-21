@@ -17,6 +17,13 @@
 #       -DLLVM_ROOT_DIR Specific the root directory of brew installed LLVM, e.g., /opt/homebrew/opt/llvm
 #       -DBUILD_DOC=1 means build CCGL documentation based on doxygen
 #
+#       Sanitizers related flags (Experimental):
+#
+#       -DSANITIZE_ADDRESS=On for MSVC and Clang
+#       -DSANITIZE_MEMORY=On for MSVC, GCC, and Clang
+#       -DSANITIZE_THREAD=On for MSVC, GCC, and Clang
+#       -DSANITIZE_UNDEFINED=On for MSVC, GCC, and Clang
+#
 #  Routine testing platforms and compilers include:
 #     1. Windows 10 with Visual Studio 2010/2015/2019, mongo-c-driver-1.16.2, GDAL-1.11.4/2.4.4/3.3.3
 #     2. CentOS 6.2 (cluster) with GCC-4.8.4, mongo-c-driver-1.5.5, GDAL-1.9.0
@@ -25,7 +32,7 @@
 #              mongo-c-driver-1.16.2, GDAL-3.3.3 (brew installed and framework by kyngchaos.com)
 #
 #  Created and maintained by Liangjun Zhu, zlj(a)lreis.ac.cn
-#  Latest updated: Apr 5, 2023
+#  Latest updated: Aug 10, 2023
 #  Copyright (C) 2017-2023 Lreis, IGSNRR, CAS
 # ----------------------------------------------------------------------------
 ### Disable in-source builds to prevent source tree corruption.
@@ -88,9 +95,9 @@ ELSE()
     ENDIF ()
 ENDIF ()
 
-SET(INSTALL_PREFIX ${INSTALL_DIR})
-SET(CMAKE_INSTALL_PREFIX ${INSTALL_DIR})
-SET(DOC_INSTALL_DIR "${INSTALL_DIR}/doc" CACHE PATH "Path to the documentation")
+SET(INSTALL_PREFIX ${INSTALL_DIR} CACHE PATH "Set INSTALL_PREFIX cache" FORCE)
+SET(CMAKE_INSTALL_PREFIX ${INSTALL_DIR} CACHE PATH "Set CMAKE_INSTALL_PREFIX cache" FORCE)
+SET(DOC_INSTALL_DIR "${INSTALL_DIR}/doc" CACHE PATH "Set path cache to the documentation")
 
 ### Allow project folders in MSVC.
 IF(MSVC OR XCODE)
@@ -256,6 +263,14 @@ IF ((CV_GCC OR CV_CLANG) AND CODE_COVERAGE)
     SET(UNITTEST 1)
 ENDIF ()
 
+### Check if use Sanitizers for GCC and Clang
+SET(USE_SAN 0)
+IF (SANITIZE_ADDRESS OR SANITIZE_MEMORY OR SANITIZE_THREAD OR SANITIZE_UNDEFINED)
+  SET(USE_SAN 1)
+  find_package(Sanitizers)
+ENDIF ()
+
+
 ### Build Googletest if UNITTEST is set as True or 1
 IF (UNITTEST STREQUAL 1)
     ADD_DEFINITIONS(-DUNITTEST)
@@ -300,7 +315,7 @@ IF (UNITTEST STREQUAL 1)
     enable_testing()
     ADD_SUBDIRECTORY(${TEST_DIR})
     # For the convenient of debugging in MSVC and CLion
-    IF (CMAKE_GENERATOR MATCHES "Visual Studio" OR CMAKE_GENERATOR MATCHES "XCode")
+    IF (CMAKE_GENERATOR MATCHES "Visual Studio" OR CMAKE_GENERATOR MATCHES "Xcode")
         FILE(COPY ${CCGL_BASE_DIR}/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test/Debug)
         FILE(COPY ${CCGL_BASE_DIR}/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test/Release)
     ELSE ()

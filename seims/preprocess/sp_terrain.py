@@ -490,8 +490,8 @@ class TerrainUtilClass(object):
 
         status_output('Generating depression storage capacity...', 20, f)
         TerrainUtilClass.depression_capacity(cfg.maindb, cfg.spatials.landuse,
-                                             cfg.spatials.soil_texture,
                                              cfg.spatials.slope,
+                                             cfg.spatials.soil_texture,
                                              cfg.spatials.depression,
                                              cfg.imper_perc_in_urban)
 

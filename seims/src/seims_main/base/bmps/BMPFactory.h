@@ -22,7 +22,7 @@ using namespace data_raster;
 /*!
  * \namespace bmps
  * \brief All BMPs scenario related data, classes, and functions.
- * \ingroup scenarios
+ * \ingroup bmps
  */
 namespace bmps {
 /*!

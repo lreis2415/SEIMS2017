@@ -9,8 +9,9 @@
 #include "seims.h"
 
 /*!
- * \defgroup NutrientCommon Functions for climate related intermediate parameters.
+ * \defgroup NutrientCommon
  * \ingroup common_algorithm
+ * \brief Functions for climate related intermediate parameters.
  */
 
 /*!

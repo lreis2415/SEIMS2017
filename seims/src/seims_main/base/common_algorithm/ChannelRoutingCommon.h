@@ -9,8 +9,9 @@
 #include <seims.h>
 
 /*!
- * \defgroup ChannelRouting Some common used function in channel routing related modules, e.g., MUSK_CH.
+ * \defgroup ChannelRouting 
  * \ingroup common_algorithm
+ * \brief Functions for channel routing related modules, e.g., MUSK_CH.
  */
 
 /*!

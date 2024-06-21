@@ -1,10 +1,10 @@
 """@package run_seims
 Configure and run SEIMS model.
 
-    In order to avoid thread lock problems may caused by pymongo (MongoClient),
+    In order to avoid thread lock problems may be caused by pymongo (MongoClient),
       several functions should be called by following format:
 
-      model.SetMongoClient()  # the global client object (global_mongoclient.py) will be used
+      model.SetMongoClient()  # the singleton MongoDB client object will be used
       model.ReadOutletObservations()
       model.UnsetMongoClient()
 
@@ -46,7 +46,7 @@ from subprocess import CalledProcessError
 if os.path.abspath(os.path.join(sys.path[0], '..')) not in sys.path:
     sys.path.insert(0, os.path.abspath(os.path.join(sys.path[0], '..')))
 
-import global_mongoclient as MongoDBObj
+# import global_mongoclient as MongoDBObj
 
 from pygeoc.utils import UtilClass, FileClass, StringClass, \
     sysstr, is_string, get_config_parser
@@ -211,6 +211,7 @@ class ParseSEIMSConfig(object):
                                 'out_stime': self.out_stime, 'out_etime': self.out_etime,
                                 'workload': self.workload
                                 }
+        print(self.config_dict)
         return self.config_dict
 
 
@@ -389,19 +390,8 @@ class MainSEIMS(object):
         """Should be invoked outset of this script and followed by `UnsetMongoClient`
         """
         if self.mongoclient is None:
-            self.mongoclient = MongoDBObj.client  # type: MongoClient
-
-    def ConnectMongoDB(self):
-        """Connect to MongoDB if no connected `MongoClient` is available
-        Should not be invoked NOW!
-
-        TODO: should we add a flag to force connect to MongoDB by host and port, rather than
-        TODO:   import from db_mongodb module?
-        """
-        if self.mongoclient is not None:
-            return
-        # Currently, ConnectMongoDB will terminate the program if the connection is failed
-        self.mongoclient = ConnectMongoDB(self.host, self.port).get_conn()
+            self.mongoclient = ConnectMongoDB(ip=self.host, port=self.port).get_conn()
+            # self.mongoclient = MongoDBObj.client  # type: MongoClient
 
     def UnsetMongoClient(self):
         """Should be invoked together with `SetMongoClient`
@@ -684,7 +674,7 @@ class MainSEIMS(object):
             stime = [stime]
         if not isinstance(etime, list):
             etime = [etime]
-        self.ConnectMongoDB()
+        self.SetMongoClient()
         read_model = ReadModelData(self.mongoclient, self.db_name)
         for idx, outputid in enumerate(output_ids):
             cur_stime = stime[0]

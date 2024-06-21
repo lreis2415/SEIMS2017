@@ -8,14 +8,12 @@ on:
       - dev
     paths-ignore:
       - 'data'
-      - 'gui'
       - 'knowledge'
   pull_request:
     branches:
       - dev
     paths-ignore:
       - 'data'
-      - 'gui'
       - 'knowledge'
   workflow_dispatch:
 

@@ -40,6 +40,11 @@ static const char LOG_RELEASE[] = "RELEASE";
 
 el::base::type::StoragePointer sharedLoggingRepository();
 
+/*!
+ * \class Logging
+ * \ingroup util
+ * \brief Logging swapper of easylogging++.h
+ */
 class Logging {
     static el::Configurations gDefaultConf;
 public:

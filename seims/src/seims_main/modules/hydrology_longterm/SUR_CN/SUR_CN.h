@@ -33,7 +33,7 @@
 
 /*!
  * \defgroup SUR_CN
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief SCS Curve Number Method to calculate infiltration and excess precipitation
  *
  */

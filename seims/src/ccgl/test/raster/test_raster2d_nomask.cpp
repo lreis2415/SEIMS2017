@@ -56,6 +56,9 @@ public:
         raster_name2 = rs2.c_str();
         raster_name3 = rs3.c_str();
     }
+
+    ~InputRasterFiles() { ; }
+
     const char* raster_name1;
     const char* raster_name2;
     const char* raster_name3;
@@ -791,10 +794,10 @@ TEST_P(clsRasterDataTest2DNoMask, RasterIOWithCalcPos) {
 #ifdef USE_GDAL
 INSTANTIATE_TEST_CASE_P(MultipleLayers, clsRasterDataTest2DNoMask,
                         Values(new InputRasterFiles(rs1_asc, rs2_asc, rs3_asc),
-                            new InputRasterFiles(rs1_tif, rs2_tif, rs3_tif)));
+                            new InputRasterFiles(rs1_tif, rs2_tif, rs3_tif)),);
 #else
 INSTANTIATE_TEST_CASE_P(MultipleLayers, clsRasterDataTest2DNoMask,
-                        Values(new InputRasterFiles(rs1_asc, rs2_asc, rs3_asc)));
+                        Values(new InputRasterFiles(rs1_asc, rs2_asc, rs3_asc)),);
 #endif /* USE_GDAL */
 
 } /* namespace */

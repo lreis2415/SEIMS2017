@@ -47,41 +47,37 @@ int DepressionFSDaily::Execute() {
     for (int i = 0; i < m_nCells; i++) {
         //////////////////////////////////////////////////////////////////////////
         // runoff
-		// ����ݵ����Ϊ0��m_sr = m_pe����������ȣ��ݵ���ˮ��� = 0
         if (m_depCap[i] < 0.001) {
             m_sr[i] = m_pe[i];
             m_sd[i] = 0.;
-        } else if (m_pe[i] > 0.) {
-			// ����ݵ����> 0������Ǳ����ɢ��� > 0���ر�������� = ���� - ���������ݵ���ˮ = ������
-            FLTPT pc = m_pe[i] - m_depCap[i] * CalLn(1. - m_sd[i] / m_depCap[i]);
-            FLTPT deltaSd = m_pe[i] * CalExp(-pc / m_depCap[i]);
-            if (deltaSd > m_depCap[i] - m_sd[i]) {
-                deltaSd = m_depCap[i] - m_sd[i];
-            }
-            m_sd[i] += deltaSd;
-            m_sr[i] = m_pe[i] - deltaSd;
         } else {
-			// ����ݵ����> 0������Ǳ����ɢ��� = 0����ر�������� = 0���ݵ���ˮ��� = �ݵ���ˮ��� + �����������
-            m_sd[i] += m_pe[i];
-            m_sr[i] = 0.;
+            if (m_pe[i] > 0.) {
+                FLTPT pc = m_pe[i] - m_depCap[i] * CalLn(1. - m_sd[i] / m_depCap[i]);
+                FLTPT deltaSd = m_pe[i] * CalExp(-pc / m_depCap[i]);
+                if (deltaSd > m_depCap[i] - m_sd[i]) {
+                    deltaSd = m_depCap[i] - m_sd[i];
+                }
+                m_sd[i] += deltaSd;
+                m_sr[i] = m_pe[i] - deltaSd;
+                m_pe[i] = 0.;
+            } else {
+                m_sr[i] = 0.;
+            }
         }
 
         //////////////////////////////////////////////////////////////////////////
         // evaporation
-		// ����ݵ���ˮ��� > 0
         if (m_sd[i] > 0) {
             /// TODO: Is this logically right? PET is just potential, which include
             ///       not only ET from surface water, but also from plant and soil.
             ///       Please Check the corresponding theory. By LJ.
             // evaporation from depression storage
-			// �����Ǳ����ɢ��� - ֲ�������������� < �ݵ���ˮ��ȣ��ݵ����� = ��Ǳ����ɢ��� - ֲ��������������
-			// �����Ǳ����ɢ��� - ֲ�������������� > �ݵ���ˮ��ȣ��ݵ����� = �ݵ���ˮ���(ȫ������)
-            if (m_pet[i] - m_ei[i] < m_sd[i]) {
+            if (m_pet[i] >= m_ei[i] && m_pet[i] - m_ei[i] <= m_sd[i]) { // make sure m_ed >= 0
                 m_ed[i] = m_pet[i] - m_ei[i];
             } else {
                 m_ed[i] = m_sd[i];
             }
-			// �ݵ���ˮ��� - �ݵ��������
+            if (m_ed[i] < 0) { m_ed[i] = 0; }
             m_sd[i] -= m_ed[i];
         } else {
             m_ed[i] = 0.;

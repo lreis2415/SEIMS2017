@@ -137,7 +137,8 @@ void _ui64tow_s(vuint64_t value, wchar_t* buffer, size_t size, vint radix) {
 }
 
 void _gcvt_s(char* buffer, size_t size, double value, vint numberOfDigits) {
-    sprintf(buffer, "%f", value);
+    //sprintf(buffer, "%f", value);
+    snprintf(buffer, size, "%f", value);
     char* point = strchr(buffer, '.');
     if (!point) return;
     char* zero = buffer + strlen(buffer);
@@ -248,14 +249,14 @@ wstring atow(const string& astr) {
 
 vint IsInt(const string& num_str, bool& success) {
     char* endptr = nullptr;
-    int result = strtol(num_str.c_str(), &endptr, 10);
+    int result = CVT_INT(strtol(num_str.c_str(), &endptr, 10));
     success = endptr == num_str.c_str() + num_str.length() && itoa(result) == num_str;
     return result;
 }
 
 vint IsInt(const wstring& num_str, bool& success) {
     wchar_t* endptr = nullptr;
-    int result = wcstol(num_str.c_str(), &endptr, 10);
+    int result = CVT_INT(wcstol(num_str.c_str(), &endptr, 10));
     success = endptr == num_str.c_str() + num_str.length() && itow(result) == num_str;
     return result;
 }

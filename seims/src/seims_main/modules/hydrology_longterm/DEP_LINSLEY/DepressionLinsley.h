@@ -28,7 +28,7 @@
 #include "SimulationModule.h"
 
 /** \defgroup DEP_LINSLEY
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief A simple fill and spill method method to calculate depression storage
  *
  */

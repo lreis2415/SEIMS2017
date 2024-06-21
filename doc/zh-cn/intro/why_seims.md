@@ -1,6 +1,6 @@
-1.2 Why SEIMS? {#why_seims}
+为何选用SEIMS? {#why_seims}
 ==================================
 
 [TOC]
 
-Coming soon...
+计划中...

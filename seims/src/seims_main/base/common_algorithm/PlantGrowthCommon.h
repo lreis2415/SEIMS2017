@@ -14,8 +14,9 @@
 //using namespace ccgl;
 
 /*!
- * \defgroup PlantGrowthCommon Some common used function in Plant growth module, e.g., PG_EPIC.
+ * \defgroup PlantGrowthCommon
  * \ingroup common_algorithm
+ * \brief Functions for Plant growth related modules, e.g., PG_EPIC.
  */
 
 #define MAX_CROP_LAND_USE_ID   97

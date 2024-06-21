@@ -68,6 +68,7 @@ clsSubbasins::clsSubbasins(map<string, IntRaster*>& rs_int_map,
     std::ostringstream oss;
     oss << prefix_id << "_" << VAR_SUBBSN[0];
     rs_int_map[GetUpper(oss.str())]->GetRasterData(&n_cells, &subbasin_data);
+    cell_width = rs_int_map[GetUpper(oss.str())]->GetCellWidth();
 
     // valid cell indexes of each subbasin, key is subbasin ID, value is vector of cell's index
     map<int, vector<int> > cell_list_map;

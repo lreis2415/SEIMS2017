@@ -23,9 +23,10 @@
  *   -11. Apr. 2022 lj Comprehensive functional testing, bug fixing, and robustness improving.
  *                     Add subset feature to support data decomposition and combination.
  *   -12. Jul. 2023 lj Add valid position index (1D array, pos_idx_) and will remove pos_data_ in next version.
+ *   -13. Aug. 2023 lj Add GDAL data types added from versions 3.5 and 3.7
  *
  * \author Liangjun Zhu, zlj(at)lreis.ac.cn
- * \version 2.7
+ * \version 2.8
  */
 #ifndef CCGL_DATA_RASTER_H
 #define CCGL_DATA_RASTER_H
@@ -118,15 +119,17 @@ typedef std::pair<double, double> XY_COOR; /// Coordinate pair
  * \brief Raster data types follows GDALDataType
  */
 typedef enum {
-    RDT_Unknown,
-    RDT_UInt8,
-    RDT_Int8,
-    RDT_UInt16,
-    RDT_Int16,
-    RDT_UInt32,
-    RDT_Int32,
-    RDT_Float,
-    RDT_Double
+    RDT_Unknown,  ///< GDT_Unknown
+    RDT_UInt8,    ///< GDT_Byte
+    RDT_Int8,     ///< GDT_Int8, GDAL>=3.7
+    RDT_UInt16,   ///< GDT_UInt16
+    RDT_Int16,    ///< GDT_Int16
+    RDT_UInt32,   ///< GDT_UInt32
+    RDT_Int32,    ///< GDT_Int32
+    RDT_UInt64,   ///< GDT_UInt64, GDAL>=3.5
+    RDT_Int64,    ///< GDT_Int64, GDAL>=3.5
+    RDT_Float,    ///< GDT_Float32
+    RDT_Double    ///< GDT_Float64
 } RasterDataType;
 
 /** Common functions independent to clsRasterData **/
@@ -371,12 +374,14 @@ bool ReadRasterFileByGdal(const string& filename, STRDBL_MAP& header, T*& values
     double minmax[2];
     T* tmprasterdata = nullptr;
     bool read_as_signedbyte = false;
-    signed char* char_data = nullptr; // DO NOT use char*
     unsigned char* uchar_data = nullptr;
+    signed char* char_data = nullptr; // DO NOT use char*
     vuint16_t* uint16_data = nullptr; // 16-bit unsigned integer
     vint16_t* int16_data = nullptr;   // 16-bit signed integer
     vuint32_t* uint32_data = nullptr; // 32-bit unsigned integer
     vint32_t* int32_data = nullptr;   // 32-bit signed integer
+    vuint64_t* uint64_data = nullptr; // 64-bit unsigned integer
+    vint64_t* int64_data = nullptr;   // 64-bit signed integer
     float* float_data = nullptr;
     double* double_data = nullptr;
     CPLErr result;
@@ -391,9 +396,11 @@ bool ReadRasterFileByGdal(const string& filename, STRDBL_MAP& header, T*& values
         //    2) maximum <= 127 and minimum >= 0 and no_data_value_ < 0 ==> signed char
         // Otherwise, unsigned char.
         //
+        // Update (08/09/2023): GDAL>=3.7 added the support of GDT_Int8. Keep this code for compatibility!
+        //
         po_band->ComputeRasterMinMax(approx_minmax, minmax);
         if ((minmax[1] <= 127 && minmax[0] < 0)
-            || (minmax[1] <= 127 && minmax[0] >= 0 && (!get_value_flag || get_value_flag && nodata < 0))) {
+            || (minmax[1] <= 127 && minmax[0] >= 0 && (!get_value_flag || (get_value_flag && nodata < 0)))) {
             read_as_signedbyte = true;
         }
         uchar_data = static_cast<unsigned char*>(CPLMalloc(sizeof(unsigned char) * n_cols * n_rows));
@@ -417,6 +424,21 @@ bool ReadRasterFileByGdal(const string& filename, STRDBL_MAP& header, T*& values
         }
         CPLFree(uchar_data);
         break;
+#if GDAL_VERSION_MAJOR >= 3 && GDAL_VERSION_MINOR >= 7
+    case GDT_Int8:
+            char_data = static_cast<signed char*>(CPLMalloc(sizeof(signed char) * n_cols * n_rows));
+            result = po_band->RasterIO(GF_Read, 0, 0, n_cols, n_rows, char_data,
+                                       n_cols, n_rows, GDT_Int8, 0, 0);
+            if (result != CE_None) {
+                StatusMessage("RaterIO trouble: " + string(CPLGetLastErrorMsg()));
+                GDALClose(po_dataset);
+                return false;
+            }
+            Initialize1DArray(n_rows * n_cols, tmprasterdata, char_data);
+            CPLFree(char_data);
+            in_type = RDT_Int8;
+            break;
+#endif
     case GDT_UInt16:
         uint16_data = static_cast<vuint16_t*>(CPLMalloc(sizeof(vuint16_t) * n_cols * n_rows));
         result = po_band->RasterIO(GF_Read, 0, 0, n_cols, n_rows, uint16_data,
@@ -469,6 +491,34 @@ bool ReadRasterFileByGdal(const string& filename, STRDBL_MAP& header, T*& values
         CPLFree(int32_data);
         in_type = RDT_Int32;
         break;
+#if GDAL_VERSION_MAJOR >= 3 && GDAL_VERSION_MINOR >= 5
+    case GDT_UInt64:
+        uint64_data = static_cast<vuint64_t*>(CPLMalloc(sizeof(vuint64_t) * n_cols * n_rows));
+        result = po_band->RasterIO(GF_Read, 0, 0, n_cols, n_rows, uint64_data,
+                                   n_cols, n_rows, GDT_UInt64, 0, 0);
+        if (result != CE_None) {
+            StatusMessage("RaterIO trouble: " + string(CPLGetLastErrorMsg()));
+            GDALClose(po_dataset);
+            return false;
+        }
+        Initialize1DArray(n_rows * n_cols, tmprasterdata, uint64_data);
+        CPLFree(uint64_data);
+        in_type = RDT_UInt64;
+        break;
+    case GDT_Int64:
+        int64_data = static_cast<vint64_t*>(CPLMalloc(sizeof(vint64_t) * n_cols * n_rows));
+        result = po_band->RasterIO(GF_Read, 0, 0, n_cols, n_rows, int64_data,
+                                   n_cols, n_rows, GDT_Int64, 0, 0);
+        if (result != CE_None) {
+            StatusMessage("RaterIO trouble: " + string(CPLGetLastErrorMsg()));
+            GDALClose(po_dataset);
+            return false;
+        }
+        Initialize1DArray(n_rows * n_cols, tmprasterdata, int64_data);
+        CPLFree(int64_data);
+        in_type = RDT_Int64;
+        break;
+#endif
     case GDT_Float32:
         float_data = static_cast<float*>(CPLMalloc(sizeof(float) * n_cols * n_rows));
         result = po_band->RasterIO(GF_Read, 0, 0, n_cols, n_rows, float_data,
@@ -574,7 +624,9 @@ bool WriteSingleGeotiff(const string& filename, const STRDBL_MAP& header,
         }
         else if (outtype == RDT_Int8) { // [-128, 127]
             // https://gdal.org/drivers/raster/gtiff.html
+#if GDAL_VERSION_MAJOR < 3 || (GDAL_VERSION_MAJOR == 3 && GDAL_VERSION_MINOR < 7)
             papsz_options = CSLSetNameValue(papsz_options, "PIXELTYPE", "SIGNEDBYTE");
+#endif
             new_values = static_cast<signed char*>(CPLMalloc(sizeof(signed char) * n_cols * n_rows));
             signed char* values_char = static_cast<signed char*>(new_values);
             if (old_nodata < INT8_MIN || old_nodata > INT8_MAX) {
@@ -669,6 +721,46 @@ bool WriteSingleGeotiff(const string& filename, const STRDBL_MAP& header,
             }
             if (illegal_count > 0) convert_permit = false;
         }
+#if GDAL_VERSION_MAJOR >= 3 && GDAL_VERSION_MINOR >=5
+        else if (outtype == RDT_UInt64) { // [0, 18446744073709551615]
+            new_values = static_cast<vuint64_t*>(CPLMalloc(sizeof(vuint64_t) * n_cols * n_rows));
+            vuint64_t* values_uint64 = static_cast<vuint64_t*>(new_values);
+            if (old_nodata < 0 || old_nodata > UINT64_MAX) {
+                new_nodata = UINT64_MAX;
+                change_nodata = true;
+            }
+            int illegal_count = 0;
+#pragma omp parallel for reduction(+:illegal_count)
+            for (int i = 0; i < n_cols * n_rows; i++) {
+                if (FloatEqual(values[i], old_nodata) && change_nodata) {
+                    values_uint64[i] = UINT64_MAX;
+                    continue;
+                }
+                if (values[i] < 0 || values[i] > UINT64_MAX) illegal_count += 1;
+                values_uint64[i] = static_cast<vuint64_t>(values[i]);
+            }
+            if (illegal_count > 0) convert_permit = false;
+        }
+        else if (outtype == RDT_Int64) { // [-18446744073709551615, 18446744073709551615]
+            new_values = static_cast<vint64_t*>(CPLMalloc(sizeof(vint64_t) * n_cols * n_rows));
+            vint64_t* values_int64 = static_cast<vint64_t*>(new_values);
+            if (old_nodata < INT64_MIN || old_nodata > INT64_MAX) {
+                new_nodata = INT64_MIN;
+                change_nodata = true;
+            }
+            int illegal_count = 0;
+#pragma omp parallel for reduction(+:illegal_count)
+            for (int i = 0; i < n_cols * n_rows; i++) {
+                if (FloatEqual(values[i], old_nodata) && change_nodata) {
+                    values_int64[i] = INT64_MIN;
+                    continue;
+                }
+                if (values[i] < INT64_MIN || values[i] > INT64_MAX) illegal_count += 1;
+                values_int64[i] = static_cast<vint64_t>(values[i]);
+            }
+            if (illegal_count > 0) convert_permit = false;
+        }
+#endif
         else if (outtype == RDT_Float) {
             new_values = static_cast<float*>(CPLMalloc(sizeof(float) * n_cols * n_rows));
             float* values_float = static_cast<float*>(new_values);
@@ -827,48 +919,59 @@ bool ReadGridFsFile(MongoGridFs* gfs, const string& filename,
     if (rstype == RDT_Double && size_dtype == sizeof(double)) {
         double* data_dbl = reinterpret_cast<double*>(buf);
         Initialize1DArray(value_count, data, data_dbl);
-        Release1DArray(data_dbl);
+        //Release1DArray(data_dbl);
     }
     else if (rstype == RDT_Float && size_dtype == sizeof(float)) {
         float* data_flt = reinterpret_cast<float*>(buf);
         Initialize1DArray(value_count, data, data_flt);
-        Release1DArray(data_flt);
+        //Release1DArray(data_flt);
     }
     else if (rstype == RDT_Int32 && size_dtype == sizeof(vint32_t)) {
         vint32_t* data_int32 = reinterpret_cast<vint32_t*>(buf);
         Initialize1DArray(value_count, data, data_int32);
-        Release1DArray(data_int32);
+        //Release1DArray(data_int32);
     }
     else if (rstype == RDT_UInt32 && size_dtype == sizeof(vuint32_t)) {
         vuint32_t* data_uint32 = reinterpret_cast<vuint32_t*>(buf);
         Initialize1DArray(value_count, data, data_uint32);
-        Release1DArray(data_uint32);
+        //Release1DArray(data_uint32);
+    }
+    else if (rstype == RDT_Int64 && size_dtype == sizeof(vint64_t)) {
+        vint64_t* data_int64 = reinterpret_cast<vint64_t*>(buf);
+        Initialize1DArray(value_count, data, data_int64);
+        //Release1DArray(data_int64);
+    }
+    else if (rstype == RDT_UInt64 && size_dtype == sizeof(vuint64_t)) {
+        vuint64_t* data_uint64 = reinterpret_cast<vuint64_t*>(buf);
+        Initialize1DArray(value_count, data, data_uint64);
+        //Release1DArray(data_uint64);
     }
     else if (rstype == RDT_Int16 && size_dtype == sizeof(vint16_t)) {
         vint16_t* data_int16 = reinterpret_cast<vint16_t*>(buf);
         Initialize1DArray(value_count, data, data_int16);
-        Release1DArray(data_int16);
+        //Release1DArray(data_int16);
     }
     else if (rstype == RDT_UInt16 && size_dtype == sizeof(vuint16_t)) {
         vuint16_t* data_uint16 = reinterpret_cast<vuint16_t*>(buf);
         Initialize1DArray(value_count, data, data_uint16);
-        Release1DArray(data_uint16);
+        //Release1DArray(data_uint16);
     }
     else if (rstype == RDT_Int8 && size_dtype == sizeof(vint8_t)) {
         vint8_t* data_int8 = reinterpret_cast<vint8_t*>(buf);
         Initialize1DArray(value_count, data, data_int8);
-        Release1DArray(data_int8);
+        //Release1DArray(data_int8);
     }
     else if (rstype == RDT_UInt8 && size_dtype == sizeof(vuint8_t)) {
         vuint8_t* data_uint8 = reinterpret_cast<vuint8_t*>(buf);
         Initialize1DArray(value_count, data, data_uint8);
-        Release1DArray(data_uint8);
+        //Release1DArray(data_uint8);
     }
     else {
         StatusMessage("Unconsistent of data type and size!");
         delete[] buf;
         return false;
     }
+    delete[] buf;
     return true;
 }
 
@@ -1928,7 +2031,8 @@ void clsRasterData<T, MASK_T>::InitializeRasterClass(bool is_2d /* = false */) {
     n_cells_ = -1;
     rs_type_ = RDT_Unknown;
     rs_type_out_ = RDT_Unknown;
-    no_data_value_ = static_cast<T>(NODATA_VALUE); // Be careful of unsigned data type!
+    no_data_value_ = DefaultNoDataByType(TypeToRasterDataType(typeid(T)));
+    //no_data_value_ = static_cast<T>(NODATA_VALUE); // Be careful of unsigned data type!
     default_value_ = NODATA_VALUE;
     raster_ = nullptr;
     pos_data_ = nullptr;
@@ -2380,7 +2484,7 @@ double clsRasterData<T, MASK_T>::GetStatistics(string sindex, const int lyr /* =
     sindex = GetUpper(sindex);
     if (!ValidateRasterData() || !ValidateLayer(lyr)) {
         StatusMessage("No available raster statistics!");
-        return CVT_DBL(no_data_value_);
+        return CVT_DBL(default_value_);
     }
     if (is_2draster && nullptr != raster_2d_) {
         // for 2D raster data
@@ -2393,7 +2497,7 @@ double clsRasterData<T, MASK_T>::GetStatistics(string sindex, const int lyr /* =
             return stats_2d_.at(sindex)[lyr - 1];
         }
         StatusMessage("WARNING: " + ValueToString(sindex) + " is not supported currently.");
-        return CVT_DBL(no_data_value_);
+        return CVT_DBL(default_value_);
     }
     // Else, for 1D raster data
     auto it = stats_.find(sindex);
@@ -2404,7 +2508,7 @@ double clsRasterData<T, MASK_T>::GetStatistics(string sindex, const int lyr /* =
         return stats_.at(sindex);
     }
     StatusMessage("WARNING: " + ValueToString(sindex) + " is not supported currently.");
-    return CVT_DBL(no_data_value_);
+    return CVT_DBL(default_value_);
 }
 
 template <typename T, typename MASK_T>
@@ -4044,7 +4148,7 @@ int clsRasterData<T, MASK_T>::MaskAndCalculateValidPosition() {
             Initialize1DArray(n_cells_, raster_, no_data_value_);
         }
         // Loop the masked raster values
-        int synthesis_idx = -1;
+        size_t synthesis_idx = 0;
         for (size_t k = 0; k < pos_rows.size(); ++k) {
             synthesis_idx = k;
             int tmpr = pos_rows.at(k);

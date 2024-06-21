@@ -15,8 +15,9 @@
 using std::time_t;
 
 /*!
- * \defgroup ClimateParameters Functions for climate related intermediate parameters.
+ * \defgroup ClimateParameters
  * \ingroup common_algorithm
+ * \brief Functions for climate related intermediate parameters.
  */
 
 /*!

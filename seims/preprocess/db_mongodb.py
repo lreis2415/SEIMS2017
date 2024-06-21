@@ -20,8 +20,21 @@ from pymongo.errors import ConnectionFailure, InvalidOperation
 from preprocess.text import DBTableNames, ModelParamFields
 
 
+def singleton(cls):
+    instances = dict()
+
+    def wrapper(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+
+    return wrapper
+
+
+@singleton
 class ConnectMongoDB(object):
     """Connect to MongoDB, and close when finished."""
+    client = None
 
     def __init__(self, ip, port, maxPoolSize=None):
         """initial mongodb client by hostname and port.

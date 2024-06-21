@@ -43,19 +43,22 @@ BMPPlantMgtFactory::~BMPPlantMgtFactory() {
 }
 
 void BMPPlantMgtFactory::loadBMP(MongoClient* conn, const string& bmpDBName) {
-    bson_t* b = bson_new();
-    bson_t *child1 = bson_new(), *child2 = bson_new();
-    BSON_APPEND_DOCUMENT_BEGIN(b, "$query", child1);
-    BSON_APPEND_INT32(child1, FLD_SCENARIO_SUB, m_subScenarioId);
-    bson_append_document_end(b, child1);
-    BSON_APPEND_DOCUMENT_BEGIN(b, "$orderby", child2);
-    BSON_APPEND_INT32(child2, BMP_FLD_SEQUENCE, 1);
-    bson_append_document_end(b, child2);
-    bson_destroy(child1);
-    bson_destroy(child2);
+//    bson_t* b = bson_new();
+//    bson_t *child1 = bson_new(), *child2 = bson_new();
+//    BSON_APPEND_DOCUMENT_BEGIN(b, "$query", child1);
+//    BSON_APPEND_INT32(child1, FLD_SCENARIO_SUB, m_subScenarioId);
+//    bson_append_document_end(b, child1);
+//    BSON_APPEND_DOCUMENT_BEGIN(b, "$orderby", child2);
+//    BSON_APPEND_INT32(child2, BMP_FLD_SEQUENCE, 1);
+//    bson_append_document_end(b, child2);
+//    bson_destroy(child1);
+//    bson_destroy(child2);
+
+    bson_t* b = BCON_NEW(FLD_SCENARIO_SUB, BCON_INT32(m_subScenarioId));
+    bson_t* opts = BCON_NEW("sort", "{", BMP_FLD_SEQUENCE, BCON_INT32(1), "}");
 
     std::unique_ptr<MongoCollection> collection(new MongoCollection(conn->GetCollection(bmpDBName, m_bmpCollection)));
-    mongoc_cursor_t* cursor = collection->ExecuteQuery(b);
+    mongoc_cursor_t* cursor = collection->ExecuteQuery(b, opts);
 
     const bson_t* bsonTable;
     bson_iter_t itertor;
@@ -259,6 +262,7 @@ void BMPPlantMgtFactory::loadBMP(MongoClient* conn, const string& bmpDBName) {
         count++;
     }
     bson_destroy(b);
+    bson_destroy(opts);
     mongoc_cursor_destroy(cursor);
 }
 

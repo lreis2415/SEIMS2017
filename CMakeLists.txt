@@ -9,6 +9,7 @@
 #         -DINSTALL_PREFIX=<path/to/install>
 #         -DLLVM_ROOT_DIR Specific the root directory of brew installed LLVM, e.g., /usr/local/opt/llvm
 #         -DSEIMS_DOC=1 means build SEIMS documentation based on doxygen
+#         -DBUILD_TAUDEMEXT=0 means do not build TauDEM_ext
 #
 #  Routine testing platforms and compilers include:
 #     1. Windows 10 with Visual Studio 2010/2013/2015, MSMPI-v8.1, GDAL-1.11.4
@@ -18,9 +19,9 @@
 #     5. macOS 10.14.5 with Clang-10.0 with Xcode, OpenMPI-4.0.1, GDAL-2.4.2 (brew installed)
 #
 #  Created and maintained by Liangjun Zhu (zlj@lreis.ac.cn)
-#  Latest updated: Apr 15, 2023
+#  Latest updated: Jun 12, 2024
 #
-#  Copyright (C) 2013-2023 Lreis, IGSNRR, CAS, and NJNU
+#  Copyright (C) 2013-2024 Lreis, IGSNRR, CAS, and NJNU
 # ----------------------------------------------------------------------------
 ### Disable in-source builds to prevent source tree corruption.
 IF(" ${CMAKE_SOURCE_DIR}" STREQUAL " ${CMAKE_BINARY_DIR}")
@@ -72,6 +73,8 @@ option(BUILD_SHARED_LIBS "Build shared libraries (DLLs)." OFF)
 option(BUILD_WITH_STATIC_CRT "Build against dynamic CRT on windows." ON)
 # Build documatation by doxygen
 option(SEIMS_DOC "Build SEIMS documentation." OFF)
+# Build TauDEM_ext or not
+option(BUILD_TAUDEMEXT "Do not build TauDEM_ext" ON)
 
 ### Detect compiler and target platform architecture.
 INCLUDE(Utils)
@@ -96,11 +99,9 @@ ELSE()
         SET(INSTALL_DIR ${CMAKE_INSTALL_PREFIX} CACHE PATH "Set default install path" FORCE)
     ENDIF ()
 ENDIF ()
-
-SET(INSTALL_PREFIX ${INSTALL_DIR})
-SET(CMAKE_INSTALL_PREFIX ${INSTALL_DIR})
-
-SET(DOC_INSTALL_DIR "${INSTALL_DIR}/doc" CACHE PATH "Path to the documentation")
+SET(INSTALL_PREFIX ${INSTALL_DIR} CACHE PATH "Set INSTALL_PREFIX cache" FORCE)
+SET(CMAKE_INSTALL_PREFIX ${INSTALL_DIR} CACHE PATH "Set CMAKE_INSTALL_PREFIX cache" FORCE)
+SET(DOC_INSTALL_DIR "${INSTALL_DIR}/doc" CACHE PATH "Set path of the documentation to cache" FORCE)
 
 ### Allow project folders in MSVC and Xcode.
 IF(MSVC OR XCODE)
@@ -215,12 +216,8 @@ ENDIF()
 
 ### Add subdirectories.
 ADD_SUBDIRECTORY(./seims)
-# ADD_SUBDIRECTORY(./gui)  # TODO
 IF(SEIMS_DOC)
   ADD_SUBDIRECTORY(./doc)
-  # ADD_CUSTOM_TARGET(travis_doc)
-  # ADD_CUSTOM_COMMAND(TARGET travis_doc
-  #                    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/doc/travis-doxygen.sh)
 ENDIF()
 
 ### Build platform.

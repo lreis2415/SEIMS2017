@@ -324,7 +324,7 @@ DateTime ConvertTMToDateTime(tm* time_info, vint milliseconds) {
     dt.minute = time_info->tm_min;
     dt.second = time_info->tm_sec;
 
-    dt.milliseconds = milliseconds;
+    dt.milliseconds = CVT_INT(milliseconds);
     dt.filetime = CVT_VUINT64(timer * 1000 + milliseconds);
     dt.total_milliseconds = CVT_VUINT64(timer * 1000 + milliseconds);
     delete time_info;

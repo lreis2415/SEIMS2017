@@ -21,11 +21,11 @@ if os.path.abspath(os.path.join(sys.path[0], '..')) not in sys.path:
     sys.path.insert(0, os.path.abspath(os.path.join(sys.path[0], '..')))
 
 from typing import Optional
-from pymongo import MongoClient
 from pygeoc.utils import FileClass
 
 from utility import read_data_items_from_txt
-import global_mongoclient as MongoDBObj
+# import global_mongoclient as MongoDBObj
+from preprocess.db_mongodb import MongoClient, ConnectMongoDB
 from preprocess.text import DBTableNames
 from run_seims import MainSEIMS
 from calibration.config import CaliConfig, get_optimization_config
@@ -133,7 +133,8 @@ class Calibration(object):
         if self.param_defs:
             return self.param_defs
         # read param_range_def file and output to json file
-        conn = MongoDBObj.client  # type: MongoClient
+        # conn = MongoDBObj.client  # type: MongoClient
+        conn = ConnectMongoDB(self.cfg.model.host, self.cfg.model.port).get_conn()
         db = conn[self.cfg.model.db_name]
         collection = db['PARAMETERS']
 
@@ -159,7 +160,8 @@ class Calibration(object):
 
     def reset_simulation_timerange(self):
         """Update simulation time range in MongoDB [FILE_IN]."""
-        conn = MongoDBObj.client  # type: MongoClient
+        # conn = MongoDBObj.client  # type: MongoClient
+        conn = ConnectMongoDB(self.cfg.model.host, self.cfg.model.port).get_conn()
         db = conn[self.cfg.model.db_name]
         stime_str = self.cfg.model.simu_stime.strftime('%Y-%m-%d %H:%M:%S')
         etime_str = self.cfg.model.simu_etime.strftime('%Y-%m-%d %H:%M:%S')

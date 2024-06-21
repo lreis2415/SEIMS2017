@@ -36,7 +36,6 @@ import matplotlib.pyplot as plt
 import numpy
 from typing import List
 from pygeoc.utils import FileClass, UtilClass
-from pymongo import MongoClient
 # Morris screening method
 from SALib.sample.morris import sample as morris_spl
 from SALib.analyze.morris import analyze as morris_alz
@@ -48,9 +47,10 @@ from SALib.analyze.fast import analyze as fast_alz
 from utility import read_data_items_from_txt
 from utility import save_png_eps
 from utility import SpecialJsonEncoder
-import global_mongoclient as MongoDBObj
+# import global_mongoclient as MongoDBObj
 from run_seims import MainSEIMS
 from preprocess.text import DBTableNames
+from preprocess.db_mongodb import MongoClient, ConnectMongoDB
 from parameters_sensitivity.config import PSAConfig
 from parameters_sensitivity.figure import sample_histograms, empirical_cdf
 from run_seims import ParseSEIMSConfig, create_run_model
@@ -94,7 +94,8 @@ class Sensitivity(object):
 
     def reset_simulation_timerange(self):
         """Update simulation time range in MongoDB [FILE_IN]."""
-        conn = MongoDBObj.client  # type: MongoClient
+        # conn = MongoDBObj.client  # type: MongoClient
+        conn = ConnectMongoDB(self.cfg.model.host, self.cfg.model.port).get_conn()
         db = conn[self.model.db_name]
         stime_str = self.model.simu_stime.strftime('%Y-%m-%d %H:%M:%S')
         etime_str = self.model.simu_etime.strftime('%Y-%m-%d %H:%M:%S')
@@ -131,7 +132,8 @@ class Sensitivity(object):
                     self.param_defs = UtilClass.decode_strs_in_dict(json.load(f))
                 return
         # read param_range_def file and output to json file
-        conn = MongoDBObj.client  # type: MongoClient
+        # conn = MongoDBObj.client  # type: MongoClient
+        conn = ConnectMongoDB(self.cfg.model.host, self.cfg.model.port).get_conn()
         db = conn[self.model.db_name]
         collection = db['PARAMETERS']
 
@@ -211,7 +213,8 @@ class Sensitivity(object):
             self.read_param_ranges()
         if self.param_values is None or len(self.param_values) == 0:
             self.generate_samples()
-        conn = MongoDBObj.client  # type: MongoClient
+        # conn = MongoDBObj.client  # type: MongoClient
+        conn = ConnectMongoDB(self.cfg.model.host, self.cfg.model.port).get_conn()
         db = conn[self.model.db_name]
         collection = db['PARAMETERS']
         collection.update_many({}, {'$unset': {'CALI_VALUES': ''}})

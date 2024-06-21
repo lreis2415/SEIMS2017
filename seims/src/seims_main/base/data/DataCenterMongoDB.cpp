@@ -183,15 +183,15 @@ bool DataCenterMongoDB::GetFileInStringVector() {
             LOG(ERROR) << "Nothing found in the collection: " << DB_TAB_FILE_IN << ".";
             return false;
         }
-        bson_iter_t itertor;
+        bson_iter_t it;
         const bson_t* bson_table;
         while (mongoc_cursor_more(cursor) && mongoc_cursor_next(cursor, &bson_table)) {
             vector<string> tokens(2);
-            if (bson_iter_init_find(&itertor, bson_table, Tag_ConfTag)) {
-                tokens[0] = GetStringFromBsonIterator(&itertor);
+            if (bson_iter_init_find(&it, bson_table, Tag_ConfTag)) {
+                tokens[0] = GetStringFromBsonIterator(&it);
             }
-            if (bson_iter_init_find(&itertor, bson_table, Tag_ConfValue)) {
-                tokens[1] = GetStringFromBsonIterator(&itertor);
+            if (bson_iter_init_find(&it, bson_table, Tag_ConfValue)) {
+                tokens[1] = GetStringFromBsonIterator(&it);
             }
             if (StringMatch(tokens[0], Tag_Mode)) {
                 model_mode_ = tokens[1];
@@ -284,7 +284,7 @@ bool DataCenterMongoDB::GetFileOutVector() {
 
 int DataCenterMongoDB::ReadIntParameterInDB(const char* param_name) {
     bson_t* filter = BCON_NEW(PARAM_FLD_NAME, BCON_UTF8(param_name));
-    LOG(DEBUG) << "Query for " << param_name << ": " << bson_as_json(filter, NULL);
+    CLOG(TRACE, LOG_INIT) << "Query for " << param_name << ": " << bson_as_json(filter, NULL);
     std::unique_ptr<MongoCollection>
             collection(new MongoCollection(mongo_client_->GetCollection(model_name_, DB_TAB_PARAMETERS)));
     mongoc_cursor_t* cursor = collection->ExecuteQuery(filter);
@@ -310,10 +310,13 @@ int DataCenterMongoDB::ReadIntParameterInDB(const char* param_name) {
 }
 
 void DataCenterMongoDB::ReadClimateSiteList() {
-    bson_t* query = bson_new();
-    BSON_APPEND_INT32(query, Tag_SubbasinId, subbasin_id_); // subbasin id
-    BSON_APPEND_UTF8(query, Tag_Mode, input_->getModelMode().c_str()); // mode
-    LOG(DEBUG) << "ReadClimateSiteList: " << bson_as_json(query, NULL);
+//    bson_t* query = bson_new();
+//    BSON_APPEND_INT32(query, Tag_SubbasinId, subbasin_id_); // subbasin id
+//    BSON_APPEND_UTF8(query, Tag_Mode, input_->getModelMode().c_str()); // mode
+
+    bson_t* query = BCON_NEW(Tag_SubbasinId, BCON_INT32(subbasin_id_),
+                             Tag_Mode, BCON_UTF8(input_->getModelMode().c_str()));
+    CLOG(TRACE, LOG_INIT) << "ReadClimateSiteList: " << bson_as_json(query, NULL);
     std::unique_ptr<MongoCollection> collection(new MongoCollection(mongo_client_->GetCollection(model_name_,
                                                                         DB_TAB_SITELIST)));
     mongoc_cursor_t* cursor = collection->ExecuteQuery(query);

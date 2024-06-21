@@ -7,6 +7,7 @@
 #include "utils_time.h"
 #include "utils_array.h"
 #include "utils_string.h"
+#include "Logging.h"
 
 using namespace utils_time;
 using namespace utils_string;
@@ -28,35 +29,46 @@ RegularMeasurement::RegularMeasurement(MongoClient* conn, const string& hydroDBN
     //   "$orderby" : { "STATIONID" : 1,
     //                  "UTCDATETIME" : 1 }
     // }
-    bson_t* q;
+    //bson_t* q;
     bson_t* site_array = bson_new();
     for (int i = 0; i < nSites; i++) {
         BSON_APPEND_INT32(site_array, ValueToString(i).c_str(), m_siteIDList[i]);
     }
-    // StatusMessage(bson_as_json(site_array, NULL));
+
     vint st = CVT_VINT(startTime) * 1000;
     vint et = CVT_VINT(endTime) * 1000;
 
-    q = BCON_NEW("$query", "{", MONG_HYDRO_DATA_SITEID, "{", "$in", BCON_ARRAY(site_array), "}",
-                                MONG_HYDRO_SITE_TYPE, BCON_UTF8(siteType.c_str()),
-                                MONG_HYDRO_DATA_UTC, "{", "$gte", BCON_DATE_TIME(st),
-                                                          "$lte", BCON_DATE_TIME(et),
-                                                     "}",
-                           "}",
-                 "$orderby", "{", MONG_HYDRO_DATA_SITEID, BCON_INT32(1),
-                                  MONG_HYDRO_DATA_UTC, BCON_INT32(1),
-                             "}");
+//    q = BCON_NEW("$query", "{", MONG_HYDRO_DATA_SITEID, "{", "$in", BCON_ARRAY(site_array), "}",
+//                                MONG_HYDRO_SITE_TYPE, BCON_UTF8(siteType.c_str()),
+//                                MONG_HYDRO_DATA_UTC, "{", "$gte", BCON_DATE_TIME(st),
+//                                                          "$lte", BCON_DATE_TIME(et),
+//                                                     "}",
+//                           "}",
+//                 "$orderby", "{", MONG_HYDRO_DATA_SITEID, BCON_INT32(1),
+//                                  MONG_HYDRO_DATA_UTC, BCON_INT32(1),
+//                             "}");
 
-    // StatusMessage(bson_as_json(q, NULL));
+    // http://mongoc.org/libmongoc/current/mongoc_collection_find_with_opts.html
+    bson_t* filter = BCON_NEW(MONG_HYDRO_DATA_SITEID, "{", "$in", BCON_ARRAY(site_array), "}",
+                              MONG_HYDRO_SITE_TYPE, BCON_UTF8(siteType.c_str()),
+                              MONG_HYDRO_DATA_UTC, "{", "$gte", BCON_DATE_TIME(st), "$lte", BCON_DATE_TIME(et), "}");
+    bson_t* opts = BCON_NEW("sort", "{", MONG_HYDRO_DATA_SITEID, BCON_INT32(1),
+                                         MONG_HYDRO_DATA_UTC, BCON_INT32(1),
+                                    "}");
 
     // perform query and read measurement data
     std::unique_ptr<MongoCollection>
             collection(new MongoCollection(m_conn->GetCollection(hydroDBName, DB_TAB_DATAVALUES)));
-    mongoc_cursor_t* cursor = collection->ExecuteQuery(q);
+    mongoc_cursor_t* cursor = nullptr;
+    CLOG(TRACE, LOG_INIT) << "Query Regular measurement data: filter: " << bson_as_json(filter, NULL);
+    CLOG(TRACE, LOG_INIT) << "Query Regular measurement data: opts: " << bson_as_json(opts, NULL);
+    cursor = collection->ExecuteQuery(filter, opts);
     bson_error_t err;
     if (mongoc_cursor_error(cursor, &err)) {
         StatusMessage(err.message);
-        bson_destroy(q);
+        //bson_destroy(q);
+        bson_destroy(filter);
+        bson_destroy(opts);
         mongoc_cursor_destroy(cursor);
         throw ModelException("RegularMeasurement", "Constructor", "Query error! ");
     }
@@ -97,21 +109,21 @@ RegularMeasurement::RegularMeasurement(MongoClient* conn, const string& hydroDBN
         index++;
     }
     if (CVT_INT(index) < nRecords) {
-        std::ostringstream oss;
-        oss << "There are no adequate data of " << siteType << " for sites:[" << sitesList << "] in database:" <<
+        CLOG(TRACE, LOG_INIT) << "There are no adequate data of " << siteType << " for sites:[" << sitesList << "] in database:" <<
                 hydroDBName << " during " << ConvertToString2(m_startTime) << " to " << ConvertToString2(m_endTime) <<
                 ". You may want to check the database or the input simulation period!";
-        throw ModelException("RegularMeasurement", "Constructor", oss.str());
+        throw ModelException("RegularMeasurement", "Constructor", "No adequate data found!");
     }
     if (iSite + 1 != nSites) {
-        std::ostringstream oss;
-        oss << "The number of sites should be " << nSites << " while the query result is " << iSite + 1 <<
+        CLOG(TRACE, LOG_INIT) << "The number of sites should be " << nSites << " while the query result is " << iSite + 1 <<
                 " for sites:[" << sitesList << "] in database:" << hydroDBName
                 << " during " << ConvertToString2(m_startTime) << " to " << ConvertToString2(m_endTime);
-        throw ModelException("RegularMeasurement", "Constructor", oss.str());
+        throw ModelException("RegularMeasurement", "Constructor", "Site count error!");
     }
     bson_destroy(site_array);
-    bson_destroy(q);
+    // bson_destroy(q);
+    bson_destroy(filter);
+    bson_destroy(opts);
     mongoc_cursor_destroy(cursor);
 }
 

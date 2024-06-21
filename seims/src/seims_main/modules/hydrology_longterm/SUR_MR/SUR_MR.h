@@ -30,7 +30,7 @@
 #include "SimulationModule.h"
 
 /** \defgroup SUR_MR
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Modified Rational Method to calculate infiltration and excess precipitation
  *
  */

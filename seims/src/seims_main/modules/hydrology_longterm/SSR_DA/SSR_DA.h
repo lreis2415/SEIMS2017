@@ -19,7 +19,7 @@
 
 /*!
  * \defgroup SSR_DA
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Subsurface runoff using Darcy's law and the kinematic approximation
  *
  */

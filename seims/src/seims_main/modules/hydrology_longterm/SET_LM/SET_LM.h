@@ -16,7 +16,7 @@
 
 /*!
  * \defgroup SET_LM
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Calculate soil Temperature according to the linearly relationship with actual soil moisture
  */
 

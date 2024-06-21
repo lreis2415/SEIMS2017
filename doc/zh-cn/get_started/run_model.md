@@ -1,6 +1,6 @@
-2.4 Running a SEIMS-based waterhsed model {#run_seims_model}
+运行基于SEIMS的流域过程模型 {#getstart_run_seims_model}
 ============================================================
 
 [TOC]
 
-Coming soon...
+计划中...

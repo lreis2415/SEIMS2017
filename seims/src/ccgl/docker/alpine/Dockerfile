@@ -1,15 +1,15 @@
 ##
 # crazyzlj/ccgl:alpine
 #
-# This script is written based on PROJ and GDAL. 
+# This script is written based on PROJ and GDAL.
 #   https://github.com/OSGeo/PROJ/blob/master/Dockerfile
 #   https://github.com/OSGeo/gdal/tree/master/docker
 #
-# Usage: 
+# Usage:
 #   > cd CCGL
 #   > docker build -t <tag> -f docker/apline/Dockerfile .
 #
-# Copyright 2022 Liang-Jun Zhu <zlj@lreis.ac.cn>
+# Copyright 2022-2024 Liang-Jun Zhu <zlj@lreis.ac.cn>
 
 # Use alpine as the build container
 ARG ALPINE_VERSION=3.15
@@ -17,12 +17,12 @@ FROM alpine:${ALPINE_VERSION} as builder
 
 LABEL maintainer="Liang-Jun Zhu <zlj@lreis.ac.cn>"
 
-# Replace alpine repository source cdn to accelarate access speed
-# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk update && apk upgrade
+# Replace alpine repository source cdn to accelarate access speed and setup build env
 
-# Setup build env
-RUN apk add --no-cache cmake make g++
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+RUN apk update && apk upgrade && \
+    apk add --no-cache cmake make g++
 
 # Copy source directory
 WORKDIR /CCGL
@@ -47,15 +47,15 @@ RUN cd /CCGL \
 FROM alpine:${ALPINE_VERSION} as runner
 
 # Replace alpine repository source cdn
-# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk update && apk upgrade
-
 # Add gnu standard C++ library and OpenMP library for running apps based on CCGL
-RUN apk add --no-cache libstdc++ libgomp
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+RUN apk update && apk upgrade && \
+    apk add --no-cache libstdc++ libgomp
 
 # Order layers starting with less frequently varying ones
 ARG INSTALL_DIR=/CCGL/dist
-COPY --from=builder ${INSTALL_DIR}/bin/ /usr/bin/
-COPY --from=builder ${INSTALL_DIR}/include/ /usr/include/
-COPY --from=builder ${INSTALL_DIR}/lib/ /usr/lib/
-COPY --from=builder ${INSTALL_DIR}/share/ccgl/ /usr/share/ccgl/
+COPY --from=builder ${INSTALL_DIR}/bin/ /usr/local/bin/
+COPY --from=builder ${INSTALL_DIR}/include/ /usr/local/include/
+COPY --from=builder ${INSTALL_DIR}/lib/ /usr/local/lib/
+COPY --from=builder ${INSTALL_DIR}/share/ccgl/ /usr/local/share/ccgl/

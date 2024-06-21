@@ -1,4 +1,4 @@
-2 Get started {#GET_STARTED}
+快速入门 {#GET_STARTED}
 ===============================
 
 SEIMS is mainly written by C++ with the support of GDAL (Geospatial Data Abstraction Library, https://www.gdal.org/), mongo-c-driver (https://github.com/mongodb/mongo-c-driver), OpenMP (Open Multi-Processing) and MPI (Message Passing Interface), while Python is used for organizing the utility tools such as data preprocessing, postprocessing, parameter sensitivity analysis, auto-calibration, and BMP (Best Management Practices) scenarios analysis.
@@ -10,11 +10,11 @@ In order to save the length of this manual, the software environments with Windo
 Users are encouraged to follow this manual step by step to get started with SEIMS, including download and installation, understanding the data preparation of the demo watershed, preprocessing and running the user-configured SEIMS-based watershed model, postprocessing, parameter sensitivity analysis, auto-calibration, and BMPs scenario analysis, etc.
 
 
-- @subpage download_installation
-- @subpage data_preparation
-- @subpage data_preprocessing
-- @subpage run_seims_model
-- @subpage postprocessing
-- @subpage parameters_sensitivity
-- @subpage auto_calibration
-- @subpage bmp_scenario_analysis
+- @subpage getstart_download_installation
+- @subpage getstart_data_preparation
+- @subpage getstart_data_preprocessing
+- @subpage getstart_run_seims_model
+- @subpage getstart_runmodel_postprocessing
+- @subpage getstart_parameters_sensitivity
+- @subpage getstart_autocalibration
+- @subpage getstart_bmp_scenario_analysis

@@ -19,7 +19,7 @@
 #include "SimulationModule.h"
 
 /** \defgroup PET_H
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Calculate potential evapotranspiration using Hargreaves method
  */
 

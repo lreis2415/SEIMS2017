@@ -43,13 +43,10 @@ InputStation::~InputStation() {
 
 void InputStation::build_query_bson(const int nSites, const vector<int>& siteIDList,
                                     const string& siteType, bson_t* query) {
-    /// build query statement
     //query = bson_new();  query has been initialized before
-    bson_t* child = bson_new();
     bson_t* child2 = bson_new();
     bson_t* child3 = bson_new();
-    BSON_APPEND_DOCUMENT_BEGIN(query, "$query", child);
-    BSON_APPEND_DOCUMENT_BEGIN(child, MONG_HYDRO_DATA_SITEID, child2);
+    BSON_APPEND_DOCUMENT_BEGIN(query, MONG_HYDRO_DATA_SITEID, child2);
     BSON_APPEND_ARRAY_BEGIN(child2, "$in", child3);
     std::ostringstream ossIndex;
     for (int iSite = 0; iSite < nSites; iSite++) {
@@ -58,33 +55,25 @@ void InputStation::build_query_bson(const int nSites, const vector<int>& siteIDL
         BSON_APPEND_INT32(child3, ossIndex.str().c_str(), siteIDList[iSite]);
     }
     bson_append_array_end(child2, child3);
-    bson_append_document_end(child, child2);
+    bson_append_document_end(query, child2);
     bson_destroy(child2);
     bson_destroy(child3);
 
     if (siteType == DataType_Precipitation) {
-        BSON_APPEND_UTF8(child, MONG_HYDRO_SITE_TYPE, siteType.c_str()); //"Type"
+        BSON_APPEND_UTF8(query, MONG_HYDRO_SITE_TYPE, siteType.c_str()); //"Type"
         child2 = bson_new();
         child3 = bson_new();
-        BSON_APPEND_DOCUMENT_BEGIN(child, MONG_HYDRO_SITE_TYPE, child2); //"Type"
+        BSON_APPEND_DOCUMENT_BEGIN(query, MONG_HYDRO_SITE_TYPE, child2); //"Type"
         BSON_APPEND_ARRAY_BEGIN(child2, "$in", child3);
         BSON_APPEND_UTF8(child3, "0", DataType_Precipitation); //"P"
         BSON_APPEND_UTF8(child3, "1", DataType_Meteorology);   //"M"
         bson_append_array_end(child2, child3);
-        bson_append_document_end(child, child2);
+        bson_append_document_end(query, child2);
         bson_destroy(child2);
         bson_destroy(child3);
     } else {
-        BSON_APPEND_UTF8(child, MONG_HYDRO_SITE_TYPE, siteType.c_str());
+        BSON_APPEND_UTF8(query, MONG_HYDRO_SITE_TYPE, siteType.c_str());
     } //"Type"
-    bson_append_document_end(query, child);
-    bson_destroy(child);
-    child2 = bson_new();
-    BSON_APPEND_DOCUMENT_BEGIN(query, "$orderby", child2);
-    /// sort by site ID
-    BSON_APPEND_INT32(child2, MONG_HYDRO_DATA_SITEID, 1);
-    bson_append_document_end(query, child2);
-    bson_destroy(child2);
 }
 
 void InputStation::ReadSitesInfo(const string& siteType, const string& hydroDBName, const string& sitesList) {
@@ -102,11 +91,12 @@ void InputStation::ReadSitesInfo(const string& siteType, const string& hydroDBNa
 
     bson_t* query = bson_new();
     build_query_bson(nSites, siteIDList, siteType, query);
-    //printf("%s\n",bson_as_json(query,NULL));
+    bson_t* opts = BCON_NEW("sort", "{", MONG_HYDRO_DATA_SITEID, BCON_INT32(1), "}");
+    CLOG(TRACE, LOG_INIT) << "ReadSitesInfo: " << bson_as_json(query,NULL);
 
     std::unique_ptr<MongoCollection> collection(new MongoCollection(m_conn->GetCollection(hydroDBName,
                                                                         DB_TAB_SITES)));
-    mongoc_cursor_t* cursor = collection->ExecuteQuery(query);
+    mongoc_cursor_t* cursor = collection->ExecuteQuery(query, opts);
 
     const bson_t* record = NULL;
     FLTPT* pEle = new FLTPT[nSites];

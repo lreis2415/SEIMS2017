@@ -9,7 +9,7 @@
 #include "SimulationModule.h"
 
 /** \defgroup PER_PI
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Calculate the amount of water percolated from the soil water reservoir
  *
  */
