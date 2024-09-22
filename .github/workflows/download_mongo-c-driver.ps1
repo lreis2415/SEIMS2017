@@ -1,5 +1,5 @@
 ﻿param ($mongoCPath = "$env:SystemDrive\mongo-c-driver", $version = "1.16.2")
-$url = "https://raw.githubusercontent.com/crazyzlj/Github_Actions_Precompiled_Packages/release/releases/mongo-c-driver-$version-vs2019x64.zip"
+$url = "https://raw.githubusercontent.com/crazyzlj/Github_Actions_Precompiled_Packages/release/mongo-c-driver/mongo-c-driver-$version-vs2019x64.zip"
 $zipFile = "$mongoCPath\mongo-c-driver.zip"
 
 # Check if mongoCPath existed
