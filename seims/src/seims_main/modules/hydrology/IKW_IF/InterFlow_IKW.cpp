@@ -184,7 +184,7 @@ int InterFlow_IKW::Execute() {
                                  "Please check the error message for more information");
         }
     }
-    //return 0;
+    return 0;
 }
 
 bool InterFlow_IKW::CheckInputSize(const char *key, int n) {
@@ -253,7 +253,6 @@ void InterFlow_IKW::Set1DData(const char *key, int n, float *data) {
         throw ModelException(M_IKW_IF[0], "Set1DData", "Parameter " + s
                              + " does not exist.");
     }
-
 }
 
 void InterFlow_IKW::Get1DData(const char *key, int *n, float **data) {
