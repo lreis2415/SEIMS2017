@@ -3,7 +3,6 @@
 
 [TOC]
 
-计划中...
 **SEIMS主程序** – 可执行程序（MPI&OpenMP版本为 `seims_mpi`，OpenMP版本为 `seims_omp` 或 `seims`，串行版本为seims）将读取所有配置文件，加载所有配置模块和输入数据（包括气候、空间数据和管理数据等），并输出指定的输出结果。
 
 **SEIMS模块** – 动态链接库文件（即Windows上的 `.dll`, Unix-like系统上的`.so`，或macOS上的 `.dylib`），该文件遵循SEIMS模块API，可由SEIMS主程序加载。一个SEIMS模块对应一个流域子过程。 
