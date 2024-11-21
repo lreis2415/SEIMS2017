@@ -1,0 +1,9 @@
+# .dockerignore
+.github
+.idea
+.vs
+bin
+build*
+cmake-build*
+dist
+data

@@ -10,7 +10,10 @@ For more information on the development of TauDEM please refer to the wiki https
 
 For the latest release and detailed documentation please refer to the website: http://hydrology.usu.edu/taudem.
 
-Mannually update to v5.3.9 at Develop branch, commit [98137bb6541a0d0077a9c95becfed4e56d0aa0ac](hhttps://github.com/dtarb/TauDEM/commit/98137bb6541a0d0077a9c95becfed4e56d0aa0ac) created at 11 Apr 2021. -- 12 Jan 2022 By LJ.
+Mannually update to v5.3.9 at Develop branch, 
+commit [b2b48d7df977126a08a13fa2e7e06aa69f7fc400](https://github.com/dtarb/TauDEM/commit/b2b48d7df977126a08a13fa2e7e06aa69f7fc400)
+submitted on Sep 2, 2023.
+-- Otc 22, 2024 By LJ.
 
 TauDEM采用C/C++编写，矢栅数据读写基于GDAL库，因此可以跨平台编译。
 通用编译命令：

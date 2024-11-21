@@ -1,0 +1,57 @@
+##
+# docker pull ghcr.io/lreis2415/taudem_ext:debian
+# or
+# docker pull registry.cn-hangzhou.aliyuncs.com/ljzhu-geomodels/taudem_ext:debian
+#
+# Build by yourself (DO NOT MISSING the dot at the end of the line):
+#   > cd TauDEM_ext
+#   > docker build -t taudem_ext:debian -f docker/Dockerfile.debian .
+#
+# Copyright 2022-2024 Liang-Jun Zhu <zlj@lreis.ac.cn>
+#
+
+# Use debian as the build and runner container, which is used for continuumio/miniconda3
+# https://github.com/ContinuumIO/docker-images/blob/main/miniconda3/debian/Dockerfile
+ARG DEBIAN_VER=12.7-slim@sha256:ad86386827b083b3d71139050b47ffb32bbd9559ea9b1345a739b14fec2d9ecf
+FROM debian:${DEBIAN_VER} AS builder
+
+LABEL maintainer="Liang-Jun Zhu <zlj@lreis.ac.cn>"
+
+RUN apt-get update -q && \
+    apt-get install -q -y --no-install-recommends \
+    cmake make g++ libgdal-dev libopenmpi-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy source directory
+WORKDIR /taudem_ext
+COPY . ./
+
+# # Build for release
+ARG INSTALL_DIR=/taudem_ext/dist
+RUN cd /taudem_ext \
+    && mkdir build \
+    && cd build \
+    && cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} \
+    && make -j4 \
+    && make install -j4 \
+    && cd ..
+
+# # Build final image
+FROM debian:${DEBIAN_VER} AS runner
+
+RUN apt-get update -q && \
+    apt-get install -q -y --no-install-recommends \
+    gdal-bin openmpi-bin libgomp1 tini \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Order layers starting with less frequently varying ones
+ARG INSTALL_DIR=/taudem_ext/dist
+COPY --from=builder ${INSTALL_DIR}/bin/ /usr/local/bin/
+
+ENV OMPI_ALLOW_RUN_AS_ROOT=1
+ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+
+COPY docker/docker-entrypoint.sh /
+ENTRYPOINT ["/usr/bin/tini", "--", "/docker-entrypoint.sh"]
