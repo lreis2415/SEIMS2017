@@ -3277,6 +3277,8 @@ bool clsRasterData<T, MASK_T>::OutputToMongoDB(MongoGridFs* gfs, const string& f
         return OutputSubsetToMongoDB(gfs, filename, opts, include_nodata, false, true);
     }
     CopyStringMap(opts, options_); // Update metadata
+    // Added by ljzhu, for compatible with yjwang's code. But, can this key-value be passed by the opts argument?
+    UpdateStringMapIfNotExist(options_, HEADER_RS_PARAM_ABSTRACTION_TYPE, PARAM_ABSTRACTION_TYPE_PHYSICAL);
     if (options_.find(HEADER_RSOUT_DATATYPE) == options_.end()
         || StringMatch("Unknown", options_.at(HEADER_RSOUT_DATATYPE))) {
         UpdateStrHeader(options_, HEADER_RSOUT_DATATYPE,
@@ -3360,6 +3362,8 @@ bool clsRasterData<T, MASK_T>::OutputSubsetToMongoDB(MongoGridFs* gfs,
     if (nullptr == gfs) { return false; }
     if (subset_.empty()) { return false; }
     CopyStringMap(opts, options_); // Update metadata
+    // Added by ljzhu, for compatible with yjwang's code. But, can this key-value be passed by the opts argument?
+    UpdateStringMapIfNotExist(options_, HEADER_RS_PARAM_ABSTRACTION_TYPE, PARAM_ABSTRACTION_TYPE_PHYSICAL);
     if (include_nodata) {
         UpdateStringMap(options_, HEADER_INC_NODATA, "TRUE");
     }

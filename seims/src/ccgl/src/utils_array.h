@@ -370,6 +370,7 @@ bool Initialize1DArray(const int row, T*& data, const INI_T init_value) {
 template <typename T, typename INI_T>
 bool Initialize1DArray(const int row, T*& data, INI_T* const init_data) {
     if (nullptr != data) {
+        // cout << "The input 1D array pointer is not nullptr. No initialization performed!" << endl;
         return false;
     }
     data = new(nothrow) T[row];
@@ -396,6 +397,7 @@ bool Initialize2DArray(const int row, const int col, T**& data, const INI_T init
         return false;
     }
     if (nullptr != data) {
+        // cout << "The input 2D array pointer is not nullptr. No initialization performed!" << endl;
         return false;
     }
     data = new(nothrow) T*[row];
