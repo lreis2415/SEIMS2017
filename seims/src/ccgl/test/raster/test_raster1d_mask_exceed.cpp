@@ -68,6 +68,9 @@ public:
         mask_name = maskf.c_str();
         mask2_name = maskf2.c_str();
     }
+
+    ~InputRasterFiles() { ; }
+
     const char* raster_name;
     const char* mask_name;
     const char* mask2_name;
@@ -337,6 +340,7 @@ TEST_P(clsRasterDataTestMaskExceed, MatchExactNoPosNoMaskExt) {
     delete mongors;
     delete mongors_valid;
 #endif
+    delete rs_;
 }
 
 // matched_exactly = True, calc_pos = False, use_mask_ext = True
@@ -524,6 +528,8 @@ TEST_P(clsRasterDataTestMaskExceed, MatchExactNoPosUseMaskExt) {
     delete mongors;
     delete mongors_valid;
 #endif
+
+    delete rs_;
 }
 
 // matched_exactly = True, calc_pos = True, use_mask_ext = False
@@ -709,6 +715,8 @@ TEST_P(clsRasterDataTestMaskExceed, MatchExactCalPosNoMaskExt) {
     delete mongors;
     delete mongors_valid;
 #endif
+
+    delete rs_;
 }
 
 // matched_exactly = True, calc_pos = True, use_mask_ext = True
@@ -896,6 +904,8 @@ TEST_P(clsRasterDataTestMaskExceed, MatchExactCalPosUseMaskExt) {
     delete mongors;
     delete mongors_valid;
 #endif
+
+    delete rs_;
 }
 
 // matched_exactly = False, calc_pos = False, use_mask_ext = False
@@ -1082,6 +1092,8 @@ TEST_P(clsRasterDataTestMaskExceed, NotMatchExactNoPosNoMaskExt) {
     delete mongors;
     delete mongors_valid;
 #endif
+
+    delete rs_;
 }
 
 // matched_exactly = False, calc_pos = False, use_mask_ext = True
@@ -1277,6 +1289,8 @@ TEST_P(clsRasterDataTestMaskExceed, NotMatchExactNoPosUseMaskExt) {
     delete mongors;
     delete mongors_valid;
 #endif
+
+    delete rs_;
 }
 
 // matched_exactly = False, calc_pos = True, use_mask_ext = False
@@ -1463,6 +1477,8 @@ TEST_P(clsRasterDataTestMaskExceed, NotMatchExactCalPosNoMaskExt) {
     delete mongors;
     delete mongors_valid;
 #endif
+
+    delete rs_;
 }
 
 // matched_exactly = False, calc_pos = True, use_mask_ext = True
@@ -1649,16 +1665,17 @@ TEST_P(clsRasterDataTestMaskExceed, NotMatchExactCalPosUseMaskExt) {
     delete mongors;
     delete mongors_valid;
 #endif
+    delete rs_;
 }
 
 
 #ifdef USE_GDAL
 INSTANTIATE_TEST_CASE_P(SingleLayer, clsRasterDataTestMaskExceed,
                         Values(new InputRasterFiles(AscFile, MaskAscFile, MaskAscFile2),
-                            new InputRasterFiles(TifFile, MaskTifFile, MaskTifFile2)));
+                            new InputRasterFiles(TifFile, MaskTifFile, MaskTifFile2)),);
 #else
 INSTANTIATE_TEST_CASE_P(SingleLayer, clsRasterDataTestMaskExceed,
-                        Values(new InputRasterFiles(AscFile, MaskAscFile, MaskAscFile2)));
+                        Values(new InputRasterFiles(AscFile, MaskAscFile, MaskAscFile2)),);
 #endif /* USE_GDAL */
 
 } /* namespace */

@@ -552,10 +552,10 @@ TEST_P(clsRasterDataTestNoMask, RasterIOWithCalcPos) {
 // instantiate them several times.
 #ifdef USE_GDAL
 INSTANTIATE_TEST_CASE_P(SingleLayer, clsRasterDataTestNoMask,
-                        Values(AscFileChars, TifFileChars));
+                        Values(AscFileChars, TifFileChars),);
 #else
 INSTANTIATE_TEST_CASE_P(SingleLayer, clsRasterDataTestNoMask,
-                        Values(AscFileChars));
+                        Values(AscFileChars),);
 #endif /* USE_GDAL */
 
 } /* namespace */

@@ -1,30 +1,45 @@
-# Build CCGL library on native C++11 with GDAL and run test with CMake
+# Build CCGL library on native C++11 with GDAL, run test with CMake, and deploy docker image
 
-name: Build with GDAL
+name: Build and deploy with GDAL
 
 on:
-    push:
-        paths-ignore:
-            #- 'doc/**'
-    pull_request:
-        paths-ignore:
-            #- 'doc/**'
-    workflow_dispatch:
+  push:
+    branches:
+      - 'master'
+      - 'dev'
+    paths-ignore:
+      - 'doc/**'
+  pull_request:
+      paths-ignore:
+          - 'doc/**'
+  workflow_dispatch:
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Debug
 
-jobs:
-  build-linux-ubuntu:
-    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
-    # You can convert this to a matrix build if you need cross-platform coverage.
-    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-    runs-on: ubuntu-latest
+  # Container registry domain, and a name for the Docker image that this workflow builds.
+  # IMAGE_NAME: ${{ github.repository }} ==> crazyzlj/ccgl
+  IMAGE_NAME: ccgl
+  # github container registry
+  REGISTRY: ghcr.io
+  NAMESPACE: ${{ github.repository_owner }}
+  # aliyun ACR
+  REGION_ID_ACR: cn-hangzhou
+  REGISTRY_ACR: registry.cn-hangzhou.aliyuncs.com
+  LOGIN_SERVER: https://registry.cn-hangzhou.aliyuncs.com
+  NAMESPACE_ACR: ljzhu-geomodels
+  DOCKERFILE_NAME: Dockerfile.alpine-with-gdal
+  # IMAGE_TAG: ${{ github.sha }}
+  IMAGE_TAG: ${{ github.ref == 'refs/heads/master' && 'alpine-with-gdal' || 'dev-alpine-with-gdal' }}
 
+jobs:
+  # Check GitHub Actions runner images versions: https://github.com/actions/runner-images
+  build-linux:
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout CCGL
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install GDAL
       run: sudo apt-get update && sudo apt-get install -qq gdal-bin libgdal-dev
@@ -44,12 +59,70 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest -C ${{env.BUILD_TYPE}} --rerun-failed --output-on-failure
 
-  build-windows:
-    runs-on: windows-2019
+  deploy-linux:
+    needs: build-linux
+    runs-on: ubuntu-22.04
+    # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+    # permissions: write-all
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
 
     steps:
+      - uses: actions/checkout@v4
+      # login alibaba Container Registry
+      - name: Login to ACR
+        uses: aliyun/acr-login@v1
+        with:
+          login-server: ${{ env.LOGIN_SERVER }}
+          region-id: ${{ env.REGION_ID_ACR }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+      # login ghcr.io
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # This step uses [docker/metadata-action](https://github.com/docker/metadata-action#about) to extract tags and labels that will be applied to the specified image. The `id` "meta" allows the output of this step to be referenced in a subsequent step. The `images` value provides the base name for the tags and labels.
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ env.REGISTRY_ACR }}/${{ env.NAMESPACE_ACR }}/${{ env.IMAGE_NAME }}
+            ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+      # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
+      # It uses the `context` parameter to define the build's context as the set of files located in the specified path. For more information, see "[Usage](https://github.com/docker/build-push-action#usage)" in the README of the `docker/build-push-action` repository.
+      # It uses the `tags` and `labels` parameters to tag and label the image with the output from the "meta" step.
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/${{ env.DOCKERFILE_NAME }}
+          push: true
+          platforms: linux/amd64,linux/arm64
+          provenance: false
+          tags: |
+            ${{ env.REGISTRY_ACR }}/${{ env.NAMESPACE_ACR }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+            ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  build-windows:
+    runs-on: windows-2019
+    steps:
     - name: Checkout CCGL
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Download GDAL
       id: pwshdowngdal
@@ -88,7 +161,7 @@ jobs:
       run: brew list gdal &>/dev/null || brew install gdal
 
     - name: Checkout CCGL
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DUNITTEST=1

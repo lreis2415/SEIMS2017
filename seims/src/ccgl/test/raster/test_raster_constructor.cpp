@@ -60,7 +60,8 @@ TEST(clsRasterDataTestBlankCtor, ValidateAccess) {
     EXPECT_EQ(-1, rs->GetDataLength()); // m_nCells
     EXPECT_EQ(-1, rs->GetCellNumber()); // m_nCells
 
-    EXPECT_EQ(-9999., rs->GetNoDataValue());  // m_noDataValue
+    float nodata_value = -1 * FLT_MAX; // the default nodata value depends on the data type T
+    EXPECT_EQ(nodata_value, rs->GetNoDataValue());  // m_noDataValue
     EXPECT_EQ(-9999., rs->GetDefaultValue()); // m_defaultValue
 
     EXPECT_EQ("", rs->GetFilePath()); // m_filePathName
@@ -121,14 +122,14 @@ TEST(clsRasterDataTestBlankCtor, ValidateAccess) {
     EXPECT_EQ(nullptr, rs_2ddata);
 
     /** Get raster cell value by various way **/
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValueByIndex(-1));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValueByIndex(0));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValueByIndex(540, 1));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValueByIndex(541, 1));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValueByIndex(29));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValueByIndex(29, 0));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValueByIndex(-1, 2));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValueByIndex(541, 2));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValueByIndex(-1));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValueByIndex(0));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValueByIndex(540, 1));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValueByIndex(541, 1));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValueByIndex(29));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValueByIndex(29, 0));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValueByIndex(-1, 2));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValueByIndex(541, 2));
 
     int tmp_lyr = rs->GetLayers();
     float* tmp_values = nullptr;
@@ -138,14 +139,14 @@ TEST(clsRasterDataTestBlankCtor, ValidateAccess) {
     rs->GetValueByIndex(0, tmp_values);
     EXPECT_EQ(nullptr, tmp_values);
 
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValue(-1, 0));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValue(20, 0));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValue(0, -1));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValue(0, 30));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValue(2, 4, -1));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValue(2, 4, 2));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValue(2, 4));
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValue(2, 4, 1));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValue(-1, 0));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValue(20, 0));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValue(0, -1));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValue(0, 30));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValue(2, 4, -1));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValue(2, 4, 2));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValue(2, 4));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValue(2, 4, 1));
 
     rs->GetValue(-1, 0, tmp_values);
     EXPECT_EQ(nullptr, tmp_values);
@@ -170,9 +171,9 @@ TEST(clsRasterDataTestBlankCtor, ValidateAccess) {
 
     // Set raster data value
     rs->SetValue(2, 4, 18.06f);
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValue(2, 4));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValue(2, 4));
     rs->SetValue(0, 0, 1.f);
-    EXPECT_FLOAT_EQ(-9999.f, rs->GetValue(0, 0));
+    EXPECT_FLOAT_EQ(nodata_value, rs->GetValue(0, 0));
 
     /** Output to new file **/
     string newfullname = GetAppPath() + SEP + "no_output.tif";
@@ -187,7 +188,7 @@ TEST(clsRasterDataASCConstructor, SupportedCases) {
     if (HasFailure()) { return; }
     EXPECT_EQ(4, not_std_rs->GetCellNumber());
     EXPECT_EQ(2, not_std_rs->GetValidNumber());
-
+    delete not_std_rs;
 }
 
 TEST(clsRasterDataFailedConstructor, FailedCases) {
@@ -479,6 +480,8 @@ TEST(clsRasterDataInt32, IOWithoutDefNodata) {
     EXPECT_EQ(INT32_MIN, rs->GetNoDataValue());
     EXPECT_TRUE(rs->GetDataType() == RDT_Int32);
     EXPECT_TRUE(rs->GetOutDataType() == RDT_Int32);
+
+    delete rs;
 }
 
 TEST(clsRasterDataFloat, FullIO) {

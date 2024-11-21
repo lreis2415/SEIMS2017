@@ -67,6 +67,9 @@ public:
         raster_name3 = rs3.c_str();
         mask_name = maskf.c_str();
     }
+
+    ~InputRasterFiles() { ; }
+
     const char* raster_name1;
     const char* raster_name2;
     const char* raster_name3;
@@ -246,7 +249,7 @@ TEST_P(clsRasterData2DSplitMerge, MaskLyrIO) {
     data3[2][1] = 36.f;
     EXPECT_TRUE(newsub3->Set2DData(newsub3->n_cells, newlyrs, data3));
     newdata[3] = data3;
-    
+
     float** datafull = nullptr;
     Initialize2DArray(maskrs_->GetValidNumber(), 2, datafull, -9999);
     datafull[0][0] = 2008.f;
@@ -345,7 +348,7 @@ TEST_P(clsRasterData2DSplitMerge, MaskLyrIO) {
         }
     }
     delete newrs;
-    
+
 #ifdef USE_MONGODB
     /** Output subset data to MongoDB **/
     string mask_subset_name = maskrs_->GetCoreName() + "_2d";
@@ -364,7 +367,7 @@ TEST_P(clsRasterData2DSplitMerge, MaskLyrIO) {
     STRING_MAP opts_valid;
     UpdateStrHeader(opts_full, HEADER_INC_NODATA, "TRUE");
     UpdateStrHeader(opts_valid, HEADER_INC_NODATA, "FALSE");
-    
+
     for (auto it = subsetsfull.begin(); it != subsetsfull.end(); ++it) {
         string gfsfull = itoa(it->first) + "_" + mask_subset_name;
         EXPECT_TRUE(it->second->ReadFromMongoDB(GlobalEnv->gfs_, gfsfull, opts_full));
@@ -435,6 +438,8 @@ TEST_P(clsRasterData2DSplitMerge, MaskLyrIO) {
         Release2DArray(it->second);
     }
     newdata.clear();
+
+    Release2DArray(datafull);
 }
 // Raster IO based on mask layer which has several subset
 //   1. output raster data according to mask's subset
@@ -590,7 +595,7 @@ TEST_P(clsRasterData2DSplitMerge, SplitRaster) {
     datacombvalid[13][2] = 67.67f;
     datacombvalid[14][2] = -9999.f;
     datacombvalid[15][2] = -9999.f;
-    
+
     for (auto it = rs_subset.begin(); it != rs_subset.end(); ++it) {
         vector<string> outfiles(lyrs);
         for (int ilyr = 0; ilyr < lyrs; ilyr++) {
@@ -651,6 +656,9 @@ TEST_P(clsRasterData2DSplitMerge, SplitRaster) {
         Release2DArray(it->second);
     }
     subarray.clear();
+
+    Release2DArray(datacombvalid);
+
     delete rs;
 }
 
@@ -658,10 +666,10 @@ TEST_P(clsRasterData2DSplitMerge, SplitRaster) {
 #ifdef USE_GDAL
     INSTANTIATE_TEST_CASE_P(MultiLayers, clsRasterData2DSplitMerge,
                             Values(new InputRasterFiles(rs1_asc, rs2_asc, rs3_asc, mask_asc_file),
-                                new InputRasterFiles(rs1_tif, rs2_tif, rs3_tif, mask_tif_file)));
+                                new InputRasterFiles(rs1_tif, rs2_tif, rs3_tif, mask_tif_file)),);
 #else
     INSTANTIATE_TEST_CASE_P(MultiLayers, clsRasterData2DSplitMerge,
-                            Values(new InputRasterFiles(rs1_asc, rs2_asc, rs3_asc, mask_asc_file)));
+                            Values(new InputRasterFiles(rs1_asc, rs2_asc, rs3_asc, mask_asc_file)),);
 #endif /* USE_GDAL */
 
 } /* namespace */

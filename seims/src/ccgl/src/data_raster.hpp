@@ -725,6 +725,46 @@ bool WriteSingleGeotiff(const string& filename, const STRDBL_MAP& header,
             }
             if (illegal_count > 0) convert_permit = false;
         }
+#if GDAL_VERSION_MAJOR >= 3 && GDAL_VERSION_MINOR >=5
+        else if (outtype == RDT_UInt64) { // [0, 18446744073709551615]
+            new_values = static_cast<vuint64_t*>(CPLMalloc(sizeof(vuint64_t) * n_cols * n_rows));
+            vuint64_t* values_uint64 = static_cast<vuint64_t*>(new_values);
+            if (old_nodata < 0 || old_nodata > UINT64_MAX) {
+                new_nodata = UINT64_MAX;
+                change_nodata = true;
+            }
+            int illegal_count = 0;
+#pragma omp parallel for reduction(+:illegal_count)
+            for (int i = 0; i < n_cols * n_rows; i++) {
+                if (FloatEqual(values[i], old_nodata) && change_nodata) {
+                    values_uint64[i] = UINT64_MAX;
+                    continue;
+                }
+                if (values[i] < 0 || values[i] > UINT64_MAX) illegal_count += 1;
+                values_uint64[i] = static_cast<vuint64_t>(values[i]);
+            }
+            if (illegal_count > 0) convert_permit = false;
+        }
+        else if (outtype == RDT_Int64) { // [-18446744073709551615, 18446744073709551615]
+            new_values = static_cast<vint64_t*>(CPLMalloc(sizeof(vint64_t) * n_cols * n_rows));
+            vint64_t* values_int64 = static_cast<vint64_t*>(new_values);
+            if (old_nodata < INT64_MIN || old_nodata > INT64_MAX) {
+                new_nodata = INT64_MIN;
+                change_nodata = true;
+            }
+            int illegal_count = 0;
+#pragma omp parallel for reduction(+:illegal_count)
+            for (int i = 0; i < n_cols * n_rows; i++) {
+                if (FloatEqual(values[i], old_nodata) && change_nodata) {
+                    values_int64[i] = INT64_MIN;
+                    continue;
+                }
+                if (values[i] < INT64_MIN || values[i] > INT64_MAX) illegal_count += 1;
+                values_int64[i] = static_cast<vint64_t>(values[i]);
+            }
+            if (illegal_count > 0) convert_permit = false;
+        }
+#endif
         else if (outtype == RDT_Float) {
             new_values = static_cast<float*>(CPLMalloc(sizeof(float) * n_cols * n_rows));
             float* values_float = static_cast<float*>(new_values);
