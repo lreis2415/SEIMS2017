@@ -170,8 +170,8 @@ bool GR4J::CheckInputData(void) {
                     "Invalid input! m_soilPorosity or m_soilThickness is 0.");
             }
         }
+        CHECK_POSITIVE(GetModuleName(), m_GR4J_X4[i]);
     }
-    CHECK_POSITIVE(GetModuleName(), m_GR4J_X4);
     return true;
 }
 
