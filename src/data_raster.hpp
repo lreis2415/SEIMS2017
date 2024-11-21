@@ -98,7 +98,6 @@ CONST_CHARS HEADER_RS_CELLSIZE = "CELLSIZE"; /// Cell size (length)
 CONST_CHARS HEADER_RS_LAYERS = "LAYERS"; /// Layers number
 CONST_CHARS HEADER_RS_CELLSNUM = "CELLSNUM"; /// Number of the first layer's valid cells
 CONST_CHARS HEADER_RS_SRS = "SRS"; /// SRS
-CONST_CHARS HEADER_RS_PARAM_ABSTRACTION_TYPE = "PARAM_ABSTRACTION_TYPE"; /// spatial parameter type, physical or conceptual
 CONST_CHARS HEADER_RS_DATATYPE = "DATATYPE"; /// Data type of original raster
 CONST_CHARS HEADER_RSOUT_DATATYPE = "DATATYPE_OUT"; /// Desired output data type of raster
 CONST_CHARS HEADER_INC_NODATA = "INCLUDE_NODATA"; /// Include nodata ("TRUE") or not ("FALSE"), for DB only
@@ -111,6 +110,11 @@ CONST_CHARS STATS_RS_STD = "STD"; /// Standard derivation value
 CONST_CHARS STATS_RS_RANGE = "RANGE"; /// Range value
 CONST_CHARS ASCIIExtension = "asc"; /// ASCII extension
 CONST_CHARS GTiffExtension = "tif"; /// GeoTIFF extension
+
+CONST_CHARS HEADER_RS_PARAM_ABSTRACTION_TYPE = "PARAM_ABSTRACTION_TYPE"; /// spatial parameter type, physical or conceptual
+CONST_CHARS PARAM_ABSTRACTION_TYPE_CONEPTUAL = "CONCEPTUAL";
+CONST_CHARS PARAM_ABSTRACTION_TYPE_PHYSICAL = "PHYSICAL";
+
 
 typedef std::pair<int, int> ROW_COL; /// Row and Col pair
 typedef std::pair<double, double> XY_COOR; /// Coordinate pair
@@ -3273,6 +3277,8 @@ bool clsRasterData<T, MASK_T>::OutputToMongoDB(MongoGridFs* gfs, const string& f
         return OutputSubsetToMongoDB(gfs, filename, opts, include_nodata, false, true);
     }
     CopyStringMap(opts, options_); // Update metadata
+    // Added by ljzhu, for compatible with yjwang's code. But, can this key-value be passed by the opts argument?
+    UpdateStringMapIfNotExist(options_, HEADER_RS_PARAM_ABSTRACTION_TYPE, PARAM_ABSTRACTION_TYPE_PHYSICAL);
     if (options_.find(HEADER_RSOUT_DATATYPE) == options_.end()
         || StringMatch("Unknown", options_.at(HEADER_RSOUT_DATATYPE))) {
         UpdateStrHeader(options_, HEADER_RSOUT_DATATYPE,
@@ -3356,6 +3362,8 @@ bool clsRasterData<T, MASK_T>::OutputSubsetToMongoDB(MongoGridFs* gfs,
     if (nullptr == gfs) { return false; }
     if (subset_.empty()) { return false; }
     CopyStringMap(opts, options_); // Update metadata
+    // Added by ljzhu, for compatible with yjwang's code. But, can this key-value be passed by the opts argument?
+    UpdateStringMapIfNotExist(options_, HEADER_RS_PARAM_ABSTRACTION_TYPE, PARAM_ABSTRACTION_TYPE_PHYSICAL);
     if (include_nodata) {
         UpdateStringMap(options_, HEADER_INC_NODATA, "TRUE");
     }
@@ -3522,9 +3530,14 @@ bool clsRasterData<T, MASK_T>::ReadFromMongoDB(MongoGridFs* gfs,
     STRING_MAP header_str = InitialStrHeader();
     STRING_MAP opts_upd;
     CopyStringMap(opts, opts_upd);
+    UpdateStringMapIfNotExist(opts_upd, HEADER_RS_PARAM_ABSTRACTION_TYPE, PARAM_ABSTRACTION_TYPE_PHYSICAL);
+    bool is_conceptual = StringMatch(opts_upd.at(HEADER_RS_PARAM_ABSTRACTION_TYPE), PARAM_ABSTRACTION_TYPE_CONEPTUAL);
     if (opts.empty() || opts.count(HEADER_INC_NODATA) < 1) { // GFS file include nodata by default
         UpdateStringMap(opts_upd, HEADER_INC_NODATA, "TRUE");
     }
+    //if(is_conceptual) {
+    //    UpdateStringMap(opts_upd, HEADER_INC_NODATA, "FALSE");
+    //}
     if (!ReadGridFsFile(gfs, filename, dbdata, header_dbl, header_str, opts_upd)) { return false; }
 
     if (headers_.at(HEADER_RS_NROWS) > 0 && headers_.at(HEADER_RS_NCOLS) > 0

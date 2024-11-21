@@ -130,6 +130,10 @@ namespace utils_math {
 #ifndef Abs
 #define Abs(x) ((x) >= 0 ? (x) : -(x))
 #endif
+/*! Return non-negative value */
+# ifndef NonNeg
+# define NonNeg(x) ((x) >= 0 ? (x) : 0)
+# endif
 
 /*!
  * \brief Whether v1 is equal to v2
@@ -167,6 +171,13 @@ T MaxInArray(const T* a, int n);
 */
 template <typename T>
 T MinInArray(const T* a, int n);
+
+
+template <typename T>
+bool IsVectorAllSame(const vector<T>* a, T value);
+
+template <typename T>
+bool IsValueInVector(const vector<T>* a, T value);
 
 /*!
  * \brief Sum of a numeric array
@@ -357,6 +368,29 @@ T MinInArray(const T* a, const int n) {
     return m;
 }
 
+template <typename T>
+bool IsVectorAllSame(const vector<T>* a, T value){
+    for (int i = 0; i < a->size(); i++) {
+        if (a->at(i) != value) {
+            return false;
+        }
+    }
+    return true;
+}
+
+template <typename T>
+bool IsValueInVector(const vector<T>* a, T value){
+    return std::find(a->begin(), a->end(), value) != a->end();
+}
+template <typename T>
+bool IsValueInVectorVector(const vector< vector<T>>* a, T value) {
+    for (int i = 0; i < a->size(); i++) {
+        if (std::find(a->at(i).begin(), a->at(i).end(), value) != a->at(i).end()) {
+            return true;
+        }
+    }
+    return false;
+}
 template <typename T>
 T Sum(const int row, const T* data) {
     T tmp = 0;

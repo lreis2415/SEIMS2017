@@ -100,6 +100,7 @@ void CopyStringMap(const STRING_MAP& in_opts, STRING_MAP& out_opts);
  * \brief Add or modify element in a string map
  */
 void UpdateStringMap(STRING_MAP& opts, const string& key, const string& value);
+void UpdateStringMapIfNotExist(STRING_MAP& opts, const string& key, const string& value);
 
 #if defined(CPP_GCC) || defined(CPP_ICC)
 extern void _itoa_s(vint32_t value, char* buffer, size_t size, vint radix);

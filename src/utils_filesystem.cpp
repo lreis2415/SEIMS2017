@@ -94,6 +94,7 @@ int FindFiles(const char* lp_path, const char* expression, vector<string>& vec_f
         struct dirent *h_file;
         errno = 0;
         while ((h_file = readdir(dir)) != nullptr) {
+            if(h_file->d_type==DT_DIR) continue;
             if (!strcmp(h_file->d_name, ".")) continue;
             if (!strcmp(h_file->d_name, "..")) continue;
 

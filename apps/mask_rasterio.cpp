@@ -48,7 +48,8 @@ void Usage(const string& appname, const string& error_msg /* = std::string() */)
             " [-outdatatype <outDataType>] [-default <defaultValue>] [-nodata <updatedNodata>]"
             " [-include_nodata <includeNoData>]"
             " [-mongo <host> <port> <DB> <GFS>]"
-            " [-thread <threadsNum>]\n\n";
+            " [-thread <threadsNum>]"
+            " [-opts <options>]\n\n";
     cout << "2. " << corename << " -configfile <configFile> [-thread <threadsNum>]\n\n";
 
     cout << "\t<xxFmt> is data format for <in>, <out>, and <mask>, can be FILE or GFS.\n";
@@ -56,7 +57,8 @@ void Usage(const string& appname, const string& error_msg /* = std::string() */)
     cout << "\t<xxGFSName> is the GridFS file name in MongoDB.\n";
     cout << "\t<reclassifyList> is the reclassified list, the format is origin1:new1,origin2:new2,.... "
             "The new value can be single value or multi values, e.g., 1.2 or 1.2|1.3|2.2 \n";
-    cout << "\t<IOMode> is the operation type, can be MASK (default), DEC(Decompose), MASK&DEC, or COM(Combine).\n";
+    cout << "\t<opts> is user-specified options, will be appended to metadata, e.g., paramtype=concpetual,xxx=yyy,...\n";
+    cout << "\t<IOMode> is the operation type, can be MASK (default), DEC (Decompose), MASK&DEC, or COM (Combine).\n";
     cout << "\tIf -out is not specified, <in>_masked.tif will be generated.\n";
     cout << "\t<outDataType> is the data type of <out>, uint8, int8, uint16,"
             " int16, uint32, int32, float, and double are supported.\n";
@@ -154,6 +156,19 @@ bool parse_key_values(string& kvstrs, map<vint, vector<double> >& kv) {
     return valid_kv;
 }
 
+bool parse_key_values(string& kvstrs, STRING_MAP& res) {
+    if (kvstrs.empty()) { return false; }
+    bool str2num_flag = false;
+    vector<string> kvlist = SplitString(kvstrs, ',');
+    if (kvlist.empty()) { return false; }
+    for (auto it_kvlist = kvlist.begin(); it_kvlist != kvlist.end(); ++it_kvlist) {
+        if ((*it_kvlist).empty()) { continue; }
+        vector<string> opt = SplitString(*it_kvlist, '=');
+        if (opt.size() != 2) { continue; }
+        UpdateStringMap(res, opt.at(0), opt.at(1));
+    }
+    return true;
+}
 /*!
  * \return
  *   0. Succeed
@@ -196,6 +211,7 @@ int main(const int argc, const char** argv) {
     bool global_recls = false;
     vector<bool> reclass_data;
     vector<map<vint, vector<double> > > reclass_keyvalues;
+    STRING_MAP opts; // Additional options, e.g., output data type
 
     if (argc < 2) {
         Usage(argv[0], "To run the program, "
@@ -368,6 +384,9 @@ int main(const int argc, const char** argv) {
                 inc_nodata = true;
             }
         }
+        else if (itkv->first == "OPTS") {
+            parse_key_values(itkv->second.at(0), opts);
+        }
         else {
             cout << "Warning: Unknown Tag that will be ignored: " << itkv->first << "\n";
         }
@@ -396,7 +415,7 @@ int main(const int argc, const char** argv) {
             }
         }
         if (default_values.empty()) { default_values.emplace_back(global_defaultv); }
-        if (update_nodata.empty()) { update_nodata.push_back(global_updnodata); }  // compatible with vs2010 
+        if (update_nodata.empty()) { update_nodata.push_back(global_updnodata); }  // compatible with vs2010
         if (nodata_values.empty()) { nodata_values.emplace_back(global_nodata); }
         if (out_types.empty()) { out_types.emplace_back(global_outtype); }
         if (out_fmts.empty()) { out_fmts.emplace_back(global_outfmt); }
@@ -497,7 +516,6 @@ int main(const int argc, const char** argv) {
     }
 
     // Load input raster
-    STRING_MAP opts; // Additional options, e.g., output data type
     bool output_all = false;
     bool output_subset = false;
     bool combine_subset = false;
@@ -572,13 +590,13 @@ int main(const int argc, const char** argv) {
                 if (reclass_data.at(in_idx)) {
                     if (output_subset) {
                         rs->OutputSubsetToMongoDB(gfs, out_paths.at(in_idx), opts,
-                                                  inc_nodata, true, false, 
+                                                  inc_nodata, true, false,
                                                   reclass_keyvalues.at(in_idx),
                                                   default_values.at(in_idx));
                     }
                     if (output_all) {
                         rs->OutputSubsetToMongoDB(gfs, out_paths.at(in_idx), opts,
-                                                  inc_nodata, true, true, 
+                                                  inc_nodata, true, true,
                                                   reclass_keyvalues.at(in_idx),
                                                   default_values.at(in_idx));
                     }

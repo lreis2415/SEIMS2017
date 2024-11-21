@@ -16,7 +16,8 @@
 #include <cstdarg> // variable arguments
 #include <iostream>
 #include <vector>
-
+#include <sstream>
+#include <fstream>
 #include "basic.h"
 
 using std::vector;
@@ -185,6 +186,18 @@ void Read1DArrayFromTxtFile(const char* filename, int& rows, T*& data);
  */
 template <typename T>
 void Read2DArrayFromTxtFile(const char* filename, int& rows, T**& data);
+
+
+/*!
+ * \brief Read csv.
+ *
+ * \param[in] filename
+ * \param[in] header Only the columns in the header will be read and stored in data.
+ *                      The order of the data is the same as the header.
+ * \param[out] data
+ */
+template <typename T>
+bool Read2DArrayFromCsvFile(const char* filename, const vector<string>* header, std::vector<std::vector<T>>& data);
 
 /*!
  * \brief Read 2D array from string
@@ -357,7 +370,7 @@ bool Initialize1DArray(const int row, T*& data, const INI_T init_value) {
 template <typename T, typename INI_T>
 bool Initialize1DArray(const int row, T*& data, INI_T* const init_data) {
     if (nullptr != data) {
-        cout << "The input 1D array pointer is not nullptr. No initialization performed!" << endl;
+        // cout << "The input 1D array pointer is not nullptr. No initialization performed!" << endl;
         return false;
     }
     data = new(nothrow) T[row];
@@ -378,10 +391,13 @@ bool Initialize1DArray(const int row, T*& data, INI_T* const init_data) {
 }
 
 template <typename T, typename INI_T>
-bool Initialize2DArray(const int row, const int col, T**& data,
-                       const INI_T init_value) {
+bool Initialize2DArray(const int row, const int col, T**& data, const INI_T init_value) {
+    if (row <= 0 || col <= 0) {
+        cout << "The row and col should not be less or equal to ZERO!" << endl;
+        return false;
+    }
     if (nullptr != data) {
-        cout << "The input 2D array pointer is not nullptr. No initialization performed!" << endl;
+        // cout << "The input 2D array pointer is not nullptr. No initialization performed!" << endl;
         return false;
     }
     data = new(nothrow) T*[row];
@@ -520,6 +536,44 @@ void RemoveValueInVector(const T val, vector<T>& vec) {
             ++iter;
         }
     }
+}
+
+template <typename T>
+bool Read2DArrayFromCsvFile(const char* filename, const vector<string>* header, std::vector<std::vector<T>>& data) {
+    std::ifstream ifs(filename);
+    std::string line;
+    if (!ifs.is_open()) {
+        std::cerr << "Error: Open file " << filename << " failed!" << std::endl;
+        return false;
+    }
+    vector<int> col_idx;
+    if (header != nullptr) {
+        int i = 0;
+        std::getline(ifs, line);
+        std::stringstream ss(line);
+        std::string value;
+        while (getline(ss, value, ',')) {
+            if (ValueInVector(value, *header)) {
+                col_idx.push_back(i);
+            }
+            i++;
+        }
+    }
+    while (std::getline(ifs, line)) {
+        int i = 0;
+        std::vector<T> row;
+        std::stringstream ss(line);
+        std::string value;
+        while (getline(ss, value, ',')) {
+            if (ValueInVector(i, col_idx)) {
+                row.push_back(static_cast<T>(std::stod(value)));
+            }
+            i++;
+        }
+        data.push_back(row);
+    }
+    ifs.close();
+    return true;
 }
 
 } /* utils_array */

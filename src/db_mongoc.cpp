@@ -317,6 +317,8 @@ mongoc_gridfs_file_t* MongoGridFs::GetFile(string const& gfilename, mongoc_gridf
     bson_t filter = BSON_INITIALIZER;
     BSON_APPEND_UTF8(&filter, "filename", gfilename.c_str());
     AppendStringOptionsToBson(&filter, opts, "metadata.");
+//    char* strfilter = bson_as_json(&filter, NULL);
+//    printf("Filter: %s\n", strfilter);
     int count = 0;
     while (count < 5) {
         gfile = mongoc_gridfs_find_one_with_opts(gfs, &filter, NULL, &err);
@@ -369,14 +371,17 @@ bool MongoGridFs::RemoveFile(string const& gfilename, mongoc_gridfs_t* gfs /* = 
     return true;
 }
 
-void MongoGridFs::GetFileNames(vector<string>& files_existed, mongoc_gridfs_t* gfs /* = NULL */) {
+void MongoGridFs::GetFileNames(vector<string>& files_existed, mongoc_gridfs_t* gfs /* = NULL */, STRING_MAP opts) {
     if (gfs_ != NULL) { gfs = gfs_; }
     if (NULL == gfs) {
         StatusMessage("mongoc_gridfs_t must be provided for MongoGridFs!");
     }
+
     //vector<string> filesExisted;
     bson_t* query = bson_new();
     bson_init(query);
+    AppendStringOptionsToBson(query, opts, "metadata.");
+
     mongoc_gridfs_file_list_t* glist = mongoc_gridfs_find_with_opts(gfs, query, NULL);
     mongoc_gridfs_file_t* file;
     while ((file = mongoc_gridfs_file_list_next(glist))) {

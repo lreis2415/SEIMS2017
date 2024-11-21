@@ -103,6 +103,16 @@ void UpdateStringMap(STRING_MAP& opts, const string& key, const string& value) {
     }
 }
 
+void UpdateStringMapIfNotExist(STRING_MAP& opts, const string& key, const string& value) {
+    if (opts.count(key) <= 0) {
+#ifdef HAS_VARIADIC_TEMPLATES
+        opts.emplace(key, value);
+#else
+        opts.insert(make_pair(key, value));
+#endif
+    }
+}
+
 #if defined(CPP_GCC) || defined(CPP_ICC)
 void _itoa_s(vint32_t value, char* buffer, size_t size, vint radix) {
     strprintf(buffer, size, "%d", value);
