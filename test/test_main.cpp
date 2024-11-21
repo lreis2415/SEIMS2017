@@ -92,5 +92,11 @@ int main(int argc, char** argv) {
     // Current Google test constantly leak 2 blocks at exit
     _CrtMemDumpAllObjectsSince(&memoryState);
 #endif /* Run Visual Leak Detector during Debug */
+
+#ifdef USE_MONGODB
+    //delete GlobalEnv;
+    delete client_;
+    delete gfs_;
+#endif
     return retval;
 }

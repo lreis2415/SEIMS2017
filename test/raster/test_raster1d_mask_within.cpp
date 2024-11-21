@@ -68,6 +68,9 @@ public:
         mask_name = maskf.c_str();
         mask2_name = maskf2.c_str();
     }
+
+    ~InputRasterFiles() { ; }
+
     const char* raster_name;
     const char* mask_name;
     const char* mask2_name;
@@ -984,6 +987,8 @@ TEST_P(clsRasterDataTestMaskWithin, MatchExactCalPosUseMaskExt) {
     delete mongors;
     delete mongors_valid;
 #endif
+
+    delete rs_;
 }
 
 // matched_exactly = False, calc_pos = False, use_mask_ext = False
@@ -1801,10 +1806,10 @@ TEST_P(clsRasterDataTestMaskWithin, NotMatchExactCalcPosUseMaskExt) {
 #ifdef USE_GDAL
 INSTANTIATE_TEST_CASE_P(SingleLayer, clsRasterDataTestMaskWithin,
                         Values(new InputRasterFiles(AscFile, MaskAscFileS, MaskAscFileS2),
-                            new InputRasterFiles(TifFile, MaskTifFileS, MaskTifFileS2)));
+                            new InputRasterFiles(TifFile, MaskTifFileS, MaskTifFileS2)),);
 #else
 INSTANTIATE_TEST_CASE_P(SingleLayer, clsRasterDataTestMaskWithin,
-                        Values(new InputRasterFiles(AscFile, MaskAscFileS, MaskAscFileS2)));
+                        Values(new InputRasterFiles(AscFile, MaskAscFileS, MaskAscFileS2)),);
 #endif /* USE_GDAL */
 
 } /* namespace */

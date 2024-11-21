@@ -81,3 +81,7 @@ endif ()
 # endif ()
 # SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}" PARENT_SCOPE)
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" PARENT_SCOPE)
+
+if (USE_SAN)
+  add_sanitizers(${APPNAME})
+endif ()

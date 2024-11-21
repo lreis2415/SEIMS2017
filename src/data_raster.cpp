@@ -4,6 +4,7 @@
  *
  * \remarks
  *   - 1. Apr. 2022 - lj - Separated from clsRasterData class for widely use.
+ *   - 2. Aug. 2023 - lj - Add GDAL data types added from versions 3.5 and 3.7
  *
  * \author Liangjun Zhu, zlj(at)lreis.ac.cn
  */
@@ -20,6 +21,8 @@ string RasterDataTypeToString(const int type) {
         case RDT_Int16:	    return("INT16");   // 16-bit signed integer
         case RDT_UInt32:	return("UINT32");  // 32-bit unsigned integer
         case RDT_Int32: 	return("INT32");   // 32-bit signed integer
+        case RDT_UInt64:    return("UINT64");  // 64-bit unsigned integer
+        case RDT_Int64:     return("INT64");   // 64-bit signed integer
         case RDT_Float: 	return("FLOAT");   // 32-bit floating point
         case RDT_Double: 	return("DOUBLE");  // 64-bit floating point
         default:	        return("Unknown"); // All others
@@ -29,11 +32,14 @@ string RasterDataTypeToString(const int type) {
 RasterDataType StringToRasterDataType(const string& stype) {
     if (StringMatch(stype, "UCHAR") || StringMatch(stype, "UINT8")
         || StringMatch(stype, "GDT_Byte")) { return RDT_UInt8; }
-    if (StringMatch(stype, "CHAR") || StringMatch(stype, "INT8")) { return RDT_Int8; }
+    if (StringMatch(stype, "CHAR") || StringMatch(stype, "INT8")
+        || StringMatch(stype, "GDT_Int8")) { return RDT_Int8; }
     if (StringMatch(stype, "UINT16") || StringMatch(stype, "GDT_UInt16")) { return RDT_UInt16; }
     if (StringMatch(stype, "INT16") || StringMatch(stype, "GDT_Int16")) { return RDT_Int16; }
     if (StringMatch(stype, "UINT32") || StringMatch(stype, "GDT_UInt32")) { return RDT_UInt32; }
     if (StringMatch(stype, "INT32") || StringMatch(stype, "GDT_Int32")) { return RDT_Int32; }
+    if (StringMatch(stype, "UINT64") || StringMatch(stype, "GDT_UInt64")) { return RDT_UInt64; }
+    if (StringMatch(stype, "INT64") || StringMatch(stype, "GDT_Int64")) { return RDT_Int64; }
     if (StringMatch(stype, "FLOAT") || StringMatch(stype, "GDT_Float32")) { return RDT_Float; }
     if (StringMatch(stype, "DOUBLE") || StringMatch(stype, "GDT_Float64")) { return RDT_Double; }
     return RDT_Unknown;
@@ -46,6 +52,8 @@ RasterDataType TypeToRasterDataType(const std::type_info& t) {
     if (t == typeid(vint16_t)) { return RDT_Int16; }
     if (t == typeid(vuint32_t)) { return RDT_UInt32; }
     if (t == typeid(vint32_t)) { return RDT_Int32; }
+    if (t == typeid(vuint64_t)) { return RDT_UInt64; }
+    if (t == typeid(vint64_t)) { return RDT_Int64; }
     if (t == typeid(float)) { return RDT_Float; }
     if (t == typeid(double)) { return RDT_Double; }
     return RDT_Unknown;
@@ -60,6 +68,8 @@ double DefaultNoDataByType(const RasterDataType type) {
         case RDT_Int16:	    return INT16_MIN;     // 16-bit signed integer
         case RDT_UInt32:	return UINT32_MAX;    // 32-bit unsigned integer
         case RDT_Int32: 	return INT32_MIN;     // 32-bit signed integer
+        case RDT_UInt64:	return UINT64_MAX;    // 32-bit unsigned integer
+        case RDT_Int64: 	return INT64_MIN;     // 32-bit signed integer
         case RDT_Float: 	return MISSINGFLOAT;  // 32-bit floating point
         case RDT_Double: 	return MISSINGFLOAT;  // 64-bit floating point
         default:	        return NODATA_VALUE;  // All others
@@ -70,12 +80,21 @@ double DefaultNoDataByType(const RasterDataType type) {
 GDALDataType CvtToGDALDataType(const RasterDataType type) {
     switch (type) {
         case RDT_Unknown:   return GDT_Unknown;  // Unknown
-        case RDT_Int8:	    return GDT_Byte;     // 8-bit signed integer is not initially supported by GDAL!
         case RDT_UInt8:	    return GDT_Byte;     // 8-bit unsigned integer
+        case RDT_Int8:
+#if GDAL_VERSION_MAJOR >= 3 && GDAL_VERSION_MINOR >= 7
+            return GDT_Int8;                     // 8-bit signed integer not supported by GDAL<3.7!
+#else
+            return GDT_Byte;                     // 8-bit signed integer supported by GDAL>=3.7!
+#endif
         case RDT_UInt16:	return GDT_UInt16;   // 16-bit unsigned integer
         case RDT_Int16:	    return GDT_Int16;    // 16-bit signed integer
         case RDT_UInt32:	return GDT_UInt32;   // 32-bit unsigned integer
         case RDT_Int32: 	return GDT_Int32;    // 32-bit signed integer
+#if GDAL_VERSION_MAJOR >= 3 && GDAL_VERSION_MINOR >= 5
+        case RDT_UInt64:	return GDT_UInt64;   // 64-bit unsigned integer
+        case RDT_Int64: 	return GDT_Int64;    // 64-bit signed integer
+#endif
         case RDT_Float: 	return GDT_Float32;  // 32-bit floating point
         case RDT_Double: 	return GDT_Float64;  // 64-bit floating point
         default:	        return GDT_Unknown;  // All others
@@ -283,7 +302,9 @@ bool SubsetPositions::ReadFromMongoDB(MongoGridFs* gfs, const string& fname, con
     n_lyrs = db_nlyrs;
     if (n_lyrs == 1) {
         if (n_cells == db_ncells) {
-            return SetData(db_ncells, dbdata);
+            bool set_success = SetData(db_ncells, dbdata);
+            Release1DArray(dbdata);
+            return set_success;
         }
         if (nullptr == data_) {
             Initialize1DArray(n_cells, data_, NODATA_VALUE);
