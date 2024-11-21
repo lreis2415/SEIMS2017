@@ -155,10 +155,11 @@ IF(NOT CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
     message(STATUS "Find OpenMP from LLVM")
     # To use OpenMP in Clang built by CMake, the recommended way is to
     #   install llvm alone by 'brew install llvm', which has builtin 'libomp'
+    FIND_PACKAGE(LLVM)
     IF (NOT LLVM_ROOT_DIR)
         SET(LLVM_ROOT_DIR "/opt/homebrew/opt/llvm")
+        FIND_PACKAGE(LLVM)
     ENDIF ()
-    FIND_PACKAGE(LLVM)
     IF(LLVM_VERSION_MAJOR)
         geo_include_directories(${LLVM_LIBRARY_DIRS}/clang/${LLVM_VERSION_BASE_STRING}/include)
         SET(OpenMP_CXX_FLAGS "-fopenmp")
