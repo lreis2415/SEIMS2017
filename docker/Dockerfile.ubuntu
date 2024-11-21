@@ -1,0 +1,57 @@
+##
+# docker pull ghcr.io/lreis2415/taudem_ext:ubuntu
+# or
+# docker pull registry.cn-hangzhou.aliyuncs.com/ljzhu-geomodels/taudem_ext:ubuntu
+#
+# Build by yourself (DO NOT MISSING the dot at the end of the line):
+#   > cd TauDEM_ext
+#   > docker build -t taudem_ext:ubuntu -f docker/Dockerfile.ubuntu .
+#
+# Copyright 2022-2024 Liang-Jun Zhu <zlj@lreis.ac.cn>
+#
+
+# Use GDAL image tagged ubuntu-small-<version> as the build and runner container
+#  see https://github.com/OSGeo/gdal/pkgs/container/gdal/versions?filters%5Bversion_type%5D=tagged
+ARG GDAL_VERSION=3.9.2
+FROM ghcr.io/osgeo/gdal:ubuntu-small-${GDAL_VERSION} AS builder
+
+LABEL maintainer="Liang-Jun Zhu <zlj@lreis.ac.cn>"
+
+RUN apt-get update -q && \
+    apt-get install -q -y --no-install-recommends \
+    cmake make g++ libopenmpi-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy source directory
+WORKDIR /taudem_ext
+COPY . ./
+
+# # Build for release
+ARG INSTALL_DIR=/taudem_ext/dist
+RUN cd /taudem_ext \
+    && mkdir build \
+    && cd build \
+    && cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} \
+    && make -j4 \
+    && make install -j4 \
+    && cd ..
+
+# # Build final image
+FROM ghcr.io/osgeo/gdal:ubuntu-small-${GDAL_VERSION} AS runner
+
+RUN apt-get update -q && \
+    apt-get install -q -y --no-install-recommends \
+    openmpi-bin libgomp1 tini \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Order layers starting with less frequently varying ones
+ARG INSTALL_DIR=/taudem_ext/dist
+COPY --from=builder ${INSTALL_DIR}/bin/ /usr/local/bin/
+
+ENV OMPI_ALLOW_RUN_AS_ROOT=1
+ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+
+COPY docker/docker-entrypoint.sh /
+ENTRYPOINT ["/usr/bin/tini", "--", "/docker-entrypoint.sh"]

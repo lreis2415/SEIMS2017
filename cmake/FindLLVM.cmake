@@ -1,6 +1,7 @@
 # https://github.com/ldc-developers/ldc/blob/master/cmake/Modules/FindLLVM.cmake
-# commit 019e9c8e30259376dd1379937b125b50f7ae231d 12 Oct, 2021
+# commit d595f4fefa5537afbf396b29c6a8e6776ff71b9b Nov 10, 2022
 # 
+# Updated: 08/10/2023 - lj -  Only if LLVM_FIND_VERSION is assigned, the found version will be checked.
 #
 # - Find LLVM headers and libraries.
 # This module locates LLVM and adapts the llvm-config output for use with
@@ -15,7 +16,7 @@
 #  LLVM_INCLUDE_DIRS   - Directory containing LLVM include files.
 #  LLVM_IS_SHARED      - Whether LLVM is going to be linked dynamically (ON) or statically (OFF).
 #  LLVM_LDFLAGS        - Linker flags to add when linking against LLVM
-#                        (includes -LLVM_LIBRARY_DIRS).
+#                        (includes -LLLVM_LIBRARY_DIRS).
 #  LLVM_LIBRARIES      - Full paths to the library files to link against.
 #  LLVM_LIBRARY_DIRS   - Directory containing LLVM libraries.
 #  LLVM_NATIVE_ARCH    - Backend corresponding to LLVM_HOST_TARGET, e.g.,
@@ -36,45 +37,47 @@
 # We also want an user-specified LLVM_ROOT_DIR to take precedence over the
 # system default locations such as /usr/local/bin. Executing find_program()
 # multiples times is the approach recommended in the docs.
-set(llvm_config_names llvm-config-13.0 llvm-config130 llvm-config-13
-        llvm-config-12.0 llvm-config120 llvm-config-12
-        llvm-config-11.0 llvm-config110 llvm-config-11
-        llvm-config-10.0 llvm-config100 llvm-config-10
-        llvm-config-9.0 llvm-config90 llvm-config-9
-        llvm-config-8.0 llvm-config80 llvm-config-8
-        llvm-config-7.0 llvm-config70 llvm-config-7
-        llvm-config-6.0 llvm-config60
-        llvm-config)
-find_program(LLVM_CONFIG 
-        NAMES ${llvm_config_names}
-        PATHS ${LLVM_ROOT_DIR}/bin NO_DEFAULT_PATH
-        DOC "Path to llvm-config tool.")
+set(llvm_config_names llvm-config-16.0 llvm-config160 llvm-config-16
+                      llvm-config-15.0 llvm-config150 llvm-config-15
+                      llvm-config-14.0 llvm-config140 llvm-config-14
+                      llvm-config-13.0 llvm-config130 llvm-config-13
+                      llvm-config-12.0 llvm-config120 llvm-config-12
+                      llvm-config-11.0 llvm-config110 llvm-config-11
+                      llvm-config-10.0 llvm-config100 llvm-config-10
+                      llvm-config-9.0 llvm-config90 llvm-config-9
+                      llvm-config)
+find_program(LLVM_CONFIG
+    NAMES ${llvm_config_names}
+    PATHS ${LLVM_ROOT_DIR}/bin NO_DEFAULT_PATH
+    DOC "Path to llvm-config tool.")
 find_program(LLVM_CONFIG NAMES ${llvm_config_names})
 if(APPLE)
     # extra fallbacks for MacPorts & Homebrew
-    find_program(LLVM_CONFIG 
-            NAMES ${llvm_config_names}
-            PATHS /opt/local/libexec/llvm-13/bin  /opt/local/libexec/llvm-12/bin
-            /opt/local/libexec/llvm-11/bin  /opt/local/libexec/llvm-10/bin  /opt/local/libexec/llvm-9.0/bin
-            /opt/local/libexec/llvm-8.0/bin /opt/local/libexec/llvm-7.0/bin /opt/local/libexec/llvm-6.0/bin
-            /opt/local/libexec/llvm/bin
-            /usr/local/opt/llvm@13/bin /usr/local/opt/llvm@12/bin
-            /usr/local/opt/llvm@11/bin /usr/local/opt/llvm@10/bin /usr/local/opt/llvm@9/bin
-            /usr/local/opt/llvm@8/bin  /usr/local/opt/llvm@7/bin  /usr/local/opt/llvm@6/bin
-            /usr/local/opt/llvm/bin
-            NO_DEFAULT_PATH)
+    find_program(LLVM_CONFIG
+        NAMES ${llvm_config_names}
+        PATHS /opt/local/libexec/llvm-16/bin
+              /opt/local/libexec/llvm-15/bin
+              /opt/local/libexec/llvm-14/bin  /opt/local/libexec/llvm-13/bin  /opt/local/libexec/llvm-12/bin
+              /opt/local/libexec/llvm-11/bin  /opt/local/libexec/llvm-10/bin  /opt/local/libexec/llvm-9.0/bin
+              /opt/local/libexec/llvm/bin
+              /usr/local/opt/llvm@16/bin
+              /usr/local/opt/llvm@15/bin
+              /usr/local/opt/llvm@14/bin /usr/local/opt/llvm@13/bin /usr/local/opt/llvm@12/bin
+              /usr/local/opt/llvm@11/bin /usr/local/opt/llvm@10/bin /usr/local/opt/llvm@9/bin
+              /usr/local/opt/llvm/bin
+        NO_DEFAULT_PATH)
 endif()
 
 # Prints a warning/failure message depending on the required/quiet flags. Copied
 # from FindPackageHandleStandardArgs.cmake because it doesn't seem to be exposed.
 macro(_LLVM_FAIL _msg)
-    if(LLVM_FIND_REQUIRED)
-        message(FATAL_ERROR "${_msg}")
-    else()
-        if(NOT LLVM_FIND_QUIETLY)
-            message(WARNING "${_msg}")
-        endif()
+  if(LLVM_FIND_REQUIRED)
+    message(FATAL_ERROR "${_msg}")
+  else()
+    if(NOT LLVM_FIND_QUIETLY)
+      message(WARNING "${_msg}")
     endif()
+  endif()
 endmacro()
 
 
@@ -84,16 +87,16 @@ if(NOT LLVM_CONFIG)
     endif()
 else()
     macro(llvm_set var flag)
-        if(LLVM_FIND_QUIETLY)
+       if(LLVM_FIND_QUIETLY)
             set(_quiet_arg ERROR_QUIET)
         endif()
         set(result_code)
         execute_process(
-                COMMAND ${LLVM_CONFIG} --${flag}
-                RESULT_VARIABLE result_code
-                OUTPUT_VARIABLE LLVM_${var}
-                OUTPUT_STRIP_TRAILING_WHITESPACE
-                ${_quiet_arg}
+            COMMAND ${LLVM_CONFIG} --${flag}
+            RESULT_VARIABLE result_code
+            OUTPUT_VARIABLE LLVM_${var}
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            ${_quiet_arg}
         )
         if(result_code)
             _LLVM_FAIL("Failed to execute llvm-config ('${LLVM_CONFIG}', result code: '${result_code})'")
@@ -104,20 +107,20 @@ else()
         endif()
     endmacro()
     macro(llvm_set_libs var flag components)
-        if(LLVM_FIND_QUIETLY)
+       if(LLVM_FIND_QUIETLY)
             set(_quiet_arg ERROR_QUIET)
         endif()
         set(result_code)
         execute_process(
-                COMMAND ${LLVM_CONFIG} --${flag} ${components}
-                RESULT_VARIABLE result_code
-                OUTPUT_VARIABLE tmplibs
-                OUTPUT_STRIP_TRAILING_WHITESPACE
-                ${_quiet_arg}
+            COMMAND ${LLVM_CONFIG} --${flag} ${components}
+            RESULT_VARIABLE result_code
+            OUTPUT_VARIABLE tmplibs
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            ${_quiet_arg}
         )
         if(result_code)
             _LLVM_FAIL("Failed to execute llvm-config ('${LLVM_CONFIG}', result code: '${result_code})'")
-        else()
+        else()        
             file(TO_CMAKE_PATH "${tmplibs}" tmplibs)
             string(REGEX MATCHALL "${pattern}[^ ]+" LLVM_${var} ${tmplibs})
         endif()
@@ -131,6 +134,8 @@ else()
 
     # The LLVM version string _may_ contain a git/svn suffix, so match only the x.y.z part
     string(REGEX MATCH "^[0-9]+[.][0-9]+[.][0-9]+" LLVM_VERSION_BASE_STRING "${LLVM_VERSION_STRING}")
+    string(REGEX REPLACE "([0-9]+).*" "\\1" LLVM_VERSION_MAJOR "${LLVM_VERSION_STRING}" )
+    string(REGEX REPLACE "[0-9]+\\.([0-9]+).*[A-Za-z]*" "\\1" LLVM_VERSION_MINOR "${LLVM_VERSION_STRING}" )
 
     llvm_set(SHARED_MODE shared-mode)
     if(LLVM_SHARED_MODE STREQUAL "shared")
@@ -144,6 +149,11 @@ else()
     string(REPLACE "\n" " " LLVM_LDFLAGS "${LLVM_LDFLAGS} ${LLVM_SYSTEM_LIBS}")
     if(APPLE) # unclear why/how this happens
         string(REPLACE "-llibxml2.tbd" "-lxml2" LLVM_LDFLAGS ${LLVM_LDFLAGS})
+    endif()
+
+    if(${LLVM_VERSION_MAJOR} LESS "15")
+        # Versions below 15.0 do not support component windowsdriver
+        list(REMOVE_ITEM LLVM_FIND_COMPONENTS "windowsdriver")
     endif()
 
     llvm_set(LIBRARY_DIRS libdir true)
@@ -189,19 +199,18 @@ else()
         string(REPLACE "-Wno-maybe-uninitialized " "" LLVM_CXXFLAGS ${LLVM_CXXFLAGS})
     endif()
 
-    string(REGEX REPLACE "([0-9]+).*" "\\1" LLVM_VERSION_MAJOR "${LLVM_VERSION_STRING}" )
-    string(REGEX REPLACE "[0-9]+\\.([0-9]+).*[A-Za-z]*" "\\1" LLVM_VERSION_MINOR "${LLVM_VERSION_STRING}" )
-    if (${LLVM_VERSION_MAJOR})
-        set (LLVM_FOUND true)
-    endif ()
-    # if (${LLVM_VERSION_STRING} VERSION_LESS ${LLVM_FIND_VERSION})
-    #     _LLVM_FAIL("Unsupported LLVM version ${LLVM_VERSION_STRING} found (${LLVM_CONFIG}). At least version ${LLVM_FIND_VERSION} is required. You can also set variables 'LLVM_ROOT_DIR' or 'LLVM_CONFIG' to use a different LLVM installation.")
-    # endif()
+    if (${LLVM_FIND_VERSION})
+        if (${LLVM_VERSION_STRING} VERSION_LESS ${LLVM_FIND_VERSION})
+            _LLVM_FAIL("Unsupported LLVM version ${LLVM_VERSION_STRING} found (${LLVM_CONFIG}).
+            At least version ${LLVM_FIND_VERSION} is required.
+            You can also set variables 'LLVM_ROOT_DIR' or 'LLVM_CONFIG' to use a different LLVM installation.")
+        endif()
+    endif()
 endif()
 
 # Use the default CMake facilities for handling QUIET/REQUIRED.
 include(FindPackageHandleStandardArgs)
 
 find_package_handle_standard_args(LLVM
-        REQUIRED_VARS LLVM_ROOT_DIR
-        VERSION_VAR LLVM_VERSION_STRING)
+    REQUIRED_VARS LLVM_ROOT_DIR
+    VERSION_VAR LLVM_VERSION_STRING)

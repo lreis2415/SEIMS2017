@@ -16,8 +16,8 @@
 #              GDAL-3.4.0 (brew installed), OpenMPI-4.1.2
 #
 #  Created and maintained by Liang-Jun Zhu (zlj@lreis.ac.cn)
-#  Latest updated: May. 27, 2022
-#  Copyright (C) 2017-2022 Lreis, IGSNRR, CAS
+#  Latest updated: Aug. 15, 2023
+#  Copyright (C) 2017-2023 Lreis, IGSNRR, CAS
 # ----------------------------------------------------------------------------
 ### Disable in-source builds to prevent source tree corruption.
 IF(" ${CMAKE_SOURCE_DIR}" STREQUAL " ${CMAKE_BINARY_DIR}")
@@ -77,7 +77,8 @@ ELSE()
         SET(INSTALL_DIR ${CMAKE_INSTALL_PREFIX} CACHE PATH "Set default install path" FORCE)
     ENDIF ()
 ENDIF ()
-SET(CMAKE_INSTALL_PREFIX ${INSTALL_DIR})
+SET(INSTALL_PREFIX ${INSTALL_DIR} CACHE PATH "Set INSTALL_PREFIX cache" FORCE)
+SET(CMAKE_INSTALL_PREFIX ${INSTALL_DIR} CACHE PATH "Set CMAKE_INSTALL_PREFIX cache" FORCE)
 
 ### Allow project folders in MSVC and Xcode.
 IF(MSVC OR XCODE)

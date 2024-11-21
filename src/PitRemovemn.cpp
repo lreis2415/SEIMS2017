@@ -1,15 +1,15 @@
 /*  PitRemovemn main program to compute pit filled DEM.
-     
+
   David Tarboton, Teklu Tesfa
-  Utah State University  
-  May 23, 2010 
+  Utah State University
+  May 23, 2010
 
 */
 
 /*  Copyright (C) 2010  David Tarboton, Utah State University
 
 This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License 
+modify it under the terms of the GNU General Public License
 version 2, 1991 as published by the Free Software Foundation.
 
 This program is distributed in the hope that it will be useful,
@@ -17,23 +17,23 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-A copy of the full GNU General Public License is included in file 
+A copy of the full GNU General Public License is included in file
 gpl.html. This is also available at:
 http://www.gnu.org/copyleft/gpl.html
 or from:
-The Free Software Foundation, Inc., 59 Temple Place - Suite 330, 
+The Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA  02111-1307, USA.
 
-If you wish to use or incorporate this program (or parts of it) into 
-other software that does not meet the GNU General Public License 
+If you wish to use or incorporate this program (or parts of it) into
+other software that does not meet the GNU General Public License
 conditions contact the author to request permission.
-David G. Tarboton  
-Utah State University 
-8200 Old Main Hill 
-Logan, UT 84322-8200 
-USA 
-http://www.engineering.usu.edu/dtarb/ 
-email:  dtarb@usu.edu 
+David G. Tarboton
+Utah State University
+8200 Old Main Hill
+Logan, UT 84322-8200
+USA
+http://www.engineering.usu.edu/dtarb/
+email:  dtarb@usu.edu
 */
 
 //  This software is distributed from http://hydrology.usu.edu/taudem/
@@ -78,13 +78,13 @@ int main(int argc, char **argv) {
                 strcpy(newfile, argv[i]);
                 i++;
             } else { goto errexit; }
-        } else if (strcmp(argv[i], "-sfdr") == 0) {
-            i++;
-            if (argc > i) {
-                strcpy(flowfile, argv[i]);
-                useflowfile = 1;
+            /* } else if (strcmp(argv[i], "-sfdr") == 0) { // dgt 5/11/23 Commenting out this option as main code appears to not support this option
                 i++;
-            } else { goto errexit; }
+                if (argc > i) {
+                    strcpy(flowfile, argv[i]);
+                    useflowfile = 1;
+                    i++;
+                } else { goto errexit; } */
         } else if (strcmp(argv[i], "-v") == 0) {
             i++;
             verbose = true;
@@ -124,16 +124,21 @@ int main(int argc, char **argv) {
     return 0;
 
     errexit:
-    printf("Simple Usage:\n %s <basefilename>\n", argv[0]);
-    printf("Usage with specific file names:\n %s -z <demfile>\n", argv[0]);
-    printf("-fel <newfile> [-sfdr <flowfile>]\n");
-    printf("<basefilename> is the name of the raw digital elevation model.\n");
+    // 5/11/23 dgt Fixing usage text (noting that sfdr option is currently commented out in main code)
+    printf("Simple use:\n %s <demfile>\n", argv[0]);
+    printf("Simple use takes as input just the input DEM file name and the name of the output file is\n");
+    printf("created by inserting 'fel' into the input file name.\n");
+    printf("It is not possible to use a depression mask, or specify 4 way pit removal with the simple input pattern.\n\n");
+
+    printf("General use with specific file names:\n %s -z <demfile> ", argv[0]);
+    printf("-fel <newfile> [-depmask <maskfile>] [ -4way] [-v] \n");
+    printf("General use requires specification of the file name for each input/output, preceded by a flag indicating\n");
+    printf("the file content.\n");
     printf("<demfile> is the name of the input elevation grid file.\n");
     printf("<newfile> is the output elevation grid with pits filled.\n");
-    printf("<flowfile> is the input grid of flow directions to be imposed.\n");
-    printf("The following are appended to the file names\n");
-    printf("before the files are opened:\n");
-    printf("fel    output elevation grid with pits filled.\n\n");
+    printf("<depmaskfile> is depression mask indicator grid.\n");
+    printf("-4way (optional) is flag to set 4 way depression filling.\n");
+    printf("-v (optional) is flag to set verbose (more detailed) output messages.\n");
     exit(0);
 }
 

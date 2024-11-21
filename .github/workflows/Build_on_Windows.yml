@@ -4,10 +4,13 @@ name: Build with MSMPI and GDAL using MSVC on Windows
 
 on:
   push:
-    paths-ignore: 
+    branches:
+      - 'master'
+      - 'dev'
+    paths-ignore:
       - 'data'
   pull_request:
-      paths-ignore: 
+      paths-ignore:
         - 'data'
   workflow_dispatch:
 
@@ -22,7 +25,7 @@ jobs:
 
     steps:
     - name: Checkout TauDEM_ext
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup MPI (use MS-MPI)
       uses: mpi4py/setup-mpi@v1

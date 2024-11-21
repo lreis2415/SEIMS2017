@@ -1,0 +1,60 @@
+##
+# docker pull ghcr.io/lreis2415/taudem_ext:alpine
+# or
+# docker pull registry.cn-hangzhou.aliyuncs.com/ljzhu-geomodels/taudem_ext:alpine
+#
+# Build by yourself (DO NOT MISSING the dot at the end of the line):
+#   > cd TauDEM_ext
+#   > docker build -t taudem_ext:alpine -f docker/Dockerfile.alpine .
+#
+# Copyright 2022-2024 Liang-Jun Zhu <zlj@lreis.ac.cn>
+#
+
+# Use GDAL image tagged alpine-small-<version> as the build and test container
+#  see https://github.com/OSGeo/gdal/pkgs/container/gdal/versions?filters%5Bversion_type%5D=tagged
+ARG GDAL_VERSION=3.9.2
+FROM ghcr.io/osgeo/gdal:alpine-small-${GDAL_VERSION} AS builder
+
+LABEL maintainer="Liang-Jun Zhu <zlj@lreis.ac.cn>"
+
+# Replace alpine repository source cdn to accelarate access speed and setup build env, when necessary
+
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+RUN apk update && apk upgrade && \
+    apk add --no-cache cmake make g++ openmpi-dev
+
+# Copy source directory
+WORKDIR /taudem_ext
+COPY . ./
+
+# # Build for release
+ARG INSTALL_DIR=/taudem_ext/dist
+RUN cd /taudem_ext \
+    && mkdir build \
+    && cd build \
+    && cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} \
+    && make -j4 \
+    && make install -j4 \
+    && cd ..
+
+# # Build final image
+FROM ghcr.io/osgeo/gdal:alpine-small-${GDAL_VERSION} AS runner
+
+# Replace alpine repository source cdn to accelarate access speed and setup build env, when necessary
+# Add OpenMPI related tools/libraries for running TauDEM
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk update && apk upgrade && \
+    apk add --no-cache openmpi libgomp tini openssh \
+    rm -rf /var/cache/apk/*
+
+# Order layers starting with less frequently varying ones
+ARG INSTALL_DIR=/taudem_ext/dist
+COPY --from=builder ${INSTALL_DIR}/bin/ /usr/local/bin/
+
+ENV OMPI_ALLOW_RUN_AS_ROOT=1
+ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+
+COPY docker/docker-entrypoint.sh /
+ENTRYPOINT ["/sbin/tini", "--", "/docker-entrypoint.sh"]

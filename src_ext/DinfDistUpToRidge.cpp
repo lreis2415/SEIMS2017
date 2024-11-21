@@ -105,6 +105,7 @@ int hdisttoridgegrd(char *angfile, char *rdgfile, char *wfile, char *rtrfile, in
         int ny = flowData->getny(); // ny is rows num. of current rank's partition
         int xstart, ystart;
         flowData->localToGlobal(0, 0, xstart, ystart);
+        flowData->savedxdyc(ang);
         ang.read(xstart, ystart, ny, nx, flowData->getGridPointer()); // read current rank's partition data
 
         //if using ridgeData, get information from file, added by Zhu LJ, Apr 2,2015
@@ -386,6 +387,7 @@ int vrisetoridgegrd(char *angfile, char *felfile, char *rdgfile, char *rtrfile, 
         int ny = flowData->getny();
         int xstart, ystart;
         flowData->localToGlobal(0, 0, xstart, ystart);
+        flowData->savedxdyc(ang);
         ang.read(xstart, ystart, ny, nx, flowData->getGridPointer());
 
         //if using ridgeData, get information from file, added by Zhu LJ, Apr 2,2015
@@ -672,6 +674,7 @@ int pdisttoridgegrd(char *angfile, char *felfile, char *rdgfile, char *wfile, ch
         int ny = flowData->getny();
         int xstart, ystart;
         flowData->localToGlobal(0, 0, xstart, ystart);
+        flowData->savedxdyc(ang);
         ang.read(xstart, ystart, ny, nx, flowData->getGridPointer());
 
         //if using ridgeData, get information from file, added by Zhu LJ, Apr 2,2015
