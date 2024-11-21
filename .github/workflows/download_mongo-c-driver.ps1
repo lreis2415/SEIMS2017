@@ -15,6 +15,8 @@ Get-ChildItem
 Write-Host "Setting environmetal paths of mongo-c-driver……"
 $env:MONGOC_ROOT = $mongoCPath
 $env:MONGOC_BIN = "$mongoCPath\bin;"
+$env:PATH = "$env:MONGOC_BIN;$env:PATH"
 
 Write-Output "MONGOC_ROOT=$env:MONGOC_ROOT"
 Write-Output "MONGOC_BIN=$env:MONGOC_BIN"
+Write-Output "PATH=$env:PATH"

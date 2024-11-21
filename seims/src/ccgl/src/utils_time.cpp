@@ -327,7 +327,7 @@ DateTime ConvertTMToDateTime(tm* time_info, vint milliseconds) {
     dt.milliseconds = CVT_INT(milliseconds);
     dt.filetime = CVT_VUINT64(timer * 1000 + milliseconds);
     dt.total_milliseconds = CVT_VUINT64(timer * 1000 + milliseconds);
-    delete time_info;
+    //delete &time_info;
     return dt;
 }
 
@@ -351,7 +351,9 @@ DateTime DateTime::LocalTime() {
 #else
     localtime_r(&timer, time_info);
 #endif
-    return ConvertTMToDateTime(time_info, GetCurrentMilliseconds());
+    DateTime dt = ConvertTMToDateTime(time_info, GetCurrentMilliseconds());
+    delete time_info;
+    return dt;
 #endif /* CPP_MSVC */
 }
 
@@ -368,7 +370,9 @@ DateTime DateTime::UTCTime() {
 #else
     gmtime_r(&timer, time_info);
 #endif
-    return ConvertTMToDateTime(time_info, GetCurrentMilliseconds());
+    DateTime dt = ConvertTMToDateTime(time_info, GetCurrentMilliseconds());
+    delete time_info;
+    return dt;
 #endif /* CPP_MSVC */
 }
 
@@ -390,7 +394,7 @@ DateTime DateTime::FromDateTime(const int iyear, const int imonth, const int ida
     FileTimeToSystemTime(&file_time, &sys_time);
     return SystemTimeToDateTime(sys_time);
 #elif (defined CPP_GCC) || (defined CPP_ICC)
-    tm time_info;
+    struct tm time_info;
     memset(&time_info, 0, sizeof(time_info));
     time_info.tm_year = iyear - 1900;
     time_info.tm_mon = imonth - 1;
@@ -400,7 +404,9 @@ DateTime DateTime::FromDateTime(const int iyear, const int imonth, const int ida
     time_info.tm_sec = isecond;
     time_info.tm_isdst = -1;
 
-    return ConvertTMToDateTime(&time_info, imillisecond);
+    DateTime dt = ConvertTMToDateTime(&time_info, imillisecond);
+    //delete &time_info;
+    return dt;
 #endif
 }
 
@@ -423,7 +429,9 @@ DateTime DateTime::FromFileTime(const vuint64_t ifiletime) {
 #else
     localtime_r(&timer, time_info);
 #endif
-    return ConvertTMToDateTime(time_info, ifiletime % 1000);
+    DateTime dt = ConvertTMToDateTime(time_info, ifiletime % 1000);
+    delete time_info;
+    return dt;
 #endif
 }
 
@@ -450,7 +458,9 @@ DateTime DateTime::ToLocalTime() {
 #else
     localtime_r(&timer, time_info);
 #endif
-    return ConvertTMToDateTime(time_info, milliseconds);
+    DateTime dt = ConvertTMToDateTime(time_info, milliseconds);
+    //delete &time_info;
+    return dt;
 #endif
 }
 
@@ -469,7 +479,9 @@ DateTime DateTime::ToUTCTime() {
     gmtime_r(&timer, time_info);
 #endif
 
-    return ConvertTMToDateTime(time_info, milliseconds);
+    DateTime dt = ConvertTMToDateTime(time_info, milliseconds);
+    //delete &time_info;
+    return dt;
 #endif
 }
 

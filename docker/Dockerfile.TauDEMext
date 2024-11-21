@@ -1,12 +1,19 @@
 ##
+# docker pull ghcr.io/lreis2415/seims:dev-latest
+# or
+# docker pull registry.cn-hangzhou.aliyuncs.com/ljzhu-geomodels/seims:dev-latest
+#
+# Build by yourself (DO NOT MISSING the dot at the end of the line):
+#   > cd SEIMS
+#   > docker build -t seims:dev-latest -f docker/Dockerfile.TauDEMext .
 #
 # Copyright 2024 Liang-Jun Zhu <zlj@lreis.ac.cn>
 #
 
-# Use the latest master branch of TauDEM_ext image based on continuumio/miniconda3 as the build and test container, which is based on debian:12.5-slim
+# Use debian as the build and runner container, which is used for continuumio/miniconda3
 # https://github.com/ContinuumIO/docker-images/blob/main/miniconda3/debian/Dockerfile
-# https://github.com/lreis2415/TauDEM_ext/pkgs/container/taudem_ext
-FROM ghcr.io/lreis2415/taudem_ext:master-debian-miniconda as builder
+ARG DEBIAN_VER=12.7-slim
+FROM debian:${DEBIAN_VER} AS builder
 
 LABEL maintainer="Liang-Jun Zhu <zlj@lreis.ac.cn>"
 
@@ -32,24 +39,36 @@ RUN cd /seims \
     && make install -j 8 \
     && cd ..
 
-## Build final image
-FROM ghcr.io/lreis2415/taudem_ext:master-debian-miniconda as runner
+## Create pyseims environment
+# References:
+#  https://pythonspeed.com/articles/activate-conda-dockerfile/
+#  https://medium.com/@rvaid.29/reduce-the-size-of-conda-based-docker-images-3f7f713d3a8f
+FROM continuumio/miniconda3:24.7.1-0 AS pybuilder
 
 # Copy source directory
 WORKDIR /seims
 COPY seims seims
-COPY docker docker
 
-# Create new conda environment for pyseims
-# Refers to https://pythonspeed.com/articles/activate-conda-dockerfile/
-RUN conda env create -f ./seims/pyseims_env.yml
+# 1. Install conda-pack
+# 2. Create new conda environment for pyseims
+# 3. Package the environment as tar using conda-pack
+# 4. Unpack the environment in /venv using conda-unpack
+RUN conda install -c conda-forge conda-pack && \
+    conda env create -f ./seims/pyseims_env.yml && \
+    conda-pack -n pyseims -o /tmp/env.tar && \
+    mkdir /venv && \
+    cd /venv && \
+    tar -xf /tmp/env.tar && \
+    rm /tmp/env.tar && \
+    /venv/bin/conda-unpack
 
-# Make RUN commands use the new environment:
-SHELL ["conda", "run", "--no-capture-output", "-n", "pyseims", "/bin/bash", "-c"]
+# Use taudem_ext:debian as base image for the runner
+# https://github.com/lreis2415/TauDEM_ext/pkgs/container/taudem_ext
+FROM ghcr.io/lreis2415/taudem_ext:debian AS runner
 
 RUN apt-get update -q && \
     apt-get install -q -y --no-install-recommends \
-    gdal-bin openmpi-bin libgomp1 tini libmongoc-1.0-0 \
+    libmongoc-1.0-0 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -59,10 +78,19 @@ COPY --from=builder ${INSTALL_DIR}/bin/ /usr/local/bin/
 COPY --from=builder ${INSTALL_DIR}/include/ /usr/local/include/
 COPY --from=builder ${INSTALL_DIR}/lib/ /usr/local/lib/
 COPY --from=builder ${INSTALL_DIR}/share/ /usr/local/share/
+# Copy the environment directory /venv from the pybuilder stage
+COPY --from=pybuilder /venv /venv
 
-ENV OMPI_ALLOW_RUN_AS_ROOT=1
-ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+# These ENV variables have been set in taudem_ext:debian
+#ENV OMPI_ALLOW_RUN_AS_ROOT=1
+#ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 
-COPY docker/docker-entrypoint.sh /
+COPY docker/pyseims.sh /
+# Copy source directory
+WORKDIR /seims
+COPY seims seims
 WORKDIR /seims/seims
-ENTRYPOINT ["/usr/bin/tini", "--", "/docker-entrypoint.sh"]
+SHELL ["/bin/bash", "-c"]
+# The taudem_ext:debian already set the /docker-entrypoint.sh
+#COPY docker/docker-entrypoint.sh /
+#ENTRYPOINT ["/usr/bin/tini", "--", "/docker-entrypoint.sh"]

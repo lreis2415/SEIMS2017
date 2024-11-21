@@ -103,7 +103,6 @@ void Release1DArray(T*& data);
 
 /*!
  * \brief Release DT_Array2D data
- * \param[in] row row
  * \param[in] data
  */
 template <typename T>

@@ -5,6 +5,7 @@ name: Build on Ubuntu using GCC
 on:
   push:
       branches:
+        - master
         - dev
       paths-ignore:
         - 'data'
@@ -20,10 +21,24 @@ on:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
+  # Container registry domain, and a name for the Docker image that this workflow builds.
+  IMAGE_NAME: seims
+  # github container registry
+  REGISTRY: ghcr.io
+  NAMESPACE: ${{ github.repository_owner }}
+  # aliyun ACR
+  REGION_ID_ACR: cn-hangzhou
+  REGISTRY_ACR: registry.cn-hangzhou.aliyuncs.com
+  LOGIN_SERVER: https://registry.cn-hangzhou.aliyuncs.com
+  NAMESPACE_ACR: ljzhu-geomodels
+  # dockerfiles and tags
+  DEBIAN_DOCKERFILE: Dockerfile.TauDEMext
+  DEBIAN_IMAGE_TAG: ${{ github.ref == 'refs/heads/master' && 'latest' || 'dev-latest' }}
 
 jobs:
-  build_linux:
-    runs-on: ubuntu-latest
+  build-linux:
+    # Check GitHub Actions runner images versions: https://github.com/actions/runner-images
+    runs-on: ubuntu-22.04
     services:
       mongodb:
         image: mongo
@@ -32,9 +47,9 @@ jobs:
 
     steps:
     - name: Checkout SEIMS
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Install GDAL and mongo-c-driver
+    - name: Install GDAL, mongo-c-driver, and OpenMPI
       run: sudo apt-get update && sudo apt-get install -qq gdal-bin libgdal-dev libmongoc-1.0-0 libmongoc-dev
 
     - name: Setup MSMPI
@@ -43,7 +58,7 @@ jobs:
         mpi: mpich
 
     - name: Checkout SEIMS
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
@@ -69,7 +84,7 @@ jobs:
           doxyfile-path: 'doc/Doxyfile.zh-cn.in'
 
     - name: Deploy Docs
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           commit_message: ${{ github.event.head_commit.message }}
@@ -77,35 +92,98 @@ jobs:
           force_orphan: true
           publish_dir: ./@CMAKE_CURRENT_BINARY_DIR@/html
 
-    - name: Cache conda
-      uses: actions/cache@v3
-      env:
-        # Increase this value to reset cache if etc/example-environment.yml has not changed
-        CACHE_NUMBER: 0
-      with:
-        path: ~/conda_pkgs_dir
-        key:
-          ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('seims/pyseims_env.yml') }}
-    - uses: conda-incubator/setup-miniconda@v2
-      with:
-        activate-environment: pyseims
-        environment-file: seims/pyseims_env.yml
-        auto-activate-base: false
-        auto-update-conda: true
-        use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
+    # - name: Cache conda
+    #   uses: actions/cache@v4
+    #   env:
+    #     # Increase this value to reset cache if etc/example-environment.yml has not changed
+    #     CACHE_NUMBER: 0
+    #   with:
+    #     path: ~/conda_pkgs_dir
+    #     key:
+    #       ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('seims/pyseims_env.yml') }}
+    # - uses: conda-incubator/setup-miniconda@v3
+    #   with:
+    #     activate-environment: pyseims
+    #     environment-file: seims/pyseims_env.yml
+    #     auto-activate-base: false
+    #     auto-update-conda: true
+    #     use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
 
-    - name: Run SEIMS on demo data
-      shell: bash -el {0}
-      run: |
-        #conda info
-        #conda list
-        #printenv | sort
-        cd seims
-        python pyseims_check.py
-        cd test
-        python demo_preprocess.py -name youwuzhen
-        python demo_runmodel.py -name youwuzhen
-        python demo_postprocess.py -name youwuzhen
-        python -m scoop -n 2 demo_parameters_sensitivity.py -name youwuzhen
-        python -m scoop -n 2 demo_calibration.py -name youwuzhen
-        python -m scoop -n 2 demo_scenario_analysis.py -name youwuzhen
+    # - name: Run SEIMS on demo data
+    #   shell: bash -el {0}
+    #   run: |
+    #     #conda info
+    #     #conda list
+    #     #printenv | sort
+    #     cd seims
+    #     python pyseims_check.py
+    #     cd test
+    #     python demo_preprocess.py -name youwuzhen
+    #     python demo_runmodel.py -name youwuzhen
+    #     python demo_postprocess.py -name youwuzhen
+    #     python -m scoop -n 2 demo_parameters_sensitivity.py -name youwuzhen
+    #     python -m scoop -n 2 demo_calibration.py -name youwuzhen
+    #     python -m scoop -n 2 demo_scenario_analysis.py -name youwuzhen
+
+  deploy-debian:
+    needs: build-linux
+    runs-on: ubuntu-22.04
+    # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+      # login alibaba Container Registry
+      - name: Login to ACR
+        uses: aliyun/acr-login@v1
+        with:
+          login-server: ${{ env.LOGIN_SERVER }}
+          region-id: ${{ env.REGION_ID_ACR }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+      # login ghcr.io
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # This step uses [docker/metadata-action](https://github.com/docker/metadata-action#about) to extract tags and labels that will be applied to the specified image. The `id` "meta" allows the output of this step to be referenced in a subsequent step. The `images` value provides the base name for the tags and labels.
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ env.REGISTRY_ACR }}/${{ env.NAMESPACE_ACR }}/${{ env.IMAGE_NAME }}
+            ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
+      # It uses the `context` parameter to define the build's context as the set of files located in the specified path. For more information, see "[Usage](https://github.com/docker/build-push-action#usage)" in the README of the `docker/build-push-action` repository.
+      # It uses the `tags` and `labels` parameters to tag and label the image with the output from the "meta" step.
+      # https://github.com/marketplace/actions/docker-setup-buildx
+      - uses: docker/setup-buildx-action@v3
+      - name: Build based on debian
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/${{ env.DEBIAN_DOCKERFILE }}
+          push: true
+          platforms: linux/amd64
+          provenance: false
+          tags: |
+            ${{ env.REGISTRY_ACR }}/${{ env.NAMESPACE_ACR }}/${{ env.IMAGE_NAME }}:${{ env.DEBIAN_IMAGE_TAG }}
+            ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ env.DEBIAN_IMAGE_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+
