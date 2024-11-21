@@ -1,6 +1,6 @@
 # https://github.com/ldc-developers/ldc/blob/master/cmake/Modules/FindLLVM.cmake
 # commit 2cd14c59dd878091140b89c8048dbdd457031aee May 19, 2024
-# 
+#
 # Updated: 11/21/2024 - lj -  Only if LLVM_FIND_VERSION is assigned, the found version will be checked.
 #
 # - Find LLVM headers and libraries.
@@ -29,7 +29,7 @@
 #  LLVM_VERSION_STRING - Full LLVM version string (e.g. 6.0.0svn).
 #  LLVM_VERSION_BASE_STRING - Base LLVM version string without git/svn suffix (e.g. 6.0.0).
 #
-# Note: The variable names were chosen in conformance with the offical CMake
+# Note: The variable names were chosen in conformance with the official CMake
 # guidelines, see ${CMAKE_ROOT}/Modules/readme.txt.
 
 # Try suffixed versions to pick up the newest LLVM install available on Debian
@@ -112,7 +112,7 @@ else()
         )
         if(result_code)
             _LLVM_FAIL("Failed to execute llvm-config ('${LLVM_CONFIG}', result code: '${result_code})'")
-        else()        
+        else()
             file(TO_CMAKE_PATH "${tmplibs}" tmplibs)
             string(REGEX MATCHALL "${pattern}[^ ]+" LLVM_${var} ${tmplibs})
         endif()
@@ -191,8 +191,12 @@ else()
         string(REPLACE "-Wno-maybe-uninitialized " "" LLVM_CXXFLAGS ${LLVM_CXXFLAGS})
     endif()
 
-    if (${LLVM_VERSION_STRING} VERSION_LESS ${LLVM_FIND_VERSION})
-        _LLVM_FAIL("Unsupported LLVM version ${LLVM_VERSION_STRING} found (${LLVM_CONFIG}). At least version ${LLVM_FIND_VERSION} is required. You can also set variables 'LLVM_ROOT_DIR' or 'LLVM_CONFIG' to use a different LLVM installation.")
+    if (${LLVM_FIND_VERSION})
+        if (${LLVM_VERSION_STRING} VERSION_LESS ${LLVM_FIND_VERSION})
+            _LLVM_FAIL("Unsupported LLVM version ${LLVM_VERSION_STRING} found (${LLVM_CONFIG}).
+            At least version ${LLVM_FIND_VERSION} is required.
+            You can also set variables 'LLVM_ROOT_DIR' or 'LLVM_CONFIG' to use a different LLVM installation.")
+        endif()
     endif()
 endif()
 

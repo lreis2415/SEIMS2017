@@ -35,16 +35,18 @@ import matplotlib.pyplot as plt
 
 from typing import Optional
 from pygeoc.utils import StringClass, is_string
-from pymongo import MongoClient
 
 from utility import save_png_eps, PlotConfig
-import global_mongoclient as MongoDBObj
+# import global_mongoclient as MongoDBObj
+from preprocess.db_mongodb import MongoClient, ConnectMongoDB
 from parameters_sensitivity.sensitivity import SpecialJsonEncoder
 
-
-def write_param_values_to_mongodb(spatial_db, param_names, pop_genes, impact_subbasins):
+# Yujing: I just keep your changes here, I'm not sure why the function name is the same, but different arguments...
+# def write_param_values_to_mongodb(spatial_db, param_names, pop_genes, impact_subbasins):
+def write_param_values_to_mongodb(host, port, spatial_db, param_defs, param_values):
     # update Parameters collection in MongoDB
-    conn = MongoDBObj.client  # type: MongoClient
+    # conn = MongoDBObj.client  # type: MongoClient
+    conn = ConnectMongoDB(host, port).get_conn()
     db = conn[spatial_db]
     collection = db['PARAMETERS']
     collection.update_many({}, {'$unset': {ModelParamFields.cali_values: '', ModelParamFields.impact_subbasins: ''}})

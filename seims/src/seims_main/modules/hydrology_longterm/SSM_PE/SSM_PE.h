@@ -12,7 +12,7 @@
 
 /*!
  * \defgroup SSM_PE
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Distribution of snow sublimation (water equivalent) for a user defined period
  *
  */

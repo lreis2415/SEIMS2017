@@ -14,7 +14,7 @@
 
 /*!
  * \defgroup IKW_REACH
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief channel flow routing using Muskingum method
  *
  */

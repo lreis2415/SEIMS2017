@@ -31,10 +31,11 @@ from pymongo import MongoClient
 if os.path.abspath(os.path.join(sys.path[0], '../..')) not in sys.path:
     sys.path.insert(0, os.path.abspath(os.path.join(sys.path[0], '../..')))
 
-import global_mongoclient as MongoDBObj
+# import global_mongoclient as MongoDBObj
 
 from utility import read_simulation_from_txt, mask_rasterio
 from preprocess.text import DBTableNames, RasterMetadata
+from preprocess.db_mongodb import MongoClient, ConnectMongoDB
 from preprocess.sd_slopeposition_units import DelinateSlopePositionByThreshold
 from scenario_analysis import _DEBUG, BMPS_CFG_UNITS, BMPS_CFG_METHODS
 from scenario_analysis.scenario import Scenario
@@ -68,7 +69,8 @@ class SUScenario(Scenario):
         Each BMP is stored in Collection as one item identified by 'SUBSCENARIO' field,
         so the `self.bmps_params` is dict with BMP_ID ('SUBSCENARIO') as key.
         """
-        conn = MongoDBObj.client  # type: MongoClient
+        # conn = MongoDBObj.client  # type: MongoClient
+        conn = ConnectMongoDB(self.model.host, self.model.port).get_conn()  # type: MongoClient
         scenariodb = conn[self.scenario_db]
 
         bmpcoll = scenariodb[self.cfg.bmps_coll]

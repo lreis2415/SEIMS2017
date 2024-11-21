@@ -24,9 +24,10 @@ if os.path.abspath(os.path.join(sys.path[0], '..')) not in sys.path:
 from typing import Optional
 from pymongo import MongoClient
 
+# import global_mongoclient as MongoDBObj
+from preprocess.db_mongodb import ConnectMongoDB
 from utility import read_data_items_from_txt_with_subbasin_id
-import global_mongoclient as MongoDBObj
-from preprocess.text import DBTableNames, ModelParamFields
+from preprocess.text import DBTableNames
 from run_seims import MainSEIMS
 from calibration.config import CaliConfig, get_optimization_config
 from calibration.sample_lhs import lhs
@@ -139,7 +140,12 @@ class Calibration(object):
     def init_param_defs(self):
         """Read cali_param_rng.def file
         """
-        conn = MongoDBObj.client  # type: MongoClient
+        # read param_defs.json if already existed
+        if self.param_defs:
+            return self.param_defs
+        # read param_range_def file and output to json file
+        # conn = MongoDBObj.client  # type: MongoClient
+        conn = ConnectMongoDB(self.cfg.model.host, self.cfg.model.port).get_conn()
         db = conn[self.cfg.model.db_name]
         collection = db['PARAMETERS']
 
@@ -165,7 +171,8 @@ class Calibration(object):
                 self.impact_subbasins.append(subbasin_ids)
     def reset_simulation_timerange(self):
         """Update simulation time range in MongoDB [FILE_IN]."""
-        conn = MongoDBObj.client  # type: MongoClient
+        # conn = MongoDBObj.client  # type: MongoClient
+        conn = ConnectMongoDB(self.cfg.model.host, self.cfg.model.port).get_conn()
         db = conn[self.cfg.model.db_name]
         stime_str = self.cfg.model.simu_stime.strftime('%Y-%m-%d %H:%M:%S')
         etime_str = self.cfg.model.simu_etime.strftime('%Y-%m-%d %H:%M:%S')

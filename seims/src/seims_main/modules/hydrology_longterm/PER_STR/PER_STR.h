@@ -17,7 +17,7 @@
 
 /*!
  * \defgroup PER_STR
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Percolation calculated by storage routing method.
  */
 

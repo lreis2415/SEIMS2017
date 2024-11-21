@@ -29,7 +29,7 @@
 using namespace bmps;
 
 /** \defgroup MUSK_CH
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief channel flow routing using Muskingum method
  */
 

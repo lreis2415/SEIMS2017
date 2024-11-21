@@ -45,7 +45,7 @@
 
 /*!
  * \defgroup SUR_GA
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Green-Ampt Method to calculate infiltration and excess precipitation
  *
  */

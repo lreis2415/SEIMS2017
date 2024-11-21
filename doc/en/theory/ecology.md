@@ -1,4 +1,4 @@
-5.3 Ecology {#ecology_theory}
+Ecology {#ecology_theory}
 =============================
 
 [TOC]

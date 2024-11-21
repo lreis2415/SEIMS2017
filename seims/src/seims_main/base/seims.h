@@ -18,7 +18,7 @@ using namespace data_raster;
 
 /*!
  * \enum LayeringMethod
- * \ingroup base
+ * \ingroup util
  * \brief Grid layering method for routing and parallel computing.
  *        Reference: Liu et al., 2014, EM&S, 51, 221-227. https://doi.org/10.1016/j.envsoft.2013.10.005
  */
@@ -30,7 +30,7 @@ const char* const LayeringMethodString[] = {"_UP_DOWN", "_DOWN_UP"};
 
 /*!
  * \enum FlowDirMethod
- * \ingroup base
+ * \ingroup util
  * \brief Flow direction method for flow routing.
  */
 enum FlowDirMethod {
@@ -42,7 +42,7 @@ const char* const FlowDirMethodString[] = { "_D8", "_DINF", "_MFDMD" };
 
 /*!
  * \enum GroupMethod
- * \ingroup base
+ * \ingroup util
  * \brief Group method for parallel task scheduling.
  */
 enum GroupMethod {
@@ -53,7 +53,7 @@ const char* const GroupMethodString[] = {"KMETIS", "PMETIS"};
 
 /*!
  * \enum ScheduleMethod
- * \ingroup base
+ * \ingroup util
  * \brief Parallel task scheduling strategy at subbasin level by MPI. TESTED!
  */
 enum ScheduleMethod {
@@ -64,7 +64,7 @@ const char* const ScheduleMethodString[] = {"SPATIAL", "TEMPOROSPATIAL"};
 
 /*!
  * \def DiagonalCCW
- * \ingroup base
+ * \ingroup util
  * \brief Whether diagonal counter clockwise from east
  *
  * \code
@@ -85,7 +85,7 @@ const char* const ScheduleMethodString[] = {"SPATIAL", "TEMPOROSPATIAL"};
 const int DiagonalCCW[9] = {0, 0, 1, 0, 1, 0, 1, 0, 1};
 /*!
  * \def FlowDirCCW
- * \ingroup base
+ * \ingroup util
  * \brief Flow directions of ArcGIS rule
  *
  *        32  64 128

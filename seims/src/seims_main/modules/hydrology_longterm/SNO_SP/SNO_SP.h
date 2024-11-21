@@ -20,7 +20,7 @@
 
 /*!
  * \defgroup SNO_SP
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Calculate snow melt by snowpack daily method from SWAT
  *
  */

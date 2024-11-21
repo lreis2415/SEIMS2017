@@ -1,4 +1,4 @@
-5 Theory {#SEIMS_THEORY}
+Theory {#SEIMS_THEORY}
 ============================
 
 [TOC]

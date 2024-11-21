@@ -1,4 +1,4 @@
-5.2 Erosion {#erosion_theory}
+Erosion {#erosion_theory}
 ===================================================================
 
 [TOC]

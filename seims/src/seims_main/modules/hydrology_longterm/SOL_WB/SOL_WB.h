@@ -16,7 +16,7 @@
 
 /*!
  * \defgroup SOL_WB
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Soil water balance calculation
  *
  */

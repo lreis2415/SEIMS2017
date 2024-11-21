@@ -128,12 +128,14 @@ BMPArealStructFactory::~BMPArealStructFactory() {
 }
 
 void BMPArealStructFactory::loadBMP(MongoClient* conn, const string& bmpDBName) {
-    bson_t* b = bson_new();
-    bson_t* child1 = bson_new();
-    BSON_APPEND_DOCUMENT_BEGIN(b, "$query", child1);
-    BSON_APPEND_INT32(child1, BMP_FLD_SUB, m_subScenarioId);
-    bson_append_document_end(b, child1);
-    bson_destroy(child1);
+//    bson_t* b = bson_new();
+//    bson_t* child1 = bson_new();
+//    BSON_APPEND_DOCUMENT_BEGIN(b, "$query", child1);
+//    BSON_APPEND_INT32(child1, BMP_FLD_SUB, m_subScenarioId);
+//    bson_append_document_end(b, child1);
+//    bson_destroy(child1);
+
+    bson_t* b = BCON_NEW(BMP_FLD_SUB, BCON_INT32(m_subScenarioId));
 
     std::unique_ptr<MongoCollection> collection(new MongoCollection(conn->GetCollection(bmpDBName, m_bmpCollection)));
     mongoc_cursor_t* cursor = collection->ExecuteQuery(b);

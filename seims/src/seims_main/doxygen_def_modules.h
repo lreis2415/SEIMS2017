@@ -1,70 +1,96 @@
-/** \defgroup Base Base modules, e.g., data, util, module_setting
+// Global definitions for SEIMS's main classes and simulation modules
+
+/** \defgroup Base Basic functional libraries
  *
  */
 
-/** \defgroup data Include data related classes, e.g. Measurement, HydroClimateData etc.
- * \ingroup Base
- *
- */
-/** \defgroup util Utility class for module metadata information, parameter information, etc.
- * \ingroup Base
- *
- */
-/** \defgroup module_setting Module settings for SEIMS
- * \ingroup Base
- *
- */
-/** \defgroup common_algorithm Common used algorithms.
- * \ingroup Base
- */
-/** \defgroup scenarios BMPs scenarios related.
+/** \defgroup util
+ * 
+ *  Utility class, enum, const, etc.
+ * 
  * \ingroup Base
  *
  */
 
-/** \defgroup Main Entrance for SEIMS
+/** \defgroup data
+ * 
+ * Data related classes, e.g., DataCenter.
+ * 
+ * \ingroup Base
  *
  */
 
-/** \defgroup seims_omp SEIMS OpenMP version
+/** \defgroup bmps
+ * 
+ * BMP and BMP scenario related data
+ * 
+ * \ingroup Base
+ *
+ */
+
+/** \defgroup common_algorithm
+ * 
+ * Common used algorithms
+ * 
+ * \ingroup Base
+ */
+
+/** \defgroup module_setting
+ * 
+ * Simulation module settings
+ * 
+ * \ingroup Base
+ *
+ */
+
+/** \defgroup Modules Watershed process modules
+ *
+ */
+
+/** \defgroup Climate
+ * \ingroup Modules
+ *
+ */
+
+/** \defgroup Hydrology
+ * \ingroup Modules
+ *
+ */
+
+/** \defgroup Erosion
+ * \ingroup Modules
+ *
+ */
+
+/** \defgroup Nutrient
+ * \ingroup Modules
+ *
+ */
+
+/** \defgroup Ecology
+ * \ingroup Modules
+ *
+ */
+
+/** \defgroup Management
+ * \ingroup Modules
+ *
+ */
+
+ /** \defgroup Main Executable of SEIMS
+ *
+ */
+
+/** \defgroup seims_omp
+ * \ingroup Main
+ * 
+ * SEIMS OpenMP version
+ *
+ */
+
+/** \defgroup seims_mpi
  * \ingroup Main
  *
- */
-/** \defgroup seims_mpi SEIMS MPI&OpenMP version
- * \ingroup Main
- *
- */
-
-/** \defgroup Modules All functional modules in SEIMS
- *
- */
-
-/** \defgroup Climate Climate related modules
- * \ingroup Modules
- *
- */
-
-/** \defgroup Hydrology Hydrology related modules
- * \ingroup Modules
- *
- */
-
-/** \defgroup Erosion Erosion related modules
- * \ingroup Modules
- *
- */
-
-/** \defgroup Nutrient Nutrient related modules
- * \ingroup Modules
- *
- */
-
-/** \defgroup Ecology Ecology related modules
- * \ingroup Modules
- *
- */
-
-/** \defgroup Management BMPs or NPS related modules
- * \ingroup Modules
- *
+ * SEIMS MPI&OpenMP version
+ * 
  */

@@ -32,7 +32,7 @@
 
 /*!
  * \defgroup IUH_IF
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief IUH overland method to calculate interflow routing
  *
  */

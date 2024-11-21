@@ -359,6 +359,17 @@ clsReaches::clsReaches() {
 
 clsReaches::clsReaches(MongoClient* conn, const string& db_name,
                        const string& collection_name, const LayeringMethod mtd /* = UP_DOWN */) {
+//    bson_t* b = bson_new();
+//    bson_t* child1 = bson_new();
+//    bson_t* child2 = bson_new();
+//    BSON_APPEND_DOCUMENT_BEGIN(b, "$query", child1); /// query all records
+//    bson_append_document_end(b, child1);
+//    BSON_APPEND_DOCUMENT_BEGIN(b, "$orderby", child2); /// and order by subbasin ID
+//    BSON_APPEND_INT32(child2, REACH_SUBBASIN, 1);
+//    bson_append_document_end(b, child2);
+//    bson_destroy(child1);
+//    bson_destroy(child2);
+
     bson_t* b = bson_new();
     bson_t* opts = BCON_NEW("sort", "{", REACH_SUBBASIN, BCON_INT32(1), "}");
 

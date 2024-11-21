@@ -20,7 +20,7 @@
 
 /*!
  * \defgroup PET_PT
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Calculate potential evapotranspiration using PriestleyTaylor method
  *
  */

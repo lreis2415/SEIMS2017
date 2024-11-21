@@ -1,6 +1,6 @@
-2.1 Download and Installation {#download_installation}
+下载与编译安装 {#getstart_download_installation}
 ======================================================
 
 [TOC]
 
-Coming soon...
+计划中...

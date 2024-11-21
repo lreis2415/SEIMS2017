@@ -16,7 +16,7 @@
 
 /*!
  * \defgroup STP_FP
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Finn Plauborg Method to Compute Soil Temperature
  *
  */

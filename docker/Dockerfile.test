@@ -1,0 +1,44 @@
+ARG DEBIAN_VER=12.7-slim@sha256:ad86386827b083b3d71139050b47ffb32bbd9559ea9b1345a739b14fec2d9ecf
+
+FROM continuumio/miniconda3 AS builder
+# References:
+#  https://pythonspeed.com/articles/activate-conda-dockerfile/
+#  https://medium.com/@rvaid.29/reduce-the-size-of-conda-based-docker-images-3f7f713d3a8f
+
+# Copy source directory
+WORKDIR /seims
+COPY seims seims
+COPY docker docker
+
+# 1. Install conda-pack
+# 2. Create new conda environment for pyseims
+# 3. Package the environment as tar using conda-pack
+# 4. Unpack the environment in /venv using conda-unpack
+RUN conda install -c conda-forge conda-pack && \
+    conda env create -f ./seims/pyseims_env.yml && \
+    conda-pack -n pyseims -o /tmp/env.tar && \
+    mkdir /venv && \
+    cd /venv && \
+    tar -xf /tmp/env.tar && \
+    rm /tmp/env.tar && \
+    /venv/bin/conda-unpack
+
+# Make RUN commands use the new environment:
+#SHELL ["conda", "run", "--no-capture-output", "-n", "pyseims", "/bin/bash", "-c"]
+
+#WORKDIR /seims/seims
+#ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "pyseims", "python3", "pyseims_check.py"]
+
+# Runtime image build stage
+# Using slim debian image as the base image for the environment
+FROM debian:${DEBIAN_VER} AS runner
+# Copy the environment directory /venv from the environment build stage
+COPY --from=builder /venv /venv
+
+# Copy source directory
+WORKDIR /seims
+COPY seims seims
+WORKDIR /seims/seims
+# To test if the image has boto3 properly installed
+SHELL ["/bin/bash", "-c"]
+ENTRYPOINT ["source /venv/bin/activate && python pyseims_check.py"]

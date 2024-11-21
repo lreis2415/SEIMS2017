@@ -22,8 +22,8 @@ from future.utils import viewitems
 if os.path.abspath(os.path.join(sys.path[0], '..')) not in sys.path:
     sys.path.insert(0, os.path.abspath(os.path.join(sys.path[0], '..')))
 
-from pymongo import MongoClient
-import global_mongoclient as MongoDBObj
+# from pymongo import MongoClient
+# import global_mongoclient as MongoDBObj
 
 from bson.objectid import ObjectId
 from pygeoc.utils import get_config_parser
@@ -32,6 +32,7 @@ from typing import List, Iterator, Optional
 
 from scenario_analysis.config import SAConfig
 from preprocess.text import DBTableNames, ModelCfgFields
+from preprocess.db_mongodb import MongoClient, ConnectMongoDB
 from run_seims import MainSEIMS
 from utility.scoop_func import scoop_log
 
@@ -160,7 +161,8 @@ class Scenario(object):
         """Export current scenario to MongoDB.
         Delete the same ScenarioID if existed.
         """
-        conn = MongoDBObj.client  # type: MongoClient
+        # conn = MongoDBObj.client  # type: MongoClient
+        conn = ConnectMongoDB(self.model.host, self.model.port).get_conn()  # type: MongoClient
         db = conn[self.scenario_db]
         collection = db[DBTableNames.scenarios]
         try:

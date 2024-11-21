@@ -9,6 +9,7 @@
 #include "utils_time.h"
 #include "utils_array.h"
 #include "utils_string.h"
+#include "Logging.h"
 
 using namespace utils_time;
 using namespace utils_string;
@@ -36,7 +37,7 @@ RegularMeasurement::RegularMeasurement(MongoClient* conn, const string& hydroDBN
     for (int i = 0; i < nSites; i++) {
         BSON_APPEND_INT32(site_array, ValueToString(i).c_str(), m_siteIDList[i]);
     }
-    // StatusMessage(bson_as_json(site_array, NULL));
+
     vint st = CVT_VINT(startTime) * 1000;
     vint et = CVT_VINT(endTime) * 1000;
 

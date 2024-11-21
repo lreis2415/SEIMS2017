@@ -23,7 +23,7 @@
 
 /*!
  * \defgroup PET_PM
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Penman Monteith Method to Compute PET
  *
  */

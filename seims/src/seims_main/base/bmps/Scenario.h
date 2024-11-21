@@ -21,11 +21,14 @@
 
 using namespace ccgl;
 
+/*!
+ * \namespace bmps
+ * \ingroup bmps
+ * \brief Namespace for all BMP related
+ */
 namespace bmps {
 /*!
  * \class Scenario
- * \ingroup scenarios
- *
  * \brief Main class of scenario in BMP database
  *
  * Scenario contains a collection of BMPFactory.

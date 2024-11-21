@@ -194,7 +194,7 @@ def main(cfg):
 
     # Write calibrated values to MongoDB
     # TODO, extract this function, which is same with `Sensitivity::write_param_values_to_mongodb`.
-    write_param_values_to_mongodb(
+    write_param_values_to_mongodb(cfg.model.host, cfg.model.port,
         cfg.model.db_name,
         param_names=cali_obj.param_names,
         pop_genes=pop_genes,
@@ -320,7 +320,7 @@ def main(cfg):
             ind.id = idx
             pop_genes.append(ind[:])
         pop_genes = numpy.array(pop_genes)
-        write_param_values_to_mongodb(
+        write_param_values_to_mongodb(cfg.model.host, cfg.model.port,
             cfg.model.db_name,
             param_names=cali_obj.param_names,
             pop_genes=pop_genes,

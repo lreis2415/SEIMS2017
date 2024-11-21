@@ -15,7 +15,7 @@
 
 /*!
  * \defgroup SUR_ES
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Calculate infiltration and excess precipitation
  *
  */

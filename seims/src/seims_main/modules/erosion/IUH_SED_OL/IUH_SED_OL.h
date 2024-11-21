@@ -18,7 +18,7 @@
 #include "SimulationModule.h"
 
 /** \defgroup IUH_SED_OL
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief IUH overland method to calculate overland flow routing
  *
  */

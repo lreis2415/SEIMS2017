@@ -14,7 +14,7 @@
 
 /*!
  * \defgroup SRD_MB
- * \ingroup Hydrology_longterm
+ * \ingroup Hydrology
  * \brief Soil redistribution calculation
  */
 /*!

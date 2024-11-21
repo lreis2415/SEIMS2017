@@ -1,6 +1,6 @@
-1.1 What is SEIMS? {#whatis_seims}
+SEIMS是什么? {#whatis_seims}
 ==================================
 
 [TOC]
 
-Coming soon...
+计划中...

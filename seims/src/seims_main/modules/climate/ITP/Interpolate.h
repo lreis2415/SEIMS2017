@@ -16,13 +16,14 @@
 
 /** \defgroup ITP
  * \ingroup Climate
- * \brief Interpolation Module
+ * 
+ * \brief  Interpolation of climate data
  */
 
 /*!
  * \class Interpolate
  * \ingroup ITP
- * \brief Interpolation
+ * \brief Interpolate simulation class
  */
 class Interpolate: public SimulationModule {
 public:

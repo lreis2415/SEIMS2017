@@ -65,19 +65,22 @@ void BMPArealSrcFactory::loadBMP(MongoClient* conn, const string& bmpDBName) {
 }
 
 void BMPArealSrcFactory::ReadArealSourceManagements(MongoClient* conn, const string& bmpDBName) {
-    bson_t* b = bson_new();
-    bson_t *child1 = bson_new(), *child2 = bson_new();
-    BSON_APPEND_DOCUMENT_BEGIN(b, "$query", child1);
-    BSON_APPEND_INT32(child1, BMP_FLD_SUB, m_subScenarioId);
-    bson_append_document_end(b, child1);
-    BSON_APPEND_DOCUMENT_BEGIN(b, "$orderby", child2);
-    BSON_APPEND_INT32(child2, BMP_FLD_SEQUENCE, 1);
-    bson_append_document_end(b, child2);
-    bson_destroy(child1);
-    bson_destroy(child2);
+//    bson_t* b = bson_new();
+//    bson_t *child1 = bson_new(), *child2 = bson_new();
+//    BSON_APPEND_DOCUMENT_BEGIN(b, "$query", child1);
+//    BSON_APPEND_INT32(child1, BMP_FLD_SUB, m_subScenarioId);
+//    bson_append_document_end(b, child1);
+//    BSON_APPEND_DOCUMENT_BEGIN(b, "$orderby", child2);
+//    BSON_APPEND_INT32(child2, BMP_FLD_SEQUENCE, 1);
+//    bson_append_document_end(b, child2);
+//    bson_destroy(child1);
+//    bson_destroy(child2);
+
+    bson_t* b = BCON_NEW(BMP_FLD_SUB, BCON_INT32(m_subScenarioId));
+    bson_t* opts = BCON_NEW("sort", "{", BMP_FLD_SEQUENCE, BCON_INT32(1), "}");
 
     std::unique_ptr<MongoCollection> collection(new MongoCollection(conn->GetCollection(bmpDBName, m_arealSrcMgtTab)));
-    mongoc_cursor_t* cursor = collection->ExecuteQuery(b);
+    mongoc_cursor_t* cursor = collection->ExecuteQuery(b, opts);
 
     bson_iter_t iter;
     const bson_t* bsonTable;
@@ -90,16 +93,19 @@ void BMPArealSrcFactory::ReadArealSourceManagements(MongoClient* conn, const str
         count++;
     }
     bson_destroy(b);
+    bson_destroy(opts);
     mongoc_cursor_destroy(cursor);
 }
 
 void BMPArealSrcFactory::ReadArealSourceLocations(MongoClient* conn, const string& bmpDBName) {
-    bson_t* b = bson_new();
-    bson_t* child1 = bson_new();
-    BSON_APPEND_DOCUMENT_BEGIN(b, "$query", child1);
-    BSON_APPEND_INT32(child1, BMP_ARSRC_FLD_CODE, m_arealSrc);
-    bson_append_document_end(b, child1);
-    bson_destroy(child1);
+//    bson_t* b = bson_new();
+//    bson_t* child1 = bson_new();
+//    BSON_APPEND_DOCUMENT_BEGIN(b, "$query", child1);
+//    BSON_APPEND_INT32(child1, BMP_ARSRC_FLD_CODE, m_arealSrc);
+//    bson_append_document_end(b, child1);
+//    bson_destroy(child1);
+
+    bson_t* b = BCON_NEW(BMP_ARSRC_FLD_CODE, BCON_INT32(m_arealSrc));
 
     std::unique_ptr<MongoCollection> collection(new MongoCollection(conn->GetCollection(bmpDBName, m_arealSrcDistTab)));
     mongoc_cursor_t* cursor = collection->ExecuteQuery(b);
@@ -136,7 +142,7 @@ void BMPArealSrcFactory::SetArealSrcLocsMap(int n, int* mgtField) {
 }
 
 void BMPArealSrcFactory::Dump(std::ostream* fs) {
-    if (fs == nullptr) return;
+    if (nullptr == fs) return;
     *fs << "Point Source Management Factory: " << endl <<
             "    SubScenario ID: " << m_subScenarioId << endl;
     for (auto it = m_arealSrcMgtSeqs.begin(); it != m_arealSrcMgtSeqs.end(); ++it) {
@@ -234,7 +240,7 @@ ArealSourceMgtParams::ArealSourceMgtParams(const bson_t*& bsonTable, bson_iter_t
 }
 
 void ArealSourceMgtParams::Dump(std::ostream* fs) {
-    if (fs == nullptr) return;
+    if (nullptr == fs) return;
     *fs << "    Point Source Managements: " << endl;
     if (m_startDate != 0) {
         *fs << "      Start Date: " << ConvertToString(m_startDate) << endl;
@@ -285,7 +291,7 @@ void ArealSourceLocations::SetValidCells(const int n, int* mgtFieldIDs) {
 }
 
 void ArealSourceLocations::Dump(std::ostream* fs) {
-    if (fs == nullptr) return;
+    if (nullptr == fs) return;
     *fs << "      Point Source Location: " << endl <<
             "        ARSRCID: " << m_arealSrcID << ", Valid Cells Number: " << m_nCells <<
             ", Size: " << m_size << endl;

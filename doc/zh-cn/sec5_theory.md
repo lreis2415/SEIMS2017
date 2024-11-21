@@ -1,4 +1,4 @@
-5 Theory {#SEIMS_THEORY}
+理论基础 {#SEIMS_THEORY}
 ============================
 
 [TOC]

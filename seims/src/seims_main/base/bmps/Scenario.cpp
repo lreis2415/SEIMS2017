@@ -71,8 +71,7 @@ void Scenario::loadBMPs() {
                              "' does not exist or there is not a table named '" +
                              TAB_BMP_INDEX + "' in BMP database.");
     }
-    bson_t* query = bson_new();
-    BSON_APPEND_INT32(query, FLD_SCENARIO_ID, m_sceneID);
+    bson_t* query = BCON_NEW(FLD_SCENARIO_ID, BCON_INT32(m_sceneID));
     //cout<<bson_as_json(query, NULL)<<endl;
     std::unique_ptr<MongoCollection>
             collection(new MongoCollection(m_conn->GetCollection(m_bmpDBName, TAB_BMP_SCENARIO)));
@@ -103,7 +102,7 @@ void Scenario::loadBMPs() {
         if (bson_iter_init_find(&iter, info, FLD_SCENARIO_TABLE)) collectionName = GetStringFromBsonIterator(&iter);
         if (bson_iter_init_find(&iter, info, FLD_SCENARIO_LOCATION)) location = GetStringFromBsonIterator(&iter);
         if (bson_iter_init_find(&iter, info, FLD_SCENARIO_EFFECTIVENESSVARIABLE)) GetNumericFromBsonIterator(&iter, tempEffectivenessChangeable);
-        effectivenessChangeable = tempEffectivenessChangeable == 1 ? true : false;
+        effectivenessChangeable = tempEffectivenessChangeable == 1;
         if (effectivenessChangeable) {
             if (bson_iter_init_find(&iter, info, FLD_SCENARIO_CHANGEFREQUENCY)) GetNumericFromBsonIterator(&iter, changeFrequency);
             // TODO, !!! MUST MODIFY. Or read from database later!
@@ -127,8 +126,7 @@ void Scenario::loadBMPs() {
 
         int BMPType = -1;
         int BMPPriority = -1;
-        bson_t* queryBMP = bson_new();
-        BSON_APPEND_INT32(queryBMP, FLD_BMP_ID, BMPID);
+        bson_t* queryBMP = BCON_NEW(FLD_BMP_ID, BCON_INT32(BMPID));
 
         mongoc_cursor_t* cursor2 = collbmpidx->ExecuteQuery(queryBMP);
 
