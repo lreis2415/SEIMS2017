@@ -99,4 +99,6 @@ node_modules
 # debug doxygen locally
 @CMAKE_CURRENT_BINARY_DIR@
 
-doc/.history/*
+doc/.history/**
+.history/**
+doc\zh-cn\.history**
