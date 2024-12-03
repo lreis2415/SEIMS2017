@@ -191,11 +191,18 @@ void PrintInfoItem::Flush(const string& projectPath, MongoGridFs* gfs, IntRaster
 
         if (Suffix == GTiffExtension || Suffix == ASCIIExtension) {
             FloatRaster* rs_data = nullptr;
+            STRDBL_MAP tmpheader;
+#ifdef HAS_VARIADIC_TEMPLATES
+            tmpheader.emplace(HEADER_RS_NODATA, CVT_DBL(NODATA_VALUE));
+#else
+            tmpheader.insert(make_pair(HEADER_RS_NODATA, CVT_DBL(NODATA_VALUE)));
+#endif
             if (is1d) { // Single-layered and cell-based raster data
                 rs_data = new FloatRaster(templateRaster, m_1DData, m_nRows);
             } else { // Multi-layered and cell-based raster data
                 rs_data = new FloatRaster(templateRaster, m_2DData, m_nRows, m_nLayers);
             }
+            rs_data->SetHeader(tmpheader);
             if (outToMongoDB) {
                 gfs->RemoveFile(gfs_name);
                 int try_times = 1;
