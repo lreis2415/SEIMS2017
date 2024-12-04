@@ -2246,6 +2246,7 @@ clsRasterData<T, MASK_T>::clsRasterData(clsRasterData<MASK_T>* mask, T** const v
     }
     Initialize2DArray(n_cells_, n_lyrs_, raster_2d_, values); // DO NOT ASSIGN ARRAY DIRECTLY!
     CopyHeader(mask_->GetRasterHeader(), headers_);
+    no_data_value_ = static_cast<T>(mask_->GetNoDataValue());
     UpdateHeader(headers_, HEADER_RS_LAYERS, n_lyrs_);
     CopyStringMap(opts, options_);
     UpdateStrHeader(options_, HEADER_RS_SRS, mask_->GetSrsString());
