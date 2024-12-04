@@ -1,0 +1,219 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: seims/src/seims_main/base/module_setting/invoke.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('invoke_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">invoke.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="invoke_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * \file invoke.h</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * \brief Parse the input arguments as a class which can be easily extended.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * Changelog:</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *   - 1. 2018-02-01 - lj - Initial implementation.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *   - 2. 2018-06-06 - lj - Add parameters related to MPI version, e.g., group method.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> *   - 3. 2021-04-06 - lj - Add flow direction algorithm as an input argument</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> * \author Liangjun Zhu</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifndef SEIMS_INPUT_ARGUMENTS_H</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define SEIMS_INPUT_ARGUMENTS_H</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="basic_8h.html">basic.h</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="seims_8h.html">seims.h</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceccgl.html">ccgl</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">/// Full usage information</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="invoke_8h.html#a0e293bf34b2cd8c1aa66cef5426ef9ad">   22</a></span><span class="comment"></span><span class="keywordtype">void</span> <a class="code hl_function" href="invoke_8h.html#a0e293bf34b2cd8c1aa66cef5426ef9ad">Usage</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; appname, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; error_msg = std::string());</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"></span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * \class InputArgs</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * \ingroup module_setting</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> * \brief Parse the input arguments of SEIMS.</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="group__module__setting.html">   29</a></span><span class="keyword">class </span><a class="code hl_class" href="group__module__setting.html#class_input_args">InputArgs</a>: <a class="code hl_class" href="classccgl_1_1_interface.html">Interface</a> {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">    /*!</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">     * \brief Constructor by detailed parameters</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">     * \param[in] model_path path of the configuration of the Model</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">     * \param[in] model_cfgname config name of specific model, the default is &quot;&quot;, it corresponds to a subfolder</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">     * \param[in] thread_num thread or processor number, which must be greater or equal than 1 (default)</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">     * \param[in] fdir_mtd can be 0, 1, and 2, which means D8 (default), Dinf, and MFDmd, respectively</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">     * \param[in] lyr_mtd can be 0 and 1, which means UP_DOWN (default) and DOWN_UP, respectively</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">     * \param[in] host the address of MongoDB database, by default, MongoDB IP is 127.0.0.1 (i.e., localhost)</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">     * \param[in] port port number, default is 27017</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">     * \param[in] scenario_id the ID of BMPs Scenario which has been defined in BMPs database</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">     * \param[in] calibration_id the ID of Calibration which has been defined in PARAMETERS table</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">     * \param[in] subbasin_id the subbasin that will be executed, default is 0 which means the whole watershed</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">     * \param[in] grp_mtd can be 0 and 1, which means KMETIS (default) and PMETIS, respectively</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">     * \param[in] skd_mtd (TESTED) can be 0 and 1, which means SPATIAL (default) and TEMPOROSPATIAL, respectively</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">     * \param[in] time_slices (TESTED) should be greater than 1, required when &lt;skd_mtd&gt; is 1</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">     * \param[in] log_level logging level, the default is Info</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">     * \param[in] mpi_version Optional, is running the MPI version?</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="group__module__setting.html#afc5786c8d6c1650d2a77d2b5be57ef8e">   49</a></span>    <a class="code hl_function" href="group__module__setting.html#afc5786c8d6c1650d2a77d2b5be57ef8e">InputArgs</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <a class="code hl_variable" href="group__module__setting.html#a2729d419e663ceb11d646de7f4f33c6e">model_path</a>, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <a class="code hl_variable" href="group__module__setting.html#a146f89ab4319c4c48cbd3f33cb9b5781">model_cfgname</a>,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>              <span class="keywordtype">int</span> <a class="code hl_variable" href="group__module__setting.html#a0cf945d299f5307fe7bf18fe8e44b90a">thread_num</a>, <a class="code hl_enumeration" href="group__util.html#gaf7fabc1dcca995db30df9de773143cf7">FlowDirMethod</a> <a class="code hl_variable" href="group__module__setting.html#a1bcce8f41d84c4127137faf6ba3dd069">fdir_mtd</a>, <a class="code hl_enumeration" href="group__util.html#gac6f61231d36d327c1c46e9d46c47b9a6">LayeringMethod</a> <a class="code hl_variable" href="group__module__setting.html#af5d824d0e611a1514f41b4cccdb08c56">lyr_mtd</a>, </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <a class="code hl_variable" href="group__module__setting.html#ad15b3bcc0069ee8e787fa91227a5a77b">host</a>, uint16_t <a class="code hl_variable" href="group__module__setting.html#ad7e3d223d5cedfc497884451e149aa2c">port</a>,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>              <span class="keywordtype">int</span> <a class="code hl_variable" href="group__module__setting.html#ac6ef0075aa18d4afe65984b5c12fa487">scenario_id</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="group__module__setting.html#ad862e496d3525ffc200c41f7a1bd8399">calibration_id</a>,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>              <span class="keywordtype">int</span> <a class="code hl_variable" href="group__module__setting.html#a66f74fba9cad01451a01faa1f7c74895">subbasin_id</a>, <a class="code hl_enumeration" href="group__util.html#gab0fa86be43bbacdea6c4de5d7018535d">GroupMethod</a> <a class="code hl_variable" href="group__module__setting.html#a943929c6c95dec5caacfe1d4b83dd199">grp_mtd</a>,</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>              <a class="code hl_enumeration" href="group__util.html#ga09602134b32324286975f7b7485c73f6">ScheduleMethod</a> <a class="code hl_variable" href="group__module__setting.html#a9fea975ed5cac8bc0aefff15d9cf0b9c">skd_mtd</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="group__module__setting.html#a553d64736085a6385a5a410c10f170eb">time_slices</a>,</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>              <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <a class="code hl_variable" href="group__module__setting.html#a9a6d1282fee6d4e6fd8b99e2a88b10f3">log_level</a>, <span class="keywordtype">bool</span> <a class="code hl_variable" href="group__module__setting.html#a03eb662bda9c4866c019d304ac9af6d4">mpi_version</a> = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"></span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">    /*!</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">     * \brief Initializer.</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">     * \param[in] argc Number of arguments</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">     * \param[in] argv \a char* Arguments</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">     * \param[in] mpi_version Optional, is running the MPI version?</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="group__module__setting.html#a2825712ad39f6de8618c006c967c0aa9">   63</a></span>    <span class="keyword">static</span> <a class="code hl_class" href="group__module__setting.html#class_input_args">InputArgs</a>* <a class="code hl_function" href="group__module__setting.html#a2825712ad39f6de8618c006c967c0aa9">Init</a>(<span class="keywordtype">int</span> argc, <span class="keyword">const</span> <span class="keywordtype">char</span>** argv, <span class="keywordtype">bool</span> <a class="code hl_variable" href="group__module__setting.html#a03eb662bda9c4866c019d304ac9af6d4">mpi_version</a> = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group__module__setting.html#a2729d419e663ceb11d646de7f4f33c6e">   66</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a2729d419e663ceb11d646de7f4f33c6e">model_path</a>;      <span class="comment">///&lt; full path of model folder which contains all inputs and outputs of all models</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="group__module__setting.html#a146f89ab4319c4c48cbd3f33cb9b5781">   67</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a146f89ab4319c4c48cbd3f33cb9b5781">model_cfgname</a>;   <span class="comment">///&lt; config name of specific model, the default is &quot;&quot;, it corresponds to a subfolder</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group__module__setting.html#ae9b5e683c6560164cd06ed85f556bcf7">   68</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#ae9b5e683c6560164cd06ed85f556bcf7">model_name</a>;      <span class="comment">///&lt; model_name</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="group__module__setting.html#a9b74105ac51f85c56ecedd71b1a47936">   69</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a9b74105ac51f85c56ecedd71b1a47936">output_scene</a>;    <span class="comment">///&lt; output identifier concatenated with scenario_id, calibration_id, lyr_mtd, fdir_mtd</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="group__module__setting.html#a5f900776b0f5227e8200554a95fa8990">   70</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a5f900776b0f5227e8200554a95fa8990">output_path</a>;     <span class="comment">///&lt; full path of model outputs</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="group__module__setting.html#a0cf945d299f5307fe7bf18fe8e44b90a">   71</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="group__module__setting.html#a0cf945d299f5307fe7bf18fe8e44b90a">thread_num</a>;         <span class="comment">///&lt; thread number for OpenMP</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="group__module__setting.html#a1bcce8f41d84c4127137faf6ba3dd069">   72</a></span>    <a class="code hl_enumeration" href="group__util.html#gaf7fabc1dcca995db30df9de773143cf7">FlowDirMethod</a> <a class="code hl_variable" href="group__module__setting.html#a1bcce8f41d84c4127137faf6ba3dd069">fdir_mtd</a>; <span class="comment">///&lt; Flow direction method for flow routing, default is 0 (D8)</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="group__module__setting.html#af5d824d0e611a1514f41b4cccdb08c56">   73</a></span>    <a class="code hl_enumeration" href="group__util.html#gac6f61231d36d327c1c46e9d46c47b9a6">LayeringMethod</a> <a class="code hl_variable" href="group__module__setting.html#af5d824d0e611a1514f41b4cccdb08c56">lyr_mtd</a>; <span class="comment">///&lt; Layering method for sequencing computing, default is 0</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="group__module__setting.html#ad15b3bcc0069ee8e787fa91227a5a77b">   74</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#ad15b3bcc0069ee8e787fa91227a5a77b">host</a>;            <span class="comment">///&lt; Host IP address or name of MongoDB database</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="group__module__setting.html#ad7e3d223d5cedfc497884451e149aa2c">   75</a></span>    uint16_t <a class="code hl_variable" href="group__module__setting.html#ad7e3d223d5cedfc497884451e149aa2c">port</a>;          <span class="comment">///&lt; port of MongoDB, 27017 is default</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="group__module__setting.html#ac6ef0075aa18d4afe65984b5c12fa487">   76</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="group__module__setting.html#ac6ef0075aa18d4afe65984b5c12fa487">scenario_id</a>;        <span class="comment">///&lt; scenario ID defined in Database, -1 for no use.</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="group__module__setting.html#ad862e496d3525ffc200c41f7a1bd8399">   77</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="group__module__setting.html#ad862e496d3525ffc200c41f7a1bd8399">calibration_id</a>;     <span class="comment">///&lt; calibration ID defined in Database (PARAMETERS), -1 for no use.</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="group__module__setting.html#a66f74fba9cad01451a01faa1f7c74895">   78</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="group__module__setting.html#a66f74fba9cad01451a01faa1f7c74895">subbasin_id</a>;        <span class="comment">///&lt; Subbasin ID, which will be executed, 0 for whole basin, 9999 for field-version</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="group__module__setting.html#a943929c6c95dec5caacfe1d4b83dd199">   79</a></span>    <a class="code hl_enumeration" href="group__util.html#gab0fa86be43bbacdea6c4de5d7018535d">GroupMethod</a> <a class="code hl_variable" href="group__module__setting.html#a943929c6c95dec5caacfe1d4b83dd199">grp_mtd</a>;    <span class="comment">///&lt; Group method for parallel task scheduling, default is 0</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="group__module__setting.html#a9fea975ed5cac8bc0aefff15d9cf0b9c">   80</a></span>    <a class="code hl_enumeration" href="group__util.html#ga09602134b32324286975f7b7485c73f6">ScheduleMethod</a> <a class="code hl_variable" href="group__module__setting.html#a9fea975ed5cac8bc0aefff15d9cf0b9c">skd_mtd</a>; <span class="comment">///&lt; Parallel task scheduling strategy at subbasin level by MPI</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="group__module__setting.html#a553d64736085a6385a5a410c10f170eb">   81</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="group__module__setting.html#a553d64736085a6385a5a410c10f170eb">time_slices</a>;        <span class="comment">///&lt; Time slices for Temporal-Spatial discretization method, Wang et al. (2013). Unfinished!</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="group__module__setting.html#a9a6d1282fee6d4e6fd8b99e2a88b10f3">   82</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a9a6d1282fee6d4e6fd8b99e2a88b10f3">log_level</a>;       <span class="comment">///&lt; logging level, i.e., Trace, Debug, Info (default), Warning, Error, and Fatal</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="group__module__setting.html#a03eb662bda9c4866c019d304ac9af6d4">   83</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="group__module__setting.html#a03eb662bda9c4866c019d304ac9af6d4">mpi_version</a>;       <span class="comment">///&lt; is running the MPI version?</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>};</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#endif </span><span class="comment">/* SEIMS_INPUT_ARGUMENTS_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="abasic_8h_html"><div class="ttname"><a href="basic_8h.html">basic.h</a></div><div class="ttdoc">Basic definitions.</div></div>
+<div class="ttc" id="aclassccgl_1_1_interface_html"><div class="ttname"><a href="classccgl_1_1_interface.html">ccgl::Interface</a></div><div class="ttdoc">Base type of all interfaces.</div><div class="ttdef"><b>Definition:</b> basic.h:407</div></div>
+<div class="ttc" id="agroup__module__setting_html_a03eb662bda9c4866c019d304ac9af6d4"><div class="ttname"><a href="group__module__setting.html#a03eb662bda9c4866c019d304ac9af6d4">InputArgs::mpi_version</a></div><div class="ttdeci">bool mpi_version</div><div class="ttdoc">is running the MPI version?</div><div class="ttdef"><b>Definition:</b> invoke.h:83</div></div>
+<div class="ttc" id="agroup__module__setting_html_a0cf945d299f5307fe7bf18fe8e44b90a"><div class="ttname"><a href="group__module__setting.html#a0cf945d299f5307fe7bf18fe8e44b90a">InputArgs::thread_num</a></div><div class="ttdeci">int thread_num</div><div class="ttdoc">thread number for OpenMP</div><div class="ttdef"><b>Definition:</b> invoke.h:71</div></div>
+<div class="ttc" id="agroup__module__setting_html_a146f89ab4319c4c48cbd3f33cb9b5781"><div class="ttname"><a href="group__module__setting.html#a146f89ab4319c4c48cbd3f33cb9b5781">InputArgs::model_cfgname</a></div><div class="ttdeci">string model_cfgname</div><div class="ttdoc">config name of specific model, the default is &quot;&quot;, it corresponds to a subfolder</div><div class="ttdef"><b>Definition:</b> invoke.h:67</div></div>
+<div class="ttc" id="agroup__module__setting_html_a1bcce8f41d84c4127137faf6ba3dd069"><div class="ttname"><a href="group__module__setting.html#a1bcce8f41d84c4127137faf6ba3dd069">InputArgs::fdir_mtd</a></div><div class="ttdeci">FlowDirMethod fdir_mtd</div><div class="ttdoc">Flow direction method for flow routing, default is 0 (D8)</div><div class="ttdef"><b>Definition:</b> invoke.h:72</div></div>
+<div class="ttc" id="agroup__module__setting_html_a2729d419e663ceb11d646de7f4f33c6e"><div class="ttname"><a href="group__module__setting.html#a2729d419e663ceb11d646de7f4f33c6e">InputArgs::model_path</a></div><div class="ttdeci">string model_path</div><div class="ttdoc">full path of model folder which contains all inputs and outputs of all models</div><div class="ttdef"><b>Definition:</b> invoke.h:66</div></div>
+<div class="ttc" id="agroup__module__setting_html_a2825712ad39f6de8618c006c967c0aa9"><div class="ttname"><a href="group__module__setting.html#a2825712ad39f6de8618c006c967c0aa9">InputArgs::Init</a></div><div class="ttdeci">static InputArgs * Init(int argc, const char **argv, bool mpi_version=false)</div><div class="ttdoc">Initializer.</div></div>
+<div class="ttc" id="agroup__module__setting_html_a553d64736085a6385a5a410c10f170eb"><div class="ttname"><a href="group__module__setting.html#a553d64736085a6385a5a410c10f170eb">InputArgs::time_slices</a></div><div class="ttdeci">int time_slices</div><div class="ttdoc">Time slices for Temporal-Spatial discretization method, Wang et al. (2013). Unfinished!</div><div class="ttdef"><b>Definition:</b> invoke.h:81</div></div>
+<div class="ttc" id="agroup__module__setting_html_a5f900776b0f5227e8200554a95fa8990"><div class="ttname"><a href="group__module__setting.html#a5f900776b0f5227e8200554a95fa8990">InputArgs::output_path</a></div><div class="ttdeci">string output_path</div><div class="ttdoc">full path of model outputs</div><div class="ttdef"><b>Definition:</b> invoke.h:70</div></div>
+<div class="ttc" id="agroup__module__setting_html_a66f74fba9cad01451a01faa1f7c74895"><div class="ttname"><a href="group__module__setting.html#a66f74fba9cad01451a01faa1f7c74895">InputArgs::subbasin_id</a></div><div class="ttdeci">int subbasin_id</div><div class="ttdoc">Subbasin ID, which will be executed, 0 for whole basin, 9999 for field-version</div><div class="ttdef"><b>Definition:</b> invoke.h:78</div></div>
+<div class="ttc" id="agroup__module__setting_html_a943929c6c95dec5caacfe1d4b83dd199"><div class="ttname"><a href="group__module__setting.html#a943929c6c95dec5caacfe1d4b83dd199">InputArgs::grp_mtd</a></div><div class="ttdeci">GroupMethod grp_mtd</div><div class="ttdoc">Group method for parallel task scheduling, default is 0</div><div class="ttdef"><b>Definition:</b> invoke.h:79</div></div>
+<div class="ttc" id="agroup__module__setting_html_a9a6d1282fee6d4e6fd8b99e2a88b10f3"><div class="ttname"><a href="group__module__setting.html#a9a6d1282fee6d4e6fd8b99e2a88b10f3">InputArgs::log_level</a></div><div class="ttdeci">string log_level</div><div class="ttdoc">logging level, i.e., Trace, Debug, Info (default), Warning, Error, and Fatal</div><div class="ttdef"><b>Definition:</b> invoke.h:82</div></div>
+<div class="ttc" id="agroup__module__setting_html_a9b74105ac51f85c56ecedd71b1a47936"><div class="ttname"><a href="group__module__setting.html#a9b74105ac51f85c56ecedd71b1a47936">InputArgs::output_scene</a></div><div class="ttdeci">string output_scene</div><div class="ttdoc">output identifier concatenated with scenario_id, calibration_id, lyr_mtd, fdir_mtd</div><div class="ttdef"><b>Definition:</b> invoke.h:69</div></div>
+<div class="ttc" id="agroup__module__setting_html_a9fea975ed5cac8bc0aefff15d9cf0b9c"><div class="ttname"><a href="group__module__setting.html#a9fea975ed5cac8bc0aefff15d9cf0b9c">InputArgs::skd_mtd</a></div><div class="ttdeci">ScheduleMethod skd_mtd</div><div class="ttdoc">Parallel task scheduling strategy at subbasin level by MPI</div><div class="ttdef"><b>Definition:</b> invoke.h:80</div></div>
+<div class="ttc" id="agroup__module__setting_html_ac6ef0075aa18d4afe65984b5c12fa487"><div class="ttname"><a href="group__module__setting.html#ac6ef0075aa18d4afe65984b5c12fa487">InputArgs::scenario_id</a></div><div class="ttdeci">int scenario_id</div><div class="ttdoc">scenario ID defined in Database, -1 for no use.</div><div class="ttdef"><b>Definition:</b> invoke.h:76</div></div>
+<div class="ttc" id="agroup__module__setting_html_ad15b3bcc0069ee8e787fa91227a5a77b"><div class="ttname"><a href="group__module__setting.html#ad15b3bcc0069ee8e787fa91227a5a77b">InputArgs::host</a></div><div class="ttdeci">string host</div><div class="ttdoc">Host IP address or name of MongoDB database</div><div class="ttdef"><b>Definition:</b> invoke.h:74</div></div>
+<div class="ttc" id="agroup__module__setting_html_ad7e3d223d5cedfc497884451e149aa2c"><div class="ttname"><a href="group__module__setting.html#ad7e3d223d5cedfc497884451e149aa2c">InputArgs::port</a></div><div class="ttdeci">uint16_t port</div><div class="ttdoc">port of MongoDB, 27017 is default</div><div class="ttdef"><b>Definition:</b> invoke.h:75</div></div>
+<div class="ttc" id="agroup__module__setting_html_ad862e496d3525ffc200c41f7a1bd8399"><div class="ttname"><a href="group__module__setting.html#ad862e496d3525ffc200c41f7a1bd8399">InputArgs::calibration_id</a></div><div class="ttdeci">int calibration_id</div><div class="ttdoc">calibration ID defined in Database (PARAMETERS), -1 for no use.</div><div class="ttdef"><b>Definition:</b> invoke.h:77</div></div>
+<div class="ttc" id="agroup__module__setting_html_ae9b5e683c6560164cd06ed85f556bcf7"><div class="ttname"><a href="group__module__setting.html#ae9b5e683c6560164cd06ed85f556bcf7">InputArgs::model_name</a></div><div class="ttdeci">string model_name</div><div class="ttdoc">model_name</div><div class="ttdef"><b>Definition:</b> invoke.h:68</div></div>
+<div class="ttc" id="agroup__module__setting_html_af5d824d0e611a1514f41b4cccdb08c56"><div class="ttname"><a href="group__module__setting.html#af5d824d0e611a1514f41b4cccdb08c56">InputArgs::lyr_mtd</a></div><div class="ttdeci">LayeringMethod lyr_mtd</div><div class="ttdoc">Layering method for sequencing computing, default is 0</div><div class="ttdef"><b>Definition:</b> invoke.h:73</div></div>
+<div class="ttc" id="agroup__module__setting_html_afc5786c8d6c1650d2a77d2b5be57ef8e"><div class="ttname"><a href="group__module__setting.html#afc5786c8d6c1650d2a77d2b5be57ef8e">InputArgs::InputArgs</a></div><div class="ttdeci">InputArgs(const string &amp;model_path, const string &amp;model_cfgname, int thread_num, FlowDirMethod fdir_mtd, LayeringMethod lyr_mtd, const string &amp;host, uint16_t port, int scenario_id, int calibration_id, int subbasin_id, GroupMethod grp_mtd, ScheduleMethod skd_mtd, int time_slices, const string &amp;log_level, bool mpi_version=false)</div><div class="ttdoc">Constructor by detailed parameters</div></div>
+<div class="ttc" id="agroup__module__setting_html_class_input_args"><div class="ttname"><a href="group__module__setting.html#class_input_args">InputArgs</a></div><div class="ttdoc">Parse the input arguments of SEIMS.</div><div class="ttdef"><b>Definition:</b> invoke.h:29</div></div>
+<div class="ttc" id="agroup__util_html_ga09602134b32324286975f7b7485c73f6"><div class="ttname"><a href="group__util.html#ga09602134b32324286975f7b7485c73f6">ScheduleMethod</a></div><div class="ttdeci">ScheduleMethod</div><div class="ttdoc">Parallel task scheduling strategy at subbasin level by MPI.</div><div class="ttdef"><b>Definition:</b> seims.h:59</div></div>
+<div class="ttc" id="agroup__util_html_gab0fa86be43bbacdea6c4de5d7018535d"><div class="ttname"><a href="group__util.html#gab0fa86be43bbacdea6c4de5d7018535d">GroupMethod</a></div><div class="ttdeci">GroupMethod</div><div class="ttdoc">Group method for parallel task scheduling.</div><div class="ttdef"><b>Definition:</b> seims.h:48</div></div>
+<div class="ttc" id="agroup__util_html_gac6f61231d36d327c1c46e9d46c47b9a6"><div class="ttname"><a href="group__util.html#gac6f61231d36d327c1c46e9d46c47b9a6">LayeringMethod</a></div><div class="ttdeci">LayeringMethod</div><div class="ttdoc">Grid layering method for routing and parallel computing.</div><div class="ttdef"><b>Definition:</b> seims.h:25</div></div>
+<div class="ttc" id="agroup__util_html_gaf7fabc1dcca995db30df9de773143cf7"><div class="ttname"><a href="group__util.html#gaf7fabc1dcca995db30df9de773143cf7">FlowDirMethod</a></div><div class="ttdeci">FlowDirMethod</div><div class="ttdoc">Flow direction method for flow routing.</div><div class="ttdef"><b>Definition:</b> seims.h:36</div></div>
+<div class="ttc" id="ainvoke_8h_html_a0e293bf34b2cd8c1aa66cef5426ef9ad"><div class="ttname"><a href="invoke_8h.html#a0e293bf34b2cd8c1aa66cef5426ef9ad">Usage</a></div><div class="ttdeci">void Usage(const string &amp;appname, const string &amp;error_msg=std::string())</div><div class="ttdoc">Full usage information</div></div>
+<div class="ttc" id="anamespaceccgl_html"><div class="ttname"><a href="namespaceccgl.html">ccgl</a></div><div class="ttdoc">Common Cross-platform Geographic Library (CCGL)</div></div>
+<div class="ttc" id="aseims_8h_html"><div class="ttname"><a href="seims_8h.html">seims.h</a></div><div class="ttdoc">The SEIMS related definitions and utilities header.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_ce650b3ee6c8ee1902ad5d9b217fa743.html">seims</a></li><li class="navelem"><a class="el" href="dir_f9d338a7544abb673b2d39dcadbe364c.html">src</a></li><li class="navelem"><a class="el" href="dir_64f8a13685b9f2f1d5623a66b281a23c.html">seims_main</a></li><li class="navelem"><a class="el" href="dir_d9d8c03d94c229237348b60b53b769ac.html">base</a></li><li class="navelem"><a class="el" href="dir_cce2c0ac50386f26b5b526fa8626cc77.html">module_setting</a></li><li class="navelem"><a class="el" href="invoke_8h.html">invoke.h</a></li>
+  </ul>
+</div>
+</body>
+</html>

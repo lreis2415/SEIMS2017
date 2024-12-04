@@ -1,0 +1,342 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: 下载与编译安装</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('getstart_download_installation.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">下载与编译安装 </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>目录</h3>
+<ul><li class="level1"><a href="#autotoc_md31">docker方式</a></li>
+<li class="level1"><a href="#autotoc_md32">手动编译运行方式</a><ul><li class="level2"><a href="#autotoc_md33">下载</a></li>
+<li class="level2"><a href="#autotoc_md34">必备的软件和库</a><ul><li class="level3"><a href="#autotoc_md35">用于编译SEIMS的C/C++部分的软件和库</a><ul><li class="level4"><a href="#autotoc_md36">CMake</a></li>
+<li class="level4"><a href="#autotoc_md37">C/C++编译器</a></li>
+<li class="level4"><a href="#autotoc_md42">用于C/C++的MPI</a></li>
+<li class="level4"><a href="#autotoc_md46">用于 C/C++的GDAL</a></li>
+<li class="level4"><a href="#autotoc_md50">C/C++的mongo-c-driver驱动程序</a></li>
+</ul>
+</li>
+<li class="level3"><a href="#autotoc_md54">支持运行SEIMS的软件</a><ul><li class="level4"><a href="#autotoc_md55">MongoDB （社区） 服务器</a></li>
+<li class="level4"><a href="#autotoc_md57">MongoDB图形用户界面（GUI）</a></li>
+</ul>
+</li>
+<li class="level3"><a href="#autotoc_md58">Python环境</a></li>
+</ul>
+</li>
+<li class="level2"><a href="#autotoc_md59">C/C++构建环境的测试</a></li>
+<li class="level2"><a href="#autotoc_md60">SEIMS的安装</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="textblock"><p ><a class="anchor" id="md_doc_zh_cn_get_started_download_installation"></a></p>
+<p >SEIMS托管于<a href="https://github.com/lreis2415/SEIMS">Github</a>。SEIMS依赖于多个开源软件，如 <a href="https://www.gdal.org/">GDAL</a> 和<a href="https://github.com/mongodb/mongo-c-driver">mongo-c-driver</a>。目前，还没有编译好的二进制文件可分发，只能通过源代码分发。</p>
+<p >我们鼓励用户使用docker方式运行或者手动下载并安装（即从源代码编译）SEIMS。一般来说，SEIMS版本库(<a href="https://github.com/lreis2415/SEIMS/tree/master">https://github.com/lreis2415/SEIMS/tree/master</a>)中的 <code>master</code> 分支是相对稳定的版本，而 <code>dev</code> 分支反映了最新的开发变更，现在是默认分支。</p>
+<p >我们强烈建议用户通过GitHub的actions查看SEIMS在Windows、Linux和macOS上的自动安装和测试的工作流：</p>
+<p ><a href="https://github.com/lreis2415/SEIMS/actions/workflows/Build_on_Windows.yml"><img src="https://github.com/lreis2415/SEIMS/actions/workflows/Build_on_Windows.yml/badge.svg" alt="Build on Windows using MSVC" style="pointer-events: none;" class="inline"/></a></p>
+<p ><a href="https://github.com/lreis2415/SEIMS/actions/workflows/Build_on_Linux.yml"><img src="https://github.com/lreis2415/SEIMS/actions/workflows/Build_on_Linux.yml/badge.svg" alt="Build on Ubuntu using GCC" style="pointer-events: none;" class="inline"/></a></p>
+<p ><a href="https://github.com/lreis2415/SEIMS/actions/workflows/Build_on_macOS.yml"><img src="https://github.com/lreis2415/SEIMS/actions/workflows/Build_on_macOS.yml/badge.svg" alt="Build on macOS using AppleClang" style="pointer-events: none;" class="inline"/></a></p>
+<p >配置的yml脚本位于 <code>SEIMS/.github/workflows</code>. </p>
+<h1><a class="anchor" id="autotoc_md31"></a>
+docker方式</h1>
+<h1><a class="anchor" id="autotoc_md32"></a>
+手动编译运行方式</h1>
+<h2><a class="anchor" id="autotoc_md33"></a>
+下载</h2>
+<p >用户可以使用git来克隆仓库或直接下载压缩包zip文件。</p><ul>
+<li>使用git克隆单独的 <code>master</code> 或 <code>dev</code> 分支。<ol type="1">
+<li>下载并安装git，例如Windows用户可以访问 <a href="https://gitforwindows.org/">https://gitforwindows.org/</a>.</li>
+<li>在文件资源管理器中打开或创建一个本地目录，该目录名中不要有空格，例如 <code>D:\demo</code>，在该目录的空白处右键单击，然后选择 “Git Bash Here”。然后，输入以下两个命令来配置 Git 的基本设置，也就是你的 GitHub 账户的用户名和邮箱。<code>git config --global user.name "YourUsername"</code><code>git config --global user.email "youremail@example.com"</code> `</li>
+<li><p class="startli">如果这是你第一次在计算机中使用git，需要创建一个SSH密钥并加入到你的Github账户中。</p>
+<p class="startli">首先，输入以下命令以生成一个 SSH 密钥，并将其存储到你的用户目录，如 <code>C:/Users/XXX/.ssh/id_rsa.pub</code></p>
+<p class="startli"><code>ssh-keygen -t rsa -C "email@example.com"</code></p>
+<p class="startli">然后，复制该文件的内容并添加到你的Github账户中（路径为：“Settings” -&gt; “SSH and GPG keys” -&gt; “New SSH key”）。</p>
+</li>
+<li>克隆一个单独的分支，如 <code>master</code> 分支： <code>git clone git@github.com:lreis2415/SEIMS.git --branch master --single-branch</code></li>
+</ol>
+</li>
+<li>或者，用户可以直接下载压缩包zip文件（例如：<code>master</code> 分支的zip文件为 <a href="https://github.com/lreis2415/SEIMS/archive/master.zip">https://github.com/lreis2415/SEIMS/archive/master.zip</a> ）并将其解压到一个本地无空格路径下，如 <code>D:\demo</code>。</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md34"></a>
+必备的软件和库</h2>
+<p >要成功编译和运行SEIMS，需要几个软件和库。</p>
+<ol type="1">
+<li>用于编译SEIMS的C/C++部分的软件和库<ul>
+<li>CMake 3.1+</li>
+<li>C/C++ 编译器，部分支持 C++11，如 MSVC 2010+、 GCC 4.6+、 Intel C++ 12.0+ 和 Clang 8.0+</li>
+<li>用于C/C++的MPI实现，如 MS-MPI v6+、 MPICH、 OpenMPI 或 Intel MPI</li>
+<li>用于C/C++的GDAL</li>
+<li>用于C/C++的mongo-c-driver 1.16+</li>
+</ul>
+</li>
+<li>支持运行SEIMS的软件<ul>
+<li>MongoDB (community) server 4.2</li>
+<li>MongoDB GUI</li>
+</ul>
+</li>
+<li>运行SEIMS的Python环境<ul>
+<li>Python 2.7.x 或 3.x （强烈推荐Anaconda 或 miniconda）</li>
+<li>Python的第三方包（GDAL、 pymongo、 scoop、 DEAP、 PyGeoC等）可以通过 <code>conda</code> 命令下载</li>
+</ul>
+</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md35"></a>
+用于编译SEIMS的C/C++部分的软件和库</h3>
+<h4><a class="anchor" id="autotoc_md36"></a>
+CMake</h4>
+<p >CMake 3.1+ 用于构建SEIMS的C/C++工程项目，例如Microsoft Visual Studio解决方案（<code>*.sln</code>）。CMake可以从官方网站 <a href="https://cmake.org/download/">https://cmake.org/download/</a> 下载。适用于Windows 64位的安装程序类似于 <code>cmake-3.x.x-win64-x64.msi</code> 。 安装CMake之后，请将CMake可执行文件的路径（如 <code>C:\Program Files (x86)\CMake\bin</code> ）添加到系统变量 <code>PATH</code> 中。这样，就可以在CMD（命令提示符）中直接通过输入 <code>cmake</code> 运行cmake而无需输入绝对路径。</p>
+<h4><a class="anchor" id="autotoc_md37"></a>
+C/C++编译器</h4>
+<p ><a class="anchor" id="autotoc_md38"></a> </p><h5>Microsoft Visual C++ (MSVC)</h5>
+<p >SEIMS使用了C++11的一些特性，例如 <code>nullptr</code> 和 <code>auto</code> 关键字。因此， MSVC 2010是最低支持版本。Microsoft Visual Studio是基于Microsoft Visual C++的强大的集成开发环境（IDE）。如果你不想安装 Microsoft Visual Studio，可以使用Visual C++构建工具来构建针对Windows桌面的C++库和应用程序，这些工具与Microsoft Visual Studio中提供的工具相同。不过，仍然强烈推荐使用Visual Studio。 如果你想开发基于MPI的并行应用程序，MSVC 2010是最佳选择，因为其是最后一个集成MPI集群调试器的MSVC版本。MPI集群调试器是Windows上用于调试基于MPI并行应用程序的最便捷和强大的工具。关于MPI集群调试器的更多详细信息可以在https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/dd560809(v=vs.100) 中找到。此外，MSVC 2013、2015和2019均支持并推荐。所有这些MSVC版本可以从 <a href="https://visualstudio.microsoft.com/vs/older-downloads/">https://visualstudio.microsoft.com/vs/older-downloads/</a> 下载</p>
+<p ><a class="anchor" id="autotoc_md39"></a> </p><h5>GCC</h5>
+<p >在 Linux 或 macOS 系统上推荐使用 GCC。</p>
+<p ><a class="anchor" id="autotoc_md40"></a> </p><h5>Clang</h5>
+<p >macOS 默认使用Clang编译器的变体，即 AppleClang，它不支持OpenMP。 在Mac上，强烈推荐通过 homebrew 安装的Clang编译器。</p>
+<p ><a class="anchor" id="autotoc_md41"></a> </p><h5>Intel C++</h5>
+<p >Intel C++编译器可以作为附加组件安装在Windows的Microsoft Visual Studio中。</p>
+<h4><a class="anchor" id="autotoc_md42"></a>
+用于C/C++的MPI</h4>
+<p ><a class="anchor" id="autotoc_md43"></a> </p><h5>MS-MPI</h5>
+<p >Microsoft MPI (MS-MPI)是Microsoft实现的 MPI （Message Passing Interface, <a href="https://www.mpi-forum.org/）标准，用于在Windows平台上开发和运行并行应用程序。推荐使用MS-MPI">https://www.mpi-forum.org/）标准，用于在Windows平台上开发和运行并行应用程序。推荐使用MS-MPI</a> v6及更高版本。 从Microsoft下载中心下载MS-MPI（需要两个安装文件，即<code>msmpisdk.msi</code> 和 <code>MSMpiSetup.exe</code>），例如MS-MPI v6的下载链接是 <a href="https://www.microsoft.com/en-us/download/details.aspx?id=47259，并将其安装到默认位置。安装后，MS-MPI的环境变量会自动设置。打开">https://www.microsoft.com/en-us/download/details.aspx?id=47259，并将其安装到默认位置。安装后，MS-MPI的环境变量会自动设置。打开</a><code>系统-&gt;高级系统设置-&gt;环境变量-&gt;系统变量</code>，确保以下变量-值对已存在。如果没有，请手动添加，其路径与你的计算机上的路径一致。 </p><div class="fragment"><div class="line">MSMPI_BIN=C:\Program Files\Microsoft MPI\Bin\</div>
+<div class="line">MSMPI_INC=C:\Program Files (x86)\Microsoft SDKs\MPI\Include\</div>
+<div class="line">MSMPI_LIB32=C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x86\</div>
+<div class="line">MSMPI_LIB64=C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x64\</div>
+</div><!-- fragment --><p ><a class="anchor" id="autotoc_md44"></a> </p><h5>MPICH</h5>
+<p >在Mac上，MPICH可以通过homebrew安装。</p>
+<p ><a class="anchor" id="autotoc_md45"></a> </p><h5>OpenMPI</h5>
+<p >在Mac上，OpenMPI可以通过homebrew安装。</p>
+<h4><a class="anchor" id="autotoc_md46"></a>
+用于 C/C++的GDAL</h4>
+<p ><a class="anchor" id="autotoc_md47"></a> </p><h5>用于Windows的GISInternals</h5>
+<p >由Tamas Szekeres维护的<a href="http://www.gisinternals.com/index.html">GISInternals支持网站</a>是在Windows平台上由MSVC编译的GDAL库最著名的网站。用户应根据所使用的编译器版本和操作系统架构选择确切的版本。例如，我在Windows 10-64位系统上安装了MSVC2013 (_MSC_VER=1800)，并且希望编译64位应用系统的GDAL-1.11.4，因此我应该从归档版本 (<a href="http://www.gisinternals.com/archive.php">http://www.gisinternals.com/archive.php</a>)下载<code>release-1800-x64-gdal-1-11-4-mapserver-6-4-3.zip</code> 和 <code>release-1800-x64-gdal-1-11-4-mapserver-6-4-3-libs.zip</code></p>
+<ul>
+<li>将这两个zip文件解压到同一个没有空格的目录路径下，例如 <code>C:/GDAL</code>。</li>
+<li>打开高级系统属性-&gt;环境变量，在系统变量窗格下创建几个新的系统变量： <div class="fragment"><div class="line">GDAL_DIR=C:\GDAL</div>
+<div class="line">GDAL_DATA=C:\GDAL\bin\gdal-data</div>
+<div class="line">GDAL_PATHS=C:\GDAL;C:\GDAL\bin;C:\GDAL\bin\proj\apps;C:\GDAL\bin\gdal\apps;C:\GDAL\bin\ms\apps;C:\GDAL\bin\curl;</div>
+</div><!-- fragment --></li>
+<li>然后，将<code>%GDAL_PATHS%</code> 添加到系统变量 <code>PATH</code> 的末尾。</li>
+<li>此时，用于C/C++的GDAL库以及可执行的GDAL工具（例如 <code>gdalinfo</code> ）已安装。打开一个新的CMD窗口，输入以下命令 <code>gdalinfo --version</code>，屏幕上应打印类似于 <code>GDAL 1.11.4, released 2016/01/25</code> 的信息。</li>
+</ul>
+<p ><a class="anchor" id="autotoc_md48"></a> </p><h5>在Ubuntu上使用apt-get</h5>
+<p >在Ubuntu上，可以通过 <code>apt-get</code> 命令轻松地安装GDAL： </p><div class="fragment"><div class="line">apt-get update &amp;&amp; sudo apt-get install -qq gdal-bin libgdal-dev</div>
+</div><!-- fragment --><p> 默认情况下，将会安装最新版本的GDAL。</p>
+<p ><a class="anchor" id="autotoc_md49"></a> </p><h5>在macOS上使用homebrew</h5>
+<p >在macOS上，可以通过 <code>brew</code> 命令轻松地安装GDAL： </p><div class="fragment"><div class="line">brew install gdal</div>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md50"></a>
+C/C++的mongo-c-driver驱动程序</h4>
+<p >SEIMS采用了MongoDB的mongo-c-driver库（https://github.com/mongodb/mongo-c-driver）来处理MongoDB的数据输入/输出（IO）。由于 mongo-c-driver仍在积极持续开发中，不同版本的构建方法和API（应用程序接口）函数可能不同。推荐使用VS2019支持的最后一个版本，即 <code>1.16.2</code> 。欢迎报告由版本兼容性引起的任何错误！</p>
+<p ><a class="anchor" id="autotoc_md51"></a> </p><h5>在Windows上使用MSVC</h5>
+<ul>
+<li>下载release文件并解压到本地目录，例如 <code>D:\demo\mongo-c-driver-1.16.2</code></li>
+<li><p class="startli">打开 <code>VS201x Developer Command Prompt</code> ，依次执行以下命令。假设编译后生成的mongo-c-driver库和头文件的目标路径为 <code>C:\mongo-c-driver-vs201x</code> 。 </p><div class="fragment"><div class="line">REM VS2010:</div>
+<div class="line">cmake -G &quot;Visual Studio 10 2010 Win64&quot; -DENABLE_ZLIB=BUNDLED &quot;-DCMAKE_INSTALL_PREFIX=C:\mongo-c-driver-vs2010&quot; &quot;-DCMAKE_PREFIX_PATH=C:\mongo-c-driver-vs2010&quot; ..</div>
+<div class="line">REM VS2015:</div>
+<div class="line">cmake -G &quot;Visual Studio 14 2015 Win64&quot; -DENABLE_ZLIB=BUNDLED &quot;-DCMAKE_INSTALL_PREFIX=C:\mongo-c-driver-vs2015&quot; &quot;-DCMAKE_PREFIX_PATH=C:\mongo-c-driver-vs2015&quot; ..</div>
+<div class="line">REM VS2019:</div>
+<div class="line">cmake -G &quot;Visual Studio 16 2019&quot; -A x64 -DENABLE_ZLIB=BUNDLED &quot;-DCMAKE_INSTALL_PREFIX=C:\mongo-c-driver-vs2019&quot; &quot;-DCMAKE_PREFIX_PATH=C:\mongo-c-driver-vs2019&quot; ..</div>
+<div class="line"> </div>
+<div class="line">msbuild.exe /p:Configuration=RelWithDebInfo ALL_BUILD.vcxproj</div>
+<div class="line">msbuild.exe INSTALL.vcxproj</div>
+</div><!-- fragment --><p class="startli">注意事项：</p><ol type="1">
+<li>如果CMD找不到 <code>msbuild.exe</code> ，请在.NetFramework的路径中查找它，例如 <code>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe</code>。</li>
+<li>如果你想编译32位的mongo-c-driver库，请将生成器"Visual Studio 12 2013 Win64"替换为"Visual Studio 12 2013"。</li>
+</ol>
+</li>
+<li>现在，mongo-c-driver已经构建并安装好了，bin、include和lib的目录可以在mongo-c-dirver的根目录下找到，即 <code>C:\mongo-c-driver-vs201x</code> 。</li>
+<li>创建两个新的系统变量： <div class="fragment"><div class="line">MONGOC_ROOT=C:\mongo-c-driver-vs201x</div>
+<div class="line">MONGOC_LIB=C:\mongo-c-driver-vs201x\bin</div>
+</div><!-- fragment --></li>
+<li>然后，将 <code>%MONGOC_LIB%</code> 添加到系统变量 <code>PATH</code> 的最后。</li>
+</ul>
+<p ><a class="anchor" id="autotoc_md52"></a> </p><h5>在Ubuntu上使用apt-get</h5>
+<p >在Ubuntu上，可以通过 <code>apt-get</code> 命令轻松地安装GDAL： </p><div class="fragment"><div class="line">apt-get update &amp;&amp; sudo apt-get install -qq libmongoc-1.0-0 libmongoc-dev</div>
+</div><!-- fragment --><p> 默认情况下，将会安装最新版本的GDAL。</p>
+<p ><a class="anchor" id="autotoc_md53"></a> </p><h5>在macOS上使用homebrew</h5>
+<p >在macOS上，可以通过 <code>brew</code> 命令轻松地安装GDAL： </p><div class="fragment"><div class="line">brew install mongo-c-driver</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md54"></a>
+支持运行SEIMS的软件</h3>
+<h4><a class="anchor" id="autotoc_md55"></a>
+MongoDB （社区） 服务器</h4>
+<blockquote class="doxtable">
+<p >注意：请参见<a href="https://www.mongodb.com/docs/drivers/c/">官方文档</a> 中的mongo-c-driver 和 MongoDB服务器之间的兼容性表格说明。 </p>
+</blockquote>
+<p>鉴于对灵活的数据结构、弹性的可扩展性和高性能的要求，SEIM采用了一种广泛的使用NoSQL数据库MongoDB（https://www.mongodb.com）来管理各种数据。 MongoDB服务器的免费版本是MongoDB社区服务器，可以从官方网站下载，或使用包管理工具（如 apt-get 和 homebrew）进行安装。</p>
+<p ><a class="anchor" id="autotoc_md56"></a> </p><h5>Windows</h5>
+<p >下载之前的稳定发行版本3.6.9 <a href="https://fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-3.6.9-signed.msi">https://fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-3.6.9-signed.msi</a> 或其他合适的版本。</p><ul>
+<li><p class="startli">1. 安装并简单测试</p><ul>
+<li>安装MongoDB社区服务器（以 <code>mongodb-win32-x86_64-2008plus-ssl-3.2.3-signed.msi</code> 为例）到一个没有空格的本地目录，例如 <code>D:\MongoDB</code>。</li>
+<li>创建一个名为 logs 的新目录（如 <code>D:\MongoDB\logs</code>）来存储日志文件。</li>
+<li>创建一个名为 <code>db</code>（如 <code>D:\MongoDB\db</code> ）来存储数据。</li>
+<li>以管理员身份打开CMD并运行以下命令： <code>D:\MongoDB\bin\mongod.exe --dbpath=D:\mongodb\db</code></li>
+<li>CMD窗口打印的最后一行应类似于： <code>Tue Oct 09 11:50:55 [websvr] admin web console waiting for connections on port 27017</code> 这表示MongoDB服务器已经成功启动，并且端口 27017 已被MongoDB占用。</li>
+<li>不要关闭当前CMD窗口，以管理员身份打开一个新的CMD窗口，并运行以下命令： <code>D:\MongoDB\bin\mongo.exe</code> 如果最后一行显示为 connecting to: test，表示MongoDB的链接成功。默认连接名为 test 的数据库。</li>
+<li>继续测试：</li>
+</ul>
+<div class="fragment"><div class="line">use test</div>
+<div class="line">db.foo.save({hello:0})</div>
+<div class="line">db.foo.find()</div>
+</div><!-- fragment --> <pre class="fragment">如果最后一行显示类似于 `{ "_id" : ObjectId("5c222fdff492e1436718e00b"), "Hello" : 0 }` ，表示键值数据（即键为 `hello` ，值为 `0` ）已成功插入到 test 数据库中新创建的集合 `foo` 中。
+</pre><ul>
+<li>输入 <code>exit</code> 退出MongoDB.</li>
+</ul>
+</li>
+<li>2. 将MongoDB注册为系统服务 如前一节所示，一个CMD窗口必须保持打开以保持MongoDB服务器的运行，这较为繁琐。因此，希望将MongoDB设置为系统服务，使其在Windows系统启动时自动启动，这样在每次重新启动Windows系统后就不需要手动启动它。<ul>
+<li>以管理员身份打开CMD并输入以下命令： <code>D:\MongoDB\bin\mongod.exe --dbpath=D:\MongoDB\db --logpath=D:\MongoDB\logs\mongodb.log --install --serviceName "MongoDB"</code></li>
+<li>如果控制台窗口中显示类似于 “Tue Oct 09 12:05:15 Service can be started from the command line with 'net start MongoDB'” 的信息（或可能没有显示内容），表示服务已成功注册。</li>
+<li>现在，只需一个简单的命令 net start MongoDB 即可启动MongoDB服务器。此命令会将MongoDB服务器设置为自动启动服务。<ul>
+<li>或者，我们也可以手动将MongoDB服务设置为随Windows系统自动启动： <code>D:\MongoDB\bin\mongod --install --serviceName "MongoDB" --serviceDisplayName "MongoDB" --logpath D:\MongoDB\logs\mongodb.log --logappend --dbpath D:\MongoDB\db --directoryperdb</code></li>
+<li>如果未发生错误，自动启动服务设置已成功！</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4><a class="anchor" id="autotoc_md57"></a>
+MongoDB图形用户界面（GUI）</h4>
+<p >为了查看、查询和更新存储在MongoDB中的数据，迫切需要一个用户友好且高效的GUI。 Robo 3T 正是我们所需要的工具 (<a href="https://robomongo.org/download">https://robomongo.org/download</a>)。下载适合你系统的版本并安装。 打开 Robo 3T 并连接到 <code>localhost:27017</code> （即 <code>127.0.0.1:27017</code>）。可以看到我们刚刚插入的键值数据。</p>
+<h3><a class="anchor" id="autotoc_md58"></a>
+Python环境</h3>
+<p >安装运行SEIMS所需的Python环境， 包括预处理、后处理、参数敏感性分析， 率定和情景分析</p>
+<p >我们推荐使用Python3.x，尽管仍然支持Python2.7。 强烈推荐使用 <code>Conda</code> 来运行pySEIMS。 请在Anaconda或Miniconda shell中使用以下命令来创建一个用于SEIMS的新的Python环境。</p>
+<div class="fragment"><div class="line">cd SEIMS/seims</div>
+<div class="line">conda env create -f pyseims_env.yml</div>
+<div class="line">conda activate pyseims</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p >查看 <a href="https://github.com/lreis2415/SEIMS/commit/8767acc76a87473524ab8e9fa01943ac37cfcb12">this commit</a> 获取更多关于GDAL版本与C++和Python环境兼容性的信息 </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md59"></a>
+C/C++构建环境的测试</h2>
+<p >现在，我们已经为SEIMS设置了C/C++构建环境，例如MSVC 2015、MS-MPI v6、GDAL 1.11.4和mongo-c-driver 1.16.2。为了防止任何不可预见的遗漏或错误，强烈建议用户通过编译通用跨平台地理计算库（CCGL，https://github.com/crazyzlj/CCGL）并运行其单元测试来测试C/C++构建环境。CCGL已经集成到SEIMS中，无需额外下载。</p>
+<p >编译CCGL并运行单元测试的常用命令： </p><div class="fragment"><div class="line">cd &lt;path-to-CCGL&gt;</div>
+<div class="line">mkdir build</div>
+<div class="line">cd build</div>
+<div class="line">cmake .. -DCMAKE_BUILD_TYPE=Debug -DUNITTEST=1</div>
+<div class="line">make -j4</div>
+<div class="line">ctest -C Debug --rerun-failed --output-on-failure</div>
+</div><!-- fragment --><p> 对于在Windows上使用MSVC的用户，请按照一下步骤操作：</p><ul>
+<li>打开一个新的VS2015 Developer Command Prompt，导航到CCGL的目录，如 <code>D:\demo\SEIMS\seims\src\ccgl</code> ，假如用于构建CCGL的目录是 <code>D:\compile\CCGL_vs2015</code>。</li>
+<li>执行以下命令： <div class="fragment"><div class="line">cd D:\demo\SEIMS\seims\src\ccgl</div>
+<div class="line">cmake -G &quot;Visual Studio 14 2015 Win64&quot; -B D:\compile\CCGL_vs2015 -DUNITTEST=1</div>
+<div class="line">cmake --build D:\compile\CCGL_vs2015 --config Debug -- /m:4</div>
+<div class="line">cd D:\compile\CCGL_vs2015</div>
+<div class="line">ctest -C Debug --rerun-failed --output-on-failure</div>
+</div><!-- fragment --> 如果出现任何 <code>FAILED</code> 测试，你应仔细检查必备软件和库的设置。如果不确定错误的含义，请联系开发人员获取支持。</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md60"></a>
+SEIMS的安装</h2>
+<p >SEIMS主要由C++和Python编写。Python是一个解释型语言，源代码可以直接在Python环境中执行，无需手动编译。因此，SEIMS的安装主要是C++应用程序的编译和安装。 SEIMS的C++应用程序不仅包括用于流域建模的主程序和模块，还包括用于预处理的集成程序，例如TauDEM进行的流域划分（http://hydrology.usu.edu/taudem/taudem5/index.html）和METIS进行的子流域图的静态任务调度（http://glaros.dtc.umn.edu/gkhome/metis/metis/overview）。所有的C++应用程序都由CMake组织，可以一次性构建、编译和安装。</p>
+<p >编译SEIMS的常用命令： </p><div class="fragment"><div class="line">cd &lt;path-to-SEIMS&gt;</div>
+<div class="line">mkdir build</div>
+<div class="line">cd build</div>
+<div class="line">cmake .. -DCMAKE_BUILD_TYPE=Release</div>
+<div class="line">make -j4</div>
+<div class="line">make install</div>
+</div><!-- fragment --><p >对于在Windows上使用MSVC的用户，请按照以下步骤操作：</p><ul>
+<li>打开一个新的VS2015 Developer Command Prompt，导航到SEIMS目录，例如 <code>D:\demo\SEIMS</code>。</li>
+<li>使用CMake构建Visual Studio解决方案，并使用 <code>msbuild.exe</code> 编译整个SEIMS解决方案。 <div class="fragment"><div class="line">cd D:\demo\SEIMS</div>
+<div class="line">d:</div>
+<div class="line">mkdir build</div>
+<div class="line">cd build</div>
+<div class="line">cmake -G &quot;Visual Studio 12 2015 Win64&quot; ..</div>
+<div class="line">msbuild.exe ALL_BUILD.vcxproj /p:Configuration=Release</div>
+<div class="line">msbuild.exe INSTALL.vcxproj /p:Configuration=Release</div>
+</div><!-- fragment --></li>
+<li>安装和编译完成后，所有可执行文件和库都会安装在默认位置，即 <code>D:\demo\SEIMS\build\bin</code>。 </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+  </ul>
+</div>
+</body>
+</html>

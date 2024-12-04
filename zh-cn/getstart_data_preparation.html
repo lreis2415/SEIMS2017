@@ -1,0 +1,595 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: 示例流域数据准备</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('getstart_data_preparation.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">示例流域数据准备 </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>目录</h3>
+<ul><li class="level1"><a href="#autotoc_md8">文件格式的基本约定</a><ul><li class="level2"><a href="#autotoc_md9">空间数据</a></li>
+<li class="level2"><a href="#dataprep_basic_plaintest">纯文本</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md10">空间数据</a></li>
+<li class="level1"><a href="#autotoc_md11">降水数据</a><ul><li class="level2"><a href="#dataprep_spatial_pcp_station">降水站的空间信息</a></li>
+<li class="level2"><a href="#autotoc_md12">降水数据记录</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md13">气象数据</a></li>
+<li class="level1"><a href="#autotoc_md14">观测数据</a><ul><li class="level2"><a href="#autotoc_md15">监测站点的空间信息</a></li>
+<li class="level2"><a href="#autotoc_md16">观测数据记录</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md17">查找表</a><ul><li class="level2"><a href="#autotoc_md18">土壤特性</a></li>
+<li class="level2"><a href="#autotoc_md19">初始土地覆盖参数</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md20">管理措施数据</a><ul><li class="level2"><a href="#autotoc_md21">BMP情景</a></li>
+<li class="level2"><a href="#autotoc_md22">植物管理</a></li>
+<li class="level2"><a href="#autotoc_md23">一般面积结构性BMP</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md24">更多介绍...</a></li>
+</ul>
+</div>
+<div class="textblock"><p ><a class="anchor" id="md_doc_zh_cn_get_started_data_preparation"></a></p>
+<p >简单来说，流域建模就是根据地理信息数据（如数字高程模型[DEM]，土地利用图和土壤类型图）、气象数据和管理数据等，利用经验公式或物理公式模拟流域的行为simulate the behavior of watershed，如径流、土壤侵蚀和养分循环。因此，数据收集和准备是流域建模的第一关键步骤。 作为示例，选择了中国福建长汀县游屋圳小流域的数据进行长期（即以每日为时间步长）流域建模和应用。is selected for long-term (i.e., daily time-step) watershed modeling and application</p>
+<h1><a class="anchor" id="autotoc_md8"></a>
+文件格式的基本约定</h1>
+<p >基本上，基于SEIMS流域模型的输入数据包括两类：空间数据和纯文本数据。 </p>
+<h2><a class="anchor" id="autotoc_md9"></a>
+空间数据</h2>
+<p >空间数据包括栅格数据和矢量数据。理论上，SEIMS支持所有GDAL支持的栅格（https://www.gdal.org/formats_list.html）和矢量（https://www.gdal.org/ogr_formats.html）数据格式。然而，强烈推荐使用最常见的GeoTIFF格式作为栅格数据以及ESRI Shapefile格式作为矢量数据。</p><ul>
+<li>请确保所有的空间数据有相同的投影坐标系，而非地理坐标系。</li>
+<li>不同栅格数据的空间范围不必完全一致。但是，同一位置的网格单元最好重合，否则，栅格数据将基于DEM数据进行插值，这可能造成不希望的失真。 </li>
+</ul>
+<h2><a class="anchor" id="dataprep_basic_plaintest"></a>
+纯文本</h2>
+<p >除了空间数据，几乎所有其他数据都可以以纯文本形式提供。纯文本的基本约定如下：</p><ul>
+<li>以数字符号（<code>#</code>）开头的行将被SEIMS视为注释行并忽略。然而，有一个例外，当纯文本文件的第一行用于记录时间系统和时区时，如 <code>#LOCALTIME 8</code> 表示当前文件中记录的时间为东八区时间，<code>#UTCTIME</code> 表示协调世界时（即格林尼治时间，GMT）。</li>
+<li>如果需要，第一条有效行可用作标题。</li>
+<li>每行数据中的值以逗号（<code>,</code>）分隔。</li>
+<li>在每个值内，主要分隔符为短划线（<code>-</code>），次要分隔符为冒号（<code>:</code>）。</li>
+</ul>
+<p >例如，如下所示的纯文本 </p><div class="fragment"><div class="line"># This line is a comment.</div>
+<div class="line">SUBSCENARIO,NAME,LANDUSE,PARAMETERS</div>
+<div class="line">1, Closing measures,7-16,Interc_max:Maximum Interception Capacity:AC:1-Conductivity:Soil hydraulic conductivity:RC:3.5</div>
+</div><!-- fragment --><p> 可以解析为类似字典的Python数据结构： </p><div class="fragment"><div class="line">demo_dict = {</div>
+<div class="line">    &#39;SUBSCENARIO&#39;: 1,</div>
+<div class="line">    &#39;NAME&#39;:&#39;Closing measures&#39;</div>
+<div class="line">    &#39;LANDUSE&#39;: [7, 16],</div>
+<div class="line">    &#39;PARAMETERS&#39;: [</div>
+<div class="line">        [&#39;Interc_max&#39;, &#39;Maximum Interception Capacity&#39;, &#39;AC&#39;, 1],</div>
+<div class="line">        [&#39;Conductivity&#39;, &#39;Soil hydraulic conductivity&#39;, &#39;RC&#39;, 3.5]        </div>
+<div class="line">    ]</div>
+<div class="line">}</div>
+</div><!-- fragment --> <h1><a class="anchor" id="autotoc_md10"></a>
+空间数据</h1>
+<p >名为游屋圳小流域的示例数据（约5.39km<sup>2</sup>）位于中国福建省长汀县河田镇（<a class="el" href="getstart_data_preparation.html#fig_ywz_loc">Fig. Youwuzhen Map</a>）。该区域属于中国东南部典型的红壤丘陵地区，遭受严重的土壤侵蚀。流域以低山、丘陵地貌为主，地质自东北向西南方向倾斜（最大坡度达到52.9°，平均坡度为16.8°），河流沿岸地势较平坦，海拔295.0~556.5米。土地利用类型主要为林地、水田和果园，分别占59.8、20.6、12.8。（<a class="el" href="getstart_data_preparation.html#fig_ywz_lucc">Fig. Youwuzhen Landuse</a>）。流域土壤以红壤为主，占78.4，水田土占21.6，分别可以在美国土壤分类系统中归类为*Ultisols*和*Inceptisols*（<a class="el" href="getstart_data_preparation.html#fig_ywz_soiltype">Fig. Youwuzhen Soil Type</a>）。</p>
+<p >为了提高本手册示例中的计算效率，DEM（<code>ywzdem30m.tif</code>）、土地利用图（<code>ywzlanduse30m.tif</code>）和土壤类型图（<code>ywzsoil30m.tif</code>）均统一为30米分辨率。</p>
+<p ><a class="anchor" id="fig_ywz_loc"></a><img src="../../img/youwuzhen_location_en.jpg" alt="ywzloc" class="inline"/> <img src="youwuzhen_location_en.jpg" alt="ywzloc" width="400" class="inline"/></p>
+<p ><b>图. 游屋圳小流域位置</b></p>
+<p ><a class="anchor" id="fig_ywz_lucc"></a><img src="../../img/youwuzhen_landuse_en.jpg" alt="ywzlucc" class="inline"/> <img src="youwuzhen_landuse_en.jpg" alt="ywzlucc" width="400" class="inline"/></p>
+<p ><b>图. 游屋圳小流域土地利用图</b></p>
+<p ><a class="anchor" id="fig_ywz_soiltype"></a><img src="../../img/youwuzhen_soil_en.jpg" alt="ywzsoil" class="inline"/> <img src="youwuzhen_soil_en.jpg" alt="ywzsoil" width="400" class="inline"/></p>
+<p ><b>图. 游屋圳小流域土壤类型图</b></p>
+<p >游屋圳小流域的出口位置（即矢量点）已作为ESRI Shapefile准备。如果出口数据无法预先确定，则具有最大流量累积位置（即网格单元的中心）将被标记为当前研究区的出口。</p>
+<p >在SEIMS的当前版本中，覆盖整个流域的气象站和降水站的泰森多边形也应作为矢量多边形数据提供，例如<code>thiessen_meteo.shp</code> 和 <code>thiessen_pcp.shp</code>。每个多边形的属性应包括唯一的ID（<code>ID</code>），与后续引入的站点ID一致、站点名称（<code>Name</code>）、投影坐标系下的X和Y坐标（<code>LocalX</code> 和 <code>LocalY</code>）、WGS84坐标系下的经度和纬度（<code>Lat</code> 和 <code>Lon</code>）以及海拔（<code>Elevation</code>）。</p>
+<blockquote class="doxtable">
+<p ><b>TODO</b>: 应该去除对气象站和降水站的泰森多边形的要求，因为以纯文本的形式呈现这些站点的空间信息（see <a class="el" href="getstart_data_preparation.html#dataprep_spatial_pcp_station">此处</a>）可以提供类似的信息。 </p>
+</blockquote>
+<p>所有这些空间数据位于<code>SEIMS\data\youwuzhen\data_prepare\spatial</code>。</p>
+<h1><a class="anchor" id="autotoc_md11"></a>
+降水数据</h1>
+<p >游屋圳小流域的多年平均降水量为1697.0毫米，降雨年内分配为双峰型，雨量集中且强度大，3-8月的降雨总量可占全年的75.4。 </p>
+<h2><a class="anchor" id="dataprep_spatial_pcp_station"></a>
+降水站的空间信息</h2>
+<p >降水站的空间信息字段如 <a class="el" href="getstart_data_preparation.html#tab_pcpstation">表. 降水站</a>.</p>
+<p ><a class="anchor" id="tab_pcpstation"></a><b>表. 降水站字段</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段名称   </th><th class="markdownTableHeadNone">数据类型   </th><th class="markdownTableHeadNone">描述    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">StationID   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">站点的唯一 ID    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Name   </td><td class="markdownTableBodyNone">字符串型   </td><td class="markdownTableBodyNone">站点名称    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">LocalX   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">投影坐标系下的X坐标（单位：米）    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">LocalY   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">投影坐标系下的X坐标（单位：米）    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Lat   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">WGS84坐标系下的纬度（单位：度）    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Lon   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">WGS84坐标系下的经度（单位：度）    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Elevation   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">海拔高度（单位：米）   </td></tr>
+</table>
+<p >例如，文件 <code>SEIMS\data\youwuzhen\data_prepare\climate\Sites_P.csv</code>的内容如下： </p><div class="fragment"><div class="line">StationID,Name,LocalX,LocalY,Lon,Lat,Elevation</div>
+<div class="line">81502750,HeTianZhan,39444759.232,2840563.152,116.4,25.683333,298</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md12"></a>
+降水数据记录</h2>
+<p >首行为时间系统和时区的声明 （参见<a class="el" href="getstart_data_preparation.html#dataprep_basic_plaintest">此处</a>）如果未提供，将默认为<code>#UTCTIME</code>。 降水数据的字段和格式如下。</p>
+<p ><a class="anchor" id="tab_pcp_dataitem"></a><b>表. 降水数据项的字段和格式</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段名称   </th><th class="markdownTableHeadNone">数据类型   </th><th class="markdownTableHeadNone">描述    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DATETIME   </td><td class="markdownTableBodyNone">日期时间字符串   </td><td class="markdownTableBodyNone">日期时间，格式为 <code>YYYY-MM-DD HH:MM:SS</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">StationIDs   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">每个站点ID的降水量值。多个站点可以为 <code>StationID1</code>,<code>StationID2</code>, … <code>StationIDN</code>   </td></tr>
+</table>
+<p >因此，降水数据记录的内容类似于（<code>SEIMS\data\youwuzhen\data_prepare\climate\pcp_daily.csv</code>）： </p><div class="fragment"><div class="line">#UTCTIME</div>
+<div class="line">DATETIME,81502750</div>
+<div class="line">2012-01-01 00:00:00,0</div>
+<div class="line">2012-01-02 00:00:00,0</div>
+<div class="line">2012-01-03 00:00:00,9.00</div>
+<div class="line">2012-01-04 00:00:00,16.50</div>
+<div class="line">2012-01-05 00:00:00,16.00</div>
+<div class="line">2012-01-06 00:00:00,1.50</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md13"></a>
+气象数据</h1>
+<p >游屋圳小流域地处中亚热带季风性湿润气候，多年平均气温为18.3 °C。 气象站的数据格式与降水站相同（参见<a class="el" href="getstart_data_preparation.html#dataprep_spatial_pcp_station">此处</a>），例如 <code>SEIMS\data\youwuzhen\data_prepare\climate\Sites_M.csv</code>。</p>
+<p >与降水数据相同，气象数据文本的首行为时间系统和时区的声明（参见<a class="el" href="getstart_data_preparation.html#dataprep_basic_plaintest">此处</a>）如果未提供，将默认为 <code>#UTCTIME</code>。气象数据的字段和格式如下。 <b>注意这些字段的顺序不固定。</b></p>
+<p ><a class="anchor" id="tab_meteo_dataitem"></a><b>表. 气象数据项的字段和格式</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段名称   </th><th class="markdownTableHeadNone">数据类型   </th><th class="markdownTableHeadNone">描述    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">StationID   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">站点ID    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">DATETIME   </td><td class="markdownTableBodyNone">日期时间字符串   </td><td class="markdownTableBodyNone">日期时间，格式为 YYYY-MM-DD HH:MM:SS    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">TMAX   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">最高气温（单位：摄氏度）    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">TMIN   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">最低气温（单位：摄氏度）    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">TMEAN   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">（可选） 平均气温（单位：摄氏度）    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">RM   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">相对湿度（单位：）    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">WS   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">风速（单位：米/秒）    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SR or SSD   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">太阳辐射（单位兆焦/平方米/天）或日照时长（单位：小时）    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">PET   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">潜在蒸散量（单位：毫米）   </td></tr>
+</table>
+<p >因此，气象数据记录的内容类似于（<code>SEIMS\data\youwuzhen\data_prepare\climate\meteo_daily.csv</code>）： </p><div class="fragment"><div class="line">#LOCALTIME 8</div>
+<div class="line">StationID,DATETIME,TMEAN,TMAX,TMIN,RM,WS,SSD</div>
+<div class="line">58911,2012-01-01 20:00:00,10.0 ,13.6 ,7.8 ,76 ,1.2 ,1.2</div>
+<div class="line">58911,2012-01-02 20:00:00,10.6 ,15.7 ,7.0 ,73 ,0.7 ,1.5</div>
+<div class="line">58911,2012-01-03 20:00:00,7.1 ,12.0 ,4.6 ,89 ,1.6 ,0.0</div>
+<div class="line">58911,2012-01-04 20:00:00,3.9 ,6.6 ,2.5 ,78 ,1.7 ,0.0</div>
+</div><!-- fragment --><p >此外，每种数据类型的单位也应提供，例如 <code>SEIMS\data\youwuzhen\data_prepare\climate\Variables.csv</code>。</p>
+<blockquote class="doxtable">
+<p ><b>TODO</b>: 在当前的SEIMS版本中，单位应与表3中一致。为了增强SEIMS对常用单位的兼容性，将来应增加一些单位转换功能。 </p>
+</blockquote>
+<h1><a class="anchor" id="autotoc_md14"></a>
+观测数据</h1>
+<p >流域内定期监测的流量、泥沙或养分数据被视为观测数据。观测数据组织为一个站点信息文件和若干个与监测站点和监测变量数量相对应的数据文件。 </p>
+<h2><a class="anchor" id="autotoc_md15"></a>
+监测站点的空间信息</h2>
+<p >监测站点的空间信息如下所示。</p>
+<p ><a class="anchor" id="tab_obs_site"></a><b>表. 监测站点数据的字段</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段名称   </th><th class="markdownTableHeadNone">数据类型   </th><th class="markdownTableHeadNone">描述    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">StationID   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">唯一的站点ID    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Name   </td><td class="markdownTableBodyNone">字符串型   </td><td class="markdownTableBodyNone">站点名称    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Type   </td><td class="markdownTableBodyNone">字符串型   </td><td class="markdownTableBodyNone">监测变量，多个变量之间使用短横线作为分隔符。避免在单一变量类型中使用短横线。    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Unit   </td><td class="markdownTableBodyNone">字符串型   </td><td class="markdownTableBodyNone">监测变量的单位，多个单位之间使用短横线作为分隔符。避免在单一单位中使用短横线。    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">LocalX   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">投影坐标系下的X坐标（单位：米）    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">LocalY   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">投影坐标系下的Y坐标（单位：米）    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Lat   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">WGS84坐标系下的纬度（单位：度）    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Lon   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">WGS84坐标系下的经度（单位：度）    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Elevation   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">海拔高度（单位：米）    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">isOutlet   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">监测站点的类型：<br  />
+ 1: 流域出口<br  />
+ 2: 子流域出口<br  />
+ 3: 多个子流域的交汇点<br  />
+ 0: 其他空间位置   </td></tr>
+</table>
+<p >例如， <code>SEIMS\data\youwuzhen\data_prepare\observed\SiteInfo.csv</code>： </p><div class="fragment"><div class="line">StationID,Name,Type,Lat,Lon,LocalX,LocalY,Unit,Elevation,isOutlet</div>
+<div class="line">1,hetianzhan,SED,25.680207,116.406401,440409.511725,2841541.17804,g/L,280,1</div>
+<div class="line">1,hetianzhan,Q,25.680207,116.406401,440409.511725,2841541.17804,m3/s,280,1</div>
+</div><!-- fragment --><p >请注意，观测数据主要用于后处理，例如与相应的模拟值匹配。因此，<code>Type</code> 字段应与基于SEIMS的流域模型的输出相符。所有当前可用的输出可以在<code>SEIMS\seims\preprocess\database\AvailableOutputs.csv</code>找到。例如，如果监测总氮量数据，根据河道中总氮量输出项的 <code>FILENAME</code> 字段（显然，不包括后缀，例如 <code>.txt</code>），类型应为<code>CH_TN</code>： </p><div class="fragment"><div class="line">MODULE_CLASS,OUTPUTID,DESCRIPTION,UNIT,TYPE,STARTTIME,ENDTIME,INTERVAL,INTERVAL_UNIT,SUBBASIN,FILENAME,USE</div>
+<div class="line">NutrientTransport,CH_TN,total nitrogen amount in reach,kg,NONE,1970-01-01 00:00:00,1970-01-01 00:00:00,-9999,-9999,ALL,CH_TN.txt,0</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md16"></a>
+观测数据记录</h2>
+<p >与降水数据格式类似，观测数据的首行为时间系统和时区的声明（参见<a class="el" href="getstart_data_preparation.html#dataprep_basic_plaintest">此处</a>）。如果未提供，将默认为 <code>#UTCTIME</code>。观测数据的字段和格式如下。</p>
+<p ><a class="anchor" id="tab_obs_dataitem"></a><b>表. 观测数据项的字段和格式</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段名称   </th><th class="markdownTableHeadNone">数据类型   </th><th class="markdownTableHeadNone">描述    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">StationID   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">站点ID    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">DATETIME   </td><td class="markdownTableBodyNone">日期时间字符串   </td><td class="markdownTableBodyNone">日期时间，格式为 YYYY-MM-DD HH:MM:SS    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Type   </td><td class="markdownTableBodyNone">字符串型   </td><td class="markdownTableBodyNone">监测变量    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">VALUE   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">当前变量在当前日期时间的监测值   </td></tr>
+</table>
+<p >因此，观测数据记录的内容类似于（ <code>SEIMS\data\youwuzhen\data_prepare\observed\observed_Q.csv</code>）： </p><div class="fragment"><div class="line">#UTCTIME</div>
+<div class="line">StationID,DATETIME,Type,VALUE</div>
+<div class="line">1,2012-01-14 00:00:00,Q,0.1615</div>
+<div class="line">1,2012-01-15 00:00:00,Q,0.578</div>
+<div class="line">1,2012-01-16 00:00:00,Q,0.4317</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md17"></a>
+查找表</h1>
+<p >查找表包括作物、肥料、耕作、土地利用、土壤和城市，均来自SWAT并预定义在 <code>SEIMS\seims\preprocess\database</code>中。特定研究区的参数可以附加到这些查找表中，也可以在<code>SEIMS\data\youwuzhen\data_prepare\lookup</code>中准备单独的文件。 以下是最常用查找表的详细信息。 </p>
+<h2><a class="anchor" id="autotoc_md18"></a>
+土壤特性</h2>
+<p >土壤特性包括物理特性和化学特性。字段和描述如<a class="el" href="getstart_data_preparation.html#tab_soil_lookup">表. 土壤查找表</a>所示。可选参数可以省略。 注意， <code>SEQN</code> 和 <code>NAME</code> 不一定与土壤类型（<code>SOILCODE</code>）一致，以便根据不同的土壤覆盖或地形位置表示相同土壤类型的异质性。然而， <code>SEQN</code> <b>必须</b> 与土壤类型图中的值一致，即 <code>ywzsoil30m.tif</code>。多个土壤层的土壤特性使用短横线（<code>-</code>）连接，如<a class="el" href="getstart_data_preparation.html#dataprep_basic_plaintest">此处</a>所述。</p>
+<p ><a class="anchor" id="tab_soil_lookup"></a><b>表. 土壤属性查找表中的字段和描述</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段名称   </th><th class="markdownTableHeadNone">数据类型   </th><th class="markdownTableHeadNone">单位   </th><th class="markdownTableHeadNone">描述    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SEQN or SOILCODE   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">土壤类型图的唯一标识符    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NAME   </td><td class="markdownTableBodyNone">字符串型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">土壤名称    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SOILLAYERS   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">土壤层数    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOL_Z   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">mm   </td><td class="markdownTableBodyNone">从土壤表面到土壤层底部的深度    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SOL_OM   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">%   </td><td class="markdownTableBodyNone">有机质含量    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOL_CLAY   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">%   </td><td class="markdownTableBodyNone">粘土含量，直径 D &lt; 0.002 mm    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SOL_SILT   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">%   </td><td class="markdownTableBodyNone">粉砂含量，0.002 mm &lt; D &lt; 0.05 mm    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOL_SAND   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">%   </td><td class="markdownTableBodyNone">沙子含量，0.05 mm &lt; D &lt; 2 mm    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SOL_ROCK   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">%   </td><td class="markdownTableBodyNone">石块含量，D &gt; 2 mm    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOL_BD   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">Mg/m<sup>3</sup>   </td><td class="markdownTableBodyNone">湿容重，取值范围 1.1 ~ 1.9    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SOL_AWC   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">mm   </td><td class="markdownTableBodyNone">可利用水容量    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOL_ZMX   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">mm   </td><td class="markdownTableBodyNone">（可选）土壤剖面的最大根系深度    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ANION_EXCL   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">（可选）从阴离子被排除的孔隙（空隙）比例，默认为 0.5    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOL_CRK   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">（可选）土壤剖面的最大裂隙体积，以总土壤体积的比例表示。    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SOL_K   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">mm/hr   </td><td class="markdownTableBodyNone">（可选）饱和导水率    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOL_WP   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">mm   </td><td class="markdownTableBodyNone">（可选）萎焉点    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SOL_FC   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">mm   </td><td class="markdownTableBodyNone">（可选）田间持水量    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOL_POROSITY   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">（可选）孔隙率    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SOL_USLE_K   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">（可选） USLE K 因子    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOL_ALB   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">（可选）湿润土壤时的反照率    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ESCO   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">（可选）土壤蒸发补偿因子，默认为 0.95    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOL_NO3   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">g/kg   </td><td class="markdownTableBodyNone">（可选）硝酸盐浓度    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SOL_NH4   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">g/kg   </td><td class="markdownTableBodyNone">（可选）土壤中的铵氮浓度    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOL_ORGN   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">g/kg   </td><td class="markdownTableBodyNone">（可选）有机氮浓度    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SOL_ORGP   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">g/kg   </td><td class="markdownTableBodyNone">（可选）有机磷浓度    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SOL_SOLP   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">g/kg   </td><td class="markdownTableBodyNone">（可选）可溶性磷浓度   </td></tr>
+</table>
+<p >因此，研究区的土壤特性查找表的内容类似于（<code>SEIMS\data\youwuzhen\data_prepare\lookup\soil_properties_lookup.csv</code>）： </p><div class="fragment"><div class="line">SEQN,SNAM,SOILLAYERS,SOL_ZMX,SOL_Z,SOL_BD,SOL_OM,SOL_CLAY,SOL_SILT,SOL_SAND,SOL_ROCK,SOL_WP,SOL_FC,SOL_POROSITY,SOL_K,SOL_AWC,SOL_NO3,SOL_NH4,SOL_ORGN,SOL_SOLP,SOL_ORGP</div>
+<div class="line">201,WNT,3,600,200-400-600,1.5-1.57-1.45,2.31-0.84-0.84,15.66-17.36-20.94,13.8-17.31-22.23,52.25-44.6-35.9,18.29-20.73-20.93,0.12-0.14-0.18,0.21-0.24-0.31,0.44-0.41-0.45,26.16-11.43-7.87,0.1-0.1-0.13,0.004-0.002-0.002,0-0-0,0.164-0.079-0.077,0.005-0.002-0.001,0.047-0.018-0.012</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md19"></a>
+初始土地覆盖参数</h2>
+<p >在模拟开始时应定义一些土地覆盖的参数。字段和描述如<a class="el" href="getstart_data_preparation.html#tab_soil_lookup">表. LUCC Lookup</a>所示。请参照预定义数据库<code>seims/preprocess/database/CropLookup.csv</code> 和 <code>LanduseLookup.csv</code>。</p>
+<p ><a class="anchor" id="tab_lucc_lookup"></a><b>表. 初始土地覆盖参数查找表中的字段和描述</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段名称   </th><th class="markdownTableHeadNone">数据类型   </th><th class="markdownTableHeadNone">Unit   </th><th class="markdownTableHeadNone">描述    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">LANDUSE_ID   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">土地利用ID（必须覆盖土地利用图中的ID）    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">IGRO   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">Land 土地覆盖状态：0-无生长；1-生长中    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">LANDCOVER or ICNUM   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">ICNUM， 土地覆盖ID号（当IGRO为1时必填）    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">LAI_INIT   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">初始叶面积指数 （当IGRO为1时必填）    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">BIO_INIT   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">kg/ha   </td><td class="markdownTableBodyNone">初始生物量（当IGRO为1时必填）    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">PHU_PLT   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">degC   </td><td class="markdownTableBodyNone">使植物达到成熟所需的热量单位数（当IGRO为1时必填）    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">EPCO   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">植物吸收补偿因子，范围0.01 ~ 1    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">RSDIN   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">kg/ha   </td><td class="markdownTableBodyNone">初始残留覆盖量    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">CURYR_INIT   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">year   </td><td class="markdownTableBodyNone">初始树龄    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">CHT   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">m   </td><td class="markdownTableBodyNone">初始树冠高度    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DORMI   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">休眠状态代码：1-生长中，0-休眠    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">USLE_P   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">-   </td><td class="markdownTableBodyNone">USLE的保护性管理因子   </td></tr>
+</table>
+<p >因此，特定研究区域的初始土地覆盖参数查找表的内容类似于（<code>SEIMS\data\youwuzhen\data_prepare\lookup\landcover_initial_parameters.csv</code>）： </p><div class="fragment"><div class="line">LANDUSE_ID,IGRO,LANDCOVER,LAI_INIT,BIO_INIT,PHU_PLT,EPCO,RSDIN,CURYR_INIT,CHT,DORMI,USLE_P</div>
+<div class="line">33,0,33,0,0,0,1,100,0,0,0,0.084</div>
+<div class="line">4,1,4,2,200,0,1,200,2,2,0,0.8</div>
+<div class="line">8,1,8,3,1000,0,1,300,5,5,0,0.8</div>
+<div class="line">6,1,6,2,600,0,1,200,3,2,0,0.8</div>
+<div class="line">18,0,18,0,0,0,0,0,0,0,0,1</div>
+<div class="line">104,0,-9999,0,0,0,0,0,0,0,0,1</div>
+<div class="line">106,0,-9999,0,0,0,0,0,0,0,0,1</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md20"></a>
+管理措施数据</h1>
+<p >SEIMS支持或将支持三种不同类型的最佳管理措施（BMPs）。</p><ul>
+<li>河段BMP：与特定河段相关的BMP，会改变该河段的特征，如点源、河流分流、水库、河岸湿地、河岸缓冲区等。</li>
+<li>面积结构性BMP：与流域中某个特定结构相关的BMP，会改变特定位置的特性，如草地水道、过滤带、池塘、独立湿地、梯田、地表分流、排水管管理和城市管理等。</li>
+<li>面积非结构性BMP：不与流域中某个特定结构相关的BMP，会改变特定位置的特征，如植物管理。</li>
+</ul>
+<p >本节首先介绍BMP情景的组织，然后详细说明不同BMP的参数设置。在本用户手册的当前版本中，以植被管理和一般的面积结构性BMP为示例。更多的BMP将在未来版本中更新。</p>
+<h2><a class="anchor" id="autotoc_md21"></a>
+BMP情景</h2>
+<p >BMP情景是一组不同的BMP，将应用于基于SEIMS的流域模型，以影响流域行为。 基于一个流域模型，可以创建多个不同的BMP情景来进行BMP情景分析。每个BMP情景通过一个唯一的整数ID标识。对于一个情景的每个BMP，必须指定位置和参数。对于河段BMP，位置是河段ID。对于两种面积BMP，位置是由栅格数据标识的区域，即所谓的BMP配置单元。BMP参数定义在单独的纯文本文件中，其中允许不同的参数组合，并通过唯一ID（即<code>SUBSCENARIO</code>区分）。BMP情景表的字段和描述如下。</p>
+<p ><a class="anchor" id="tab_bmpscenario"></a><b>表. BMP情景表的字段和描述</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段名称   </th><th class="markdownTableHeadNone">数据类型   </th><th class="markdownTableHeadNone">描述    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ID   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">BMP情景的唯一ID    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NAME   </td><td class="markdownTableBodyNone">字符串型   </td><td class="markdownTableBodyNone">情景名称    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">BMPID   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">预定义的BMP ID （例如 <code>SEIMS\data\youwuzhen\scenario\BMP_index.csv</code>）    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SUBSCENARIO   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">在特定BMP参数中定义的BMP的子情景ID   </td></tr>
+</table>
+<p>| DISTRIBUTION | 字符串型 | 格式为 <code>&lt;Type&gt;|&lt;Filename&gt;</code>. 分别对于河段BMP和面积BMP，<code>&lt;Type&gt;</code> 可以是 <code>REACH</code> 或 <code>RASTER</code> 。 <code>&lt;Filename&gt;</code> 是对应的河段表名称或栅格文件名。例如，<code>RASTER|LANDUSE</code> 表示当前面积BMP的配置基于土地利用类型。 | | COLLECTION | 字符串型 | 定义BMP参数的纯文本文件的名称（例如， <code>SEIMS\data\youwuzhen\scenario\plant_management.csv</code>） | | LOCATION | 整数数组 | 用于配置BMP的<code>DISTRIBUTION</code> 的定位值，例如33表示BMP将在土地利用类型为33的位置进行配置。多个定位值用短横线分隔。 |</p>
+<p >因此，特定研究区域的BMP情景表的内容类似于（<code>SEIMS\data\youwuzhen\data_prepare\scenario\BMP_scenarios.csv</code>）： </p><div class="fragment"><div class="line">ID,NAME,BMPID,SUBSCENARIO,DISTRIBUTION,COLLECTION,LOCATION</div>
+<div class="line">0,base,12,0,RASTER|LANDUSE,plant_management,33</div>
+</div><!-- fragment --><p >情景 <code>ID</code> 为0，名称为 <code>base</code> ，包括一个 <code>BMPID</code> 为12的BMP，根据 <code>BMP_index.csv</code>，该BMP为植物管理。此BMP的配置单元基于 <code>LANDUSE</code> 图，土地利用类型为33的位置将被配置。此BMP的参数可以从<code>plant_management.csv</code>加载，并且<code>SUBSCENARIO</code> 为0的子情景将被应用。</p>
+<h2><a class="anchor" id="autotoc_md22"></a>
+植物管理</h2>
+<p >借鉴SWAT模型，SEIMS的BMP模块中考虑了总共15种不同类型的植物管理操作。多个植物管理操作的组合（如种植、施肥、收割等）被视为植物管理操作的一个<code>SUBSCENARIO</code>，例如水稻和冬小麦的轮作操作。每个<code>SUBSCENARIO</code>的管理操作具有以下相同字段。</p>
+<p ><a class="anchor" id="tab_plt_mgt"></a><b>表. 植物管理操作的字段和描述</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段名称   </th><th class="markdownTableHeadNone">数据类型   </th><th class="markdownTableHeadNone">描述    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SUBSCENARIO   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">当前BMP参数表中唯一的子情景ID    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NAME   </td><td class="markdownTableBodyNone">字符串型   </td><td class="markdownTableBodyNone">子方案名称，例如 <code>Crop_rotation</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">LANDUSE_ID   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">可应用于 <code>SUBSCENARIO</code> 的土地利用类型    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SEQUENCE   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone"><code>SUBSCENARIO</code>相关的植物管理操作的序号，从1开始    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">YEAR   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone"><code>SUBSCENARIO</code>的年份编号，从1开始    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">MONTH   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">操作发生的月份Month    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DAY   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">操作发生的日期    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">BASE_HU   </td><td class="markdownTableBodyNone">Boolean   </td><td class="markdownTableBodyNone">Use (1) the fraction of annual total heat units (<code>HU</code>) or the fraction of total heat units of a plant to reach maturity (<code>PHU</code>) (0)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">HUSC   </td><td class="markdownTableBodyNone">浮点型   </td><td class="markdownTableBodyNone">运行热量单位调度，以<code>PHU</code>的分数表示，如果<code>BASE_HU=1</code>则以<code>HU</code>的分数表示。    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">MGT_OP   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">管理操作数    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>MGT&lt;N&gt;</code>   </td><td class="markdownTableBodyNone">浮点数组   </td><td class="markdownTableBodyNone">操作相关参数。<code>&lt;N&gt;</code>的取值范围是1到10。多个位置值用逗号分隔。   </td></tr>
+</table>
+<p >植被管理操作根据热量单位和/或当地经验的操作日期安排。如果满足任一条件即可执行操作。例如，种植操作设置在5月5日或 <code>HUSC</code> 大于等于0.2时。如果使用了 <code>BASE_HU</code>，并且在5月1日 <code>HUSC</code>（年总热量单位（<code>HU</code>）的分数）达到了0.2，那么将进行种植操作，因为首先满足了<code>HUSC</code>而不是 <code>MONTH/DAY</code>。</p>
+<p >植物管理操作类型通过<code>MGT_OP</code>字段的代码识别。不同的<code>MGT_OP</code>代码包括：</p>
+<ol type="1">
+<li>种植/生长季开始。初始化特定土地覆盖/植物类型的生长、</li>
+<li>灌溉操作。向位置供水。</li>
+<li>施肥操作。向土壤添加养分。</li>
+<li>农药操作。向植被和/或土壤施加农药。</li>
+<li>收割和杀青操作。收割植物中被指定为产量的部分，将产量移出该地点，并将剩余的植物生物质转化为土壤表面的残留物。</li>
+<li>耕作操作。混合上层土壤并重新分配这些层内的养分/化学物质等。</li>
+<li>仅收割操作。收割植物上被指定为产量的部分，并将产量从该位置移除，但允许植物继续生长。这种操作用于干草切割。</li>
+<li>杀青/生长季结束。停止所有植物生长并将所有植物生物量转化为残留物。</li>
+<li>放牧操作。移除植物生物量并同时施加粪肥。</li>
+<li>自动灌溉初始化。初始化位置内的自动灌溉操作。植物到达用户指定的水分胁迫水平时会进行灌溉。</li>
+<li>自动施肥初始化。初始化位置内的自动施肥操作。植物到达用户指定的氮胁迫水平时会进行施肥。</li>
+<li>街道清扫操作。移除位置上的不透水区域的沉积物和养分积累。仅当位置激活了城市积累/冲洗操作时可使用。</li>
+<li>释放/蓄积。水稻或其他植物的水释放/蓄积操作。</li>
+<li>持续施肥。连续向土壤表面施加肥料/粪肥。</li>
+<li>持续施用农药。连续向土壤表面施用农药。</li>
+<li>燃烧操作。移除位置上用户指定的植物生物量部分。</li>
+</ol>
+<p >不同植物管理操作的参数列在 <a class="el" href="getstart_data_preparation.html#tab_plt_mgt_op">Tab.</a>. 请参考 <code>SWAT 2012 Input/Output Documentation</code> 以了解每个参数的详细信息。</p>
+<p >注意，为了模拟水稻在不同生长期的水位变化，扩展了SWAT中水释放/蓄积操作的参数，即最大积水深度（<code>MAX_PND</code>）、最小适配深度（<code>MIN_FIT</code>）和最大适配深度（<code>MAX_FIT</code>）。</p>
+<p ><a class="anchor" id="tab_plt_mgt_op"></a><b>表. 植物管理操作的定义参数</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">NAME   </th><th class="markdownTableHeadNone">OP   </th><th class="markdownTableHeadNone">MGT1   </th><th class="markdownTableHeadNone">MGT2   </th><th class="markdownTableHeadNone">MGT3   </th><th class="markdownTableHeadNone">MGT4   </th><th class="markdownTableHeadNone">MGT5   </th><th class="markdownTableHeadNone">MGT6   </th><th class="markdownTableHeadNone">MGT7   </th><th class="markdownTableHeadNone">MGT8   </th><th class="markdownTableHeadNone">MGT9   </th><th class="markdownTableHeadNone">MGT10    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Plant   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">PLANT_ID   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">CURYR_MAT   </td><td class="markdownTableBodyNone">HEAT_UNITS   </td><td class="markdownTableBodyNone">LAI_INIT   </td><td class="markdownTableBodyNone">BIO_INIT   </td><td class="markdownTableBodyNone">HI_TARG   </td><td class="markdownTableBodyNone">BIO_TARG   </td><td class="markdownTableBodyNone">CNOP   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Irrigate   </td><td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">IRR_SC   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">IRR_AMT   </td><td class="markdownTableBodyNone">IRR_SALT   </td><td class="markdownTableBodyNone">IRR_EFM   </td><td class="markdownTableBodyNone">IRR_SQ   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">IRR_NO    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Fertilize   </td><td class="markdownTableBodyNone">3   </td><td class="markdownTableBodyNone">FERT_ID   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">FRT_KG   </td><td class="markdownTableBodyNone">FRT_SURFACE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Pesticide   </td><td class="markdownTableBodyNone">4   </td><td class="markdownTableBodyNone">PEST_ID   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">PST_KG   </td><td class="markdownTableBodyNone">PST_DEP   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Harvest &amp; Kill   </td><td class="markdownTableBodyNone">5   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">CNOP   </td><td class="markdownTableBodyNone">HI_OVR   </td><td class="markdownTableBodyNone">FRAC_HARVK   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Tillage   </td><td class="markdownTableBodyNone">6   </td><td class="markdownTableBodyNone">TILL_ID   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">CNOP   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Harvest Only   </td><td class="markdownTableBodyNone">7   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">HARVEFF   </td><td class="markdownTableBodyNone">HI_BMS   </td><td class="markdownTableBodyNone">HI_RSD   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Kill   </td><td class="markdownTableBodyNone">8   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Grazing   </td><td class="markdownTableBodyNone">9   </td><td class="markdownTableBodyNone">GRZ_DAYS   </td><td class="markdownTableBodyNone">MANURE_ID   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">BIO_EAT   </td><td class="markdownTableBodyNone">BIO_TRMP   </td><td class="markdownTableBodyNone">MANURE_KG   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Auto Irrigation   </td><td class="markdownTableBodyNone">10   </td><td class="markdownTableBodyNone">WSTRS_ID   </td><td class="markdownTableBodyNone">IRR_SCA   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">AUTO_WSTRS   </td><td class="markdownTableBodyNone">IRR_EFF   </td><td class="markdownTableBodyNone">IRR_MX   </td><td class="markdownTableBodyNone">IRR_ASQ   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">IRR_NOA    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Auto Fertilize   </td><td class="markdownTableBodyNone">11   </td><td class="markdownTableBodyNone">AFERT_ID   </td><td class="markdownTableBodyNone">NSTRESS   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">AUTO_NSTRS   </td><td class="markdownTableBodyNone">AUTO_NAPP   </td><td class="markdownTableBodyNone">AUTO_NYR   </td><td class="markdownTableBodyNone">AUTO_EFF   </td><td class="markdownTableBodyNone">AFRT_SURFACE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Sweep   </td><td class="markdownTableBodyNone">12   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">SWEEPEFF   </td><td class="markdownTableBodyNone">FR_CURB   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Release/Impound   </td><td class="markdownTableBodyNone">13   </td><td class="markdownTableBodyNone">IMP_TRIG   </td><td class="markdownTableBodyNone">MAX_PND   </td><td class="markdownTableBodyNone">MIN_FIT   </td><td class="markdownTableBodyNone">MAX_FIT   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Cont. Fertilize   </td><td class="markdownTableBodyNone">14   </td><td class="markdownTableBodyNone">FERT_DAYS   </td><td class="markdownTableBodyNone">CFRT_ID   </td><td class="markdownTableBodyNone">IFRT_FREQ   </td><td class="markdownTableBodyNone">CFRT_KG   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Cont. Pesticide   </td><td class="markdownTableBodyNone">15   </td><td class="markdownTableBodyNone">IPST_ID   </td><td class="markdownTableBodyNone">PEST_DAYS   </td><td class="markdownTableBodyNone">IPST_FREQ   </td><td class="markdownTableBodyNone">CPST_KG   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Burning   </td><td class="markdownTableBodyNone">16   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">BURN_FRLB   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td><td class="markdownTableBodyNone">NONE   </td></tr>
+</table>
+<blockquote class="doxtable">
+<p >注：None表示为未来可能的参数保留的位置，默认值为0。 </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md23"></a>
+一般面积结构性BMP</h2>
+<p >通常，面积结构性BMP通过修改配置BMP的区域上的流域模型相关参数来发挥作用。因此，设计了一个一般的面积结构性BMP表，如<a class="el" href="getstart_data_preparation.html#tab_general_areal_bmp">表. 一般面积结构性BMP</a>所示。其基本上包含空间参数（例如，适合的<code>LANDUSE</code> 和 <code>SLPPOS</code>）、环境效益参数（例如，<code>PARAMETERS</code> 和 <code>EFFECTIVENESS</code>）和经济效益（例如，<code>CAPEX</code>、 <code>OPEX</code> 和 <code>INCOME</code>）。</p>
+<p >注意，用户可以根据情景分析的需求扩展或修改一般面积结构性BMP的字段。这些字段将在预定义情景分析程序（例如 <code>SEIMS\seims\scenario_analysis\spatialunits</code>）或基于SEIMS基类开发的其他情景分析程序（<code>SEIMS\seims\scenario_analysis</code>）中使用。</p>
+<p ><a class="anchor" id="tab_general_areal_bmp"></a><b>表. 一般面积结构性管理操作的字段和描述</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段名称   </th><th class="markdownTableHeadNone">数据类型   </th><th class="markdownTableHeadNone">描述    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SUBSCENARIO   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">当前BMP参数表中唯一的子情景ID    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NAME   </td><td class="markdownTableBodyNone">字符串型   </td><td class="markdownTableBodyNone">子方案名称，例如<code>closing measures (CM)</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DESC   </td><td class="markdownTableBodyNone">字符串型   </td><td class="markdownTableBodyNone">BMP描述    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">REFERENCE   </td><td class="markdownTableBodyNone">字符串型   </td><td class="markdownTableBodyNone">文献参考    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">LANDUSE   </td><td class="markdownTableBodyNone">字符串型   </td><td class="markdownTableBodyNone">适用的土地利用类型。默认为‘ALL’。多个土地利用类型通过短横线链接，例如‘6-8’。   </td></tr>
+</table>
+<pre class="fragment">|
+</pre><p> | SLPPOS | 字符串型 | 适用的坡位，默认为‘ALL’。 多个坡位标签通过短横线连接，例如‘4-16’。 | | PARAMETERS | 字符串型 | BMP影响的空间参数，格式必须为： <code>NAME1:DESC1:CHANGE1:IMPACT1-NAME2:DESC2:CHANGE2:IMPACT2-</code>，其中 <code>NAME</code> 是参数的 <code>ID</code>，必须是MongoDB的 <code>SPATIAL</code> 集合中的GridFS文件之一； <code>DESC</code> 是相应描述； <code>CHANGE</code> 是更改方式（<code>VC</code>、 <code>RC</code> 或 <code>AC</code>。 <code>VC</code>：替换， <code>RC</code>：乘以， <code>AC</code>：增加）， <code>IMPACT</code> 是影响值。 | | EFFECTIVENESS | 整型 | 总体环境效益（如，减少水土流失），范围从1到5，数字越大代表效果越好。 | | CAPEX | 浮点型 | 每平方千米的初始实施成本 | | OPEX | 浮点型 | 每平方千米的年度维护成本 | | INCOME | 浮点型 | 每平方千米的年度收益 |</p>
+<p >游屋圳小流域准备的一个一般面积结构性管理操作文件O<code>SEIMS\data\youwuzhen\data_prepare\scenario\areal_struct_management.csv</code> 的示例如下： </p><div class="fragment"><div class="line">SUBSCENARIO,NAME,DESC,REFERENCE,LANDUSE,SLPPOS,PARAMETERS,EFFECTIVENESS,CAPEX,OPEX,INCOME</div>
+<div class="line">1,fengjin, CM (closing measures),Qin et al (2018),8-6,1-4,OM:Organic matter:RC:1.22-Density:bulk density:RC:0.98-Porosity:Total porosity:RC:1.02-USLE_K:USLE soil erodibility:RC:1.01-Conductivity:Soil hydraulic conductivity:RC:0.81-FieldCap:Soil field capacity:RC:1.02-Wiltingpoint:Wiltingpoint:RC:1.02-SOL_AWC:Soil available water:RC:1.02-SOL_UL:Soil saturated water:RC:1.02-SOL_CBN:Soil carbon content:RC:1.22-USLE_P:USLE practice factor:RC:0.9,3,15.5,1.5,2.0</div>
+</div><!-- fragment --><p> 可以解析为类似字典的Python数据结构： </p><div class="fragment"><div class="line">demo_dict = {&#39;NAME&#39;: &#39;fengjin&#39;,</div>
+<div class="line">            &#39;DESC&#39;: &#39;CM (closing measures)&#39;,</div>
+<div class="line">            &#39;REFERENCE&#39;: &#39;Qin et al (2018)&#39;,</div>
+<div class="line">            &#39;LANDUSE&#39;: [8, 6],</div>
+<div class="line">            &#39;SLPPOS&#39;: [1, 4],</div>
+<div class="line">            &#39;PARAMETERS&#39;: [</div>
+<div class="line">                            {&#39;NAME&#39;: &#39;OM&#39;,</div>
+<div class="line">                            &#39;DESC&#39;: &#39;ORGANIC MATTER&#39;,</div>
+<div class="line">                            &#39;CHANGE&#39;: &#39;RC&#39;,</div>
+<div class="line">                            &#39;IMPACT&#39;: 1.22</div>
+<div class="line">                            },</div>
+<div class="line">                            {&#39;NAME&#39;: &#39;DENSITY&#39;,</div>
+<div class="line">                            &#39;DESC&#39;: &#39;BULK DENSITY&#39;,</div>
+<div class="line">                            &#39;CHANGE&#39;: &#39;RC&#39;,</div>
+<div class="line">                            &#39;IMPACT&#39;: 0.98</div>
+<div class="line">                            }</div>
+<div class="line">                            ],</div>
+<div class="line">            &#39;EFFECTIVENESS&#39;: 3,</div>
+<div class="line">            &#39;CAPEX&#39;: 15.5,</div>
+<div class="line">            &#39;OPEX&#39;: 1.5,</div>
+<div class="line">            &#39;INCOME&#39;: 2,</div>
+<div class="line">            }</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md24"></a>
+更多介绍...</h1>
+<p >Predefined database: <a class="el" href="intro_predefined_database.html">Predefined database</a> </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+  </ul>
+</div>
+</body>
+</html>

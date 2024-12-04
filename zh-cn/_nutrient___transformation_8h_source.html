@@ -1,0 +1,408 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: seims/src/seims_main/modules/nutrient/NUTR_TF/Nutrient_Transformation.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_nutrient___transformation_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Nutrient_Transformation.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_nutrient___transformation_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * \file Nutrient_Transformation.h</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * \brief Daily nitrogen and phosphorus mineralization and immobilization.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *        From nminrl.f, nitvol.f, pminrl.f, and pminrl2.f of SWAT</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * Changelog:</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *   - 1. 2016-04-30 - hr - Initial implementation.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> *   - 2. 2016-07-24 - lj -</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *        -# Change m_wshd_dnit etc. variables to store the statistics values of the current day.</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> *        -# m_hmntl etc. variables should be DT_Raster1D rather than DT_Single since they are soil profile values in cell!</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> *   - 3. 2018-05-08 - lj - Reformat, especially naming style (sync update in &quot;text.h&quot;).</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> *                          Code optimization, e.g., use multiply instead of divide.</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> *   - 4. 2022-08-22 - lj - Change float to FLTPT.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * \author Huiran Gao, Liangjun Zhu</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * \defgroup NUTR_TF</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * \ingroup Nutrient</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * \brief Daily nitrogen and phosphorus mineralization and immobilization.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * From nminrl.f, nitvol.f, pminrl.f, and pminrl2.f of SWAT</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * \author Huiran Gao</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * \date April 2016</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#ifndef SEIMS_MODULE_NUTR_TF_H</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#define SEIMS_MODULE_NUTR_TF_H</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="_simulation_module_8h.html">SimulationModule.h</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"></span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * \class Nutrient_Transformation</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> * \ingroup NUTR_TF</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> * \brief Daily nitrogen and phosphorus mineralization and immobilization.</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> *  Considering fresh organic material (plant residue) and active and stable humus material.</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="group___n_u_t_r___t_f.html">   39</a></span><span class="keyword">class </span><a class="code hl_class" href="group___n_u_t_r___t_f.html#class_nutrient___transformation">Nutrient_Transformation</a>: <span class="keyword">public</span> <a class="code hl_class" href="group__module__setting.html#class_simulation_module">SimulationModule</a> {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_class" href="group___n_u_t_r___t_f.html#class_nutrient___transformation">Nutrient_Transformation</a>();</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_class" href="group___n_u_t_r___t_f.html#class_nutrient___transformation">~Nutrient_Transformation</a>();</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="group___n_u_t_r___t_f.html#adb2d4f5a30c3d5106e0ac914e88d4e34">   45</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group___n_u_t_r___t_f.html#adb2d4f5a30c3d5106e0ac914e88d4e34">SetValue</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* key, FLTPT value) <a class="code hl_define" href="basic_8h.html#a5dea698950629d9e51d19c1a25be1c30">OVERRIDE</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="group___n_u_t_r___t_f.html#a7d8e73a5a4f7d66236a8bb286a9a1ee4">   47</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group___n_u_t_r___t_f.html#a7d8e73a5a4f7d66236a8bb286a9a1ee4">SetValue</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* key, <span class="keywordtype">int</span> value) <a class="code hl_define" href="basic_8h.html#a5dea698950629d9e51d19c1a25be1c30">OVERRIDE</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="group___n_u_t_r___t_f.html#a574077d5fb8e16355a7efdb8ae2a2a85">   49</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group___n_u_t_r___t_f.html#a574077d5fb8e16355a7efdb8ae2a2a85">Set1DData</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* key, <span class="keywordtype">int</span> n, FLTPT* data) <a class="code hl_define" href="basic_8h.html#a5dea698950629d9e51d19c1a25be1c30">OVERRIDE</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="group___n_u_t_r___t_f.html#af385ea22f74f107a240bc666021f6a27">   51</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group___n_u_t_r___t_f.html#af385ea22f74f107a240bc666021f6a27">Set1DData</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* key, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span>* data) <a class="code hl_define" href="basic_8h.html#a5dea698950629d9e51d19c1a25be1c30">OVERRIDE</a>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="group___n_u_t_r___t_f.html#a62c2dcba247f68c3e597cb201a28684c">   53</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group___n_u_t_r___t_f.html#a62c2dcba247f68c3e597cb201a28684c">Set2DData</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* key, <span class="keywordtype">int</span> nRows, <span class="keywordtype">int</span> nCols, FLTPT** data) <a class="code hl_define" href="basic_8h.html#a5dea698950629d9e51d19c1a25be1c30">OVERRIDE</a>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___n_u_t_r___t_f.html#a2cb7d4fc88ea4a398600bb13ea83cc72">   55</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="group___n_u_t_r___t_f.html#a2cb7d4fc88ea4a398600bb13ea83cc72">CheckInputData</a>() <a class="code hl_define" href="basic_8h.html#a5dea698950629d9e51d19c1a25be1c30">OVERRIDE</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="group___n_u_t_r___t_f.html#a1991d7357357915b55b1bb5c46bf191e">   57</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group___n_u_t_r___t_f.html#a1991d7357357915b55b1bb5c46bf191e">InitialOutputs</a>() <a class="code hl_define" href="basic_8h.html#a5dea698950629d9e51d19c1a25be1c30">OVERRIDE</a>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="group___n_u_t_r___t_f.html#a50b6c890a8f2bded9c26231aa10df2e3">   59</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="group___n_u_t_r___t_f.html#a50b6c890a8f2bded9c26231aa10df2e3">Execute</a>() <a class="code hl_define" href="basic_8h.html#a5dea698950629d9e51d19c1a25be1c30">OVERRIDE</a>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="group___n_u_t_r___t_f.html#a22acd3bb0fd9a9956e20978051fdd9c5">   61</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group___n_u_t_r___t_f.html#a22acd3bb0fd9a9956e20978051fdd9c5">GetValue</a>(const <span class="keywordtype">char</span>* key, FLTPT* value) <a class="code hl_define" href="basic_8h.html#a5dea698950629d9e51d19c1a25be1c30">OVERRIDE</a>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="group___n_u_t_r___t_f.html#a905bf37cbb8e238d546e2ed99832eed3">   63</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group___n_u_t_r___t_f.html#a905bf37cbb8e238d546e2ed99832eed3">Get1DData</a>(const <span class="keywordtype">char</span>* key, <span class="keywordtype">int</span>* n, FLTPT** data) <a class="code hl_define" href="basic_8h.html#a5dea698950629d9e51d19c1a25be1c30">OVERRIDE</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="group___n_u_t_r___t_f.html#a0d4e9f6cdce3c6bf53f872b878195026">   65</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group___n_u_t_r___t_f.html#a0d4e9f6cdce3c6bf53f872b878195026">Get2DData</a>(const <span class="keywordtype">char</span>* key, <span class="keywordtype">int</span>* nrows, <span class="keywordtype">int</span>* ncols, FLTPT*** data) <a class="code hl_define" href="basic_8h.html#a5dea698950629d9e51d19c1a25be1c30">OVERRIDE</a>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>private:<span class="comment"></span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">    /*!</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">    * \brief estimates daily nitrogen and phosphorus mineralization and immobilization.</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">    *        considering fresh organic material (plant residue) and active and stable humus material</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">    *        Execute when CSWAT = 0, rewrite from nminrl.f of SWAT</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">    * \return void</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">void</span> MineralizationStaticCarbonMethod(<span class="keywordtype">int</span> i);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"></span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">    /*!</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">    * \brief simulates organic C, N, and P cycling in soil using C-FARM one carbon model</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">    *        Execute when CSWAT = 1, rewrite from carbon_new.f and ndenit.f of SWAT</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">    * \TODO THIS IS ON THE TODO LIST.</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">    * \return void</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">void</span> MineralizationCfarmOneCarbonModel(<span class="keywordtype">int</span> i);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment"></span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">    /*!</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">    * \brief simulates organic C, N, and P cycling in soil using CENTURY model</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">    *        Execute when CSWAT = 2, rewrite from carbon_zhang.f90 and ndenit.f of SWAT</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">void</span> MineralizationCenturyModel(<span class="keywordtype">int</span> i);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment"></span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">    /*!</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">    * \brief estimates daily mineralization (NH3 to NO3) and volatilization of NH3.</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">    *        rewrite from nitvol.f of SWAT</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">    * \return void</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">void</span> Volatilization(<span class="keywordtype">int</span> i);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"></span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">    /*!</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">    * \brief Calculate P flux between the labile, active mineral and stable mineral p pools.</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">    *        rewrite from pminrl, and pminrl2 according to solP_model</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">    * \TODO In current version, the solP_model is set to 0, i.e., pminrl2 is used as default</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">    * \return void</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordtype">void</span> CalculatePflux(<span class="keywordtype">int</span> i);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>private:<span class="comment"></span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">    /// cell width of grid map (m)</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"></span>    FLTPT m_cellWth;<span class="comment"></span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">    /// number of cells</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"></span>    <span class="keywordtype">int</span> m_nCells;<span class="comment"></span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">    /// fraction of each cell of the watershed</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment"></span>    FLTPT m_cellAreaFr;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment"></span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">    /// soil layers</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment"></span>    <span class="keywordtype">int</span>* m_nSoilLyrs;<span class="comment"></span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">    /// maximum soil layers</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment"></span>    <span class="keywordtype">int</span> m_maxSoilLyrs;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="comment">/* carbon modeling method</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">     *   = 0 Static soil carbon (old mineralization routines)</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">     *   = 1 C-FARM one carbon pool model</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">     *   = 2 Century model</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordtype">int</span> m_cbnModel;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="comment">/* phosphorus model selection</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">     * 0: dynamic coefficient method by White et al., 2009</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">     * 1: original method</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordtype">int</span> m_solP_model;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment"></span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">    /// days since P application</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment"></span>    FLTPT* m_phpApldDays;<span class="comment"></span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">    /// days since P deficit</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment"></span>    FLTPT* m_phpDefDays;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment"></span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">    /// tillage factor on SOM decomposition, used by CENTURY model</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment"></span>    <span class="keywordtype">int</span>* m_tillSwitch;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    FLTPT* m_tillDepth;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    FLTPT* m_tillDays;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    FLTPT* m_tillFactor;<span class="comment"></span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">    ///input data</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment"></span><span class="comment"></span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">    /// Rate coefficient for mineralization of the humus active organic nutrients, cmn in SWAT</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment"></span>    FLTPT m_minrlCoef;<span class="comment"></span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">    ///nitrogen active pool fraction. The fraction of organic nitrogen in the active pool.</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment"></span>    FLTPT m_orgNFrActN;<span class="comment"></span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">    /// denitrification threshold: fraction of field capacity, sdnco</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment"></span>    FLTPT m_denitThres;<span class="comment"></span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment">    /// Phosphorus availability index. The fraction of fertilizer P remaining in labile pool after initial rapid phase of P sorption, psp</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">    /// Note, In swat source code, psp is availability index, but in basin.bsn, psp is sorption index.</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment">    ///       The variable name indicates that sorption index is more precise. ---lj.</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment"></span>    FLTPT m_phpSorpIdxBsn;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    FLTPT* m_phpSorpIdx;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    FLTPT** m_psp_store; <span class="comment">// TODO, these variables should be figure out. lj</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    FLTPT** m_ssp_store;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="comment">//rate coefficient for denitrification, cdn in SWAT</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    FLTPT m_denitCoef;<span class="comment"></span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment">    ///land cover code from crop.dat</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment"></span>    <span class="keywordtype">int</span>* m_landCover;<span class="comment"></span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">    ///plant residue decomposition coefficient.</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment">    ///  The fraction of residue which will decompose in a day assuming optimal moisture,</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment">    ///  temperature, C:N ratio, and C:P ratio</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment"></span>    FLTPT* m_pltRsdDecCoef;<span class="comment"></span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment">    ///amount of residue on soil surface (kg/ha)</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment"></span>    FLTPT* m_rsdCovSoil;<span class="comment"></span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">    /// initial amount of organic matter in the soil classified as residue(kg/ha)</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment"></span>    FLTPT* m_rsdInitSoil;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment"></span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="comment">    /// daily average temperature of soil layer(deg C)</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment"></span>    FLTPT* m_soilTemp;<span class="comment"></span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">    /// bulk density of the soil (Mg/m3)</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment"></span>    FLTPT** m_soilBD;<span class="comment"></span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">    /// Soil mass (kg/ha)</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment"></span>    FLTPT** m_soilMass;<span class="comment"></span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">    /// percent organic carbon in soil layer (%), replace organic matter (%)</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment"></span>    FLTPT** m_soilCbn;<span class="comment"></span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment">    ///amount of water stored in the soil layer on current day(mm H2O)</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment"></span>    FLTPT** m_soilWtrSto;<span class="comment"></span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment">    ///Water content of soil profile at field capacity(mm H2O) (FC-WP)</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment"></span>    FLTPT** m_soilFC;<span class="comment"></span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment">    ///depth to bottom of soil layer</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment"></span>    FLTPT** m_soilDepth;<span class="comment"></span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment">    ///Percent of clay content</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment"></span>    FLTPT** m_soilClay;<span class="comment"></span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment">    /// percent of rock content</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment"></span>    FLTPT** m_soilRock;<span class="comment"></span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment">    /// thick of each soil layer</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment"></span>    FLTPT** m_soilThk;<span class="comment"></span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment">    ///amount of nitrogen stored in the active organic (humic) nitrogen pool(kg N/ha)</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment"></span>    FLTPT** m_soilActvOrgN;<span class="comment"></span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment">    ///amount of nitrogen stored in the fresh organic (residue) pool(kg N/ha)</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment"></span>    FLTPT** m_soilFrshOrgN;<span class="comment"></span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">    ///amount of phosphorus stored in the fresh organic (residue) pool(kg P/ha)</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment"></span>    FLTPT** m_soilFrshOrgP;<span class="comment"></span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">    ///amount of phosphorus stored in the active mineral phosphorus pool</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment"></span>    FLTPT** m_soilActvMinP;<span class="comment"></span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">    ///amount of phosphorus in the soil layer stored in the stable mineral phosphorus pool</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment"></span>    FLTPT** m_soilStabMinP;<span class="comment"></span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">    /// amount of water held in the soil layer at saturation</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment"></span>    FLTPT** m_soilSat;<span class="comment"></span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">    /// porosity mm/mm</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment"></span>    FLTPT** m_soilPor;<span class="comment"></span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment">    /// percent sand content of soil material</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment"></span>    FLTPT** m_soilSand;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment"></span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">    ///output data</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment"></span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment">    /************************************************************************/</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="comment">/*    CENTURY model related parameters (initialized and output)  20     */</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">    /************************************************************************/</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    FLTPT** m_sol_WOC;   <span class="comment">///&lt;</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    FLTPT** m_sol_WON;   <span class="comment">///&lt;</span></div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    FLTPT** m_sol_BM;    <span class="comment">///&lt;</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    FLTPT** m_sol_BMC;   <span class="comment">///&lt;</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    FLTPT** m_sol_BMN;   <span class="comment">///&lt;</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    FLTPT** m_sol_HP;    <span class="comment">///&lt; mass of OM in passive humus</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    FLTPT** m_sol_HS;    <span class="comment">///&lt; mass of OM in slow humus</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    FLTPT** m_sol_HSC;   <span class="comment">///&lt; mass of C present in slow humus</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    FLTPT** m_sol_HSN;   <span class="comment">///&lt; mass of N present in slow humus</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    FLTPT** m_sol_HPC;   <span class="comment">///&lt; mass of C present in passive humus</span></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    FLTPT** m_sol_HPN;   <span class="comment">///&lt; mass of N present in passive humus</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    FLTPT** m_sol_LM;    <span class="comment">///&lt; metabolic litter SOM pool</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    FLTPT** m_sol_LMC;   <span class="comment">///&lt; metabolic litter C pool</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    FLTPT** m_sol_LMN;   <span class="comment">///&lt; metabolic litter N pool</span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    FLTPT** m_sol_LSC;   <span class="comment">///&lt; structural litter C pool</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    FLTPT** m_sol_LSN;   <span class="comment">///&lt; structural litter N pool</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    FLTPT** m_sol_LS;    <span class="comment">///&lt; structural litter SOM pool</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    FLTPT** m_sol_LSL;   <span class="comment">///&lt; lignin weight in structural litter</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    FLTPT** m_sol_LSLC;  <span class="comment">///&lt; lignin amount in structural litter pool</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    FLTPT** m_sol_LSLNC; <span class="comment">///&lt; non-lignin part of the structural litter C</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    FLTPT** m_sol_RNMN;  <span class="comment">///&lt; non</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    FLTPT** m_sol_RSPC;  <span class="comment">///&lt; non</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">    /************************************************************************/</span><span class="comment"></span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment">    ///amount of nitrogen moving from active organic to nitrate pool in soil profile on current day in cell(kg N/ha)</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment"></span>    FLTPT* m_hmntl;<span class="comment"></span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment">    ///amount of phosphorus moving from the organic to labile pool in soil profile on current day in cell(kg P/ha)</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment"></span>    FLTPT* m_hmptl;<span class="comment"></span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="comment">    ///amount of nitrogen moving from the fresh organic (residue) to the nitrate(80%) and active organic(20%) pools in soil profile on current day in cell(kg N/ha)</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="comment"></span>    FLTPT* m_rmn2tl;<span class="comment"></span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment">    ///amount of phosphorus moving from the fresh organic (residue) to the labile(80%) and organic(20%) pools in soil profile on current day in cell(kg P/ha)</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="comment"></span>    FLTPT* m_rmptl;<span class="comment"></span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="comment">    ///amount of nitrogen moving from active organic to stable organic pool in soil profile on current day in cell(kg N/ha)</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="comment"></span>    FLTPT* m_rwntl;<span class="comment"></span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="comment">    ///amount of nitrogen lost from nitrate pool by denitrification in soil profile on current day in cell(kg N/ha)</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="comment"></span>    FLTPT* m_wdntl;<span class="comment"></span></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="comment">    ///amount of phosphorus moving from the labile mineral pool to the active mineral pool in the soil profile on the current day in cell(kg P/ha)</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="comment"></span>    FLTPT* m_rmp1tl;<span class="comment"></span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="comment">    ///amount of phosphorus moving from the active mineral pool to the stable mineral pool in the soil profile on the current day in cell(kg P/ha)</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="comment"></span>    FLTPT* m_roctl;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="comment"></span> </div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="comment">    ///input &amp; output data</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="comment">    ///amount of nitrogen stored in the nitrate pool in soil layer(kg N/ha)</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="comment"></span>    FLTPT** m_soilNO3;<span class="comment"></span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span><span class="comment">    ///amount of nitrogen stored in the stable organic N pool(kg N/ha)</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="comment"></span>    FLTPT** m_soilStabOrgN;<span class="comment"></span></div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="comment">    ///amount of phosphorus stored in the organic P pool in soil layer(kg P/ha)</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span><span class="comment"></span>    FLTPT** m_soilHumOrgP;<span class="comment"></span></div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="comment">    ///amount of organic matter in the soil classified as residue(kg/ha)</span></div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><span class="comment"></span>    FLTPT** m_soilRsd;<span class="comment"></span></div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="comment">    ///amount of phosphorus stored in solution(kg P/ha)</span></div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="comment"></span>    FLTPT** m_soilSolP;<span class="comment"></span></div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="comment">    ///amount of nitrogen stored in the ammonium pool in soil layer(kg/ha)</span></div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment"></span>    FLTPT** m_soilNH4;<span class="comment"></span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment">    ///water content of soil at -1.5 MPa (wilting point)</span></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="comment"></span>    FLTPT** m_soilWP;<span class="comment"></span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="comment">    ///nitrogen lost from nitrate pool due to denitrification in watershed(kg N/ha)</span></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="comment"></span>    FLTPT m_wshd_dnit;<span class="comment"></span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="comment">    ///nitrogen moving from active organic to nitrate pool in watershed(kg N/ha)</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="comment"></span>    FLTPT m_wshd_hmn;<span class="comment"></span></div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="comment">    ///phosphorus moving from organic to labile pool in watershed(kg P/ha)</span></div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span><span class="comment"></span>    FLTPT m_wshd_hmp;<span class="comment"></span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="comment">    ///nitrogen moving from fresh organic (residue) to nitrate and active organic pools in watershed(kg N/ha)</span></div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="comment"></span>    FLTPT m_wshd_rmn;<span class="comment"></span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="comment">    ///phosphorus moving from fresh organic (residue) to labile and organic pools in watershed(kg P/ha)</span></div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="comment"></span>    FLTPT m_wshd_rmp;<span class="comment"></span></div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="comment">    ///nitrogen moving from active organic to stable organic pool in watershed(kg N/ha)</span></div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span><span class="comment"></span>    FLTPT m_wshd_rwn;<span class="comment"></span></div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="comment">    ///nitrogen moving from active organic to stable organic pool in watershed(kg N/ha)</span></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="comment"></span>    FLTPT m_wshd_nitn;<span class="comment"></span></div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><span class="comment">    ///nitrogen moving from active organic to stable organic pool in watershed(kg N/ha)</span></div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span><span class="comment"></span>    FLTPT m_wshd_voln;<span class="comment"></span></div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span><span class="comment">    ///phosphorus moving from labile mineral to active mineral pool in watershed</span></div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span><span class="comment"></span>    FLTPT m_wshd_pal;<span class="comment"></span></div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span><span class="comment">    ///phosphorus moving from active mineral to stable mineral pool in watershed</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="comment"></span>    FLTPT m_wshd_pas;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="comment"></span> </div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="comment">    /// factor which converts kg/kg soil to kg/ha, could be used in other nutrient modules</span></div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span><span class="comment"></span>    FLTPT** m_conv_wt;<span class="comment"></span></div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span><span class="comment">    /// reverse of m_conv_wt, aimed to avoid divide, i.e., 1/m_conv_wt[i][j]</span></div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span><span class="comment"></span>    FLTPT** m_conv_wt_reverse;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>};</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="preprocessor">#endif </span><span class="comment">/* SEIMS_MODULE_NUTR_TF_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="a_simulation_module_8h_html"><div class="ttname"><a href="_simulation_module_8h.html">SimulationModule.h</a></div><div class="ttdoc">Parent class for all modules in SEIMS</div></div>
+<div class="ttc" id="abasic_8h_html_a5dea698950629d9e51d19c1a25be1c30"><div class="ttname"><a href="basic_8h.html#a5dea698950629d9e51d19c1a25be1c30">OVERRIDE</a></div><div class="ttdeci">#define OVERRIDE</div><div class="ttdoc">A compatible reference to override or blank if not supported by the compiler.</div><div class="ttdef"><b>Definition:</b> basic.h:160</div></div>
+<div class="ttc" id="agroup___n_u_t_r___t_f_html_a0d4e9f6cdce3c6bf53f872b878195026"><div class="ttname"><a href="group___n_u_t_r___t_f.html#a0d4e9f6cdce3c6bf53f872b878195026">Nutrient_Transformation::Get2DData</a></div><div class="ttdeci">void Get2DData(const char *key, int *nrows, int *ncols, FLTPT ***data) OVERRIDE</div><div class="ttdoc">Get 2D data, by default, DT_Raster2D, float</div></div>
+<div class="ttc" id="agroup___n_u_t_r___t_f_html_a1991d7357357915b55b1bb5c46bf191e"><div class="ttname"><a href="group___n_u_t_r___t_f.html#a1991d7357357915b55b1bb5c46bf191e">Nutrient_Transformation::InitialOutputs</a></div><div class="ttdeci">void InitialOutputs() OVERRIDE</div><div class="ttdoc">Initialize output variables.</div></div>
+<div class="ttc" id="agroup___n_u_t_r___t_f_html_a22acd3bb0fd9a9956e20978051fdd9c5"><div class="ttname"><a href="group___n_u_t_r___t_f.html#a22acd3bb0fd9a9956e20978051fdd9c5">Nutrient_Transformation::GetValue</a></div><div class="ttdeci">void GetValue(const char *key, FLTPT *value) OVERRIDE</div><div class="ttdoc">Get value, DT_Single, float</div></div>
+<div class="ttc" id="agroup___n_u_t_r___t_f_html_a2cb7d4fc88ea4a398600bb13ea83cc72"><div class="ttname"><a href="group___n_u_t_r___t_f.html#a2cb7d4fc88ea4a398600bb13ea83cc72">Nutrient_Transformation::CheckInputData</a></div><div class="ttdeci">bool CheckInputData() OVERRIDE</div><div class="ttdoc">Check the input data.</div></div>
+<div class="ttc" id="agroup___n_u_t_r___t_f_html_a50b6c890a8f2bded9c26231aa10df2e3"><div class="ttname"><a href="group___n_u_t_r___t_f.html#a50b6c890a8f2bded9c26231aa10df2e3">Nutrient_Transformation::Execute</a></div><div class="ttdeci">int Execute() OVERRIDE</div><div class="ttdoc">Execute the simulation. Return 0 for success.</div></div>
+<div class="ttc" id="agroup___n_u_t_r___t_f_html_a574077d5fb8e16355a7efdb8ae2a2a85"><div class="ttname"><a href="group___n_u_t_r___t_f.html#a574077d5fb8e16355a7efdb8ae2a2a85">Nutrient_Transformation::Set1DData</a></div><div class="ttdeci">void Set1DData(const char *key, int n, FLTPT *data) OVERRIDE</div><div class="ttdoc">Set 1D data, by default, DT_Raster1D, float</div></div>
+<div class="ttc" id="agroup___n_u_t_r___t_f_html_a62c2dcba247f68c3e597cb201a28684c"><div class="ttname"><a href="group___n_u_t_r___t_f.html#a62c2dcba247f68c3e597cb201a28684c">Nutrient_Transformation::Set2DData</a></div><div class="ttdeci">void Set2DData(const char *key, int nRows, int nCols, FLTPT **data) OVERRIDE</div><div class="ttdoc">Set 2D data, by default, DT_Raster2D, float</div></div>
+<div class="ttc" id="agroup___n_u_t_r___t_f_html_a7d8e73a5a4f7d66236a8bb286a9a1ee4"><div class="ttname"><a href="group___n_u_t_r___t_f.html#a7d8e73a5a4f7d66236a8bb286a9a1ee4">Nutrient_Transformation::SetValue</a></div><div class="ttdeci">void SetValue(const char *key, int value) OVERRIDE</div><div class="ttdoc">Set data, DT_Single, integer</div></div>
+<div class="ttc" id="agroup___n_u_t_r___t_f_html_a905bf37cbb8e238d546e2ed99832eed3"><div class="ttname"><a href="group___n_u_t_r___t_f.html#a905bf37cbb8e238d546e2ed99832eed3">Nutrient_Transformation::Get1DData</a></div><div class="ttdeci">void Get1DData(const char *key, int *n, FLTPT **data) OVERRIDE</div><div class="ttdoc">Get 1D data, by default, DT_Raster1D, float</div></div>
+<div class="ttc" id="agroup___n_u_t_r___t_f_html_adb2d4f5a30c3d5106e0ac914e88d4e34"><div class="ttname"><a href="group___n_u_t_r___t_f.html#adb2d4f5a30c3d5106e0ac914e88d4e34">Nutrient_Transformation::SetValue</a></div><div class="ttdeci">void SetValue(const char *key, FLTPT value) OVERRIDE</div><div class="ttdoc">Set data, DT_Single, float point number (float or double)</div></div>
+<div class="ttc" id="agroup___n_u_t_r___t_f_html_af385ea22f74f107a240bc666021f6a27"><div class="ttname"><a href="group___n_u_t_r___t_f.html#af385ea22f74f107a240bc666021f6a27">Nutrient_Transformation::Set1DData</a></div><div class="ttdeci">void Set1DData(const char *key, int n, int *data) OVERRIDE</div><div class="ttdoc">Set 1D data, by default, DT_Raster1D, integer</div></div>
+<div class="ttc" id="agroup___n_u_t_r___t_f_html_class_nutrient___transformation"><div class="ttname"><a href="group___n_u_t_r___t_f.html#class_nutrient___transformation">Nutrient_Transformation</a></div><div class="ttdoc">Daily nitrogen and phosphorus mineralization and immobilization.</div><div class="ttdef"><b>Definition:</b> Nutrient_Transformation.h:39</div></div>
+<div class="ttc" id="agroup__module__setting_html_class_simulation_module"><div class="ttname"><a href="group__module__setting.html#class_simulation_module">SimulationModule</a></div><div class="ttdoc">Base module for all simulation modules in SEIMS</div><div class="ttdef"><b>Definition:</b> SimulationModule.h:46</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_ce650b3ee6c8ee1902ad5d9b217fa743.html">seims</a></li><li class="navelem"><a class="el" href="dir_f9d338a7544abb673b2d39dcadbe364c.html">src</a></li><li class="navelem"><a class="el" href="dir_64f8a13685b9f2f1d5623a66b281a23c.html">seims_main</a></li><li class="navelem"><a class="el" href="dir_b89a50a3d6b2f98326f9f3f569cfd788.html">modules</a></li><li class="navelem"><a class="el" href="dir_3996e886b1e07c3846ebc60dfa15d754.html">nutrient</a></li><li class="navelem"><a class="el" href="dir_265a48941dbe4942b2a3d43dc67f8d8c.html">NUTR_TF</a></li><li class="navelem"><a class="el" href="_nutrient___transformation_8h.html">Nutrient_Transformation.h</a></li>
+  </ul>
+</div>
+</body>
+</html>

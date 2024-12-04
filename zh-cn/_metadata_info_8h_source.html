@@ -1,0 +1,482 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: seims/src/seims_main/base/module_setting/MetadataInfo.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_metadata_info_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">MetadataInfo.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_metadata_info_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * \file MetadataInfo.h</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * \brief Define MetadataInfo class used by modules</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * Changelog:</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *   - 1. 2018-3-16 - lj - Simplify code, and add In/Output parameters related for MPI version.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> * \author Junzhi Liu, Liangjun Zhu</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> * \version 1.1</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#ifndef SEIMS_METADATA_INFO_H</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define SEIMS_METADATA_INFO_H</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="basic_8h.html">basic.h</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="_metadata_info_const_8h.html">MetadataInfoConst.h</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceccgl.html">ccgl</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">using</span> std::vector;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * \ingroup module_setting</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * \struct ModelClass</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * \brief Module basic description</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="group__module__setting.html">   27</a></span><span class="keyword">struct </span><a class="code hl_struct" href="group__module__setting.html#struct_model_class">ModelClass</a> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_struct" href="group__module__setting.html#struct_model_class">ModelClass</a>(): Name(<span class="stringliteral">&quot;&quot;</span>), Description(<span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">string</span> Name;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">string</span> Description;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"></span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> * \ingroup module_setting</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> * \struct Information</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> * \brief Module development information class</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="group__module__setting.html">   41</a></span><span class="keyword">struct </span><a class="code hl_struct" href="group__module__setting.html#struct_information">Information</a> {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_struct" href="group__module__setting.html#struct_information">Information</a>() : <a class="code hl_variable" href="group__module__setting.html#a648bb8c9d3e9459afe4f131fa389352a">Id</a>(<span class="stringliteral">&quot;&quot;</span>), <a class="code hl_variable" href="group__module__setting.html#aa411bbe0edd95d200b59c0b7606173d3">Name</a>(<span class="stringliteral">&quot;&quot;</span>), <a class="code hl_variable" href="group__module__setting.html#a9f0b0e91a740ff0e1f3d0b48b069983a">Description</a>(<span class="stringliteral">&quot;&quot;</span>), <a class="code hl_variable" href="group__module__setting.html#a0fea44ad14e758340799fe8ce77b8330">Version</a>(<span class="stringliteral">&quot;&quot;</span>), <a class="code hl_variable" href="group__module__setting.html#a1b8fa5ae955f80cbd549cd3186788d3f">Author</a>(<span class="stringliteral">&quot;&quot;</span>),</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                    <a class="code hl_variable" href="group__module__setting.html#a0ea3ec0a518e6f2a6afcfe5a47e6a092">EMail</a>(<span class="stringliteral">&quot;&quot;</span>), <a class="code hl_variable" href="group__module__setting.html#af713e5818c8dff3d1c81c2dbd711e4c4">Website</a>(<span class="stringliteral">&quot;&quot;</span>), <a class="code hl_variable" href="group__module__setting.html#a8e1e2fee4394c6306a3fd80387281d94">Helpfile</a>(<span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="group__module__setting.html#a648bb8c9d3e9459afe4f131fa389352a">   46</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a648bb8c9d3e9459afe4f131fa389352a">Id</a>;          <span class="comment">///&lt; Module ID</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="group__module__setting.html#aa411bbe0edd95d200b59c0b7606173d3">   47</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#aa411bbe0edd95d200b59c0b7606173d3">Name</a>;        <span class="comment">///&lt; Module Name</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="group__module__setting.html#a9f0b0e91a740ff0e1f3d0b48b069983a">   48</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a9f0b0e91a740ff0e1f3d0b48b069983a">Description</a>; <span class="comment">///&lt; Module Description</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="group__module__setting.html#a0fea44ad14e758340799fe8ce77b8330">   49</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a0fea44ad14e758340799fe8ce77b8330">Version</a>;     <span class="comment">///&lt; Module Version</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="group__module__setting.html#a1b8fa5ae955f80cbd549cd3186788d3f">   50</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a1b8fa5ae955f80cbd549cd3186788d3f">Author</a>;      <span class="comment">///&lt; Author</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="group__module__setting.html#a0ea3ec0a518e6f2a6afcfe5a47e6a092">   51</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a0ea3ec0a518e6f2a6afcfe5a47e6a092">EMail</a>;       <span class="comment">///&lt; Email</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="group__module__setting.html#af713e5818c8dff3d1c81c2dbd711e4c4">   52</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#af713e5818c8dff3d1c81c2dbd711e4c4">Website</a>;     <span class="comment">///&lt; Website</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="group__module__setting.html#a8e1e2fee4394c6306a3fd80387281d94">   53</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a8e1e2fee4394c6306a3fd80387281d94">Helpfile</a>;    <span class="comment">///&lt; Helpfile</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>};</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"></span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"> * \ingroup module_setting</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"> * \struct baseParameter</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"> * \brief Basic model parameter information</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="group__module__setting.html">   62</a></span><span class="keyword">struct </span><a class="code hl_struct" href="group__module__setting.html#structbase_parameter">baseParameter</a> {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <a class="code hl_struct" href="group__module__setting.html#structbase_parameter">baseParameter</a>() : <a class="code hl_variable" href="group__module__setting.html#adbe1b85de6038485f9bcbdc1ee99dab1">Name</a>(<span class="stringliteral">&quot;&quot;</span>), <a class="code hl_variable" href="group__module__setting.html#a5d7787b19474e3fe73db9cc7218808ea">Units</a>(<span class="stringliteral">&quot;&quot;</span>), <a class="code hl_variable" href="group__module__setting.html#a72591cce053c48d45507d23ed1187276">Description</a>(<span class="stringliteral">&quot;&quot;</span>), <a class="code hl_variable" href="group__module__setting.html#ade2494970a4d547247921bd92186ff8d">Dimension</a>(<a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca805fbcbe894d2d1acacc96a6ffd82c2a">DT_Unknown</a>) {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group__module__setting.html#adbe1b85de6038485f9bcbdc1ee99dab1">   66</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#adbe1b85de6038485f9bcbdc1ee99dab1">Name</a>;              <span class="comment">///&lt; Name</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="group__module__setting.html#a5d7787b19474e3fe73db9cc7218808ea">   67</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a5d7787b19474e3fe73db9cc7218808ea">Units</a>;             <span class="comment">///&lt; Units</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group__module__setting.html#a72591cce053c48d45507d23ed1187276">   68</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a72591cce053c48d45507d23ed1187276">Description</a>;       <span class="comment">///&lt; Description</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="group__module__setting.html#ade2494970a4d547247921bd92186ff8d">   69</a></span>    <a class="code hl_enumeration" href="group__module__setting.html#gac6cf78ef837450cfb19495fe34976b8c">dimensionTypes</a> <a class="code hl_variable" href="group__module__setting.html#ade2494970a4d547247921bd92186ff8d">Dimension</a>; <span class="comment">///&lt; Data dimension type</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>};</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"></span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"> * \ingroup module_setting</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"> * \struct Parameter</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"> * \brief Model parameter information class</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="group__module__setting.html">   78</a></span><span class="keyword">struct </span><a class="code hl_struct" href="group__module__setting.html#struct_parameter">Parameter</a>: <a class="code hl_struct" href="group__module__setting.html#structbase_parameter">baseParameter</a> {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_struct" href="group__module__setting.html#struct_parameter">Parameter</a>() : <a class="code hl_variable" href="group__module__setting.html#a96b1cb9b1ecc5c1fea4bf390554748ea">Source</a>(<span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="group__module__setting.html#a96b1cb9b1ecc5c1fea4bf390554748ea">   82</a></span>    <span class="keywordtype">string</span> <a class="code hl_variable" href="group__module__setting.html#a96b1cb9b1ecc5c1fea4bf390554748ea">Source</a>; <span class="comment">///&lt; Source type</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>};</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"></span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"> * \ingroup module_setting</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"> * \struct InputVariable</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment"> * \brief Input variable information class</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="group__module__setting.html">   91</a></span><span class="keyword">struct </span><a class="code hl_struct" href="group__module__setting.html#struct_input_variable">InputVariable</a>: <a class="code hl_struct" href="group__module__setting.html#struct_parameter">Parameter</a> {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <a class="code hl_struct" href="group__module__setting.html#struct_input_variable">InputVariable</a>() : tfType(<a class="code hl_enumvalue" href="_metadata_info_const_8h.html#ga44c7aa1266bcfcaebbafc0ffc48fc952a44688a13255da9bff4b8bbe6b013f166">TF_None</a>) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <a class="code hl_enumeration" href="group__module__setting.html#ga44c7aa1266bcfcaebbafc0ffc48fc952">transferTypes</a> tfType;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>};</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment"></span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"> * \ingroup module_setting</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment"> * \struct OutputVariable</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment"> * \brief Output variable information class</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="group__module__setting.html">  103</a></span><span class="keyword">struct </span><a class="code hl_struct" href="group__module__setting.html#struct_output_variable">OutputVariable</a>: <a class="code hl_struct" href="group__module__setting.html#structbase_parameter">baseParameter</a> {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <a class="code hl_struct" href="group__module__setting.html#struct_output_variable">OutputVariable</a>() : tfType(<a class="code hl_enumvalue" href="_metadata_info_const_8h.html#ga44c7aa1266bcfcaebbafc0ffc48fc952a44688a13255da9bff4b8bbe6b013f166">TF_None</a>) {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <a class="code hl_enumeration" href="group__module__setting.html#ga44c7aa1266bcfcaebbafc0ffc48fc952">transferTypes</a> tfType;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>};</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"></span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment"> * \ingroup module_setting</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment"> * \struct InOutputVariable</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"> * \brief Input and output variable information class</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="group__module__setting.html">  115</a></span><span class="keyword">struct </span><a class="code hl_struct" href="group__module__setting.html#struct_in_output_variable">InOutputVariable</a>: <a class="code hl_struct" href="group__module__setting.html#struct_input_variable">InputVariable</a> {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <a class="code hl_struct" href="group__module__setting.html#struct_in_output_variable">InOutputVariable</a>() {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>};</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment"></span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment"> * \ingroup module_setting</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment"> * \class MetadataInfo</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment"> * \brief Metadata information of module</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="group__module__setting.html">  125</a></span><span class="keyword">class </span><a class="code hl_class" href="group__module__setting.html#class_metadata_info">MetadataInfo</a>: <a class="code hl_class" href="classccgl_1_1_interface.html">Interface</a> {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <a class="code hl_class" href="group__module__setting.html#class_metadata_info">MetadataInfo</a>() { m_strSchemaVersion = <span class="stringliteral">&quot;0.4&quot;</span>; }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <a class="code hl_class" href="group__module__setting.html#class_metadata_info">~MetadataInfo</a>();</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordtype">string</span> SchemaVersion() { <span class="keywordflow">return</span> m_strSchemaVersion; }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordtype">void</span> SetClass(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* description);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordtype">string</span> GetClassName() { <span class="keywordflow">return</span> m_oClass.Name; }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordtype">string</span> GetClassDescription() { <span class="keywordflow">return</span> m_oClass.Description; }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordtype">void</span> SetID(<span class="keyword">const</span> <span class="keywordtype">char</span>* ID) { m_Info.<a class="code hl_variable" href="group__module__setting.html#a648bb8c9d3e9459afe4f131fa389352a">Id</a> = ID; }</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordtype">string</span> GetID() { <span class="keywordflow">return</span> m_Info.<a class="code hl_variable" href="group__module__setting.html#a648bb8c9d3e9459afe4f131fa389352a">Id</a>; }</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keywordtype">void</span> SetName(<span class="keyword">const</span> <span class="keywordtype">char</span>* name) { m_Info.<a class="code hl_variable" href="group__module__setting.html#aa411bbe0edd95d200b59c0b7606173d3">Name</a> = name; }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordtype">string</span> GetName() { <span class="keywordflow">return</span> m_Info.<a class="code hl_variable" href="group__module__setting.html#aa411bbe0edd95d200b59c0b7606173d3">Name</a>; }</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordtype">void</span> SetDescription(<span class="keyword">const</span> <span class="keywordtype">char</span>* description) { m_Info.<a class="code hl_variable" href="group__module__setting.html#a9f0b0e91a740ff0e1f3d0b48b069983a">Description</a> = description; }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keywordtype">string</span> GetDescription() { <span class="keywordflow">return</span> m_Info.<a class="code hl_variable" href="group__module__setting.html#a9f0b0e91a740ff0e1f3d0b48b069983a">Description</a>; }</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordtype">void</span> SetVersion(<span class="keyword">const</span> <span class="keywordtype">char</span>* version) { m_Info.<a class="code hl_variable" href="group__module__setting.html#a0fea44ad14e758340799fe8ce77b8330">Version</a> = version; }</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordtype">string</span> GetVersion() { <span class="keywordflow">return</span> m_Info.<a class="code hl_variable" href="group__module__setting.html#a0fea44ad14e758340799fe8ce77b8330">Version</a>; }</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordtype">void</span> SetAuthor(<span class="keyword">const</span> <span class="keywordtype">char</span>* author) { m_Info.<a class="code hl_variable" href="group__module__setting.html#a1b8fa5ae955f80cbd549cd3186788d3f">Author</a> = author; }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keywordtype">string</span> GetAuthor() { <span class="keywordflow">return</span> m_Info.<a class="code hl_variable" href="group__module__setting.html#a1b8fa5ae955f80cbd549cd3186788d3f">Author</a>; }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordtype">void</span> SetEmail(<span class="keyword">const</span> <span class="keywordtype">char</span>* email) { m_Info.<a class="code hl_variable" href="group__module__setting.html#a0ea3ec0a518e6f2a6afcfe5a47e6a092">EMail</a> = email; }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordtype">string</span> GetEmail() { <span class="keywordflow">return</span> m_Info.<a class="code hl_variable" href="group__module__setting.html#a0ea3ec0a518e6f2a6afcfe5a47e6a092">EMail</a>; }</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordtype">void</span> SetWebsite(<span class="keyword">const</span> <span class="keywordtype">char</span>* site) { m_Info.<a class="code hl_variable" href="group__module__setting.html#af713e5818c8dff3d1c81c2dbd711e4c4">Website</a> = site; }</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordtype">string</span> GetWebsite() { <span class="keywordflow">return</span> m_Info.<a class="code hl_variable" href="group__module__setting.html#af713e5818c8dff3d1c81c2dbd711e4c4">Website</a>; }</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keywordtype">void</span> SetHelpfile(<span class="keyword">const</span> <span class="keywordtype">char</span>* file) { m_Info.<a class="code hl_variable" href="group__module__setting.html#a8e1e2fee4394c6306a3fd80387281d94">Helpfile</a> = file; }</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">string</span> GetHelpfile() { <span class="keywordflow">return</span> m_Info.<a class="code hl_variable" href="group__module__setting.html#a8e1e2fee4394c6306a3fd80387281d94">Helpfile</a>; }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">    /************ INPUT PARAMETERS FROM OTHER MODULES ************/</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordtype">int</span> GetInputCount() { <span class="keywordflow">return</span> <a class="code hl_define" href="basic_8h.html#a21a0baa0c673e26c0e05ac0b3b951978">CVT_INT</a>(m_vInputs.size()); }</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keywordtype">int</span> AddInput(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* units, <span class="keyword">const</span> <span class="keywordtype">char</span>* desc, <span class="keyword">const</span> <span class="keywordtype">char</span>* source, <a class="code hl_enumeration" href="group__module__setting.html#gac6cf78ef837450cfb19495fe34976b8c">dimensionTypes</a> dimType,</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                 <a class="code hl_enumeration" href="group__module__setting.html#ga44c7aa1266bcfcaebbafc0ffc48fc952">transferTypes</a> tfType = <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#ga44c7aa1266bcfcaebbafc0ffc48fc952a44688a13255da9bff4b8bbe6b013f166">TF_None</a>);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keywordtype">string</span> GetInputName(<span class="keywordtype">int</span> index) { <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInputs.size() ? m_vInputs[index].Name : <span class="stringliteral">&quot;&quot;</span>; }</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordtype">string</span> GetInputUnits(<span class="keywordtype">int</span> index) { <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInputs.size() ? m_vInputs[index].Units : <span class="stringliteral">&quot;&quot;</span>; }</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordtype">string</span> GetInputDescription(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInputs.size() ? m_vInputs[index].Description : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    }</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordtype">string</span> GetInputSource(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInputs.size() ? m_vInputs[index].Source : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    }</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <a class="code hl_enumeration" href="group__module__setting.html#gac6cf78ef837450cfb19495fe34976b8c">dimensionTypes</a> GetInputDimension(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInputs.size() ? m_vInputs[index].Dimension : <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca805fbcbe894d2d1acacc96a6ffd82c2a">DT_Unknown</a>;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <a class="code hl_enumeration" href="group__module__setting.html#ga44c7aa1266bcfcaebbafc0ffc48fc952">transferTypes</a> GetInputTfType(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInputs.size() ? m_vInputs[index].tfType : <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#ga44c7aa1266bcfcaebbafc0ffc48fc952a44688a13255da9bff4b8bbe6b013f166">TF_None</a>;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    }</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <a class="code hl_struct" href="group__module__setting.html#struct_input_variable">InputVariable</a> GetInput(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInputs.size() ? m_vInputs[index] : <a class="code hl_struct" href="group__module__setting.html#struct_input_variable">InputVariable</a>();</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    }</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">    /************ OUTPUT PARAMETERS ************/</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keywordtype">int</span> GetOutputCount() { <span class="keywordflow">return</span> <a class="code hl_define" href="basic_8h.html#a21a0baa0c673e26c0e05ac0b3b951978">CVT_INT</a>(m_vOutputs.size()); }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keywordtype">int</span> AddOutput(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* units, <span class="keyword">const</span> <span class="keywordtype">char</span>* desc, <a class="code hl_enumeration" href="group__module__setting.html#gac6cf78ef837450cfb19495fe34976b8c">dimensionTypes</a> dimType,</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                  <a class="code hl_enumeration" href="group__module__setting.html#ga44c7aa1266bcfcaebbafc0ffc48fc952">transferTypes</a> tfType = <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#ga44c7aa1266bcfcaebbafc0ffc48fc952a44688a13255da9bff4b8bbe6b013f166">TF_None</a>);</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keywordtype">string</span> GetOutputName(<span class="keywordtype">int</span> index) { <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vOutputs.size() ? m_vOutputs[index].Name : <span class="stringliteral">&quot;&quot;</span>; }</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordtype">string</span> GetOutputUnits(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vOutputs.size() ? m_vOutputs[index].Units : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    }</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordtype">string</span> GetOutputDescription(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vOutputs.size() ? m_vOutputs[index].Description : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    }</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <a class="code hl_enumeration" href="group__module__setting.html#gac6cf78ef837450cfb19495fe34976b8c">dimensionTypes</a> GetOutputDimension(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vOutputs.size() ? m_vOutputs[index].Dimension : <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca805fbcbe894d2d1acacc96a6ffd82c2a">DT_Unknown</a>;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <a class="code hl_enumeration" href="group__module__setting.html#ga44c7aa1266bcfcaebbafc0ffc48fc952">transferTypes</a> GetOutputTfType(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vOutputs.size() ? m_vOutputs[index].tfType : <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#ga44c7aa1266bcfcaebbafc0ffc48fc952a44688a13255da9bff4b8bbe6b013f166">TF_None</a>;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    }</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <a class="code hl_struct" href="group__module__setting.html#struct_output_variable">OutputVariable</a> GetOutput(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vOutputs.size() ? m_vOutputs[index] : <a class="code hl_struct" href="group__module__setting.html#struct_output_variable">OutputVariable</a>();</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    }</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">    /************ IN/OUTPUT PARAMETERS ************/</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keywordtype">int</span> GetInOutputCount() { <span class="keywordflow">return</span> <a class="code hl_define" href="basic_8h.html#a21a0baa0c673e26c0e05ac0b3b951978">CVT_INT</a>(m_vInOutputs.size()); }</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keywordtype">int</span> AddInOutput(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* units, <span class="keyword">const</span> <span class="keywordtype">char</span>* desc, <a class="code hl_enumeration" href="group__module__setting.html#gac6cf78ef837450cfb19495fe34976b8c">dimensionTypes</a> dimType,</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>                    <a class="code hl_enumeration" href="group__module__setting.html#ga44c7aa1266bcfcaebbafc0ffc48fc952">transferTypes</a> tfType = <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#ga44c7aa1266bcfcaebbafc0ffc48fc952a44688a13255da9bff4b8bbe6b013f166">TF_None</a>);</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keywordtype">string</span> GetInOutputName(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInOutputs.size() ? m_vInOutputs[index].Name : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    }</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <span class="keywordtype">string</span> GetInOutputUnits(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInOutputs.size() ? m_vInOutputs[index].Units : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    }</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="keywordtype">string</span> GetInOutputDescription(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInOutputs.size() ? m_vInOutputs[index].Description : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    }</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <a class="code hl_enumeration" href="group__module__setting.html#gac6cf78ef837450cfb19495fe34976b8c">dimensionTypes</a> GetInOutputDimension(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInOutputs.size() ? m_vInOutputs[index].Dimension : <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca805fbcbe894d2d1acacc96a6ffd82c2a">DT_Unknown</a>;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    }</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <a class="code hl_enumeration" href="group__module__setting.html#ga44c7aa1266bcfcaebbafc0ffc48fc952">transferTypes</a> GetInOutputTfType(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInOutputs.size() ? m_vInOutputs[index].tfType : <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#ga44c7aa1266bcfcaebbafc0ffc48fc952a44688a13255da9bff4b8bbe6b013f166">TF_None</a>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    }</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <a class="code hl_struct" href="group__module__setting.html#struct_in_output_variable">InOutputVariable</a> GetInOutput(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vInOutputs.size() ? m_vInOutputs[index] : <a class="code hl_struct" href="group__module__setting.html#struct_in_output_variable">InOutputVariable</a>();</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    }</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment">    /************ PARAMETERS FROM DATABASE ************/</span></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keywordtype">int</span> GetParameterCount() { <span class="keywordflow">return</span> <a class="code hl_define" href="basic_8h.html#a21a0baa0c673e26c0e05ac0b3b951978">CVT_INT</a>(m_vParameters.size()); }</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    <span class="keywordtype">int</span> AddParameter(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* units, <span class="keyword">const</span> <span class="keywordtype">char</span>* desc, <span class="keyword">const</span> <span class="keywordtype">char</span>* source, <a class="code hl_enumeration" href="group__module__setting.html#gac6cf78ef837450cfb19495fe34976b8c">dimensionTypes</a> dimType);</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordtype">string</span> GetParameterName(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vParameters.size() ? m_vParameters[index].Name : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    }</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    <span class="keywordtype">string</span> GetParameterUnits(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vParameters.size() ? m_vParameters[index].Units : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    }</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    <span class="keywordtype">string</span> GetParameterDescription(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vParameters.size() ? m_vParameters[index].Description : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    }</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    <span class="keywordtype">string</span> GetParameterSource(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vParameters.size() ? m_vParameters[index].Source : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    }</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span> </div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    <a class="code hl_enumeration" href="group__module__setting.html#gac6cf78ef837450cfb19495fe34976b8c">dimensionTypes</a> GetParameterDimension(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vParameters.size() ? m_vParameters[index].Dimension : <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca805fbcbe894d2d1acacc96a6ffd82c2a">DT_Unknown</a>;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    }</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <a class="code hl_struct" href="group__module__setting.html#struct_parameter">Parameter</a> GetParameter(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vParameters.size() ? m_vParameters[index] : <a class="code hl_struct" href="group__module__setting.html#struct_parameter">Parameter</a>();</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    }</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><span class="comment">    /************ DEPENDENT MODULES ************/</span></div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keywordtype">int</span> GetDependencyCount() { <span class="keywordflow">return</span> <a class="code hl_define" href="basic_8h.html#a21a0baa0c673e26c0e05ac0b3b951978">CVT_INT</a>(m_vDependencies.size()); }</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keywordtype">int</span> AddDependency(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* description);</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="keywordtype">string</span> GetDependencyName(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vDependencies.size() ? m_vDependencies[index].Name : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    }</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="keywordtype">string</span> GetDependencyDescription(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vDependencies.size() ? m_vDependencies[index].Description : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    }</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    <a class="code hl_struct" href="group__module__setting.html#struct_model_class">ModelClass</a> GetDependency(<span class="keywordtype">int</span> index) {</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        <span class="keywordflow">return</span> index &gt;= 0 &amp;&amp; index &lt; m_vDependencies.size() ? m_vDependencies[index] : <a class="code hl_struct" href="group__module__setting.html#struct_model_class">ModelClass</a>();</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    }</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    <span class="keywordtype">string</span> GetXMLDocument();</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    <span class="keywordtype">void</span> OpenTag(<span class="keywordtype">string</span> name, <span class="keywordtype">string</span> attributes, <span class="keywordtype">int</span> indent, <span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    <span class="keywordtype">void</span> CloseTag(<span class="keywordtype">string</span> name, <span class="keywordtype">int</span> indent, <span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    <span class="keywordtype">void</span> FullTag(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; name, <span class="keywordtype">int</span> indent, <span class="keywordtype">string</span>&amp; content, <span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    <span class="keywordtype">void</span> WriteClass(<span class="keywordtype">int</span> indent, <span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> </div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <span class="keywordtype">void</span> WriteInformation(<span class="keywordtype">int</span> indent, <span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span> </div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keywordtype">void</span> WriteInputs(<span class="keywordtype">int</span> indent, <span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    <span class="keywordtype">void</span> WriteOutputs(<span class="keywordtype">int</span> indent, <span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    <span class="keywordtype">void</span> WriteInOutputs(<span class="keywordtype">int</span> indent, <span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    <span class="keywordtype">void</span> WriteParameters(<span class="keywordtype">int</span> indent, <span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <span class="keywordtype">void</span> WriteDependencies(<span class="keywordtype">int</span> indent, <span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> </div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <span class="keywordtype">void</span> WriteXMLHeader(<span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    <span class="keywordtype">void</span> DimensionTag(<span class="keywordtype">string</span> tag, <span class="keywordtype">int</span> indent, <a class="code hl_enumeration" href="group__module__setting.html#gac6cf78ef837450cfb19495fe34976b8c">dimensionTypes</a> dimType, <span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span> </div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    <span class="keywordtype">void</span> TransferTypeTag(<span class="keywordtype">string</span> tag, <span class="keywordtype">int</span> indent, <a class="code hl_enumeration" href="group__module__setting.html#ga44c7aa1266bcfcaebbafc0ffc48fc952">transferTypes</a> tfType, <span class="keywordtype">string</span>* sb);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    <span class="keywordtype">string</span> m_strSchemaVersion;             <span class="comment">///&lt; latest XML schema version supported by this class</span></div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    <a class="code hl_struct" href="group__module__setting.html#struct_model_class">ModelClass</a> m_oClass;                   <span class="comment">///&lt; class name for the module</span></div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    <a class="code hl_struct" href="group__module__setting.html#struct_information">Information</a> m_Info;                    <span class="comment">///&lt; the general information for the module</span></div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    vector&lt;Parameter&gt; m_vParameters;       <span class="comment">///&lt; list of parameters for the module</span></div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    vector&lt;InputVariable&gt; m_vInputs;       <span class="comment">///&lt; list of input parameters for the module</span></div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    vector&lt;OutputVariable&gt; m_vOutputs;     <span class="comment">///&lt; list of output parameters for the module</span></div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    vector&lt;InOutputVariable&gt; m_vInOutputs; <span class="comment">///&lt; list of In/Output parameters for the module for MPI version</span></div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    vector&lt;ModelClass&gt; m_vDependencies;    <span class="comment">///&lt; list of dependency classes for the module</span></div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>};</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span> </div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span><span class="preprocessor">#endif </span><span class="comment">/* SEIMS_METADATA_INFO_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="a_metadata_info_const_8h_html"><div class="ttname"><a href="_metadata_info_const_8h.html">MetadataInfoConst.h</a></div><div class="ttdoc">Define some const variables used by MetadataInfo class</div></div>
+<div class="ttc" id="a_metadata_info_const_8h_html_ga44c7aa1266bcfcaebbafc0ffc48fc952a44688a13255da9bff4b8bbe6b013f166"><div class="ttname"><a href="_metadata_info_const_8h.html#ga44c7aa1266bcfcaebbafc0ffc48fc952a44688a13255da9bff4b8bbe6b013f166">TF_None</a></div><div class="ttdeci">@ TF_None</div><div class="ttdoc">Default, which means no need to be transferred</div><div class="ttdef"><b>Definition:</b> MetadataInfoConst.h:87</div></div>
+<div class="ttc" id="a_metadata_info_const_8h_html_gac6cf78ef837450cfb19495fe34976b8ca805fbcbe894d2d1acacc96a6ffd82c2a"><div class="ttname"><a href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca805fbcbe894d2d1acacc96a6ffd82c2a">DT_Unknown</a></div><div class="ttdeci">@ DT_Unknown</div><div class="ttdoc">Unknown type</div><div class="ttdef"><b>Definition:</b> MetadataInfoConst.h:64</div></div>
+<div class="ttc" id="abasic_8h_html"><div class="ttname"><a href="basic_8h.html">basic.h</a></div><div class="ttdoc">Basic definitions.</div></div>
+<div class="ttc" id="abasic_8h_html_a21a0baa0c673e26c0e05ac0b3b951978"><div class="ttname"><a href="basic_8h.html#a21a0baa0c673e26c0e05ac0b3b951978">CVT_INT</a></div><div class="ttdeci">#define CVT_INT(param)</div><div class="ttdoc">A reference to the postfix of executable file for RELWITHDEBINFO mode</div><div class="ttdef"><b>Definition:</b> basic.h:325</div></div>
+<div class="ttc" id="aclassccgl_1_1_interface_html"><div class="ttname"><a href="classccgl_1_1_interface.html">ccgl::Interface</a></div><div class="ttdoc">Base type of all interfaces.</div><div class="ttdef"><b>Definition:</b> basic.h:407</div></div>
+<div class="ttc" id="agroup__module__setting_html_a0ea3ec0a518e6f2a6afcfe5a47e6a092"><div class="ttname"><a href="group__module__setting.html#a0ea3ec0a518e6f2a6afcfe5a47e6a092">Information::EMail</a></div><div class="ttdeci">string EMail</div><div class="ttdoc">Email</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:51</div></div>
+<div class="ttc" id="agroup__module__setting_html_a0fea44ad14e758340799fe8ce77b8330"><div class="ttname"><a href="group__module__setting.html#a0fea44ad14e758340799fe8ce77b8330">Information::Version</a></div><div class="ttdeci">string Version</div><div class="ttdoc">Module Version</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:49</div></div>
+<div class="ttc" id="agroup__module__setting_html_a1b8fa5ae955f80cbd549cd3186788d3f"><div class="ttname"><a href="group__module__setting.html#a1b8fa5ae955f80cbd549cd3186788d3f">Information::Author</a></div><div class="ttdeci">string Author</div><div class="ttdoc">Author</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:50</div></div>
+<div class="ttc" id="agroup__module__setting_html_a5d7787b19474e3fe73db9cc7218808ea"><div class="ttname"><a href="group__module__setting.html#a5d7787b19474e3fe73db9cc7218808ea">baseParameter::Units</a></div><div class="ttdeci">string Units</div><div class="ttdoc">Units</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:67</div></div>
+<div class="ttc" id="agroup__module__setting_html_a648bb8c9d3e9459afe4f131fa389352a"><div class="ttname"><a href="group__module__setting.html#a648bb8c9d3e9459afe4f131fa389352a">Information::Id</a></div><div class="ttdeci">string Id</div><div class="ttdoc">Module ID</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:46</div></div>
+<div class="ttc" id="agroup__module__setting_html_a72591cce053c48d45507d23ed1187276"><div class="ttname"><a href="group__module__setting.html#a72591cce053c48d45507d23ed1187276">baseParameter::Description</a></div><div class="ttdeci">string Description</div><div class="ttdoc">Description</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:68</div></div>
+<div class="ttc" id="agroup__module__setting_html_a8e1e2fee4394c6306a3fd80387281d94"><div class="ttname"><a href="group__module__setting.html#a8e1e2fee4394c6306a3fd80387281d94">Information::Helpfile</a></div><div class="ttdeci">string Helpfile</div><div class="ttdoc">Helpfile</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:53</div></div>
+<div class="ttc" id="agroup__module__setting_html_a96b1cb9b1ecc5c1fea4bf390554748ea"><div class="ttname"><a href="group__module__setting.html#a96b1cb9b1ecc5c1fea4bf390554748ea">Parameter::Source</a></div><div class="ttdeci">string Source</div><div class="ttdoc">Source type</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:82</div></div>
+<div class="ttc" id="agroup__module__setting_html_a9f0b0e91a740ff0e1f3d0b48b069983a"><div class="ttname"><a href="group__module__setting.html#a9f0b0e91a740ff0e1f3d0b48b069983a">Information::Description</a></div><div class="ttdeci">string Description</div><div class="ttdoc">Module Description</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:48</div></div>
+<div class="ttc" id="agroup__module__setting_html_aa411bbe0edd95d200b59c0b7606173d3"><div class="ttname"><a href="group__module__setting.html#aa411bbe0edd95d200b59c0b7606173d3">Information::Name</a></div><div class="ttdeci">string Name</div><div class="ttdoc">Module Name</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:47</div></div>
+<div class="ttc" id="agroup__module__setting_html_adbe1b85de6038485f9bcbdc1ee99dab1"><div class="ttname"><a href="group__module__setting.html#adbe1b85de6038485f9bcbdc1ee99dab1">baseParameter::Name</a></div><div class="ttdeci">string Name</div><div class="ttdoc">Name</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:66</div></div>
+<div class="ttc" id="agroup__module__setting_html_ade2494970a4d547247921bd92186ff8d"><div class="ttname"><a href="group__module__setting.html#ade2494970a4d547247921bd92186ff8d">baseParameter::Dimension</a></div><div class="ttdeci">dimensionTypes Dimension</div><div class="ttdoc">Data dimension type</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:69</div></div>
+<div class="ttc" id="agroup__module__setting_html_af713e5818c8dff3d1c81c2dbd711e4c4"><div class="ttname"><a href="group__module__setting.html#af713e5818c8dff3d1c81c2dbd711e4c4">Information::Website</a></div><div class="ttdeci">string Website</div><div class="ttdoc">Website</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:52</div></div>
+<div class="ttc" id="agroup__module__setting_html_class_metadata_info"><div class="ttname"><a href="group__module__setting.html#class_metadata_info">MetadataInfo</a></div><div class="ttdoc">Metadata information of module</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:125</div></div>
+<div class="ttc" id="agroup__module__setting_html_ga44c7aa1266bcfcaebbafc0ffc48fc952"><div class="ttname"><a href="group__module__setting.html#ga44c7aa1266bcfcaebbafc0ffc48fc952">transferTypes</a></div><div class="ttdeci">transferTypes</div><div class="ttdoc">Float values be transferred across subbasins for MPI version</div><div class="ttdef"><b>Definition:</b> MetadataInfoConst.h:86</div></div>
+<div class="ttc" id="agroup__module__setting_html_gac6cf78ef837450cfb19495fe34976b8c"><div class="ttname"><a href="group__module__setting.html#gac6cf78ef837450cfb19495fe34976b8c">dimensionTypes</a></div><div class="ttdeci">dimensionTypes</div><div class="ttdoc">enum of dimension data types</div><div class="ttdef"><b>Definition:</b> MetadataInfoConst.h:63</div></div>
+<div class="ttc" id="agroup__module__setting_html_struct_in_output_variable"><div class="ttname"><a href="group__module__setting.html#struct_in_output_variable">InOutputVariable</a></div><div class="ttdoc">Input and output variable information class</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:115</div></div>
+<div class="ttc" id="agroup__module__setting_html_struct_information"><div class="ttname"><a href="group__module__setting.html#struct_information">Information</a></div><div class="ttdoc">Module development information class</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:41</div></div>
+<div class="ttc" id="agroup__module__setting_html_struct_input_variable"><div class="ttname"><a href="group__module__setting.html#struct_input_variable">InputVariable</a></div><div class="ttdoc">Input variable information class</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:91</div></div>
+<div class="ttc" id="agroup__module__setting_html_struct_model_class"><div class="ttname"><a href="group__module__setting.html#struct_model_class">ModelClass</a></div><div class="ttdoc">Module basic description</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:27</div></div>
+<div class="ttc" id="agroup__module__setting_html_struct_output_variable"><div class="ttname"><a href="group__module__setting.html#struct_output_variable">OutputVariable</a></div><div class="ttdoc">Output variable information class</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:103</div></div>
+<div class="ttc" id="agroup__module__setting_html_struct_parameter"><div class="ttname"><a href="group__module__setting.html#struct_parameter">Parameter</a></div><div class="ttdoc">Model parameter information class</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:78</div></div>
+<div class="ttc" id="agroup__module__setting_html_structbase_parameter"><div class="ttname"><a href="group__module__setting.html#structbase_parameter">baseParameter</a></div><div class="ttdoc">Basic model parameter information</div><div class="ttdef"><b>Definition:</b> MetadataInfo.h:62</div></div>
+<div class="ttc" id="anamespaceccgl_html"><div class="ttname"><a href="namespaceccgl.html">ccgl</a></div><div class="ttdoc">Common Cross-platform Geographic Library (CCGL)</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_ce650b3ee6c8ee1902ad5d9b217fa743.html">seims</a></li><li class="navelem"><a class="el" href="dir_f9d338a7544abb673b2d39dcadbe364c.html">src</a></li><li class="navelem"><a class="el" href="dir_64f8a13685b9f2f1d5623a66b281a23c.html">seims_main</a></li><li class="navelem"><a class="el" href="dir_d9d8c03d94c229237348b60b53b769ac.html">base</a></li><li class="navelem"><a class="el" href="dir_cce2c0ac50386f26b5b526fa8626cc77.html">module_setting</a></li><li class="navelem"><a class="el" href="_metadata_info_8h.html">MetadataInfo.h</a></li>
+  </ul>
+</div>
+</body>
+</html>

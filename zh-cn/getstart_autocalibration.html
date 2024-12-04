@@ -1,0 +1,199 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: 参数自动率定</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('getstart_autocalibration.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">参数自动率定 </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>目录</h3>
+<ul><li class="level1"><a href="#autotoc_md0">简单用法</a></li>
+<li class="level1"><a href="#autotoc_md1">自动率定的配置文件</a></li>
+<li class="level1"><a href="#autotoc_md2">高级用法</a></li>
+<li class="level1"><a href="#autotoc_md3">更多介绍...</a></li>
+</ul>
+</div>
+<div class="textblock"><p ><a class="anchor" id="md_doc_zh_cn_get_started_auto_calibration"></a></p>
+<p >在参数敏感性分析之后，可以选择少量最敏感的参数进行自动率定。这些参数的取值范围可以与敏感性分析中定义的范围相同，也可以通过排除导致模型性能不可接受的值来缩小范围，例如当*NSE*小于零时。</p>
+<p >在当前版本的SEIMS中，自动率定使用NSGA-II算法（Non-dominated Sorting Genetic Algorithm II）。在NSGA-II执行过程中，采用Latin-hypercube采样方法（Iman and Shortencarier, 1984）来生成初始的率定参数样本。交叉和变异操作类似于Deb <em>等</em> (2002)在NSGA-II中的原始实现。</p>
+<h1><a class="anchor" id="autotoc_md0"></a>
+简单用法</h1>
+<p >打开一个CMD窗口，输入以下命令运行游屋圳流域模型的流量模拟自动率定。</p>
+<div class="fragment"><div class="line">cd D:\demo\SEIMS\seims\test</div>
+<div class="line">D:</div>
+<div class="line">python –m scoop –n 2 demo_calibration.py -name youwuzhen</div>
+</div><!-- fragment --><p >运行日志包括每个模型运行的命令、每一代平均模型性能指标以及耗时（如图1所示）。</p>
+<p >与参数敏感性分析类似，在自动率定优化过程中，每一代生成的选定参数的率定值将被导入到主空间数据库的 <code>PARAMETERS</code> 集合中，并作为<code>CALI_VALUES</code> 字段存储（如图2所示）。</p>
+<p >自动率定的结果可以在<code>SEIMS\data\youwuzhen\demo_youwuzhen30m_longterm_model\CALI_NSGA2_Gen_2_Pop_4</code>中找到。近似最优的Pareto解集以散点图的形式显示，能直观解释率定优化的过程。例如，图3显示了第一代和第二代的近似最优Pareto解集，其目标是最大化 <em>NSE</em> 和最小化 <em>RSR</em> （流域出口模拟流量的*NSE*和*RSR*），展示了向最大 <em>NSE</em> 和最小*RSR*演化的方向。</p>
+<p >此外，为更好地理解率定结果，每一代中 <em>NSE</em> 最大的率定期最优解（红色虚线，图4）与输出变量的累积分布2.5和97.5水平（灰色带，图4）一起绘制，即本示例中的流域出口流量。</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+自动率定的配置文件</h1>
+<p >自动率定的配置文件，如下面代码所示的游屋圳流域模型的配置文件，包括四个部分：<code>SEIMS_Model</code>、<code>CALI_Settings</code>、<code>NSGA2</code>和 <code>OPTIONAL_MATPLOT_SETTING</code>。其中，<code>OPTIONAL_MATPLOT_SETTING</code>为可选向。节和选项的名称不能更改。</p>
+<div class="fragment"><div class="line">[SEIMS_Model]</div>
+<div class="line">MODEL_DIR = D:\demo\SEIMS\data\youwuzhen\demo_youwuzhen30m_longterm_model</div>
+<div class="line">BIN_DIR = D:\demo\SEIMS\bin</div>
+<div class="line">HOSTNAME = 127.0.0.1</div>
+<div class="line">PORT = 27017</div>
+<div class="line">threadsNum = 2</div>
+<div class="line">layeringMethod = 1</div>
+<div class="line">scenarioID = 0</div>
+<div class="line"># Simulation period (UTCTIME)</div>
+<div class="line">Sim_Time_start = 2012-01-01 00:00:00</div>
+<div class="line">Sim_Time_end = 2012-05-30 23:59:59</div>
+<div class="line"> </div>
+<div class="line">[CALI_Settings]</div>
+<div class="line"># Parameters and ranges</div>
+<div class="line">paramRngDef = cali_param_rng-Q.def</div>
+<div class="line"># Calibration period (UTCTIME)</div>
+<div class="line">Cali_Time_start = 2012-02-27 00:00:00</div>
+<div class="line">Cali_Time_end = 2012-04-30 23:59:59</div>
+<div class="line"># Validation period (UTCTIME)</div>
+<div class="line">Vali_Time_start = 2012-05-01 00:00:00</div>
+<div class="line">Vali_Time_end = 2012-05-30 23:59:59</div>
+<div class="line"> </div>
+<div class="line">[NSGA2]</div>
+<div class="line">GenerationsNum = 2</div>
+<div class="line">PopulationSize = 4</div>
+<div class="line">CrossoverRate = 0.8</div>
+<div class="line">MaxMutatePerc = 0.2</div>
+<div class="line">MutateRate = 0.1</div>
+<div class="line">SelectRate = 1.0</div>
+<div class="line"> </div>
+<div class="line">[OPTIONAL_MATPLOT_SETTINGS]</div>
+<div class="line">FIGURE_FORMATS = PDF,PNG</div>
+<div class="line">LANG_CN = False</div>
+<div class="line">FONT_TITLE = Times New Roman</div>
+<div class="line">TITLE_FONTSIZE = 16</div>
+<div class="line">LEGEND_FONTSIZE = 12</div>
+<div class="line">TICKLABEL_FONTSIZE = 12</div>
+<div class="line">AXISLABEL_FONTSIZE = 12</div>
+<div class="line">LABEL_FONTSIZE = 14</div>
+<div class="line">DPI = 300</div>
+</div><!-- fragment --><ul>
+<li><code>SEIMS_Model</code>: 基于 SEIMS 流域模型的基本设置，详见章节 2:4.3.2。注意默认使用SEIMS主程序的OpenMP版本。如果需要MPI&amp;OpenMP版本，可以配置version、<code>MPI_BIN</code> 和 <code>processNum</code> 等选项。</li>
+<li><code>CALI_Settings</code>: 自动率定的基本设置。<ol type="1">
+<li><code>paramRngDef</code>: 定义率定参数范围的文件名，格式与参数敏感性分析的 <code>paramRngDef</code>相同（章节 2:6.2）。</li>
+<li><code>Cali_Time_start</code>: 率定期的起始时间，格式为 <code>YYYY-MM-DD HH:MM:SS</code>。</li>
+<li><code>Cali_Time_end</code>: 率定期的结束时间，格式为 <code>YYYY-MM-DD HH:MM:SS</code>。</li>
+<li><code>Vali_Time_start</code>: （可选）visualization验证期的起始时间，仅用于可视化以探索率定参数的效果，格式为 <code>YYYY-MM-DD HH:MM:SS</code> ，例如图 2:7 4。</li>
+<li><code>Vali_Time_end</code>: （可选）visualization验证期的结束时间，格式为<code>YYYY-MM-DD HH:MM:SS</code>。 <code>Vali_Time_start</code> 和 <code>Vali_Time_end</code> 必须同时指定。</li>
+<li>注意：模拟期减去率定期和验证器为预热期。</li>
+</ol>
+</li>
+<li>特定优化方法的部分。当前版本中已集成并测试了NSGA-II算法。未来版本中将集成更多优化方法。<ul>
+<li><code>NSGA2</code>: NSGA-II算法的参数设置。<ul>
+<li><code>GenerationsNum</code>: 最大代数。</li>
+<li><code>PopulationSize</code>: 初始种群规模，即个体数量。</li>
+<li><code>CrossoverRate</code>: 交叉概率，范围为0到1。较大的交叉率表示两个父个体之间发生交叉操作的可能性更高。</li>
+<li><code>MutateRate</code>: 变异概率。</li>
+<li><code>MaxMutatePerc</code>: 基因变异的最大百分比。</li>
+<li><code>SelectRate</code>: 每代经过评估和排序的个体中选出的比例，称为近似最优的Pareto解集。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>OPTIONAL_MATPLOT_SETTINGS</code>: matplotlib的绘图设置，详见章节 2:5.2。</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md2"></a>
+高级用法</h1>
+<p >自动率定的Python脚本位于<code>SEIMS/seims/calibration</code>文件夹中。<code>main_nsga2.py</code>是基于NSGA-II算法的自动率定入口脚本，可以通过SEIMS Python脚本的统一格式运行，例如，</p>
+<div class="fragment"><div class="line">cd D:\demo\SEIMS\seims\calibration</div>
+<div class="line">python main_nsga2.py -ini D:\demo\SEIMS\data\youwuzhen\workspace\calibration.ini</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
+更多介绍...</h1>
+<p >Also see introduction of the Python package <a class="el" href="intro_auto_calibration_pkg.html">seims.calibration package</a> </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+  </ul>
+</div>
+</body>
+</html>

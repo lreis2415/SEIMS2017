@@ -1,0 +1,130 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: SEIMS是什么?</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('whatis_seims.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">SEIMS是什么? </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>目录</h3>
+<ul><li class="level1"><a href="#autotoc_md81">关键过程</a></li>
+</ul>
+</div>
+<div class="textblock"><p ><a class="anchor" id="md_doc_zh_cn_intro_whatis_seims"></a></p>
+<p >SEIMS （Spatially Explicit Integrated Modeling System） 是一个集成式、模块化、并行化、分布式的流域建模系统， 同时设计用于情景分析，特别是用于评估和优化BMP情景。 SEIMS可用于建立单一流域的特定流域模型，以进行针对长期或大量事件的模拟。 可考虑多种流域过程，如水文过程、土壤侵蚀、养分循环和植物生长等。</p>
+<ul>
+<li>SEIMS是一种分布式流域建模系统，在每个子流域内以具有水文连接的网格单元作为基本模拟单元。支持使用如水文响应单元（*<a href="https://doi.org/10.1111/j.1752-1688.1998.tb05961.x" title="SWAT Paper">Arnold等, 1998</a>*）和板块（*<a href="https://doi.org/10.1175/1087-3562(2004)8%3C1:RRHSSO%3E2.0.CO;2" title="RHESSys Paper">Tague and Band, 2004</a>*）的不规则形状作为基本模拟单元正在开发中。</li>
+<li>SEIMS是一种多流域过程集成的模块化系统，模型开发者可以轻松地添加自己的水文、土壤侵蚀、养分循环、植物生长以及BMP管理等模块（算法）。</li>
+<li>SEIMS是一种并行化建模系统，充分利用了子流域层面和基本模拟单元（如栅格单元）层面同时具有的并行性。开发者可以轻松地以近乎串行的编程方式实现并行化流域建模。</li>
+<li>SEIMS是一种可配置的流域建模系统，用户可以轻松地指定模块和输出</li>
+<li>SEIMS采用C++开发，支持GDAL、mongo-c-driver、OpenMP和MPI库。Python用于将各种工作流组织为实用工具，例如预处理、后处理、参数敏感性分析、自动率定和情景分析。SEIMS可以使用常用的C++编译器（如MSVC2010+、GCC4.6+、Intel C++ 12+、and Clang 8.0+）进行编译，并可在多个并行计算平台（如多核计算机和对称多处理（SMP）集群）上运行</li>
+<li>SEIMS使用了多种开源技术（如GDAL、mongo-c-driver），在Github上也是开源的（ <a href="https://github.com/lreis2415/SEIMS">https://github.com/lreis2415/SEIMS</a> ）。</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md81"></a>
+关键过程</h1>
+<p >以下几点是基于SEIMS建立流域模型并进行情景分析的常用步骤。每个过程的细节将在<a class="el" href="_g_e_t__s_t_a_r_t_e_d.html">2 开始</a>中详细阐述。</p>
+<ul>
+<li><a class="el" href="getstart_download_installation.html">安装必备软件和库，然后安装SEIMS </a></li>
+<li><a class="el" href="getstart_data_preparation.html">准备研究区域的数据（气候数据、空间数据、实际观测数据等） </a></li>
+<li><a class="el" href="getstart_data_preprocessing.html">通过数据预处理脚本为基于SEIMS的模型建立数据库 </a></li>
+<li><a class="el" href="getstart_run_seims_model.html">根据模型目标创建一个基于SEIMS的模型并运行模型 </a></li>
+<li><a class="el" href="getstart_runmodel_postprocessing.html">后处理，例如分析、绘图和图形输出 </a></li>
+<li>(可选) <a class="el" href="getstart_parameters_sensitivity.html">参数敏感性分析 </a></li>
+<li>(可选) <a class="el" href="getstart_autocalibration.html">自动校准 </a></li>
+<li>(可选) <a class="el" href="getstart_bmp_scenario_analysis.html">情景分析，如减少土壤侵蚀的BMP情景优化 </a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+  </ul>
+</div>
+</body>
+</html>

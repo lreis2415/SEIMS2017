@@ -1,0 +1,270 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: seims/src/ccgl/src/utils_string.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('utils__string_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">命名空间</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">utils_string.h 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Handling string related issues in CCGL.  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;<a class="el" href="basic_8h_source.html">basic.h</a>&quot;</code><br />
+</div>
+<p><a href="utils__string_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+命名空间</h2></td></tr>
+<tr class="memitem:namespaceccgl"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl.html">ccgl</a></td></tr>
+<tr class="memdesc:namespaceccgl"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common Cross-platform Geographic Library (CCGL) <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceccgl_1_1utils__string"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html">ccgl::utils_string</a></td></tr>
+<tr class="memdesc:namespaceccgl_1_1utils__string"><td class="mdescLeft">&#160;</td><td class="mdescRight">String related functions <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a8d1f69ac2a38e84904ce525c48c11e48"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a8d1f69ac2a38e84904ce525c48c11e48">ccgl::utils_string::GetUpper</a> (const string &amp;str)</td></tr>
+<tr class="memdesc:a8d1f69ac2a38e84904ce525c48c11e48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Uppercase of given string  <a href="namespaceccgl_1_1utils__string.html#a8d1f69ac2a38e84904ce525c48c11e48">更多...</a><br /></td></tr>
+<tr class="separator:a8d1f69ac2a38e84904ce525c48c11e48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad21577f915d237b4fc7809d8e856be6b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#ad21577f915d237b4fc7809d8e856be6b">ccgl::utils_string::StringMatch</a> (const char *a, const char *b)</td></tr>
+<tr class="memdesc:ad21577f915d237b4fc7809d8e856be6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Match <em>char</em> ignore cases  <a href="namespaceccgl_1_1utils__string.html#ad21577f915d237b4fc7809d8e856be6b">更多...</a><br /></td></tr>
+<tr class="separator:ad21577f915d237b4fc7809d8e856be6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f285f5defa180ff01720e3a950b2ea9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a0f285f5defa180ff01720e3a950b2ea9">ccgl::utils_string::StringMatch</a> (const string &amp;text1, const string &amp;text2)</td></tr>
+<tr class="memdesc:a0f285f5defa180ff01720e3a950b2ea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Match Strings in UPPERCASE manner  <a href="namespaceccgl_1_1utils__string.html#a0f285f5defa180ff01720e3a950b2ea9">更多...</a><br /></td></tr>
+<tr class="separator:a0f285f5defa180ff01720e3a950b2ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab72e5cc543c35b9ce8a1ef08a43a8811"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#ab72e5cc543c35b9ce8a1ef08a43a8811">ccgl::utils_string::TrimSpaces</a> (string &amp;str)</td></tr>
+<tr class="memdesc:ab72e5cc543c35b9ce8a1ef08a43a8811"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trim Both leading and trailing spaces  <a href="namespaceccgl_1_1utils__string.html#ab72e5cc543c35b9ce8a1ef08a43a8811">更多...</a><br /></td></tr>
+<tr class="separator:ab72e5cc543c35b9ce8a1ef08a43a8811"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2d7b894d39fdd52fbc78a40910a1f00"><td class="memItemLeft" align="right" valign="top">string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#aa2d7b894d39fdd52fbc78a40910a1f00">ccgl::utils_string::Trim</a> (string &amp;s)</td></tr>
+<tr class="memdesc:aa2d7b894d39fdd52fbc78a40910a1f00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trim given string's heading and tailing by "&lt;space&gt;,\n,\t,\r"  <a href="namespaceccgl_1_1utils__string.html#aa2d7b894d39fdd52fbc78a40910a1f00">更多...</a><br /></td></tr>
+<tr class="separator:aa2d7b894d39fdd52fbc78a40910a1f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c7a4fc2837a585984e25410a6bcd28e"><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a2c7a4fc2837a585984e25410a6bcd28e">ccgl::utils_string::SplitString</a> (const string &amp;item)</td></tr>
+<tr class="memdesc:a2c7a4fc2837a585984e25410a6bcd28e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Splits the given string by spaces  <a href="namespaceccgl_1_1utils__string.html#a2c7a4fc2837a585984e25410a6bcd28e">更多...</a><br /></td></tr>
+<tr class="separator:a2c7a4fc2837a585984e25410a6bcd28e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac9938eefbe718aa740d5f68421b82cf"><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#aac9938eefbe718aa740d5f68421b82cf">ccgl::utils_string::SplitString</a> (const string &amp;item, char delimiter)</td></tr>
+<tr class="memdesc:aac9938eefbe718aa740d5f68421b82cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Splits the given string based on the given delimiter  <a href="namespaceccgl_1_1utils__string.html#aac9938eefbe718aa740d5f68421b82cf">更多...</a><br /></td></tr>
+<tr class="separator:aac9938eefbe718aa740d5f68421b82cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1558468be432a29fdfc4d88516326a68"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1558468be432a29fdfc4d88516326a68"><td class="memTemplItemLeft" align="right" valign="top">string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a1558468be432a29fdfc4d88516326a68">ccgl::utils_string::ValueToString</a> (const T &amp;val)</td></tr>
+<tr class="memdesc:a1558468be432a29fdfc4d88516326a68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert value to string  <a href="namespaceccgl_1_1utils__string.html#a1558468be432a29fdfc4d88516326a68">更多...</a><br /></td></tr>
+<tr class="separator:a1558468be432a29fdfc4d88516326a68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e3074fd6d3ea584563439cb8ec67c22"><td class="memItemLeft" align="right" valign="top"><a id="a2e3074fd6d3ea584563439cb8ec67c22" name="a2e3074fd6d3ea584563439cb8ec67c22"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ccgl::utils_string::CopyStringMap</b> (const STRING_MAP &amp;in_opts, STRING_MAP &amp;out_opts)</td></tr>
+<tr class="memdesc:a2e3074fd6d3ea584563439cb8ec67c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy string map <br /></td></tr>
+<tr class="separator:a2e3074fd6d3ea584563439cb8ec67c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44a78a9349d2ca902519e654620d9afc"><td class="memItemLeft" align="right" valign="top"><a id="a44a78a9349d2ca902519e654620d9afc" name="a44a78a9349d2ca902519e654620d9afc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ccgl::utils_string::UpdateStringMap</b> (STRING_MAP &amp;opts, const string &amp;key, const string &amp;value)</td></tr>
+<tr class="memdesc:a44a78a9349d2ca902519e654620d9afc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add or modify element in a string map <br /></td></tr>
+<tr class="separator:a44a78a9349d2ca902519e654620d9afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a549cb5f9ee8b7a31f450bb963c3b5b23"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a549cb5f9ee8b7a31f450bb963c3b5b23">ccgl::utils_string::itoa</a> (vint number)</td></tr>
+<tr class="memdesc:a549cb5f9ee8b7a31f450bb963c3b5b23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a signed integer to a string  <a href="namespaceccgl_1_1utils__string.html#a549cb5f9ee8b7a31f450bb963c3b5b23">更多...</a><br /></td></tr>
+<tr class="separator:a549cb5f9ee8b7a31f450bb963c3b5b23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a6fe3a39807b60a553579b4b3d548f7"><td class="memItemLeft" align="right" valign="top">wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a2a6fe3a39807b60a553579b4b3d548f7">ccgl::utils_string::itow</a> (vint number)</td></tr>
+<tr class="memdesc:a2a6fe3a39807b60a553579b4b3d548f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a signed integer to an unicode string  <a href="namespaceccgl_1_1utils__string.html#a2a6fe3a39807b60a553579b4b3d548f7">更多...</a><br /></td></tr>
+<tr class="separator:a2a6fe3a39807b60a553579b4b3d548f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a490e90eeac7dc0d411f3d66129e2979b"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a490e90eeac7dc0d411f3d66129e2979b">ccgl::utils_string::i64toa</a> (vint64_t number)</td></tr>
+<tr class="memdesc:a490e90eeac7dc0d411f3d66129e2979b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a 64-bits signed integer to a string  <a href="namespaceccgl_1_1utils__string.html#a490e90eeac7dc0d411f3d66129e2979b">更多...</a><br /></td></tr>
+<tr class="separator:a490e90eeac7dc0d411f3d66129e2979b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05d202ba8639f03a1d2300a48bbd1535"><td class="memItemLeft" align="right" valign="top">wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a05d202ba8639f03a1d2300a48bbd1535">ccgl::utils_string::i64tow</a> (vint64_t number)</td></tr>
+<tr class="memdesc:a05d202ba8639f03a1d2300a48bbd1535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a 64-bits signed integer to an unicode string  <a href="namespaceccgl_1_1utils__string.html#a05d202ba8639f03a1d2300a48bbd1535">更多...</a><br /></td></tr>
+<tr class="separator:a05d202ba8639f03a1d2300a48bbd1535"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd5856ed580314227f2098c121c935c0"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#afd5856ed580314227f2098c121c935c0">ccgl::utils_string::utoa</a> (vuint number)</td></tr>
+<tr class="memdesc:afd5856ed580314227f2098c121c935c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an unsigned integer to a string  <a href="namespaceccgl_1_1utils__string.html#afd5856ed580314227f2098c121c935c0">更多...</a><br /></td></tr>
+<tr class="separator:afd5856ed580314227f2098c121c935c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85a094e780a3e43920bf04b1d804e5c9"><td class="memItemLeft" align="right" valign="top">wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a85a094e780a3e43920bf04b1d804e5c9">ccgl::utils_string::utow</a> (vuint number)</td></tr>
+<tr class="memdesc:a85a094e780a3e43920bf04b1d804e5c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an unsigned integer to an unicode string  <a href="namespaceccgl_1_1utils__string.html#a85a094e780a3e43920bf04b1d804e5c9">更多...</a><br /></td></tr>
+<tr class="separator:a85a094e780a3e43920bf04b1d804e5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92250d1e13c6e421b062899e3581b3a8"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a92250d1e13c6e421b062899e3581b3a8">ccgl::utils_string::u64toa</a> (vuint64_t number)</td></tr>
+<tr class="memdesc:a92250d1e13c6e421b062899e3581b3a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a 64-bits unsigned integer to a string  <a href="namespaceccgl_1_1utils__string.html#a92250d1e13c6e421b062899e3581b3a8">更多...</a><br /></td></tr>
+<tr class="separator:a92250d1e13c6e421b062899e3581b3a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52b3d0a6e70a2f8014f180fc67e768f5"><td class="memItemLeft" align="right" valign="top">wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a52b3d0a6e70a2f8014f180fc67e768f5">ccgl::utils_string::u64tow</a> (vuint64_t number)</td></tr>
+<tr class="memdesc:a52b3d0a6e70a2f8014f180fc67e768f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a 64-bits unsigned integer to an unicode string  <a href="namespaceccgl_1_1utils__string.html#a52b3d0a6e70a2f8014f180fc67e768f5">更多...</a><br /></td></tr>
+<tr class="separator:a52b3d0a6e70a2f8014f180fc67e768f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ef0d08fdbcd9a3c6aee855e108854bc"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a3ef0d08fdbcd9a3c6aee855e108854bc">ccgl::utils_string::ftoa</a> (double number)</td></tr>
+<tr class="memdesc:a3ef0d08fdbcd9a3c6aee855e108854bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a 64-bits floating pointer number to a string  <a href="namespaceccgl_1_1utils__string.html#a3ef0d08fdbcd9a3c6aee855e108854bc">更多...</a><br /></td></tr>
+<tr class="separator:a3ef0d08fdbcd9a3c6aee855e108854bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10350e25d35822bd677b9962b16f9b52"><td class="memItemLeft" align="right" valign="top">wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a10350e25d35822bd677b9962b16f9b52">ccgl::utils_string::ftow</a> (double number)</td></tr>
+<tr class="memdesc:a10350e25d35822bd677b9962b16f9b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a 64-bits floating pointer number to an unicode string  <a href="namespaceccgl_1_1utils__string.html#a10350e25d35822bd677b9962b16f9b52">更多...</a><br /></td></tr>
+<tr class="separator:a10350e25d35822bd677b9962b16f9b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9d969de24f498d659180ed8170600c2"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#ac9d969de24f498d659180ed8170600c2">ccgl::utils_string::wtoa</a> (const wstring &amp;wstr)</td></tr>
+<tr class="memdesc:ac9d969de24f498d659180ed8170600c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an unicode string to an Ansi string  <a href="namespaceccgl_1_1utils__string.html#ac9d969de24f498d659180ed8170600c2">更多...</a><br /></td></tr>
+<tr class="separator:ac9d969de24f498d659180ed8170600c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa086c6b2aef8ee98cadac56e728642f"><td class="memItemLeft" align="right" valign="top">wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#afa086c6b2aef8ee98cadac56e728642f">ccgl::utils_string::atow</a> (const string &amp;astr)</td></tr>
+<tr class="memdesc:afa086c6b2aef8ee98cadac56e728642f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an Ansi string to an unicode string  <a href="namespaceccgl_1_1utils__string.html#afa086c6b2aef8ee98cadac56e728642f">更多...</a><br /></td></tr>
+<tr class="separator:afa086c6b2aef8ee98cadac56e728642f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5ab0d55ef1aa4b81478a694a6b620e0"><td class="memTemplParams" colspan="2"><a id="ad5ab0d55ef1aa4b81478a694a6b620e0" name="ad5ab0d55ef1aa4b81478a694a6b620e0"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ad5ab0d55ef1aa4b81478a694a6b620e0"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ccgl::utils_string::SplitStringForValues</b> (const string &amp;items, const char delimiter, vector&lt; T &gt; &amp;values)</td></tr>
+<tr class="memdesc:ad5ab0d55ef1aa4b81478a694a6b620e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get numeric values by splitting the given string based on the given delimiter <br /></td></tr>
+<tr class="separator:ad5ab0d55ef1aa4b81478a694a6b620e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88478b65ace41a6de5b27aa4fd953693"><td class="memItemLeft" align="right" valign="top">vint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a88478b65ace41a6de5b27aa4fd953693">ccgl::utils_string::IsInt</a> (const string &amp;num_str, bool &amp;success)</td></tr>
+<tr class="memdesc:a88478b65ace41a6de5b27aa4fd953693"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a string is an signed integer, if ture, return the converted integer  <a href="namespaceccgl_1_1utils__string.html#a88478b65ace41a6de5b27aa4fd953693">更多...</a><br /></td></tr>
+<tr class="separator:a88478b65ace41a6de5b27aa4fd953693"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab27aa0ae8815a8b65d0d2d4987b6c8a6"><td class="memItemLeft" align="right" valign="top">vint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#ab27aa0ae8815a8b65d0d2d4987b6c8a6">ccgl::utils_string::IsInt</a> (const wstring &amp;num_str, bool &amp;success)</td></tr>
+<tr class="memdesc:ab27aa0ae8815a8b65d0d2d4987b6c8a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an unicode string is an signed integer  <a href="namespaceccgl_1_1utils__string.html#ab27aa0ae8815a8b65d0d2d4987b6c8a6">更多...</a><br /></td></tr>
+<tr class="separator:ab27aa0ae8815a8b65d0d2d4987b6c8a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7f78fb75ec9afc76445ce70bdb35612"><td class="memItemLeft" align="right" valign="top">vint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#ab7f78fb75ec9afc76445ce70bdb35612">ccgl::utils_string::IsInt64</a> (const string &amp;num_str, bool &amp;success)</td></tr>
+<tr class="memdesc:ab7f78fb75ec9afc76445ce70bdb35612"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string to an signed 64-bits integer  <a href="namespaceccgl_1_1utils__string.html#ab7f78fb75ec9afc76445ce70bdb35612">更多...</a><br /></td></tr>
+<tr class="separator:ab7f78fb75ec9afc76445ce70bdb35612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab39ec3ac1ee1866329abb5d2dae8294"><td class="memItemLeft" align="right" valign="top">vint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#aab39ec3ac1ee1866329abb5d2dae8294">ccgl::utils_string::IsInt64</a> (const wstring &amp;num_str, bool &amp;success)</td></tr>
+<tr class="memdesc:aab39ec3ac1ee1866329abb5d2dae8294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an unicode string to an signed 64-bits integer  <a href="namespaceccgl_1_1utils__string.html#aab39ec3ac1ee1866329abb5d2dae8294">更多...</a><br /></td></tr>
+<tr class="separator:aab39ec3ac1ee1866329abb5d2dae8294"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af657d117ac59bb27a146bd37be4c90d5"><td class="memItemLeft" align="right" valign="top">vuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#af657d117ac59bb27a146bd37be4c90d5">ccgl::utils_string::IsUInt</a> (const string &amp;num_str, bool &amp;success)</td></tr>
+<tr class="memdesc:af657d117ac59bb27a146bd37be4c90d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an Ansi string to an unsigned integer  <a href="namespaceccgl_1_1utils__string.html#af657d117ac59bb27a146bd37be4c90d5">更多...</a><br /></td></tr>
+<tr class="separator:af657d117ac59bb27a146bd37be4c90d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9242f3fddb6048b7851d20e46a8659fa"><td class="memItemLeft" align="right" valign="top">vuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a9242f3fddb6048b7851d20e46a8659fa">ccgl::utils_string::IsUInt</a> (const wstring &amp;num_str, bool &amp;success)</td></tr>
+<tr class="memdesc:a9242f3fddb6048b7851d20e46a8659fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an Unicode string to an unsigned integer  <a href="namespaceccgl_1_1utils__string.html#a9242f3fddb6048b7851d20e46a8659fa">更多...</a><br /></td></tr>
+<tr class="separator:a9242f3fddb6048b7851d20e46a8659fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e1c09f728fd077ea98e92131d928f78"><td class="memItemLeft" align="right" valign="top">vuint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a4e1c09f728fd077ea98e92131d928f78">ccgl::utils_string::IsUInt64</a> (const string &amp;num_str, bool &amp;success)</td></tr>
+<tr class="memdesc:a4e1c09f728fd077ea98e92131d928f78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an Ansi string to a 64-bits unsigned integer  <a href="namespaceccgl_1_1utils__string.html#a4e1c09f728fd077ea98e92131d928f78">更多...</a><br /></td></tr>
+<tr class="separator:a4e1c09f728fd077ea98e92131d928f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6a81db3bd17b1da8e2e502e47b14730"><td class="memItemLeft" align="right" valign="top">vuint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#ae6a81db3bd17b1da8e2e502e47b14730">ccgl::utils_string::IsUInt64</a> (const wstring &amp;num_str, bool &amp;success)</td></tr>
+<tr class="memdesc:ae6a81db3bd17b1da8e2e502e47b14730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an Unicode string to a 64-bits unsigned integer  <a href="namespaceccgl_1_1utils__string.html#ae6a81db3bd17b1da8e2e502e47b14730">更多...</a><br /></td></tr>
+<tr class="separator:ae6a81db3bd17b1da8e2e502e47b14730"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff8365c364c8244b9272c67048214f6b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#aff8365c364c8244b9272c67048214f6b">ccgl::utils_string::IsDouble</a> (const string &amp;num_str, bool &amp;success)</td></tr>
+<tr class="memdesc:aff8365c364c8244b9272c67048214f6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an Ansi string to 64-bits floating point number  <a href="namespaceccgl_1_1utils__string.html#aff8365c364c8244b9272c67048214f6b">更多...</a><br /></td></tr>
+<tr class="separator:aff8365c364c8244b9272c67048214f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b30ea64216e4691163d5349d1b36619"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__string.html#a7b30ea64216e4691163d5349d1b36619">ccgl::utils_string::IsDouble</a> (const wstring &amp;num_str, bool &amp;success)</td></tr>
+<tr class="memdesc:a7b30ea64216e4691163d5349d1b36619"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an Ansi string to 64-bits floating point number  <a href="namespaceccgl_1_1utils__string.html#a7b30ea64216e4691163d5349d1b36619">更多...</a><br /></td></tr>
+<tr class="separator:a7b30ea64216e4691163d5349d1b36619"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6982cdb44cd0af93241583cdcabbd2a"><td class="memTemplParams" colspan="2"><a id="ad6982cdb44cd0af93241583cdcabbd2a" name="ad6982cdb44cd0af93241583cdcabbd2a"></a>
+template&lt;typename STRING_T &gt; </td></tr>
+<tr class="memitem:ad6982cdb44cd0af93241583cdcabbd2a"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ccgl::utils_string::IsNumber</b> (const STRING_T &amp;num_str)</td></tr>
+<tr class="memdesc:ad6982cdb44cd0af93241583cdcabbd2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a string is a number (integer or float) <br /></td></tr>
+<tr class="separator:ad6982cdb44cd0af93241583cdcabbd2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a026557be9decf78137addc0140b1080b"><td class="memTemplParams" colspan="2"><a id="a026557be9decf78137addc0140b1080b" name="a026557be9decf78137addc0140b1080b"></a>
+template&lt;typename STRING_T &gt; </td></tr>
+<tr class="memitem:a026557be9decf78137addc0140b1080b"><td class="memTemplItemLeft" align="right" valign="top">vint&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ccgl::utils_string::ToInt</b> (const STRING_T &amp;num_str)</td></tr>
+<tr class="memdesc:a026557be9decf78137addc0140b1080b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an Ansi or Unicode string to an integer <br /></td></tr>
+<tr class="separator:a026557be9decf78137addc0140b1080b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19c490db42408073306a7286caf4667a"><td class="memTemplParams" colspan="2"><a id="a19c490db42408073306a7286caf4667a" name="a19c490db42408073306a7286caf4667a"></a>
+template&lt;typename STRING_T &gt; </td></tr>
+<tr class="memitem:a19c490db42408073306a7286caf4667a"><td class="memTemplItemLeft" align="right" valign="top">vint64_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ccgl::utils_string::ToInt64</b> (const STRING_T &amp;num_str)</td></tr>
+<tr class="memdesc:a19c490db42408073306a7286caf4667a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an Ansi or Unicode string to an signed 64-bits integer <br /></td></tr>
+<tr class="separator:a19c490db42408073306a7286caf4667a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94f5ceca1c385e9dc4da6d8d6167d0d3"><td class="memTemplParams" colspan="2"><a id="a94f5ceca1c385e9dc4da6d8d6167d0d3" name="a94f5ceca1c385e9dc4da6d8d6167d0d3"></a>
+template&lt;typename STRING_T &gt; </td></tr>
+<tr class="memitem:a94f5ceca1c385e9dc4da6d8d6167d0d3"><td class="memTemplItemLeft" align="right" valign="top">vuint&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ccgl::utils_string::ToUInt</b> (const STRING_T &amp;num_str)</td></tr>
+<tr class="memdesc:a94f5ceca1c385e9dc4da6d8d6167d0d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an Ansi or Unicode string to an unsigned integer <br /></td></tr>
+<tr class="separator:a94f5ceca1c385e9dc4da6d8d6167d0d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5856892bf8646f6eac229b1348f4415d"><td class="memTemplParams" colspan="2"><a id="a5856892bf8646f6eac229b1348f4415d" name="a5856892bf8646f6eac229b1348f4415d"></a>
+template&lt;typename STRING_T &gt; </td></tr>
+<tr class="memitem:a5856892bf8646f6eac229b1348f4415d"><td class="memTemplItemLeft" align="right" valign="top">vuint64_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ccgl::utils_string::ToUInt64</b> (const STRING_T &amp;num_str)</td></tr>
+<tr class="memdesc:a5856892bf8646f6eac229b1348f4415d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an Ansi or Unicode string to a 64-bits unsigned integer <br /></td></tr>
+<tr class="separator:a5856892bf8646f6eac229b1348f4415d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c0a70d8fa404363ec38e0123e9f2be2"><td class="memTemplParams" colspan="2"><a id="a3c0a70d8fa404363ec38e0123e9f2be2" name="a3c0a70d8fa404363ec38e0123e9f2be2"></a>
+template&lt;typename STRING_T &gt; </td></tr>
+<tr class="memitem:a3c0a70d8fa404363ec38e0123e9f2be2"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ccgl::utils_string::ToDouble</b> (const STRING_T &amp;num_str)</td></tr>
+<tr class="memdesc:a3c0a70d8fa404363ec38e0123e9f2be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an Ansi or Unicode string to a 64-bits floating point number <br /></td></tr>
+<tr class="separator:a3c0a70d8fa404363ec38e0123e9f2be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p >Handling string related issues in CCGL. </p>
+<dl class="section remark"><dt>备注</dt><dd><ul>
+<li>1. 2018-05-02 - lj - Make part of CCGL.</li>
+<li>2. 2018-11-12 - lj - Add check and conversion between string and number (int, float, double)</li>
+</ul>
+</dd></dl>
+<dl class="section author"><dt>作者</dt><dd>Liangjun Zhu, zlj(at)lreis.ac.cn </dd></dl>
+<dl class="section version"><dt>版本</dt><dd>1.1 </dd></dl>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_ce650b3ee6c8ee1902ad5d9b217fa743.html">seims</a></li><li class="navelem"><a class="el" href="dir_f9d338a7544abb673b2d39dcadbe364c.html">src</a></li><li class="navelem"><a class="el" href="dir_1635fbfac89ac2806d51d330c1bf9d4d.html">ccgl</a></li><li class="navelem"><a class="el" href="dir_0346555d3ab8b65a5051eedf2d137b94.html">src</a></li><li class="navelem"><a class="el" href="utils__string_8h.html">utils_string.h</a></li>
+  </ul>
+</div>
+</body>
+</html>

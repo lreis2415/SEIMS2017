@@ -1,0 +1,149 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: seims/src/seims_main/main/main_mpi/LoadParallelTasks.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_load_parallel_tasks_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">LoadParallelTasks.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_load_parallel_tasks_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * \file LoadParallelTasks.h</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * \brief Load parallel task scheduing information.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * Changelog:</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *   - 1. 2018-06-12  - lj -  Initial implementation.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> * \author Liangjun Zhu</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifndef SEIMS_MPI_LOAD_TASK_H</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#define SEIMS_MPI_LOAD_TASK_H</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="invoke_8h.html">invoke.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="_task_information_8h.html">TaskInformation.h</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"></span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * \brief Management process.</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> *        Read reach topology data and scatter to each ranks</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * \ingroup seims_mpi</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * \param[in] mclient MongoDB client</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * \param[in] input_args Input arguments</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * \param[in] size Number of process</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * \param[out] task Task information</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * \return 0 for success</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="group__seims__mpi.html#gaa779bb1cfcf5e92e620d3011e4a467bf">   26</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group__seims__mpi.html#gaa779bb1cfcf5e92e620d3011e4a467bf">ManagementProcess</a>(MongoClient* mclient, <a class="code hl_class" href="group__module__setting.html#class_input_args">InputArgs</a>* input_args, <span class="keywordtype">int</span> size, <a class="code hl_class" href="group__seims__mpi.html#class_task_info">TaskInfo</a>* task);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"></span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * \brief Read reach topology data by master rank and scatter to each ranks.</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> * \ingroup seims_mpi</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> * \param[in] client MongoDB client</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * \param[in] input_args Input arguments</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> * \param[in] size Number of process</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> * \param[in] rank Process ID</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> * \param[out] task Task information</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> * \return 0 for success</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="group__seims__mpi.html#ga18425ea0e53181cf714214338b00f9f3">   38</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group__seims__mpi.html#ga18425ea0e53181cf714214338b00f9f3">LoadTasks</a>(MongoClient* client, <a class="code hl_class" href="group__module__setting.html#class_input_args">InputArgs</a>* input_args, <span class="keywordtype">int</span> size, <span class="keywordtype">int</span> rank, <a class="code hl_class" href="group__seims__mpi.html#class_task_info">TaskInfo</a>* task);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif </span><span class="comment">/* SEIMS_MPI_LOAD_TASK_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="a_task_information_8h_html"><div class="ttname"><a href="_task_information_8h.html">TaskInformation.h</a></div><div class="ttdoc">Class of parallel task information.</div></div>
+<div class="ttc" id="agroup__module__setting_html_class_input_args"><div class="ttname"><a href="group__module__setting.html#class_input_args">InputArgs</a></div><div class="ttdoc">Parse the input arguments of SEIMS.</div><div class="ttdef"><b>Definition:</b> invoke.h:29</div></div>
+<div class="ttc" id="agroup__seims__mpi_html_class_task_info"><div class="ttname"><a href="group__seims__mpi.html#class_task_info">TaskInfo</a></div><div class="ttdoc">Load and preprocess task scheduling information.</div><div class="ttdef"><b>Definition:</b> TaskInformation.h:27</div></div>
+<div class="ttc" id="agroup__seims__mpi_html_ga18425ea0e53181cf714214338b00f9f3"><div class="ttname"><a href="group__seims__mpi.html#ga18425ea0e53181cf714214338b00f9f3">LoadTasks</a></div><div class="ttdeci">int LoadTasks(MongoClient *client, InputArgs *input_args, int size, int rank, TaskInfo *task)</div><div class="ttdoc">Read reach topology data by master rank and scatter to each ranks.</div></div>
+<div class="ttc" id="agroup__seims__mpi_html_gaa779bb1cfcf5e92e620d3011e4a467bf"><div class="ttname"><a href="group__seims__mpi.html#gaa779bb1cfcf5e92e620d3011e4a467bf">ManagementProcess</a></div><div class="ttdeci">int ManagementProcess(MongoClient *mclient, InputArgs *input_args, int size, TaskInfo *task)</div><div class="ttdoc">Management process.</div></div>
+<div class="ttc" id="ainvoke_8h_html"><div class="ttname"><a href="invoke_8h.html">invoke.h</a></div><div class="ttdoc">Parse the input arguments as a class which can be easily extended.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_ce650b3ee6c8ee1902ad5d9b217fa743.html">seims</a></li><li class="navelem"><a class="el" href="dir_f9d338a7544abb673b2d39dcadbe364c.html">src</a></li><li class="navelem"><a class="el" href="dir_64f8a13685b9f2f1d5623a66b281a23c.html">seims_main</a></li><li class="navelem"><a class="el" href="dir_c151e3c36c54954dcb4737f82d8a1963.html">main</a></li><li class="navelem"><a class="el" href="dir_c959c6c529103227cdb83d2a16e8fd6e.html">main_mpi</a></li><li class="navelem"><a class="el" href="_load_parallel_tasks_8h.html">LoadParallelTasks.h</a></li>
+  </ul>
+</div>
+</body>
+</html>

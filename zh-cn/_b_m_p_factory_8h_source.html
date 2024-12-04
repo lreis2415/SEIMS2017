@@ -1,0 +1,227 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: seims/src/seims_main/base/bmps/BMPFactory.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_b_m_p_factory_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">BMPFactory.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_b_m_p_factory_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * \file BMPFactory.h</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * \brief Base namespace for implementation of BMP configuration</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * Changelog:</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *   - 1. 2018-04-12 - lj - Code reformat.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> * \author Liangjun Zhu</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifndef SEIMS_BMP_FACTORY_H</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#define SEIMS_BMP_FACTORY_H</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="db__mongoc_8h.html">db_mongoc.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;data_raster.hpp&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="seims_8h.html">seims.h</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceccgl.html">ccgl</a>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">using namespace </span>db_mongoc;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">using namespace </span>data_raster;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * \namespace bmps</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * \brief All BMPs scenario related data, classes, and functions.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * \ingroup bmps</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacebmps.html">bmps</a> {<span class="comment"></span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">/*!</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * \class bmps::BMPFactory</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> * \brief Base class of all kind of BMPs Factory.</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> *        Read from BMP_SCENARIOS collection of MongoDB</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html">   33</a></span><span class="keyword">class </span><a class="code hl_class" href="classbmps_1_1_b_m_p_factory.html">BMPFactory</a>: <a class="code hl_class" href="classccgl_1_1_interface.html">Interface</a> {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">    /// Constructor</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a4b999d499a48386e46a6d5d49c968532">   36</a></span><span class="comment"></span>    <a class="code hl_function" href="classbmps_1_1_b_m_p_factory.html#a4b999d499a48386e46a6d5d49c968532">BMPFactory</a>(<span class="keywordtype">int</span> scenario_id, <span class="keywordtype">int</span> bmp_id, <span class="keywordtype">int</span> sub_scenario, <span class="keywordtype">int</span> bmp_type,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>               <span class="keywordtype">int</span> bmp_priority, vector&lt;string&gt;&amp; distribution, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; collection,</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>               <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; location, <span class="keywordtype">bool</span> effectivenessChangeable = <span class="keyword">false</span>,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>               time_t changeFrequency = -1, <span class="keywordtype">int</span> variableTimes = -1);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="comment"></span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">    /// Destructor</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a551d3db9bfb14c6aa38cdb71f4c25996">   42</a></span><span class="comment"></span>    <a class="code hl_function" href="classbmps_1_1_b_m_p_factory.html#a551d3db9bfb14c6aa38cdb71f4c25996">~BMPFactory</a>();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"></span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">    /// Load BMP parameters from MongoDB</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#af7d59d8b0ebb42a514a5b3e13343a1e0">   45</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbmps_1_1_b_m_p_factory.html#af7d59d8b0ebb42a514a5b3e13343a1e0">loadBMP</a>(<a class="code hl_class" href="classccgl_1_1db__mongoc_1_1_mongo_client.html">MongoClient</a>* conn, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; bmpDBName) = 0;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"></span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">    /*!</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">     * \brief Set raster data if needed</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">     * This function is not required for each BMP, so DO NOT define as pure virtual function.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">     * i.e., DO NOT CHANGE THE DEFINITION!!!</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a7b5cc78ee5779ba5078e5ad209a089d3">   52</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbmps_1_1_b_m_p_factory.html#a7b5cc78ee5779ba5078e5ad209a089d3">setRasterData</a>(map&lt;string, IntRaster *&gt;&amp; sceneRsMap);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"></span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">    /*!</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">    * \brief Get raster data if needed</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">    * This function is not required for each BMP, so DO NOT define as pure virtual function.</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a945a1a9087bf7ff6b606015b4e656e43">   58</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span>* <a class="code hl_function" href="classbmps_1_1_b_m_p_factory.html#a945a1a9087bf7ff6b606015b4e656e43">GetRasterData</a>();</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"></span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">    /*!  Get BMP type</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">       1 - reach BMPs which are attached to specific reaches and will change the character of the reach.</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">       2 - areal structural BMPs which are corresponding to a specific structure in the watershed and will change the character of subbasins/cells.</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">       3 - areal non-structure BMPs which are NOT corresponding to a specific structure in the watershed and will change the character of subbasins/cells.</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">       4 - point structural BMPs</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a34f6e2bf0ecb57f11002280a31fb48f8">   66</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classbmps_1_1_b_m_p_factory.html#a34f6e2bf0ecb57f11002280a31fb48f8">bmpType</a>();</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"></span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">    /// Get BMP priority</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#ad98e61a7a9ef1c861224dd752ec9f5e3">   69</a></span><span class="comment"></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classbmps_1_1_b_m_p_factory.html#ad98e61a7a9ef1c861224dd752ec9f5e3">bmpPriority</a>();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">    /// Get subScenario ID</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a8f8f9245751501f7602c5affb9c2e623">   72</a></span><span class="comment"></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classbmps_1_1_b_m_p_factory.html#a8f8f9245751501f7602c5affb9c2e623">GetSubScenarioId</a>();</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"></span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">    /// Output</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a07a451c7d53b86506708db43ad30608c">   75</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbmps_1_1_b_m_p_factory.html#a07a451c7d53b86506708db43ad30608c">Dump</a>(std::ostream* fs) = 0;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">bool</span> IsEffectivenessChangeable();</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    time_t GetChangeFrequency();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">int</span> GetChangeTimes();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#ac72dd7b703de3957dcd01eb2a589da5d">   84</a></span>    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classbmps_1_1_b_m_p_factory.html#ac72dd7b703de3957dcd01eb2a589da5d">m_scenarioId</a>; <span class="comment">///&lt; Scenario ID</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#aa210e4bd20b6dc6355be6de4fe4da6ac">   85</a></span>    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classbmps_1_1_b_m_p_factory.html#aa210e4bd20b6dc6355be6de4fe4da6ac">m_bmpId</a>; <span class="comment">///&lt; BMP ID</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a2370c0a4834573a21927c267374dbc68">   86</a></span>    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classbmps_1_1_b_m_p_factory.html#a2370c0a4834573a21927c267374dbc68">m_subScenarioId</a>; <span class="comment">///&lt; SubScenario ID within one BMP iD</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a10432c6e32cfd182351c11a3b42f4c44">   87</a></span>    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classbmps_1_1_b_m_p_factory.html#a10432c6e32cfd182351c11a3b42f4c44">m_bmpType</a>; <span class="comment">///&lt; BMP Type</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a4e69d6f18a2f1cb1efb6d18dccb66ed6">   88</a></span>    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classbmps_1_1_b_m_p_factory.html#a4e69d6f18a2f1cb1efb6d18dccb66ed6">m_bmpPriority</a>; <span class="comment">///&lt; BMP Priority</span><span class="comment"></span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">    /*! Distribution vector of BMP</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">     *  Origin format is [distribution data type]|[distribution parameter name]|Collection name|...</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a71e60056057dc4c722a78f3f43ac58f5">   92</a></span>    vector&lt;string&gt; <a class="code hl_variable" href="classbmps_1_1_b_m_p_factory.html#a71e60056057dc4c722a78f3f43ac58f5">m_distribution</a>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a1ee08a326bdb69a28658d33cf1f4134b">   93</a></span>    <span class="keyword">const</span> <span class="keywordtype">string</span> <a class="code hl_variable" href="classbmps_1_1_b_m_p_factory.html#a1ee08a326bdb69a28658d33cf1f4134b">m_bmpCollection</a>; <span class="comment">///&lt; Collection name</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classbmps_1_1_b_m_p_factory.html#a3d696be862035eb056340670ff8838ff">   94</a></span>    <span class="keyword">const</span> <span class="keywordtype">string</span> <a class="code hl_variable" href="classbmps_1_1_b_m_p_factory.html#a3d696be862035eb056340670ff8838ff">m_location</a>; <span class="comment">///&lt; Define where the BMP will be applied</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> m_effectivenessChangeable;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keyword">const</span> time_t m_changeFrequency;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> m_changeTimes;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>};</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>}</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="preprocessor">#endif </span><span class="comment">/* SEIMS_BMP_FACTORY_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html">bmps::BMPFactory</a></div><div class="ttdoc">Base class of all kind of BMPs Factory.</div><div class="ttdef"><b>Definition:</b> BMPFactory.h:33</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a07a451c7d53b86506708db43ad30608c"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a07a451c7d53b86506708db43ad30608c">bmps::BMPFactory::Dump</a></div><div class="ttdeci">virtual void Dump(std::ostream *fs)=0</div><div class="ttdoc">Output</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a10432c6e32cfd182351c11a3b42f4c44"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a10432c6e32cfd182351c11a3b42f4c44">bmps::BMPFactory::m_bmpType</a></div><div class="ttdeci">const int m_bmpType</div><div class="ttdoc">BMP Type</div><div class="ttdef"><b>Definition:</b> BMPFactory.h:87</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a1ee08a326bdb69a28658d33cf1f4134b"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a1ee08a326bdb69a28658d33cf1f4134b">bmps::BMPFactory::m_bmpCollection</a></div><div class="ttdeci">const string m_bmpCollection</div><div class="ttdoc">Collection name</div><div class="ttdef"><b>Definition:</b> BMPFactory.h:93</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a2370c0a4834573a21927c267374dbc68"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a2370c0a4834573a21927c267374dbc68">bmps::BMPFactory::m_subScenarioId</a></div><div class="ttdeci">const int m_subScenarioId</div><div class="ttdoc">SubScenario ID within one BMP iD</div><div class="ttdef"><b>Definition:</b> BMPFactory.h:86</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a34f6e2bf0ecb57f11002280a31fb48f8"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a34f6e2bf0ecb57f11002280a31fb48f8">bmps::BMPFactory::bmpType</a></div><div class="ttdeci">int bmpType()</div><div class="ttdoc">Get BMP type 1 - reach BMPs which are attached to specific reaches and will change the character of t...</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a3d696be862035eb056340670ff8838ff"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a3d696be862035eb056340670ff8838ff">bmps::BMPFactory::m_location</a></div><div class="ttdeci">const string m_location</div><div class="ttdoc">Define where the BMP will be applied</div><div class="ttdef"><b>Definition:</b> BMPFactory.h:94</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a4b999d499a48386e46a6d5d49c968532"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a4b999d499a48386e46a6d5d49c968532">bmps::BMPFactory::BMPFactory</a></div><div class="ttdeci">BMPFactory(int scenario_id, int bmp_id, int sub_scenario, int bmp_type, int bmp_priority, vector&lt; string &gt; &amp;distribution, const string &amp;collection, const string &amp;location, bool effectivenessChangeable=false, time_t changeFrequency=-1, int variableTimes=-1)</div><div class="ttdoc">Constructor</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a4e69d6f18a2f1cb1efb6d18dccb66ed6"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a4e69d6f18a2f1cb1efb6d18dccb66ed6">bmps::BMPFactory::m_bmpPriority</a></div><div class="ttdeci">const int m_bmpPriority</div><div class="ttdoc">BMP Priority</div><div class="ttdef"><b>Definition:</b> BMPFactory.h:88</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a551d3db9bfb14c6aa38cdb71f4c25996"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a551d3db9bfb14c6aa38cdb71f4c25996">bmps::BMPFactory::~BMPFactory</a></div><div class="ttdeci">~BMPFactory()</div><div class="ttdoc">Destructor</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a71e60056057dc4c722a78f3f43ac58f5"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a71e60056057dc4c722a78f3f43ac58f5">bmps::BMPFactory::m_distribution</a></div><div class="ttdeci">vector&lt; string &gt; m_distribution</div><div class="ttdoc">Distribution vector of BMP Origin format is [distribution data type]|[distribution parameter name]|Co...</div><div class="ttdef"><b>Definition:</b> BMPFactory.h:92</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a7b5cc78ee5779ba5078e5ad209a089d3"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a7b5cc78ee5779ba5078e5ad209a089d3">bmps::BMPFactory::setRasterData</a></div><div class="ttdeci">virtual void setRasterData(map&lt; string, IntRaster * &gt; &amp;sceneRsMap)</div><div class="ttdoc">Set raster data if needed This function is not required for each BMP, so DO NOT define as pure virtua...</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a8f8f9245751501f7602c5affb9c2e623"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a8f8f9245751501f7602c5affb9c2e623">bmps::BMPFactory::GetSubScenarioId</a></div><div class="ttdeci">int GetSubScenarioId()</div><div class="ttdoc">Get subScenario ID</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_a945a1a9087bf7ff6b606015b4e656e43"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#a945a1a9087bf7ff6b606015b4e656e43">bmps::BMPFactory::GetRasterData</a></div><div class="ttdeci">virtual int * GetRasterData()</div><div class="ttdoc">Get raster data if needed This function is not required for each BMP, so DO NOT define as pure virtua...</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_aa210e4bd20b6dc6355be6de4fe4da6ac"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#aa210e4bd20b6dc6355be6de4fe4da6ac">bmps::BMPFactory::m_bmpId</a></div><div class="ttdeci">const int m_bmpId</div><div class="ttdoc">BMP ID</div><div class="ttdef"><b>Definition:</b> BMPFactory.h:85</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_ac72dd7b703de3957dcd01eb2a589da5d"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#ac72dd7b703de3957dcd01eb2a589da5d">bmps::BMPFactory::m_scenarioId</a></div><div class="ttdeci">const int m_scenarioId</div><div class="ttdoc">Scenario ID</div><div class="ttdef"><b>Definition:</b> BMPFactory.h:84</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_ad98e61a7a9ef1c861224dd752ec9f5e3"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#ad98e61a7a9ef1c861224dd752ec9f5e3">bmps::BMPFactory::bmpPriority</a></div><div class="ttdeci">int bmpPriority()</div><div class="ttdoc">Get BMP priority</div></div>
+<div class="ttc" id="aclassbmps_1_1_b_m_p_factory_html_af7d59d8b0ebb42a514a5b3e13343a1e0"><div class="ttname"><a href="classbmps_1_1_b_m_p_factory.html#af7d59d8b0ebb42a514a5b3e13343a1e0">bmps::BMPFactory::loadBMP</a></div><div class="ttdeci">virtual void loadBMP(MongoClient *conn, const string &amp;bmpDBName)=0</div><div class="ttdoc">Load BMP parameters from MongoDB</div></div>
+<div class="ttc" id="aclassccgl_1_1_interface_html"><div class="ttname"><a href="classccgl_1_1_interface.html">ccgl::Interface</a></div><div class="ttdoc">Base type of all interfaces.</div><div class="ttdef"><b>Definition:</b> basic.h:407</div></div>
+<div class="ttc" id="aclassccgl_1_1db__mongoc_1_1_mongo_client_html"><div class="ttname"><a href="classccgl_1_1db__mongoc_1_1_mongo_client.html">ccgl::db_mongoc::MongoClient</a></div><div class="ttdoc">A simple wrapper of the class of MongoDB Client mongoc_client_t.</div><div class="ttdef"><b>Definition:</b> db_mongoc.h:46</div></div>
+<div class="ttc" id="adb__mongoc_8h_html"><div class="ttname"><a href="db__mongoc_8h.html">db_mongoc.h</a></div><div class="ttdoc">Simple wrappers of the API of MongoDB C driver mongo-c-driver, see MongoDB C Driver for more informat...</div></div>
+<div class="ttc" id="anamespacebmps_html"><div class="ttname"><a href="namespacebmps.html">bmps</a></div><div class="ttdoc">All BMPs scenario related data, classes, and functions.</div><div class="ttdef"><b>Definition:</b> BMPArealSourceFactory.h:22</div></div>
+<div class="ttc" id="anamespaceccgl_html"><div class="ttname"><a href="namespaceccgl.html">ccgl</a></div><div class="ttdoc">Common Cross-platform Geographic Library (CCGL)</div></div>
+<div class="ttc" id="aseims_8h_html"><div class="ttname"><a href="seims_8h.html">seims.h</a></div><div class="ttdoc">The SEIMS related definitions and utilities header.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_ce650b3ee6c8ee1902ad5d9b217fa743.html">seims</a></li><li class="navelem"><a class="el" href="dir_f9d338a7544abb673b2d39dcadbe364c.html">src</a></li><li class="navelem"><a class="el" href="dir_64f8a13685b9f2f1d5623a66b281a23c.html">seims_main</a></li><li class="navelem"><a class="el" href="dir_d9d8c03d94c229237348b60b53b769ac.html">base</a></li><li class="navelem"><a class="el" href="dir_c4eaa6a6e6c4ee7b087e3de60cab1bbc.html">bmps</a></li><li class="navelem"><a class="el" href="_b_m_p_factory_8h.html">BMPFactory.h</a></li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: seims/src/seims_main/base/module_setting/SimulationModule.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_simulation_module_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#enum-members">枚举</a>  </div>
+  <div class="headertitle"><div class="title">SimulationModule.h 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Parent class for all modules in SEIMS  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="basic_8h_source.html">basic.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils__time_8h_source.html">utils_time.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_scenario_8h_source.html">Scenario.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="cls_reach_8h_source.html">clsReach.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="cls_subbasin_8h_source.html">clsSubbasin.h</a>&quot;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;ctime&gt;</code><br />
+</div>
+<p><a href="_simulation_module_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:class_simulation_module"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__module__setting.html#class_simulation_module">SimulationModule</a></td></tr>
+<tr class="memdesc:class_simulation_module"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base module for all simulation modules in SEIMS  <a href="group__module__setting.html#class_simulation_module">更多...</a><br /></td></tr>
+<tr class="separator:class_simulation_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:a116bd0c51af028168856a9c2fcf2d54b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_simulation_module_8h.html#a116bd0c51af028168856a9c2fcf2d54b">CHECK_DATA</a>(moduleID,  expression,  desc)</td></tr>
+<tr class="memdesc:a116bd0c51af028168856a9c2fcf2d54b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macros for CheckInputData function BE REMEMBER OF SEMICOLON!  <a href="_simulation_module_8h.html#a116bd0c51af028168856a9c2fcf2d54b">更多...</a><br /></td></tr>
+<tr class="separator:a116bd0c51af028168856a9c2fcf2d54b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a340c09a1ec3acadb25f8fd022d93347c"><td class="memItemLeft" align="right" valign="top"><a id="a340c09a1ec3acadb25f8fd022d93347c" name="a340c09a1ec3acadb25f8fd022d93347c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CHECK_POINTER</b>(moduleID,  param)</td></tr>
+<tr class="memdesc:a340c09a1ec3acadb25f8fd022d93347c"><td class="mdescLeft">&#160;</td><td class="mdescRight">CHECK_POINTER is used for 1D or 2D raster and other pointer of data <br /></td></tr>
+<tr class="separator:a340c09a1ec3acadb25f8fd022d93347c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc19a5dd108d1aad1a449108d1d2711c"><td class="memItemLeft" align="right" valign="top"><a id="adc19a5dd108d1aad1a449108d1d2711c" name="adc19a5dd108d1aad1a449108d1d2711c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CHECK_POSITIVE</b>(moduleID,  param)</td></tr>
+<tr class="memdesc:adc19a5dd108d1aad1a449108d1d2711c"><td class="mdescLeft">&#160;</td><td class="mdescRight">CHECK_POSITIVE is used for single value that must be positive <br /></td></tr>
+<tr class="separator:adc19a5dd108d1aad1a449108d1d2711c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e0c439d0ec502e3c4be632bccd4676b"><td class="memItemLeft" align="right" valign="top"><a id="a0e0c439d0ec502e3c4be632bccd4676b" name="a0e0c439d0ec502e3c4be632bccd4676b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CHECK_NONNEGATIVE</b>(moduleID,  param)</td></tr>
+<tr class="memdesc:a0e0c439d0ec502e3c4be632bccd4676b"><td class="mdescLeft">&#160;</td><td class="mdescRight">CHECK_NONNEGATIVE is used for single value that must be greater or equal than zero <br /></td></tr>
+<tr class="separator:a0e0c439d0ec502e3c4be632bccd4676b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7211bfbbc385a0571c12cf198f5c007"><td class="memItemLeft" align="right" valign="top"><a id="ab7211bfbbc385a0571c12cf198f5c007" name="ab7211bfbbc385a0571c12cf198f5c007"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CHECK_NEGATIVE</b>(moduleID,  param)</td></tr>
+<tr class="memdesc:ab7211bfbbc385a0571c12cf198f5c007"><td class="mdescLeft">&#160;</td><td class="mdescRight">CHECK_NEGATIVE is used for single value that must be negative <br /></td></tr>
+<tr class="separator:ab7211bfbbc385a0571c12cf198f5c007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab81c97426f96d84ef37f3acaa42800b1"><td class="memItemLeft" align="right" valign="top"><a id="ab81c97426f96d84ef37f3acaa42800b1" name="ab81c97426f96d84ef37f3acaa42800b1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CHECK_ZERO</b>(moduleID,  param)</td></tr>
+<tr class="memdesc:ab81c97426f96d84ef37f3acaa42800b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">CHECK_ZERO is used for single value that must not be ZERO <br /></td></tr>
+<tr class="separator:ab81c97426f96d84ef37f3acaa42800b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c813a12b0e73dc4dedf0fb5697c8489"><td class="memItemLeft" align="right" valign="top"><a id="a1c813a12b0e73dc4dedf0fb5697c8489" name="a1c813a12b0e73dc4dedf0fb5697c8489"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CHECK_NODATA</b>(moduleID,  param)</td></tr>
+<tr class="memdesc:a1c813a12b0e73dc4dedf0fb5697c8489"><td class="mdescLeft">&#160;</td><td class="mdescRight">CHECK_NODATA is used for single value that must not be NODATA_VALUE <br /></td></tr>
+<tr class="separator:a1c813a12b0e73dc4dedf0fb5697c8489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+枚举</h2></td></tr>
+<tr class="memitem:gad2dde160974c283ccf8f0ce280f791ba"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__module__setting.html#gad2dde160974c283ccf8f0ce280f791ba">TimeStepType</a> { <br />
+&#160;&#160;<a class="el" href="group__module__setting.html#gad2dde160974c283ccf8f0ce280f791baadc40c96edcf1d8300170f1bef61f49ff">TIMESTEP_HILLSLOPE</a>
+, <br />
+&#160;&#160;<a class="el" href="group__module__setting.html#gad2dde160974c283ccf8f0ce280f791baa4df7462501d1a9e2d2799cfdda3cdf4c">TIMESTEP_CHANNEL</a>
+, <br />
+&#160;&#160;<a class="el" href="group__module__setting.html#gad2dde160974c283ccf8f0ce280f791baacae2e9dd50b3d6851e8660aad89963f5">TIMESTEP_SIMULATION</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:gad2dde160974c283ccf8f0ce280f791ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time step types.  <a href="group__module__setting.html#gad2dde160974c283ccf8f0ce280f791ba">更多...</a><br /></td></tr>
+<tr class="separator:gad2dde160974c283ccf8f0ce280f791ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p >Parent class for all modules in SEIMS </p>
+<p >Changelog:</p><ul>
+<li>1. 2010-07-31 - jz - Initial implementation.</li>
+<li>2. 2016-06-14 - lj - Add SetScenario etc. functions.</li>
+<li>3. 2018-03-03 - lj - Add CHECK_XXX series macros for data checking.</li>
+<li>4. 2020-09-18 - lj - Using Easyloggingpp</li>
+<li>5. 2021-10-29 - ss,lj - Add InitialIntermediates to initialize intermediate params.</li>
+</ul>
+<dl class="section author"><dt>作者</dt><dd>Junzhi Liu, Liangjun Zhu </dd></dl>
+</div><h2 class="groupheader">宏定义说明</h2>
+<a id="a116bd0c51af028168856a9c2fcf2d54b" name="a116bd0c51af028168856a9c2fcf2d54b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a116bd0c51af028168856a9c2fcf2d54b">&#9670;&nbsp;</a></span>CHECK_DATA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CHECK_DATA</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">moduleID, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">expression, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">desc&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>值:</b><div class="fragment"><div class="line">                   <span class="keywordflow">if</span> ((expression)) \</div>
+<div class="line">                   throw <a class="code hl_class" href="classccgl_1_1_model_exception.html">ModelException</a>(moduleID, <span class="stringliteral">&quot;CheckInputData&quot;</span>, <span class="keywordtype">string</span>(desc))</div>
+<div class="ttc" id="aclassccgl_1_1_model_exception_html"><div class="ttname"><a href="classccgl_1_1_model_exception.html">ccgl::ModelException</a></div><div class="ttdoc">Print the exception message</div><div class="ttdef"><b>Definition:</b> basic.h:416</div></div>
+</div><!-- fragment -->
+<p>Macros for CheckInputData function BE REMEMBER OF SEMICOLON! </p>
+<p >CHECK_DATA is used for the unforeseen situation </p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_ce650b3ee6c8ee1902ad5d9b217fa743.html">seims</a></li><li class="navelem"><a class="el" href="dir_f9d338a7544abb673b2d39dcadbe364c.html">src</a></li><li class="navelem"><a class="el" href="dir_64f8a13685b9f2f1d5623a66b281a23c.html">seims_main</a></li><li class="navelem"><a class="el" href="dir_d9d8c03d94c229237348b60b53b769ac.html">base</a></li><li class="navelem"><a class="el" href="dir_cce2c0ac50386f26b5b526fa8626cc77.html">module_setting</a></li><li class="navelem"><a class="el" href="_simulation_module_8h.html">SimulationModule.h</a></li>
+  </ul>
+</div>
+</body>
+</html>

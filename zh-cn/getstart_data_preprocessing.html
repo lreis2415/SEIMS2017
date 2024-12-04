@@ -1,0 +1,287 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: 数据预处理</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('getstart_data_preprocessing.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">数据预处理 </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>目录</h3>
+<ul><li class="level1"><a href="#autotoc_md25">简单用法</a></li>
+<li class="level1"><a href="#autotoc_md26">数据预处理的配置文件</a></li>
+<li class="level1"><a href="#autotoc_md27">高级用法</a></li>
+<li class="level1"><a href="#autotoc_md28">预处理的中间数据</a></li>
+<li class="level1"><a href="#autotoc_md29">流域建模数据库结构</a></li>
+<li class="level1"><a href="#autotoc_md30">更多介绍...</a></li>
+</ul>
+</div>
+<div class="textblock"><p ><a class="anchor" id="md_doc_zh_cn_get_started_data_preprocessing"></a></p>
+<p >流域建模的数据预处理工作流程是从各种空间数据（如DEM、土地利用图和土壤类型图）中提取空间参数，整理纯文本数据（如降水和气象数据、站点监测数据和BMP情景分析数据），并将这些数据导入研究区域的MongoDB数据库。</p>
+<p >**Windows用户注意事项**： 用户应确保所有SEIMS可执行文件（即<code>*.exe</code> 文件）已被允许通过Windows防火墙，否则可能会遇到**PermissionError**。 将<code>seims\Firewall_for_Windows.bat</code>复制到包含所有SEIMS可执行文件的 <code>bin</code> 目录中，然后右键点击 <code>bat</code> 文件并选择以管理员身份运行。</p>
+<h1><a class="anchor" id="autotoc_md25"></a>
+简单用法</h1>
+<p >打开一个终端（例如Windows的CMD），输入以下命令来运行游屋圳流域的数据预处理： </p><div class="fragment"><div class="line">cd D:\demo\SEIMS\seims\test</div>
+<div class="line">D:</div>
+<div class="line">python demo_preprocess.py -name youwuzhen</div>
+</div><!-- fragment --><p> 数据预处理的运行日志末尾如图1所示。</p>
+<p >![ywzpreprocessinfo]（../../img/messages-of-simple-usage-of-preprocess.jpg） <img src="messages-of-simple-usage-of-preprocess.jpg" alt="ywzpreprocessinfo" width="400" class="inline"/></p>
+<p >图1 游屋圳流域建模的数据预处理运行日志</p>
+<p >运行简单用法后，将在中间数据目录（即<code>SEIMS\data\youwuzhen\workspace</code>，图2）中生成数据预处理的输入配置文件（<code>preprocess.ini</code>），并且流域建模的数据已被导入MongoDB（图3）。配置文件的详细信息、高级用法、中间数据和流域建模数据库将在以下章节介绍。</p>
+<p >![ywzpreprocessinfo]（../../img/directory-tree-of-intermediate-data-of-preprocessing.jpg） <img src="directory-tree-of-intermediate-data-of-preprocessing.jpg" alt="ywzpreprocessinfo" width="400" class="inline"/></p>
+<p >图2 游屋圳流域数据预处理后的中间数据目录</p>
+<p >![ywzdb]（../../img/database-Youwuzhen-30m-longterm.jpg） <img src="database-Youwuzhen-30m-longterm.jpg" alt="ywzdb" width="400" class="inline"/></p>
+<p >图3 游屋圳流域的流域建模数据库的截图</p>
+<h1><a class="anchor" id="autotoc_md26"></a>
+数据预处理的配置文件</h1>
+<p >数据预处理的简单用法包含两个步骤，如根据SEIMS的本地路径生成配置文件，以及通过高级用法执行数据预处理，高级用法将在下一节中介绍。</p>
+<p >SEIMS使用 <code>INI</code> 文件作为配置文件的格式。 <code>INI</code> 文件是纯文本文件，其基本结构由节和选项组成（选项是一对属性和值）。行首的分号（<code>;</code>）或井号（<code>#</code>）表示注释，会被忽略。游屋圳流域的数据预处理配置内容如下所示： </p><div class="fragment"><div class="line">[PATH]</div>
+<div class="line">PREPROC_SCRIPT_DIR = d:\demo\SEIMS\seims\preprocess</div>
+<div class="line">CPP_PROGRAM_DIR = d:\demo\SEIMS\bin</div>
+<div class="line">MPIEXEC_DIR = None</div>
+<div class="line">BASE_DATA_DIR = d:\demo\SEIMS\data\youwuzhen</div>
+<div class="line">CLIMATE_DATA_DIR = d:\demo\SEIMS\data\youwuzhen\data_prepare\climate</div>
+<div class="line">SPATIAL_DATA_DIR = d:\demo\SEIMS\data\youwuzhen\data_prepare\spatial</div>
+<div class="line">MEASUREMENT_DATA_DIR = d:\demo\SEIMS\data\youwuzhen\data_prepare\observed</div>
+<div class="line">BMP_DATA_DIR = d:\demo\SEIMS\data\youwuzhen\data_prepare\scenario</div>
+<div class="line">MODEL_DIR = d:\demo\SEIMS\data\youwuzhen\demo_youwuzhen30m_longterm_model</div>
+<div class="line">TXT_DB_DIR = d:\demo\SEIMS\data\youwuzhen\data_prepare\lookup</div>
+<div class="line">WORKING_DIR = d:\demo\SEIMS\data\youwuzhen\workspace</div>
+<div class="line">[MONGODB]</div>
+<div class="line">HOSTNAME = 127.0.0.1</div>
+<div class="line">PORT = 27017</div>
+<div class="line">ClimateDBName = demo_youwuzhen30m_HydroClimate</div>
+<div class="line">BMPScenarioDBName = demo_youwuzhen30m_Scenario</div>
+<div class="line">SpatialDBName = demo_youwuzhen30m_longterm_model</div>
+<div class="line">[CLIMATE]</div>
+<div class="line">HydroClimateVarFile = Variables.csv</div>
+<div class="line">MeteoSiteFile = Sites_M.csv</div>
+<div class="line">PrecSiteFile = Sites_P.csv</div>
+<div class="line">MeteoDataFile = meteo_daily.csv</div>
+<div class="line">PrecDataFile = pcp_daily.csv</div>
+<div class="line">thiessenIdField = ID</div>
+<div class="line">[SPATIAL]</div>
+<div class="line">dem = ywzdem30m.tif</div>
+<div class="line">outlet_file = outlet_beijing1954.shp</div>
+<div class="line">PrecSitesThiessen = thiessen_pcp.shp</div>
+<div class="line">MeteoSitesThiessen = thiessen_meteo.shp</div>
+<div class="line">landuseFile = ywzlanduse30m.tif</div>
+<div class="line">landcoverInitFile = landcover_initial_parameters.csv</div>
+<div class="line">soilSEQNFile = ywzsoil30m.tif</div>
+<div class="line">soilSEQNText = soil_properties_lookup.csv</div>
+<div class="line">field_partition_thresh = 15</div>
+<div class="line">[OPTIONAL_PARAMETERS]</div>
+<div class="line">D8AccThreshold = 35</div>
+<div class="line">np = 4</div>
+<div class="line">D8DownMethod = Surface</div>
+<div class="line">dorm_hr = -1.</div>
+<div class="line">T_base = 0.</div>
+<div class="line">imperviousPercInUrbanCell = 0.3</div>
+<div class="line">defaultLanduse = 33</div>
+<div class="line">defaultSoil = 201</div>
+</div><!-- fragment --><p >数据预处理的配置文件，如游屋圳流域的的配置文件，包含五节，即<code>PATH</code>、 <code>MONGODB</code>、 <code>CLIMATE</code>、 <code>SPATIAL</code>和 <code>OPTIONAL_PARAMETERS</code>。</p>
+<p >每个节中包含若干属性-值对（即选项）。节和属性的名称不应更改。注意，在Windows实现中，节和属性名称不区分大小写。</p>
+<ul>
+<li><code>PATH</code>：可执行文件、数据和中间工作空间的完整路径。<ol type="1">
+<li><code>PREPROC_SCRIPT_DIR</code>： 数据预处理的Python脚本路径。</li>
+<li><code>CPP_PROGRAM_DIR</code>： SEIMS C/C++应用程序的安装目录。</li>
+<li><code>MPIEXEC_DIR</code>： MPI可执行文件的目录路径，即 <code>C:\Program Files\Microsoft MPI\Bin</code>。如果已添加到环境路径中，该值可以为None或注释掉。</li>
+<li><code>BASE_DATA_DIR</code>： 研究区的基础数据目录。</li>
+<li><code>CLIMATE_DATA_DIR</code>： （可选）包含降水数据（章节 2:2.3）和气象数据（章节 2:2.4）的气候数据路径。如果未指定（表示该选项行被注释），SEIMS将尝试在<code>BASE_DATA_DIR\data_prepare\climate</code>中查找气候数据。</li>
+<li><code>SPATIAL_DATA_DIR</code>： （可选）空间数据的路径（章节 2:2.1.1）。如果未指定。SEIMS将尝试在<code>BASE_DATA_DIR\data_prepare\spatial</code>中查找空间数据。</li>
+<li><code>MEASUREMENT_DATA_DIR</code>： （可选）观测数据的路径（章节 2:2.5）。如果未指定，SEIMS将尝试在<code>BASE_DATA_DIR\data_prepare\observed</code>中查找观测数据。</li>
+<li><code>BMP_DATA_DIR</code>： （可选）BMP情景数据的路径（章节 2:2.7）。如果未指定，SEIMS将尝试在<code>BASE_DATA_DIR\data_prepare\scenario</code> 中查找情景数据。</li>
+<li><code>MODEL_DIR</code>： 研究区域的模型路径，其中包含用于流域建模的多个配置文件。对于数据预处理，需要<code>file.in</code> 和 <code>file.out</code>， 校准参数 <code>param.cali</code> 是可选的。 模型文件夹的文件结构细节将在章节 2:4.2中介绍。</li>
+<li><code>TXT_DB_DIR</code>： （可选）额外查找表的路径（章节 2:2.6）。如果未指定，SEIMS将尝试在 <code>BASE_DATA_DIR\data_prepare\lookup</code> 中查找查找表。</li>
+<li><code>WORKING_DIR</code>： 可选）用于中间数据的工作空间。如果未指定，SEIMS将使用默认路径<code>BASE_DATA_DIR\workspace</code>。</li>
+</ol>
+</li>
+<li><code>MONGODB</code>： MongoDB相关设置。<ol type="1">
+<li><code>HOSTNAME</code>： MongoDB服务器的IP地址，例如127.0.0.1（即localhost）。</li>
+<li><code>PORT</code>： MongoDB服务器的端口，默认为27017。</li>
+<li><code>SpatialDBName</code>： 在MongoDB服务器中创建的研究区域主空间数据库的名称（图2：3 3）。该名称**必须**与 <code>MODEL_DIR</code> 的文件夹名称相同。</li>
+<li><code>ClimateDBName</code>： 在MongoDB服务器中创建的水文气候数据库的名称（图2：3 3）。</li>
+<li><code>BMPScenarioDBName</code>： 在MongoDB服务器中创建的BMP情景数据库的名称（图2：3 3）。</li>
+</ol>
+</li>
+<li><code>CLIMATE</code>： 位于<code>CLIMATE_DATA_DIR</code>中的气候数据文件名。<ol type="1">
+<li><code>HydroClimateVarFile</code>： 气候数据变量的类型和单位（章节 2:2.4）。</li>
+<li><code>MeteoSiteFile</code>： 气象站的空间信息（章节 2:2.4）。</li>
+<li><code>PrecSiteFile</code>： 降水站的空间信息（章节 2:2.3.1）。</li>
+<li><code>MeteoDataFile</code>： 气象数据（章节 2:2.4）。</li>
+<li><code>PrecDataFile</code>： 降水数据（章节 2:2.3.2）。</li>
+<li><code>thiessenIdField</code>： （可选）气候站泰森多边形文件中的字段ID（章节 2:2.2），默认为<code>ID</code>。</li>
+</ol>
+</li>
+<li><code>SPATIAL</code>： 位于SPATIAL_DATA_DIR 和 TXT_DB_DIR中的空间数据文件名·<ol type="1">
+<li><code>dem</code>： 原始DEM数据。</li>
+<li><code>outlet_file</code>： （可选）研究区域的出口文件。</li>
+<li><code>PrecSitesThiessen</code>： 降水站的泰森多边形文件。</li>
+<li><code>MeteoSitesThiessen</code>： 气象站的泰森多边形文件。</li>
+<li><code>landuseFile</code>： 土地利用类型的栅格文件。</li>
+<li><code>landcoverInitFile</code>： 初始土地覆盖参数的查找表（章节 2:2.6.2）。</li>
+<li><code>soilSEQNFile</code>： 土壤序列的栅格文件。</li>
+<li><code>soilSEQNText</code>： 土壤特性的查找表（章节 2:2.6.1）。</li>
+<li><code>field_partition_thresh</code>： （可选）划分水文连通地块的阈值（Wu等，2018）。可以指定多个阈值，如<code>10,15,20</code>。以 <code>fields_&lt;threshold&gt;.tif</code>（如）命名的划分的地块将导入主空间数据库（即SpatialDBName）。同时，将在 <code>MODEL_DIR</code>生成一个名为<code>connected_field_units_updown_&lt;threshold&gt;.json</code> 的json格式文件，描述地块的上下游关系和土地利用信息等。水文连通地块可用作BMP情景分析的BMP配置单元（参见章节 2:8）。</li>
+</ol>
+</li>
+<li><code>OPTIONAL_PARAMETERS</code>： 可选参数。<ol type="1">
+<li><code>D8AccThreshold</code>： 用于河流和子流域划分的流量累积阈值，默认为0。在这种情况下，TauDEM的drop分析功能将自动确定阈值。</li>
+<li><code>np</code>： 基于MPI并行计算的C++应用程序（例如TauDEM的函数）的进程数，默认为4。</li>
+<li><code>D8DownMethod</code>： 河流向下距离的计算方法，可用值为pythagoras（勾股）、horizontal（水平）、vertical（垂直）和surface（表面），或分别简化为p、h、v 和 s。默认值为surface或s。详情可参见http：//hydrology.usu.edu/taudem/taudem5/help53/DInfinityDistanceDown.html。</li>
+<li><code>dorm_hr</code>： 休眠期的日长阈值小时数，默认为-1。</li>
+<li><code>T_base</code>： 热量单位计算的基温（摄氏度），默认为0。</li>
+<li><code>imperviousPercInUrbanCell</code>： 城市单元的不透水百分比，默认为0.3。</li>
+<li><code>defaultLanduse</code>： NoData区域的默认土地利用类型，**必须**存在于准备的<code>landcoverInitFile</code>中。</li>
+<li><code>defaultSoil</code>： NoData区域的默认土壤序列类型，**必须**存在于准备的<code>soilSEQNFile</code>中。</li>
+</ol>
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md27"></a>
+高级用法</h1>
+<p >数据预处理的Python脚本位于 <code>SEIMS/seims/preprocess</code>中。脚本名称的前缀根据功能进行区分，即<code>sd_</code>用于流域的空间离散化（例如子流域的划分）， <code>sp_</code>用于空间参数的提取（例如根据SWAT模型的数据库和附加查找表提取土地利用和土壤相关参数，章节 2:2.6）， <code>hydro_</code> 用于水文和气候数据的处理，<code>db_</code> 用于MongoDB数据库的输入和/或输出。 <code>main.py</code> 是整个数据预处理流程的入口。每个脚本可以通过统一的格式独立执行： <code>python &lt;script_name&gt; -ini &lt;/path/to/configuration-file&gt;</code>。 例如，运行整个工作流程： </p><div class="fragment"><div class="line">cd D:\demo\SEIMS\seims\preprocess</div>
+<div class="line">python main.py -ini D:\demo\SEIMS\data\youwuzhen\workspace\preprocess.ini</div>
+</div><!-- fragment --><p >如果需要更新BMP情景相关数据，只需运行导入BMP情景数据到MongoDB的脚本： </p><div class="fragment"><div class="line">cd D:\demo\SEIMS\seims\preprocess</div>
+<div class="line">python db_import_bmpscenario.py -ini D:\demo\SEIMS\data\youwuzhen\workspace\preprocess.ini</div>
+</div><!-- fragment --><p >整个预处理流程可以分为两个主要步骤，即流域的空间离散化（即<code>sd_delineation.py</code>）和MongoDB数据库的创建（即<code>sd_delineation.py</code>）。强烈建议用户先将<code>D8AccThreshold</code>设置为0来运行<code>sd_delineation.py</code> ，以获得子流域的初步划分。自动划分的子流域可能过于细难以满足流域建模所需的适当空间尺度。因此，用户可以根据流量累积栅格（即<code>SEIMS\data\youwuzhen\workspace\taudem_delineated\accTauD8WithWeight.tif</code>，有关中间数据的更多信息将在后续章节中描述）手动调整合适的阈值。在确定最终的阈值并更新配置文件中的 <code>D8AccThreshold</code> 值后，需要重新运行 <code>main.py</code> 完成整个预处理工作。</p>
+<p >请注意，当前数据预处理工具的实现是为了支持现有的SEIMS流域过程模块。这意味着，如果一个新开发模块所需的输入数据无法从数据库或其他模块的输出中获得，则需要新增相应的预处理工具。更多信息请参考“章节 4:1 开发新的流域过程模块”。</p>
+<h1><a class="anchor" id="autotoc_md28"></a>
+预处理的中间数据</h1>
+<p >如图2所示，数据预处理的中间数据被组织成七个文件夹：</p>
+<ul>
+<li><code>taudem_delineated</code>： 基于TauDEM进行的子流域空间划分的原始结果和中间数据，包括流量累积数据（<code>accTauD8WithWeight.tif</code>），子流域划分数据（<code>subbasinTauM.tif</code>）以及由subbasinTauM.tif掩膜的D8流向数据（&lt;tt&gt;flowDirTauM.tif）等。</li>
+<li><code>lookup_tables</code>： 基于SWAT模型的土地利用数据库查找表，用于生成与土地利用类型相关的参数。 <blockquote class="doxtable">
+<p >TODO： 在当前版本的SEIMS中，土地利用和土壤类型相关的空间参数（栅格数据）作为单独文件（即MongoDB中的GridFS）进行准备和导入。这种解决方案会导致SEIMS主程序读取数据的性能较低。因此，在未来版本中，应使用查找表而不是分开的栅格或基于数组的参数。 </p>
+</blockquote>
++ <code>spatial_raster</code>： 所有被划定的流域边界（即<code>subbasinTauM.tif</code>）掩膜的空间参数（栅格数据）。</li>
+<li><code>spatial_shp</code>： 整个流域和每个子流域的空间矢量数据，例如：<code>reach_&lt;N&gt;.shp</code>（<code>N</code> 代表子流域编号，从1开始，<code>reach.shp</code> 是整个流域的文件）、<code>subbasin_&lt;N&gt;.shp</code>、<code>basin.shp</code> 和 <code>outlet.shp</code>。</li>
+<li><code>layering_info</code>： 每个基本模拟单元（如栅格单元和不规则形状）的流入流出索引，以及基于流向算法的 <code>UPDOWN</code>（默认，源头分层）和 <code>DOWNUP</code> （出口分层）方法的routing layers。</li>
+<li><code>metis_output</code>： 由 <code>METIS</code> 软件进行分组，用于基于子流域级别的MPI并行计算的静态任务调度。例如，<code>SEIMS\data\youwuzhen\workspace\metis_output\kmetis</code> 中的 <code>metis.part.4</code> 结果为<code>3 0 2 1 1 3 1 3 2 0 2 0 2 1 1 1 3</code>，表示游屋圳流域的17个子流域将被分配到四个进程中，具体为：子流域ID（2, 10, 12）、 （4, 5, 7, 14, 15, 16）、 （3, 9, 11, 13）和 （1, 6, 8, 17）</li>
+<li><code>runtime_log</code>： 运行日志（以 <code>status_</code>为前缀）以及若干SEIMS C++应用程序的输入配置文件（以 <code>config_</code>为前缀）。</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md29"></a>
+流域建模数据库结构</h1>
+<p >流域建模数据库的结构截图如图2:3 3所示。根据数据预处理配置文件<code>INI</code>文件（Section 2:3.2）中的特定名称创建了三个数据库。预处理后的数据被组织成数据库中的不同集合（或称为表）。</p><ul>
+<li><code>demo_youwuzhen30m_longterm_model</code>： 研究区的主要空间数据库<ol type="1">
+<li>模型配置集合，如 <code>FILE_IN</code> 和 <code>FILE_OUT</code>。</li>
+<li>初始模型参数包括校准信息，如<code>PARAMETERS</code>。</li>
+<li>河道相关参数，即 <code>REACHES</code>，包括几何参数、默认的化学参数以及用于基于MPI的并行计算任务调度的子流域组等。</li>
+<li>每个子流域的气象站信息及对应的HydroClimate数据库名称。即<code>SITELIST</code>。</li>
+<li>BMP情景数据库名称，即 <code>BMPDATABASE</code>。</li>
+<li>空间参数，即 <code>SPATIAL</code>。</li>
+<li>查找表，即<code>CROPLOOKUP</code>、<code>FERTILIZERLOOKUP</code>、<code>LANDUSELOOKUP</code>、<code>SOILLOOKUP</code>、<code>TILLAGELOOKUP</code>和 <code>URBANLOOKUP</code>。</li>
+</ol>
+</li>
+<li><code>demo_youwuzhen30m_HydroClimate</code>： 水文气象数据库<ol type="1">
+<li>气候和水文站点，即<code>SITES</code>。</li>
+<li>气候数据（<code>DATA_VALUES</code>） 和水文监测数据（<code>MEASUREMENT</code>）。</li>
+<li>气候数据的年度统计，即<code>ANNUAL_STATS</code>。</li>
+<li>水文气候变量的类型和单位，即 <code>VARIABLES</code>。</li>
+</ol>
+</li>
+<li><code>demo_youwuzhen30m_Scenario</code>： BMP情景数据库<ol type="1">
+<li>BMP ID，即 <code>BMP_INDEX</code>。</li>
+<li>BMP 情景，即 <code>BMP_SCENARIOS</code>。</li>
+<li>各种BMP参数，集合名称依赖于管理措施数据（例如<code>SEIMS\data\youwuzhen\data_prepare\scenario</code>）中的纯文本文件名，如在demo学习中的 <code>PLANT_MANAGEMENT</code>和 <code>AREAL_STRUCT_MANAGEMENT</code>。</li>
+</ol>
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md30"></a>
+更多介绍...</h1>
+<p >Also see introduction of the Python package <a class="el" href="intro_preprocess_pkg.html">seims.preprocess package</a></p>
+<p >AutoFuzSlpPos Python package: <a class="el" href="intro_autofuzslppos_pkg.html">seims.preprocess.autofuzslppos package</a></p>
+<p >Predefined database: <a class="el" href="intro_predefined_database.html">Predefined database</a> </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+  </ul>
+</div>
+</body>
+</html>

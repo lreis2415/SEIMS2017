@@ -1,0 +1,229 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: 流域管理措施情景分析</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('getstart_bmp_scenario_analysis.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">流域管理措施情景分析 </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>目录</h3>
+<ul><li class="level1"><a href="#autotoc_md4">简单用法</a></li>
+<li class="level1"><a href="#autotoc_md5">情景分析的配置文件</a></li>
+<li class="level1"><a href="#autotoc_md6">Advanced usage</a></li>
+<li class="level1"><a href="#autotoc_md7">更多介绍...</a></li>
+</ul>
+</div>
+<div class="textblock"><p ><a class="anchor" id="md_doc_zh_cn_get_started_bmp_scenario_analysis"></a></p>
+<p >不同的最佳管理措施（或高效管理措施，简称BMPs）情景（多个BMP的空间配置）在流域尺度上可能具有显著不同的环境效益、经济成本收益以及实际可操作性。通过评估流域BMP情景的环境效益和经济成本收益，并提出最优方案，为综合流域管理的决策提供了重要参考价值。在BMP情景分析中，通过在空间单元上自动选择和分配BMP（称为BMP配置单元），创建每个BMP方案。随后，利用流域模型模拟该场景对流域表现的影响。模拟结果是实现BMP情景自动空间优化的基础。</p>
+<p >作为示例，本节引用了Zhu <em>et al.</em> (2019b)中的实验之一。实验选择了水文连接的地块作为BMP配置单元（准备工作参见章节 2:3.2）。考虑了四种空间显式BMPs，并采用了基于上下游关系的专家知识的BMP配置策略（Wu <em>et al.</em>, 2018）。通过集成NSGA-II算法实现BMP情景的空间优化。更多信息参见Zhu <em>et al.</em> (2019b)。</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+简单用法</h1>
+<p >打开一个CMD窗口，输入以下命令运行游屋圳流域模型的预定义BMP分析：</p>
+<div class="fragment"><div class="line">cd D:\demo\SEIMS\seims\test</div>
+<div class="line">D:</div>
+<div class="line">python –m scoop –n 2 demo_scenario_analysis.py -name youwuzhen</div>
+</div><!-- fragment --><p >运行日志包括每次模型运行的命令、每一代的平均目标值（即环境效益和净成本）以及耗时，如图1所示。</p>
+<p >与基于 NSGA-II 算法的自动率定类似，在BMP情景优化过程中，每一代自动生成的BMP情景将被导入到情景数据库的<code>BMP_SCENARIOS</code>集合中（如图2）。</p>
+<p >BMP情景分析的结果可在以下路径找到<code>SEIMS\data\youwuzhen\demo_youwuzhen30m_longterm_model\SA_NSGA2_CONNFIELD_UPDOWN_Gen_2_Pop_4</code>：</p><ul>
+<li><code>Pareto_Economy-Environment</code> 文件夹：近似最优Pareto图，例如，图3展示了第一代和第二代在最大化环境效益和最小化经济净成本目标下的近似最优Pareto解集。</li>
+<li><p class="startli"><code>Scenarios</code> 文件夹：BMP情景信息的纯文本文件及对应的空间分布栅格文件。例如，第二代中的一个BMP情景信息如下所示： </p><div class="fragment"><div class="line">Scenario ID: 125931440</div>
+<div class="line">Gene number: 72</div>
+<div class="line">Gene values: 0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2, 0, 0, 4, 0, 2, 4, 4, 0, 1, 1, 0, 0, 0, 0, 4, 0, 0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 3, 4, 0, 2, 0, 0</div>
+<div class="line">Scenario items:</div>
+<div class="line">_id NAME    COLLECTION  BMPID   LOCATION    DISTRIBUTION    SUBSCENARIO ID</div>
+<div class="line">481 S125931440  AREAL_STRUCT_MANAGEMENT 17  44-45-64    RASTER|FIELDS_15    1   125931440</div>
+<div class="line">482 S125931440  AREAL_STRUCT_MANAGEMENT 17  21-35-40-53-70  RASTER|FIELDS_15    2   125931440</div>
+<div class="line">483 S125931440  AREAL_STRUCT_MANAGEMENT 17  60-67   RASTER|FIELDS_15    3   125931440</div>
+<div class="line">484 S125931440  AREAL_STRUCT_MANAGEMENT 17  4-6-12-16-34-38-41-42-50-68 RASTER|FIELDS_15    4   125931440</div>
+<div class="line">485 S125931440  PLANT_MANAGEMENT    12  33  RASTER|LANDUSE  0   125931440</div>
+<div class="line">Effectiveness:</div>
+<div class="line">    economy: 57.712680</div>
+<div class="line">    environment: 0.48278</div>
+</div><!-- fragment --><p class="startli">gene number为72，与BMP配置单元的数量相等，即<code>FIELDS_15</code>的空间单元数量。gene values表示分配到BMP配置单元的BMP类型，其中值为0表示未配置BMP。每种BMP类型对应一个情景项。该BMP情景的空间分布如图4所示。</p>
+</li>
+<li><code>runtime.log</code> 文件：记录每一代的近似最优Pareto解集。</li>
+<li><code>hypervolume.txt</code> 文件：记录每一代的hypervolume 索引。</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md5"></a>
+情景分析的配置文件</h1>
+<p >BMP情景分析的配置文件，如一下代码块中游屋圳流域模型的配置文件所示，包括五个部分：<code>SEIMS_Model</code>、<code>Scenario_Common</code>、<code>BMPs</code>、<code>NSGA2</code>和<code>OPTIONAL_MATPLOT_SETTING</code>。其中，<code>OPTIONAL_MATPLOT_SETTING</code>是可选项。**节和选项的名称不可更改。**</p>
+<div class="fragment"><div class="line">[SEIMS_Model]</div>
+<div class="line">MODEL_DIR = C:\z_code\Hydro\SEIMS\data\youwuzhen\demo_youwuzhen30m_longterm_model</div>
+<div class="line">BIN_DIR = C:\z_code\Hydro\SEIMS\bin</div>
+<div class="line">HOSTNAME = 127.0.0.1</div>
+<div class="line">PORT = 27017</div>
+<div class="line">threadsNum = 2</div>
+<div class="line">layeringMethod = 1</div>
+<div class="line">scenarioID = 0</div>
+<div class="line"># Simulation period (UTCTIME)</div>
+<div class="line">Sim_Time_start = 2012-01-01 00:00:00</div>
+<div class="line">Sim_Time_end = 2012-05-30 23:59:59</div>
+<div class="line"> </div>
+<div class="line">[Scenario_Common]</div>
+<div class="line">Eval_Time_start = 2012-02-27 00:00:00</div>
+<div class="line">Eval_Time_end = 2012-04-30 23:59:59</div>
+<div class="line">worst_economy = 300.</div>
+<div class="line">worst_environment = 0.</div>
+<div class="line">runtime_years = 8</div>
+<div class="line">export_scenario_txt = True</div>
+<div class="line">export_scenario_tif = True</div>
+<div class="line"> </div>
+<div class="line">[BMPs]</div>
+<div class="line">BMPs_info = {&quot;17&quot;:{&quot;COLLECTION&quot;: &quot;AREAL_STRUCT_MANAGEMENT&quot;, &quot;SUBSCENARIO&quot;: [1, 2, 3, 4]}}</div>
+<div class="line">BMPs_retain = {&quot;12&quot;:{&quot;COLLECTION&quot;: &quot;PLANT_MANAGEMENT&quot;, &quot;DISTRIBUTION&quot;: &quot;RASTER|LANDUSE&quot;, &quot;LOCATION&quot;: &quot;33&quot;, &quot;SUBSCENARIO&quot;: 0}}</div>
+<div class="line">Eval_info = {&quot;OUTPUTID&quot;: &quot;SED_OL&quot;, &quot;ENVEVAL&quot;: &quot;SED_OL_SUM.tif&quot;, &quot;BASE_ENV&quot;: -9999}</div>
+<div class="line">BMPs_cfg_units = {&quot;CONNFIELD&quot;: {&quot;DISTRIBUTION&quot;: &quot;RASTER|FIELDS_15&quot;, &quot;UNITJSON&quot;: &quot;connected_field_units_updown_15.json&quot;}}</div>
+<div class="line">BMPs_cfg_method = UPDOWN</div>
+<div class="line"> </div>
+<div class="line">[NSGA2]</div>
+<div class="line">GenerationsNum = 2</div>
+<div class="line">PopulationSize = 4</div>
+<div class="line">CrossoverRate = 1.0</div>
+<div class="line">MaxMutatePerc = 0.2</div>
+<div class="line">MutateRate = 1.0</div>
+<div class="line">SelectRate = 1.0</div>
+<div class="line"> </div>
+<div class="line">[OPTIONAL_MATPLOT_SETTINGS]</div>
+<div class="line">FIGURE_FORMATS = PDF,PNG</div>
+<div class="line">LANG_CN = False</div>
+<div class="line">FONT_TITLE = Times New Roman</div>
+<div class="line">TITLE_FONTSIZE = 16</div>
+<div class="line">LEGEND_FONTSIZE = 12</div>
+<div class="line">TICKLABEL_FONTSIZE = 12</div>
+<div class="line">AXISLABEL_FONTSIZE = 12</div>
+<div class="line">LABEL_FONTSIZE = 14</div>
+<div class="line">DPI = 300</div>
+</div><!-- fragment --><ul>
+<li>SEIMS_Model: 基于 SEIMS 流域模型的基本设置，详见章节 2:4.3.2。注意默认使用SEIMS主程序的OpenMP版本。如果需要MPI&amp;OpenMP版本，可以配置version、<code>MPI_BIN</code> 和 <code>processNum</code> 等选项。</li>
+<li>Scenario_Common: 情景分析的通用设置。<ol type="1">
+<li><code>Eval_Time_start</code>: 模型评估的起始时间，格式为 <code>YYYY-MM-DD HH:MM:SS</code>。</li>
+<li><code>Eval_Time_end</code>: 模型评估的结束时间，格式为 <code>YYYY-MM-DD HH:MM:SS</code>。</li>
+<li><code>worst_economy</code>: 最差情景下的经济净成本。</li>
+<li><code>worst_environment</code>: 最差情景下的环境效益。worst_economy 和 <code>worst_environment</code>用于计算hypervolume索引。</li>
+<li><code>runtime_years</code>: 对于基于BMP长期环境效益的BMP情景分析，SEIMS假设BMP在首次建立后经过若干年维护达到相对稳定状态。因此，<code>runtime_years</code> 用于评估BMP情景成本模型。</li>
+<li><code>Export_scenario_txt</code>: （可选）是否将每个 BMP 场景导出为纯文本文件（<code>True</code>或<code>False</code>），默认值为<code>False</code>。</li>
+<li><code>Export_scenario_tif</code>: （可选）是否将每个 BMP 场景的空间分布导出为 GeoTiff 栅格文件（<code>True</code>或 <code>False</code>），默认值为 <code>False</code>。</li>
+</ol>
+</li>
+<li><code>BMPs</code>: Application specific BMPs settings.<ol type="1">
+<li><code>BMPs_info</code>: 所选BMP类型的信息，使用JSON格式。<code>BMPID</code>作为键（参见章节 2:2.7.1），值是对应字段值的JSON字符串（可用字段参见Table 2:2 8）。注意，尽管<code>BMPID</code>是整型，键的数据类型必须为字符串。<code>DISTRIBUTION</code> 和 <code>LOCATION</code>字段可以省略，将在 <code>BMPs_cfg_units</code>中定义。 ``` BMPs_info = {"17":{ "COLLECTION": "AREAL_STRUCT_MANAGEMENT", "SUBSCENARIO": [1, 2, 3, 4] } } ``<code> 2.</code>BMPs_retain<code>：在优化期间生成BMP情景中保留的BMP类型，格式与</code>BMPs_info<code>相同。 </code>`` BMPs_retain = {"12":{ "COLLECTION": "PLANT_MANAGEMENT", "DISTRIBUTION": "RASTER|LANDUSE", "LOCATION": "33", "SUBSCENARIO": 0 } } ``<code> 3.</code>Eval_info<code>: 模型评估信息，包括</code>OUTPUTID<code>、对应输出文件名（</code>ENVEVAL<code>）以及环境变量基准值（</code>BASE_ENV<code>），例如，年土壤侵蚀总量。如果</code>BASE_ENV<code>设置为-9999，则会在BMP情景分析前首先评估基准场景。 </code>`` Eval_info = { "OUTPUTID": "SED_OL", "ENVEVAL": "SED_OL_SUM.tif", "BASE_ENV": -9999 } ``<code> 4.</code>BMPs_cfg_units<code>: BMP 配置单元信息，使用 JSON 格式。</code>UNITJSON<code>是描述每个空间单元基本信息以及空间单元间基本关系（如上下游关系）的文件。在当前版本中，支持水文响应单元（</code>HRU<code>）、明确空间位置的HRU（</code>EXPLICITHRU<code>）、水文连接地块（</code>CONNFIELD<code>）和坡位单元（</code>SLPPOS<code>）。更多详情请参考Zhu *et al.* (2019b)。 </code>`` BMPs_cfg_units = {"CONNFIELD": { "DISTRIBUTION": "RASTER|FIELDS_15", "UNITJSON": "connected_field_units_updown_15.json" } } ```</li>
+<li><code>BMPs_cfg_method</code>: 根据BMP配置单元的特征选择BMP配置策略，例如：随机策略（<code>RAND</code>）、基于个别BMP的适宜土地类型/坡位的知识策略（<code>SUIT</code>）、基于上下游关系的专家知识策略（<code>UPDOWN</code>, Wu <em>et al.</em> [2018]）以及基于坡面上BMP和坡位空间关系的领域知识策略（<code>HILLSLP</code>, Qin <em>et al.</em> [2018]）。更多详情请参考Zhu <em>et al.</em> (2019b)。</li>
+</ol>
+</li>
+<li>特点优化方法的部分。当前版本中已集成并测试了NSGA-II算法。未来版本中将集成更多优化方法。<ul>
+<li><code>NSGA2</code>: NSGA-II算法的参数设置。<ul>
+<li><code>GenerationsNum</code>: 最大代数。</li>
+<li><code>PopulationSize</code>: 初始种群规模，即个体数量。</li>
+<li><code>CrossoverRate</code>: 交叉概率，范围为0到1。较大的交叉率表示两个父个体之间发生交叉操作的可能性更高。</li>
+<li><code>MutateRate</code>: 变异概率。</li>
+<li><code>MaxMutatePerc</code>: 基因变异的最大百分比。</li>
+<li><code>SelectRate</code>: 每代经过评估和排序的个体中选出的比例，称为近似最优的Pareto解集。 <br  />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>OPTIONAL_MATPLOT_SETTINGS</code>: matplotlib的绘图设置，详见章节 2:5.2。</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Advanced usage</h1>
+<p >情景分析的 Python 脚本位于 <code>SEIMS/seims/scenario_analysis/spatialunits</code>文件夹中。<code>main_nsga2.py</code>是基于NSGA-II算法的情景分析入口脚本，可以通过SEIMS Python脚本的统一格式运行，例如， </p><div class="fragment"><div class="line">cd D:\demo\SEIMS\seims\scenario_analysis\spatialunits</div>
+<div class="line">python main_nsga2.py -ini D:\demo\SEIMS\data\youwuzhen\workspace\scenario_analysis.ini</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
+更多介绍...</h1>
+<p >Also see introduction of the Python package <a class="el" href="intro_scenario_analysis_pkg.html">seims.scenario_analysis package</a> and <a class="el" href="intro_scenario_analysis_spatialunits_pkg.html">seims.scenario_analysis.spatialunits package</a> </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+  </ul>
+</div>
+</body>
+</html>

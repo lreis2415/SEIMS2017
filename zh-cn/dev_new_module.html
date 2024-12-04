@@ -1,0 +1,387 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: 编写流域过程模拟模块</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('dev_new_module.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">编写流域过程模拟模块 </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>目录</h3>
+<ul><li class="level1"><a href="#autotoc_md82">查阅文献和/或现有模型代码</a></li>
+<li class="level1"><a href="#autotoc_md83">创建新的SEIMS模块</a></li>
+<li class="level1"><a href="#autotoc_md84">Open SEIMS solution in Visual Studio and start to code</a></li>
+<li class="level1"><a href="#autotoc_md85">Test the new SEIMS module</a></li>
+</ul>
+</div>
+<div class="textblock"><p ><a class="anchor" id="md_doc_zh_cn_write_code_dev_new_module"></a></p>
+<p >一般来说，基于SEIMS模块接口为特定流域子过程开发新模块需要三个步骤。</p><ul>
+<li>查阅流域子过程算法的相关文献和/或源代码（如有），弄清算法的输入和输出参数以及具体的模拟公式（或执行代码）。</li>
+<li>基于模块模版和“CMake”结构创建新的SEIMS模块。</li>
+<li>在Visual Studio或其他IDE中打开SEIMS解决方案，然后按照推荐的API顺序开始编码。</li>
+</ul>
+<p >本节以使用哈格里夫斯（Hargreaves）方法模拟潜在蒸散量为例来演示这些步骤。</p>
+<h1><a class="anchor" id="autotoc_md82"></a>
+查阅文献和/或现有模型代码</h1>
+<p >蒸散是一个统称，包括地表水转化为水蒸气的所有过程（Neitsch <em>et al.</em>, 2011）。它包括植被冠层蒸发、蒸腾、升华和土壤蒸发。准确评估蒸散量对于评估水资源以及气候和土地利用变化对这些资源的影响至关重要。</p>
+<p >哈格里夫斯（Hargreaves）方法最初是根据加利福尼亚州戴维斯八年的冷季型阿尔塔羊茅草溶液计数据得出的（Hargreaves, 1975）。哈格里夫斯方法在SWAT模型中采用了改进方程（Hargreaves, 1985）：</p>
+<p >$$\lambda E_{o} = petco\cdot H_{0}\cdot \left (T_{max} - T_{min} \right ) ^{0.5} \cdot \left (T_{avg} + 17.8 \right )$$</p>
+<p >其中，*λ* 是蒸发潜热（MJ kg<sup>-1</sup>）， <em>E</em><sub>o</sub> 是潜在蒸散量（mm d<sup>-1</sup>）， <em>petco</em> 是与辐射相关的系数，其范围为0.0019 to 0.0032， <em>H</em><sub>0</sub> 是地外辐射（MJ m<sup>-2</sup> d<sup>-1</sup>）， <em>T</em><sub>max</sub>， <em>T</em><sub>min</sub>，和 <em>T</em><sub>avg</sub> 分别是某日的最高、最低和平均气温（°C）。</p>
+<p >哈格里夫斯（Hargreaves）潜在蒸散量计算方法的源代码可在 <code>etpot.f</code>中找到。以下代码片段显示了核心模拟代码。</p>
+<div class="fragment"><div class="line">  <span class="keywordflow">case</span> (2)   <span class="comment">!! HARGREAVES POTENTIAL EVAPOTRANSPIRATION METHOD</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">!! extraterrestrial radiation</span></div>
+<div class="line">   <span class="comment">!! 37.59 is coefficient in equation 2.2.6 !!extraterrestrial</span></div>
+<div class="line">   <span class="comment">!! 30.00 is coefficient in equation 2.2.7 !!max at surface</span></div>
+<div class="line">   ramm = 0.</div>
+<div class="line">   ramm = hru_rmx(j) * 37.59 / 30. </div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">if</span> (tmx(j) &gt; tmn(j)) <span class="keywordflow">then</span></div>
+<div class="line">     pet_day = harg_petco(hru_sub(j))*(ramm / xl)*(tmpav(j) + 17.8)*</div>
+<div class="line">&amp;                                            (tmx(j) - tmn(j))**0.5</div>
+<div class="line">     pet_day = max(0., pet_day)</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">     pet_day = 0.</div>
+<div class="line">   endif</div>
+</div><!-- fragment --><p >其中，<code>ramn</code> 是地外辐射，由一天中最大可能辐射量（<code>hru_rmx</code>）计算得出，<code>hru_rmx</code> 是一年中不同日期和纬度的函数，<code>xl</code> 是汽化潜热，由平均气温（<code>tmpav</code>）计算得出。</p>
+<p ><code>hru_rmx</code>的计算源码可以在<code>clgen.f</code>中找到。</p>
+<p >总之，使用Hargreaves方法模拟潜在蒸散量需要用到辐射相关系数、纬度、最高气温、最低气温以及平均气温。模拟代码可以从SWAT的FORTRAN源代码（即<code>etpot.f</code> 和 <code>clgen.f</code>）中重新编写。</p>
+<h1><a class="anchor" id="autotoc_md83"></a>
+创建新的SEIMS模块</h1>
+<p >正如前文所述，SEIMS库的源码位于<code>SEIMS/seims/src/seims_main/modules</code>目录中。为了便于管理，SEIMS模块被分为多个类别。 As introduced in previous sections, the source code of SEIMS library is in <code>SEIMS/seims/src/seims_main/modules</code>. For the convenience of management, SEIMS modules are divided into several categories. There is one <code>CMakeLists.txt</code> file to indicate which categories are involved in the SEIMS project, i.e., <code>SEIMS/seims/src/seims_main/modules/CMakeLists.txt</code>.</p>
+<div class="fragment"><div class="line">MESSAGE(STATUS &quot;      Compiling SEIMS_subdir: modules...&quot;)</div>
+<div class="line">ADD_SUBDIRECTORY(./climate)</div>
+<div class="line">ADD_SUBDIRECTORY(./hydrology)</div>
+<div class="line">ADD_SUBDIRECTORY(./hydrology_longterm)</div>
+<div class="line">ADD_SUBDIRECTORY(./erosion)</div>
+<div class="line">ADD_SUBDIRECTORY(./nutrient)</div>
+<div class="line">ADD_SUBDIRECTORY(./ecology)</div>
+<div class="line">ADD_SUBDIRECTORY(./management)</div>
+<div class="line">ADD_SUBDIRECTORY(./test)</div>
+</div><!-- fragment --><p >It is worth to note that a corresponding line with the <code>ADD_SUBDIRECTORY()</code> command should be appended if a new category is added.</p>
+<p >The template of the SEIMS module is the template folder located in <code>SEIMS/seims/src/seims_main/modules/test</code>, which contains four files, i.e., <code>CMakeLists.txt</code>, <code>api.cpp</code>, <code><a class="el" href="template_8h.html" title="Brief description of this module Detail description about the implementation.">template.h</a></code>, and <code>template.cpp</code>.</p>
+<ol type="1">
+<li><code>CMakeLists.txt</code>: file used to create the project for building the module executable library.</li>
+<li><code>api.cpp</code>: implementation file of <code>MetadataInformation</code> function.</li>
+<li><code><a class="el" href="template_8h.html" title="Brief description of this module Detail description about the implementation.">template.h</a></code>: header file that defines the module class which is inherited from the basic class of SEIMS module (i.e., <code><a class="el" href="group__module__setting.html#class_simulation_module" title="Base module for all simulation modules in SEIMS">SimulationModule</a></code>). The header file should be renamed with a meaningful name, such as <code><a class="el" href="_p_e_t_hargreaves_8h.html" title="Potential evapotranspiration using Hargreaves method.">PETHargreaves.h</a></code>.</li>
+<li><code>template.cpp</code>: implementation file that includes <code>SetData</code> and <code>GetData</code> functions <code>CheckInputData</code> and <code>InitialOutputs</code> functions, and Execute function. The implementation file should be renamed with the same filename of the header file, such as <code>PETHargreaves.cpp</code>.</li>
+</ol>
+<p >Please follow these steps to create a new SEIMS module based on the module template.</p>
+<ol type="1">
+<li>Copy the folder of the SEIMS module template to an existing or newly created directory of SEIMS module library, e.g., <code>modules/hydrology_longterm</code>, and rename with the new module name followed the format of &lt;SubprocessNameAbbr&gt;_&lt;AlgorithmNameAbbr&gt;, e.g., <code>PET_H</code> that means the simulation of potential evapotranspiration using Hargreaves method.</li>
+<li><p class="startli">Open the <code>CMakeLists.txt</code> file in the module folder of <code>PET_H</code> and specify the name of the executable library (the second line) and the project folder for Visual Studio or Xcode (the 10th line, which is Optional). For example, the content of the <code>CMakeLists.txt</code> file in the module template is as follows,</p>
+<div class="fragment"><div class="line">MESSAGE(STATUS &quot;        Compiling test_subdir: template...&quot;)</div>
+<div class="line">SET(MODNAME template)</div>
+<div class="line">PROJECT(SEIMS_MODULE_${MODNAME})</div>
+<div class="line">FILE(GLOB SRC_LIST *.cpp *.h)</div>
+<div class="line">ADD_LIBRARY(${MODNAME} SHARED ${SRC_LIST})</div>
+<div class="line">SET(LIBRARY_OUTPUT_PATH ${SEIMS_BINARY_OUTPUT_PATH})</div>
+<div class="line">TARGET_LINK_LIBRARIES(${MODNAME} common_algorithm module_setting bmps data)</div>
+<div class="line">INSTALL(TARGETS ${MODNAME} DESTINATION ${INSTALL_DIR})</div>
+<div class="line">IF (MSVC OR XCODE)</div>
+<div class="line">    SET_PROPERTY(TARGET ${MODNAME} PROPERTY FOLDER &quot;modules/test&quot;)</div>
+<div class="line">ENDIF ()</div>
+</div><!-- fragment --><p class="startli">After modification for the <code>PET_H</code> module,</p>
+<div class="fragment"><div class="line">MESSAGE(STATUS &quot;        Compiling hydrology_longterm_subdir: PET_H...&quot;)</div>
+<div class="line">SET(MODNAME PET_H)</div>
+<div class="line">PROJECT(SEIMS_MODULE_${MODNAME})</div>
+<div class="line">FILE(GLOB SRC_LIST *.cpp *.h)</div>
+<div class="line">ADD_LIBRARY(${MODNAME} SHARED ${SRC_LIST})</div>
+<div class="line">SET(LIBRARY_OUTPUT_PATH ${SEIMS_BINARY_OUTPUT_PATH})</div>
+<div class="line">TARGET_LINK_LIBRARIES(${MODNAME} module_setting common_algorithm)</div>
+<div class="line">INSTALL(TARGETS ${MODNAME} DESTINATION ${INSTALL_DIR})</div>
+<div class="line">IF (MSVC OR XCODE)</div>
+<div class="line">SET_PROPERTY(TARGET ${MODNAME} PROPERTY FOLDER &quot;modules/hydrology_longterm&quot;)</div>
+<div class="line">ENDIF ()</div>
+</div><!-- fragment --><p> Note that, the 7th line is for specifying libraries to use when linking the current SEIMS module. If users do not sure how to determine the exact libraries, just keep the default settings in the module template.</p>
+</li>
+<li><p class="startli">Append the <code>ADD_SUBDIRECTORY()</code> command of the relative directory path of the new module to the <code>CMakeLists.txt</code> file in its parent directory, such as <code>modules/hydrology_longterm/CMakeLists.txt</code>, such as,</p>
+<div class="fragment"><div class="line">MESSAGE(STATUS &quot;      Compiling SEIMS_subdir: hydrology_longterm...&quot;)</div>
+<div class="line">ADD_SUBDIRECTORY(./DEP_LINSLEY)</div>
+<div class="line">ADD_SUBDIRECTORY(./GWA_RE)</div>
+<div class="line">ADD_SUBDIRECTORY(./IUH_OL)</div>
+<div class="line">ADD_SUBDIRECTORY(./MUSK_CH)</div>
+<div class="line">ADD_SUBDIRECTORY(./PER_PI)</div>
+<div class="line">ADD_SUBDIRECTORY(./PER_STR)</div>
+<div class="line">ADD_SUBDIRECTORY(./PET_PM)</div>
+<div class="line">ADD_SUBDIRECTORY(./PET_PT)</div>
+<div class="line">ADD_SUBDIRECTORY(./PET_H)</div>
+</div><!-- fragment --></li>
+<li>Rerun the CMake command as introduced in Section 2:1.4 to build the SEIMS project in which the newly created module which will be included.</li>
+<li>Alternative to step 4, open the SEIMS solution in Visual Studio (i.e., <code>SEIMS/build/SEIMS_MPI_OMP_ALL.sln</code>), and right-click on the <code>ZERO_CHECK</code> project in <code>CMakePredefinedTargets</code> and select Rebuild. Then, click on Reload All to reload all projects of SEIMS including the newly created module.</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md84"></a>
+Open SEIMS solution in Visual Studio and start to code</h1>
+<p >After (re)building the SEIMS solution which includes the newly created module, the following steps are recommended to start to code.</p>
+<ol type="1">
+<li>Open the header file (i.e., <code><a class="el" href="_p_e_t_hargreaves_8h.html" title="Potential evapotranspiration using Hargreaves method.">PETHargreaves.h</a></code> in this demo) and rename the class name from <code>ModuleTemplate</code> to <code><a class="el" href="group___p_e_t___h.html#class_p_e_t_hargreaves" title="Hargreaves method to Compute PET">PETHargreaves</a></code>. Also remember to change the include guard from <code>SEIMS_MODULE_TEMPLATE_H</code> to <code>SEIMS_MODULE_PET_H_H</code> or any other unique macro name in the whole SEIMS solution.</li>
+<li><p class="startli">Open the <code>api.cpp</code> file and write the <code>MetadataInformation</code> function. To avoid inconsistent typing of the name, unit, and description of the same parameter/variable, definitions of all these strings are defined as macro strings in the <code><a class="el" href="text_8h.html" title="Predefined string constants used in the code BE CAUTION, constant value must be aligned by SPACE,...">text.h</a></code> header file (<code>SEIMS/seims/src/seims_main/base/text.h</code>) in the current implementation of SEIMS. Thus, developers should search the planned variable first in the <code><a class="el" href="text_8h.html" title="Predefined string constants used in the code BE CAUTION, constant value must be aligned by SPACE,...">text.h</a></code> to make sure its definition is unique.</p>
+<p class="startli">According to the review of theory literature and source code of SWAT, eight inputs should be defined and four of them are from the database while the others are outputs of other modules.</p>
+<div class="fragment"><div class="line"><span class="comment">// Parameters from Database (non-time series)</span></div>
+<div class="line">mdi.AddParameter(<a class="code hl_variable" href="text_8h.html#afa5bfb8a37ec673ba3ac953cfbc26582">VAR_PET_HCOEF</a>, <a class="code hl_variable" href="text_8h.html#a2a6e81d3689ed32abbe236aa755ca43d">UNIT_NON_DIM</a>, DESC_PET_HCOEF, <a class="code hl_variable" href="text_8h.html#a60a3c1d683d59521052885b20c84768a">Source_ParameterDB</a>, <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8cad140e28204d691853ef944df5866a088">DT_Single</a>);</div>
+<div class="line">mdi.AddParameter(<a class="code hl_variable" href="text_8h.html#afa23ff0977abb48f1b741fd092b7101c">VAR_CELL_LAT</a>, <a class="code hl_variable" href="text_8h.html#a0c2741d2401112ef2a23db06645b67d1">UNIT_LONLAT_DEG</a>, DESC_CELL_LAT, <a class="code hl_variable" href="text_8h.html#a60a3c1d683d59521052885b20c84768a">Source_ParameterDB</a>, <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca542b7ab7a696715c30f1afe74d7b85e3">DT_Raster1D</a>);</div>
+<div class="line"><span class="comment">// Inputs from the output of other modules</span></div>
+<div class="line">mdi.AddInput(<a class="code hl_variable" href="text_8h.html#ab602d04511a24c661c375964bb177ee4">VAR_TMEAN</a>, <a class="code hl_variable" href="text_8h.html#a3a068b2f9fda23b1d1433b4ef6e8c998">UNIT_TEMP_DEG</a>, DESC_TMEAN, <a class="code hl_variable" href="text_8h.html#af2281483873edeb8f4d81a0fe04a6367">Source_Module</a>, <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca542b7ab7a696715c30f1afe74d7b85e3">DT_Raster1D</a>);</div>
+<div class="line">mdi.AddInput(<a class="code hl_variable" href="text_8h.html#aa5a06a6b5fc61505c8302a7498e7d577">VAR_TMAX</a>, <a class="code hl_variable" href="text_8h.html#a3a068b2f9fda23b1d1433b4ef6e8c998">UNIT_TEMP_DEG</a>, DESC_TMAX, <a class="code hl_variable" href="text_8h.html#af2281483873edeb8f4d81a0fe04a6367">Source_Module</a>, <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca542b7ab7a696715c30f1afe74d7b85e3">DT_Raster1D</a>);</div>
+<div class="line">mdi.AddInput(<a class="code hl_variable" href="text_8h.html#a79ed00129969da3aca962308f152c113">VAR_TMIN</a>, <a class="code hl_variable" href="text_8h.html#a3a068b2f9fda23b1d1433b4ef6e8c998">UNIT_TEMP_DEG</a>, DESC_TMIN, <a class="code hl_variable" href="text_8h.html#af2281483873edeb8f4d81a0fe04a6367">Source_Module</a>, <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca542b7ab7a696715c30f1afe74d7b85e3">DT_Raster1D</a>);</div>
+<div class="line">mdi.AddInput(<a class="code hl_variable" href="text_8h.html#ac80e04b36bf2497ae68eb917a101a64b">DataType_RelativeAirMoisture</a>, <a class="code hl_variable" href="text_8h.html#ade4b5f803a9fc6b80c5aaea88ce440a8">UNIT_PERCENT</a>, DESC_RM, <a class="code hl_variable" href="text_8h.html#af2281483873edeb8f4d81a0fe04a6367">Source_Module</a>, <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca542b7ab7a696715c30f1afe74d7b85e3">DT_Raster1D</a>);</div>
+<div class="ttc" id="a_metadata_info_const_8h_html_gac6cf78ef837450cfb19495fe34976b8ca542b7ab7a696715c30f1afe74d7b85e3"><div class="ttname"><a href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca542b7ab7a696715c30f1afe74d7b85e3">DT_Raster1D</a></div><div class="ttdeci">@ DT_Raster1D</div><div class="ttdoc">Raster data in floating point number, same as DT_Array1D</div><div class="ttdef"><b>Definition:</b> MetadataInfoConst.h:72</div></div>
+<div class="ttc" id="a_metadata_info_const_8h_html_gac6cf78ef837450cfb19495fe34976b8cad140e28204d691853ef944df5866a088"><div class="ttname"><a href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8cad140e28204d691853ef944df5866a088">DT_Single</a></div><div class="ttdeci">@ DT_Single</div><div class="ttdoc">Single floating point number</div><div class="ttdef"><b>Definition:</b> MetadataInfoConst.h:65</div></div>
+<div class="ttc" id="atext_8h_html_a0c2741d2401112ef2a23db06645b67d1"><div class="ttname"><a href="text_8h.html#a0c2741d2401112ef2a23db06645b67d1">UNIT_LONLAT_DEG</a></div><div class="ttdeci">CONST_CHARS UNIT_LONLAT_DEG</div><div class="ttdoc">Meter of length</div><div class="ttdef"><b>Definition:</b> text.h:1150</div></div>
+<div class="ttc" id="atext_8h_html_a2a6e81d3689ed32abbe236aa755ca43d"><div class="ttname"><a href="text_8h.html#a2a6e81d3689ed32abbe236aa755ca43d">UNIT_NON_DIM</a></div><div class="ttdeci">CONST_CHARS UNIT_NON_DIM</div><div class="ttdoc">Melt factor</div><div class="ttdef"><b>Definition:</b> text.h:1152</div></div>
+<div class="ttc" id="atext_8h_html_a3a068b2f9fda23b1d1433b4ef6e8c998"><div class="ttname"><a href="text_8h.html#a3a068b2f9fda23b1d1433b4ef6e8c998">UNIT_TEMP_DEG</a></div><div class="ttdeci">CONST_CHARS UNIT_TEMP_DEG</div><div class="ttdoc">storage per meter of reach length</div><div class="ttdef"><b>Definition:</b> text.h:1161</div></div>
+<div class="ttc" id="atext_8h_html_a60a3c1d683d59521052885b20c84768a"><div class="ttname"><a href="text_8h.html#a60a3c1d683d59521052885b20c84768a">Source_ParameterDB</a></div><div class="ttdeci">CONST_CHARS Source_ParameterDB</div><div class="ttdoc">model parameters database</div><div class="ttdef"><b>Definition:</b> text.h:165</div></div>
+<div class="ttc" id="atext_8h_html_a79ed00129969da3aca962308f152c113"><div class="ttname"><a href="text_8h.html#a79ed00129969da3aca962308f152c113">VAR_TMIN</a></div><div class="ttdeci">CONST_CHARS_LIST VAR_TMIN[]</div><div class="ttdoc">m_meanTempPre2</div><div class="ttdef"><b>Definition:</b> text.h:1073</div></div>
+<div class="ttc" id="atext_8h_html_aa5a06a6b5fc61505c8302a7498e7d577"><div class="ttname"><a href="text_8h.html#aa5a06a6b5fc61505c8302a7498e7d577">VAR_TMAX</a></div><div class="ttdeci">CONST_CHARS_LIST VAR_TMAX[]</div><div class="ttdoc">m_tillSwitch</div><div class="ttdef"><b>Definition:</b> text.h:1068</div></div>
+<div class="ttc" id="atext_8h_html_ab602d04511a24c661c375964bb177ee4"><div class="ttname"><a href="text_8h.html#ab602d04511a24c661c375964bb177ee4">VAR_TMEAN</a></div><div class="ttdeci">CONST_CHARS_LIST VAR_TMEAN[]</div><div class="ttdoc">m_maxTemp</div><div class="ttdef"><b>Definition:</b> text.h:1069</div></div>
+<div class="ttc" id="atext_8h_html_ac80e04b36bf2497ae68eb917a101a64b"><div class="ttname"><a href="text_8h.html#ac80e04b36bf2497ae68eb917a101a64b">DataType_RelativeAirMoisture</a></div><div class="ttdeci">CONST_CHARS DataType_RelativeAirMoisture</div><div class="ttdoc">8, m_rhd</div><div class="ttdef"><b>Definition:</b> text.h:43</div></div>
+<div class="ttc" id="atext_8h_html_ade4b5f803a9fc6b80c5aaea88ce440a8"><div class="ttname"><a href="text_8h.html#ade4b5f803a9fc6b80c5aaea88ce440a8">UNIT_PERCENT</a></div><div class="ttdeci">CONST_CHARS UNIT_PERCENT</div><div class="ttdoc">rate per day</div><div class="ttdef"><b>Definition:</b> text.h:1155</div></div>
+<div class="ttc" id="atext_8h_html_af2281483873edeb8f4d81a0fe04a6367"><div class="ttname"><a href="text_8h.html#af2281483873edeb8f4d81a0fe04a6367">Source_Module</a></div><div class="ttdeci">CONST_CHARS Source_Module</div><div class="ttdoc">inputs from other modules</div><div class="ttdef"><b>Definition:</b> text.h:167</div></div>
+<div class="ttc" id="atext_8h_html_afa23ff0977abb48f1b741fd092b7101c"><div class="ttname"><a href="text_8h.html#afa23ff0977abb48f1b741fd092b7101c">VAR_CELL_LAT</a></div><div class="ttdeci">CONST_CHARS_LIST VAR_CELL_LAT[]</div><div class="ttdoc">m_denitCoef</div><div class="ttdef"><b>Definition:</b> text.h:488</div></div>
+<div class="ttc" id="atext_8h_html_afa5bfb8a37ec673ba3ac953cfbc26582"><div class="ttname"><a href="text_8h.html#afa5bfb8a37ec673ba3ac953cfbc26582">VAR_PET_HCOEF</a></div><div class="ttdeci">CONST_CHARS_LIST VAR_PET_HCOEF[]</div><div class="ttdoc">m_pet</div><div class="ttdef"><b>Definition:</b> text.h:706</div></div>
+</div><!-- fragment --><p class="startli">As to the output variables of the current module, except for the potential evapotranspiration on the current day (<code>VAR_PET</code>), there are also an auxiliary output, i.e., the day length (<code>VAR_DAYLEN</code>) when calculating the maximum possible radiation for the day.</p>
+<div class="fragment"><div class="line">mdi.AddOutput(<a class="code hl_variable" href="text_8h.html#a0945844b3e683c166dbd00cc5b69a15c">VAR_DAYLEN</a>, <a class="code hl_variable" href="text_8h.html#aba21fff843f9f37ed91900a85e13b208">UNIT_HOUR</a>, DESC_DAYLEN, <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca542b7ab7a696715c30f1afe74d7b85e3">DT_Raster1D</a>);</div>
+<div class="line">mdi.AddOutput(VAR_PET, <a class="code hl_variable" href="text_8h.html#ac740f680229280a8946642aab336d089">UNIT_WTRDLT_MMD</a>, DESC_PET, <a class="code hl_enumvalue" href="_metadata_info_const_8h.html#gac6cf78ef837450cfb19495fe34976b8ca542b7ab7a696715c30f1afe74d7b85e3">DT_Raster1D</a>);</div>
+<div class="ttc" id="atext_8h_html_a0945844b3e683c166dbd00cc5b69a15c"><div class="ttname"><a href="text_8h.html#a0945844b3e683c166dbd00cc5b69a15c">VAR_DAYLEN</a></div><div class="ttdeci">CONST_CHARS_LIST VAR_DAYLEN[]</div><div class="ttdoc">m_pcp</div><div class="ttdef"><b>Definition:</b> text.h:529</div></div>
+<div class="ttc" id="atext_8h_html_aba21fff843f9f37ed91900a85e13b208"><div class="ttname"><a href="text_8h.html#aba21fff843f9f37ed91900a85e13b208">UNIT_HOUR</a></div><div class="ttdeci">CONST_CHARS UNIT_HOUR</div><div class="ttdoc">Time step (day)</div><div class="ttdef"><b>Definition:</b> text.h:1165</div></div>
+<div class="ttc" id="atext_8h_html_ac740f680229280a8946642aab336d089"><div class="ttname"><a href="text_8h.html#ac740f680229280a8946642aab336d089">UNIT_WTRDLT_MMD</a></div><div class="ttdeci">CONST_CHARS UNIT_WTRDLT_MMD</div><div class="ttdoc">mm H2O/mm Soil</div><div class="ttdef"><b>Definition:</b> text.h:1171</div></div>
+</div><!-- fragment --></li>
+<li><p class="startli">Define the input parameters, input variables from other modules, and output variables of the current module in the header file.</p>
+<div class="fragment"><div class="line"><span class="comment">// Parameters from Database</span></div>
+<div class="line"><span class="keywordtype">int</span> m_nCells; <span class="comment">///&lt; valid units number</span></div>
+<div class="line"><span class="keywordtype">float</span> m_HCoef_pet; <span class="comment">///&lt; coefficient related to radiation used in Hargreaves method</span></div>
+<div class="line"><span class="keywordtype">float</span>* m_cellLat; <span class="comment">///&lt; latitude of each valid units</span></div>
+<div class="line"><span class="comment">// Inputs from the output of other modules</span></div>
+<div class="line"><span class="keywordtype">float</span>* m_meanTemp; <span class="comment">///&lt; mean air temperature for a given day (deg C)</span></div>
+<div class="line"><span class="keywordtype">float</span>* m_maxTemp; <span class="comment">///&lt; maximum air temperature for a given day (deg C)</span></div>
+<div class="line"><span class="keywordtype">float</span>* m_minTemp; <span class="comment">///&lt; minimum air temperature for a given day (deg C)</span></div>
+<div class="line"><span class="keywordtype">float</span>* m_rhd; <span class="comment">///&lt; relative humidity (%)</span></div>
+<div class="line"><span class="comment">// Output variables</span></div>
+<div class="line"><span class="keywordtype">float</span>* m_dayLen; <span class="comment">///&lt; VAR_DAYLEN, day length (hr)</span></div>
+<div class="line"><span class="keywordtype">float</span>* m_pet; <span class="comment">///&lt; VAR_PET, potential evapotranspiration on the day</span></div>
+</div><!-- fragment --></li>
+<li><p class="startli">Complete the initialization (i.e., the constructor function that sets default values for all variables defined in header file) and finalization (i.e., the destructor function that releases the newly allocated memory of the current module such as array-based output variables).</p>
+<div class="fragment"><div class="line">PETHargreaves::PETHargreaves() :</div>
+<div class="line">    m_nCells(-1), m_HCoef_pet(0.0023f), m_cellLat(nullptr),</div>
+<div class="line">    m_meanTemp(nullptr), m_maxTemp(nullptr), m_minTemp(nullptr),</div>
+<div class="line">    m_dayLen(nullptr), m_pet(nullptr) {</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">PETHargreaves::~PETHargreaves() {</div>
+<div class="line">    <span class="keywordflow">if</span> (m_dayLen != <span class="keyword">nullptr</span>) <a class="code hl_function" href="namespaceccgl_1_1utils__array.html#a0584669df471a39b5e80da84ba671fca">Release1DArray</a>(m_dayLen);</div>
+<div class="line">    <span class="keywordflow">if</span> (m_pet != <span class="keyword">nullptr</span>) <a class="code hl_function" href="namespaceccgl_1_1utils__array.html#a0584669df471a39b5e80da84ba671fca">Release1DArray</a>(m_pet);</div>
+<div class="line">}</div>
+<div class="ttc" id="anamespaceccgl_1_1utils__array_html_a0584669df471a39b5e80da84ba671fca"><div class="ttname"><a href="namespaceccgl_1_1utils__array.html#a0584669df471a39b5e80da84ba671fca">ccgl::utils_array::Release1DArray</a></div><div class="ttdeci">void Release1DArray(T *&amp;data)</div><div class="ttdoc">Release DT_Array1D data</div><div class="ttdef"><b>Definition:</b> utils_array.h:460</div></div>
+</div><!-- fragment --></li>
+<li><p class="startli">Assign values to input parameters and input variables from other modules in <code>SetData</code> series functions such as <code>SetValue</code>, <code>Set1DData</code>, and <code>Set2DData</code>.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_e_t___h.html#abe34ceb86ea35de67c34c07e0e89635b">PETHargreaves::SetValue</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* key, <span class="keyword">const</span> <span class="keywordtype">float</span> value) {</div>
+<div class="line">    <span class="keywordtype">string</span> sk(key);</div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_function" href="namespaceccgl_1_1utils__string.html#ad21577f915d237b4fc7809d8e856be6b">StringMatch</a>(sk, <a class="code hl_variable" href="text_8h.html#afa5bfb8a37ec673ba3ac953cfbc26582">VAR_PET_HCOEF</a>)) m_HCoef_pet = value;</div>
+<div class="line">    <span class="keywordflow">else</span> {</div>
+<div class="line">        <span class="keywordflow">throw</span> ModelException(MID_PET_H, <span class="stringliteral">&quot;SetValue&quot;</span>, <span class="stringliteral">&quot;Parameter &quot;</span> + sk +</div>
+<div class="line">                            <span class="stringliteral">&quot; does not exist in current module.&quot;</span>);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_e_t___h.html#ae6914f72cacb7e12162afbd523d038e3">PETHargreaves::Set1DData</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* key, <span class="keyword">const</span> <span class="keywordtype">int</span> n, <span class="keywordtype">float</span>* value) {</div>
+<div class="line">    <span class="comment">// Check the first dimension (m_nCells) of array-based data</span></div>
+<div class="line">    <a class="code hl_function" href="group__module__setting.html#a461ac8385153dcf4b7c357116dd9bfab">CheckInputSize</a>(key, n);</div>
+<div class="line">    <span class="keywordtype">string</span> sk(key);</div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_function" href="namespaceccgl_1_1utils__string.html#ad21577f915d237b4fc7809d8e856be6b">StringMatch</a>(sk, <a class="code hl_variable" href="text_8h.html#ab602d04511a24c661c375964bb177ee4">VAR_TMEAN</a>)) m_meanTemp = value;</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="namespaceccgl_1_1utils__string.html#ad21577f915d237b4fc7809d8e856be6b">StringMatch</a>(sk, <a class="code hl_variable" href="text_8h.html#aa5a06a6b5fc61505c8302a7498e7d577">VAR_TMAX</a>)) m_maxTemp = value;</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="namespaceccgl_1_1utils__string.html#ad21577f915d237b4fc7809d8e856be6b">StringMatch</a>(sk, <a class="code hl_variable" href="text_8h.html#a79ed00129969da3aca962308f152c113">VAR_TMIN</a>)) m_minTemp = value;</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="namespaceccgl_1_1utils__string.html#ad21577f915d237b4fc7809d8e856be6b">StringMatch</a>(sk, <a class="code hl_variable" href="text_8h.html#ac80e04b36bf2497ae68eb917a101a64b">DataType_RelativeAirMoisture</a>)) m_rhd = value;</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="namespaceccgl_1_1utils__string.html#ad21577f915d237b4fc7809d8e856be6b">StringMatch</a>(sk, <a class="code hl_variable" href="text_8h.html#afa23ff0977abb48f1b741fd092b7101c">VAR_CELL_LAT</a>)) m_cellLat = value;</div>
+<div class="line">    <span class="keywordflow">else</span> {</div>
+<div class="line">        <span class="keywordflow">throw</span> ModelException(MID_PET_H, <span class="stringliteral">&quot;Set1DData&quot;</span>, <span class="stringliteral">&quot;Parameter &quot;</span> + sk +</div>
+<div class="line">                            <span class="stringliteral">&quot; does not exist in current module.&quot;</span>);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup___p_e_t___h_html_abe34ceb86ea35de67c34c07e0e89635b"><div class="ttname"><a href="group___p_e_t___h.html#abe34ceb86ea35de67c34c07e0e89635b">PETHargreaves::SetValue</a></div><div class="ttdeci">void SetValue(const char *key, FLTPT value) OVERRIDE</div><div class="ttdoc">Set data, DT_Single, float point number (float or double)</div></div>
+<div class="ttc" id="agroup___p_e_t___h_html_ae6914f72cacb7e12162afbd523d038e3"><div class="ttname"><a href="group___p_e_t___h.html#ae6914f72cacb7e12162afbd523d038e3">PETHargreaves::Set1DData</a></div><div class="ttdeci">void Set1DData(const char *key, int n, FLTPT *value) OVERRIDE</div><div class="ttdoc">Set 1D data, by default, DT_Raster1D, float</div></div>
+<div class="ttc" id="agroup__module__setting_html_a461ac8385153dcf4b7c357116dd9bfab"><div class="ttname"><a href="group__module__setting.html#a461ac8385153dcf4b7c357116dd9bfab">SimulationModule::CheckInputSize</a></div><div class="ttdeci">virtual bool CheckInputSize(const char *module_id, const char *key, int nrows, int &amp;m_nrows)</div><div class="ttdoc">Check data length of the first dimension (i.e., nRows) of the input array-based data</div></div>
+<div class="ttc" id="anamespaceccgl_1_1utils__string_html_ad21577f915d237b4fc7809d8e856be6b"><div class="ttname"><a href="namespaceccgl_1_1utils__string.html#ad21577f915d237b4fc7809d8e856be6b">ccgl::utils_string::StringMatch</a></div><div class="ttdeci">bool StringMatch(const char *a, const char *b)</div><div class="ttdoc">Match char ignore cases</div></div>
+</div><!-- fragment --></li>
+<li><p class="startli">Accomplish the validation check of data set by <code>SetData</code> functions in <code>CheckInputData</code> function and initializing necessary output variables in <code>InitialOutputs</code> function.</p>
+<p class="startli">```cpp bool <a class="el" href="group___p_e_t___h.html#ae6d7937f117b18271fd45ebf68b8cf70" title="Check the input data.">PETHargreaves::CheckInputData()</a> { <a class="el" href="_simulation_module_8h.html#adc19a5dd108d1aad1a449108d1d2711c" title="CHECK_POSITIVE is used for single value that must be positive">CHECK_POSITIVE(MID_PET_H, m_nCells)</a>; <a class="el" href="_simulation_module_8h.html#a340c09a1ec3acadb25f8fd022d93347c" title="CHECK_POINTER is used for 1D or 2D raster and other pointer of data">CHECK_POINTER(MID_PET_H, m_maxTemp)</a>; <a class="el" href="_simulation_module_8h.html#a340c09a1ec3acadb25f8fd022d93347c" title="CHECK_POINTER is used for 1D or 2D raster and other pointer of data">CHECK_POINTER(MID_PET_H, m_meanTemp)</a>; <a class="el" href="_simulation_module_8h.html#a340c09a1ec3acadb25f8fd022d93347c" title="CHECK_POINTER is used for 1D or 2D raster and other pointer of data">CHECK_POINTER(MID_PET_H, m_minTemp)</a>; <a class="el" href="_simulation_module_8h.html#a340c09a1ec3acadb25f8fd022d93347c" title="CHECK_POINTER is used for 1D or 2D raster and other pointer of data">CHECK_POINTER(MID_PET_H, m_cellLat)</a>; return true; } void <a class="el" href="group___p_e_t___h.html#ac249f2fee7cf2a0e0b990fe647ecd6ab" title="Initialize output variables.">PETHargreaves::InitialOutputs()</a> { <a class="el" href="_simulation_module_8h.html#adc19a5dd108d1aad1a449108d1d2711c" title="CHECK_POSITIVE is used for single value that must be positive">CHECK_POSITIVE(MID_PET_H, m_nCells)</a>; if (nullptr == m_pet) Initialize1DArray(m_nCells, m_pet, 0.f); if (nullptr == m_dayLen) Initialize1DArray(m_nCells, m_dayLen, 0.f); } ```</p>
+</li>
+<li><p class="startli">Implement or transplant the actual simulation code in <code>Execute</code> function.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group___p_e_t___h.html#a481578100a10e526e5e454eac273e383">PETHargreaves::Execute</a>() {</div>
+<div class="line">    <a class="code hl_function" href="group___p_e_t___h.html#ae6d7937f117b18271fd45ebf68b8cf70">CheckInputData</a>();</div>
+<div class="line">    <a class="code hl_function" href="group___p_e_t___h.html#ac249f2fee7cf2a0e0b990fe647ecd6ab">InitialOutputs</a>();</div>
+<div class="line"><span class="preprocessor">#pragma omp parallel for</span></div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; m_nCells; i++) {<span class="comment"></span></div>
+<div class="line"><span class="comment">        /// calculate the max solar radiation</span></div>
+<div class="line"><span class="comment"></span>        <span class="keywordtype">float</span> srMax; <span class="comment">/// maximum solar radiation of current day</span></div>
+<div class="line">        <a class="code hl_function" href="group___climate_parameters.html#gaa251b6aeadd0c458dae1adf4049d2705">MaxSolarRadiation</a>(<a class="code hl_variable" href="group__module__setting.html#ac578cab4a35a3c2f99be05c520a6dc02">m_dayOfYear</a>, m_cellLat[i], m_dayLen[i], srMax);<span class="comment"></span></div>
+<div class="line"><span class="comment">        ///calculate latent heat of vaporization(from swat)</span></div>
+<div class="line"><span class="comment"></span>        <span class="keywordtype">float</span> latentHeat = 2.501f - 0.002361f * m_meanTemp[i];<span class="comment"></span></div>
+<div class="line"><span class="comment">        /// extraterrestrial radiation</span></div>
+<div class="line"><span class="comment">        /// equation 1:1.1.6 in SWAT Theory 2009, p33</span></div>
+<div class="line"><span class="comment"></span>        <span class="keywordtype">float</span> h0 = srMax * 37.59f / 30.0f;<span class="comment"></span></div>
+<div class="line"><span class="comment">        /// calculate potential evapotranspiration</span></div>
+<div class="line"><span class="comment">        ///  equation 2:2.2.24 in SWAT Theory 2009, p133</span></div>
+<div class="line"><span class="comment"></span>        <span class="keywordtype">float</span> petValue = m_HCoef_pet * h0</div>
+<div class="line">                        * pow(<a class="code hl_define" href="utils__math_8h.html#aa6e7032f5dccdc69d2946c33a916b323">Abs</a>(m_maxTemp[i] - m_minTemp[i]), 0.5f)</div>
+<div class="line">                        * (m_meanTemp[i] + 17.8f) / latentHeat;</div>
+<div class="line">        m_pet[i] = m_petFactor * <a class="code hl_define" href="utils__math_8h.html#a4886a8f966a69949cefc46a6a3468006">Max</a>(0.0f, petValue);</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup___climate_parameters_html_gaa251b6aeadd0c458dae1adf4049d2705"><div class="ttname"><a href="group___climate_parameters.html#gaa251b6aeadd0c458dae1adf4049d2705">MaxSolarRadiation</a></div><div class="ttdeci">void MaxSolarRadiation(int day, FLTPT lat, FLTPT &amp;day_l, FLTPT &amp;max_sr)</div><div class="ttdoc">Calculate the max solar radiation for a station of one day</div></div>
+<div class="ttc" id="agroup___p_e_t___h_html_a481578100a10e526e5e454eac273e383"><div class="ttname"><a href="group___p_e_t___h.html#a481578100a10e526e5e454eac273e383">PETHargreaves::Execute</a></div><div class="ttdeci">int Execute() OVERRIDE</div><div class="ttdoc">Execute the simulation. Return 0 for success.</div></div>
+<div class="ttc" id="agroup___p_e_t___h_html_ac249f2fee7cf2a0e0b990fe647ecd6ab"><div class="ttname"><a href="group___p_e_t___h.html#ac249f2fee7cf2a0e0b990fe647ecd6ab">PETHargreaves::InitialOutputs</a></div><div class="ttdeci">void InitialOutputs() OVERRIDE</div><div class="ttdoc">Initialize output variables.</div></div>
+<div class="ttc" id="agroup___p_e_t___h_html_ae6d7937f117b18271fd45ebf68b8cf70"><div class="ttname"><a href="group___p_e_t___h.html#ae6d7937f117b18271fd45ebf68b8cf70">PETHargreaves::CheckInputData</a></div><div class="ttdeci">bool CheckInputData() OVERRIDE</div><div class="ttdoc">Check the input data.</div></div>
+<div class="ttc" id="agroup__module__setting_html_ac578cab4a35a3c2f99be05c520a6dc02"><div class="ttname"><a href="group__module__setting.html#ac578cab4a35a3c2f99be05c520a6dc02">SimulationModule::m_dayOfYear</a></div><div class="ttdeci">int m_dayOfYear</div><div class="ttdoc">day of year - [1, 366]</div><div class="ttdef"><b>Definition:</b> SimulationModule.h:277</div></div>
+<div class="ttc" id="autils__math_8h_html_a4886a8f966a69949cefc46a6a3468006"><div class="ttname"><a href="utils__math_8h.html#a4886a8f966a69949cefc46a6a3468006">Max</a></div><div class="ttdeci">#define Max(a, b)</div><div class="ttdoc">Return maximum value</div><div class="ttdef"><b>Definition:</b> utils_math.h:123</div></div>
+<div class="ttc" id="autils__math_8h_html_aa6e7032f5dccdc69d2946c33a916b323"><div class="ttname"><a href="utils__math_8h.html#aa6e7032f5dccdc69d2946c33a916b323">Abs</a></div><div class="ttdeci">#define Abs(x)</div><div class="ttdoc">Return absolute value</div><div class="ttdef"><b>Definition:</b> utils_math.h:131</div></div>
+</div><!-- fragment --><p class="startli">Note that the function of calculating maximum solar radiation of current day, as a universal function, should be separated from the specific module. So, the <code>MaxSolarRadiation</code> function is defined in <code>SEIMS/seims/src/seims_main/base/common_algorithm/ClimateParams.h</code> and implemented in <code>SEIMS/seims/src/seims_main/base/common_algorithm/ClimateParams.cpp</code>.</p>
+<p class="startli">The <code>#pragma omp parallel for</code> is the compiler directive of OpenMP to indicate the following for-loop code region that to be executed concurrently.</p>
+</li>
+<li><p class="startli">Complete the <code>GetData</code> functions (e.g., <code>GetValue</code>, <code>Get1DData</code>, and <code>Get2DData</code>) for output variables of current module.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_e_t___h.html#af65a0d7341f2d369d36c28146c6a8b03">PETHargreaves::Get1DData</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* key, <span class="keywordtype">int</span>* n, <span class="keywordtype">float</span>** data) {</div>
+<div class="line">    <a class="code hl_function" href="group___p_e_t___h.html#ac249f2fee7cf2a0e0b990fe647ecd6ab">InitialOutputs</a>();</div>
+<div class="line">    <span class="keywordtype">string</span> sk(key);</div>
+<div class="line">    *n = m_nCells;</div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_function" href="namespaceccgl_1_1utils__string.html#ad21577f915d237b4fc7809d8e856be6b">StringMatch</a>(sk, VAR_PET)) *data = m_pet;</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="namespaceccgl_1_1utils__string.html#ad21577f915d237b4fc7809d8e856be6b">StringMatch</a>(sk, <a class="code hl_variable" href="text_8h.html#a0945844b3e683c166dbd00cc5b69a15c">VAR_DAYLEN</a>)) *data = m_dayLen;</div>
+<div class="line">    <span class="keywordflow">else</span> {</div>
+<div class="line">        <span class="keywordflow">throw</span> ModelException(MID_PET_H, <span class="stringliteral">&quot;Get1DData&quot;</span>, <span class="stringliteral">&quot;Parameter &quot;</span> + sk + <span class="stringliteral">&quot; does not exist.&quot;</span>);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup___p_e_t___h_html_af65a0d7341f2d369d36c28146c6a8b03"><div class="ttname"><a href="group___p_e_t___h.html#af65a0d7341f2d369d36c28146c6a8b03">PETHargreaves::Get1DData</a></div><div class="ttdeci">void Get1DData(const char *key, int *n, FLTPT **data) OVERRIDE</div><div class="ttdoc">Get 1D data, by default, DT_Raster1D, float</div></div>
+</div><!-- fragment --></li>
+<li>Build the SEIMS module by right click the project name of the current module and select <code>Build</code> command.</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md85"></a>
+Test the new SEIMS module</h1>
+<p >The newly developed <code>PET_H</code> module was tested based on the Youwuzhen watershed model customized in Section 2:4.3.3. The module configuration file is as follows.</p>
+<div class="fragment"><div class="line">01 ### Driver factors, including climate and precipitation</div>
+<div class="line">02 0 | TimeSeries | | TSD_RD</div>
+<div class="line">03 0 | Interpolation_0 | Thiessen | ITP</div>
+<div class="line">04 ### Surface processes</div>
+<div class="line">05 0 | Soil temperature | Finn Plauborg | STP_FP</div>
+<div class="line">06 0 | PET | Hargreaves | PET_H</div>
+<div class="line">07 #0 | PET | PenmanMonteith | PET_PM</div>
+<div class="line">08 0 | Interception | Maximum Canopy Storage | PI_MCS</div>
+<div class="line">09 0 | Snow melt | Snowpeak Daily | SNO_SP</div>
+<div class="line">10 0 | Infiltration | Modified rational | SUR_MR</div>
+<div class="line">11 0 | Depression and Surface Runoff | Linsley | DEP_LINSLEY</div>
+<div class="line">12 0 | Hillslope erosion | MUSLE | SERO_MUSLE</div>
+<div class="line">13 0 | Plant Management Operation | SWAT | PLTMGT_SWAT</div>
+<div class="line">14 0 | Percolation | Storage routing | PER_STR</div>
+<div class="line">15 0 | Subsurface | Darcy and Kinematic | SSR_DA</div>
+<div class="line">16 0 | AET | Hargreaves and PriestleyTaylor | AET_PTH</div>
+<div class="line">17 #0 | SET | Linearly Method from WetSpa | SET_LM</div>
+<div class="line">18 0 | PG | Simplified EPIC | PG_EPIC</div>
+<div class="line">19 0 | ATMDEP | Atomosphere deposition | ATMDEP</div>
+<div class="line">20 0 | NUTR_TF | Nutrient Transformation of C, N, and P | NUTR_TF</div>
+<div class="line">21 0 | Water overland routing | IUH | IUH_OL</div>
+<div class="line">22 0 | Sediment overland routing | IUH | IUH_SED_OL</div>
+<div class="line">23 0 | Nutrient | Attached nutrient loss | NUTRSED</div>
+<div class="line">24 0 | Nutrient | Soluble nutrient loss | NUTRMV</div>
+<div class="line">25 0 | Pothole | SWAT cone shape | IMP_SWAT</div>
+<div class="line">26 0 | Soil water | Water balance | SOL_WB</div>
+<div class="line">27 ### Route Modules, including water, sediment, and nutrient</div>
+<div class="line">28 0 | Groundwater | Linear reservoir | GWA_RE</div>
+<div class="line">29 0 | Nutrient | groundwater nutrient transport | NUTRGW</div>
+<div class="line">30 0 | Water channel routing | MUSK | MUSK_CH</div>
+<div class="line">31 0 | Sediment channel routing | Simplified Bagnold equation | SEDR_SBAGNOLD</div>
+<div class="line">32 0 | Nutrient | Channel routing | NutrCH_QUAL2E</div>
+</div><!-- fragment --><p >The Youwuzhen watershed model was executed with all model parameters remain the default values as well. Figure 1 showed the spatial distributions of average potential evapotranspiration simulated by the Priestley-Taylor method (Figure 1 upper) and Hargreaves method (Figure 1 below).</p>
+<p ><img src="../../img/ywz30m_PET_PT-AVE.jpg" alt="ywz_PET_PT" class="inline"/> <img src="ywz30m_PET_PT-AVE.jpg" alt="ywz_PET_PT" width="400" class="inline"/></p>
+<p ><img src="../../img/ywz30m_PET_H-AVE.jpg" alt="ywz_PET_H" class="inline"/> <img src="ywz30m_PET_H-AVE.jpg" alt="ywz_PET_H" width="400" class="inline"/></p>
+<p >Figure 1 Spatial distributions of average potential evapotranspiration simulated by the Youwuzhen watershed model using the (upper) Priestley-Taylor method and the (below) Hargreaves method </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+  </ul>
+</div>
+</body>
+</html>

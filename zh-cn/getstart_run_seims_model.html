@@ -1,0 +1,371 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: 运行基于SEIMS的流域过程模型</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('getstart_run_seims_model.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">运行基于SEIMS的流域过程模型 </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>目录</h3>
+<ul><li class="level1"><a href="#autotoc_md69">简单使用</a></li>
+<li class="level1"><a href="#autotoc_md70">基于SEIMS模型文件结构</a><ul><li class="level2"><a href="#autotoc_md71">file.in文件</a></li>
+<li class="level2"><a href="#autotoc_md72">file.out文件</a></li>
+<li class="level2"><a href="#autotoc_md73">param.cali文件</a></li>
+<li class="level2"><a href="#autotoc_md74">config.fig文件</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md75">高级使用</a><ul><li class="level2"><a href="#autotoc_md76">在命令行界面运行</a><ul><li class="level3"><a href="#autotoc_md77">OpenMP版本</a></li>
+<li class="level3"><a href="#autotoc_md78">MPI&amp;OpenMP版本</a></li>
+</ul>
+</li>
+<li class="level2"><a href="#autotoc_md79">使用Python运行</a></li>
+<li class="level2"><a href="#autotoc_md80">自定义游屋圳流域模型</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="textblock"><p ><a class="anchor" id="md_doc_zh_cn_get_started_run_model"></a></p>
+<h1><a class="anchor" id="autotoc_md69"></a>
+简单使用</h1>
+<p >打开终端（如Windows的CMD），输入以下命令以执行预定义的基于SEIMS的游屋圳流域模型（以下简称游屋圳流域模型）： </p><div class="fragment"><div class="line">cd D:\demo\SEIMS\seims\test</div>
+<div class="line">D:</div>
+<div class="line">python demo_runmodel.py –name youwuzhen</div>
+</div><!-- fragment --><p >模拟将在大约28秒内完成（如图1所示）。预定义的输出信息可以在模型文件夹（即<code>MODEL_DIR\OUTPUT0</code>）中找到，如图2所示。</p>
+<p ><img src="../../img/screenshot-runmodel-simple-usage.jpg" alt="ywzrunmodelsimple" class="inline"/> <img src="screenshot-runmodel-simple-usage.jpg" alt="ywzrunmodelsimple" width="400" class="inline"/></p>
+<p >图1 游屋圳流域模型的OpenMP版本的简单使用</p>
+<p ><img src="../../img/screenshot-runmodel-output0-simple-usage.jpg" alt="ywzrunmodeloutput0" class="inline"/> <img src="screenshot-runmodel-output0-simple-usage.jpg" alt="ywzrunmodeloutput0" width="400" class="inline"/></p>
+<p >图2 游屋圳流域模型的预定义输出</p>
+<h1><a class="anchor" id="autotoc_md70"></a>
+基于SEIMS模型文件结构</h1>
+<p >简单来说，基于SEIMS的流域模型是一个文件夹（如<code>SEIMS\data\youwuzhen\demo_youwuzhen30m_longterm_model</code>），其中包括若干SEIMS配置文件，如<code>file.in</code>、<code>file.out</code>、<code>param.cali</code> 和 <code>config.fig</code>。</p>
+<p ><code>file.in</code> 和 <code>file.out</code>是基本模型配置所必需的，而 <code>param.cali</code> 是率定模型参数的可选文件。~~这三个纯文本文件会在数据预处理过程中被读取并导入到主空间数据库中（章节 2:3.2）。~~当这些文件发生变化（如在手动率定过程中）时，也可以仅通过运行单个预处理Python脚本（即 <code>SEIMS\seims\preprocess\db_import_model_parameters.py</code>）来更新MongoDB。</p>
+<p ><code>config.fig</code> 文件是构建基于SEIMS的流域模型的最重要的配置文件，用于选择参与流域模拟的SEIMS模块以及指定这些模块的模拟顺序。</p>
+<h2><a class="anchor" id="autotoc_md71"></a>
+file.in文件</h2>
+<p ><code>file.in</code> 文件用于定义不同时间步长的模拟时段的模拟模式。与<a class="el" href="getstart_data_preparation.html#dataprep_basic_plaintest">此处</a>描述的纯文本格式不同，其基本格式是 <code>[TAG]|[VALUE]</code>。目前该文件中必须包含以下四个 <code>TAG</code>。</p><ul>
+<li><code>MODE</code>：字符串类型，用于指定长期模拟或暴雨事件模拟。值只能为 <code>Daily</code> 或 <code>Storm</code>（不区分大小写）。</li>
+<li><code>INTERVAL</code>：整型，根据 <code>MODE</code>定义时间步长（或所谓的时间分辨率）。对于长期模拟，单位是日，例如 <code>INTERVAL|1</code>表示时间步长是一日。对于暴雨事件模拟，单位为秒，例如 <code>INTERVAL|3600</code> 表示时间步长为一小时。 特别地，对于暴雨事件模拟，可为坡面尺度和河道尺度这两个不同的过程指定不同的时间步长。例如，<code>INTERVAL|60,3600</code>表示坡面尺度过程的时间步长为1分钟，河道尺度过程的时间步长为1小时。</li>
+<li><code>STARTTIME</code>：模拟的起始时间，格式为 <code>YYYY-MM-DD HH:MM:SS</code></li>
+<li><code>ENDTIME</code>： 模拟的结束时间，格式为 <code>YYYY-MM-DD HH:MM:SS</code></li>
+</ul>
+<p >对于游屋圳流域模型，其进行的是时间步长为一天的长期模拟，时间范围为2012年1月1日至2015年12月31， <code>file.in</code>的内容如下。</p>
+<div class="fragment"><div class="line">MODE|Daily</div>
+<div class="line">INTERVAL|1</div>
+<div class="line">STARTTIME|2012-01-01 00:00:00</div>
+<div class="line">ENDTIME|2015-12-31 23:59:59</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md72"></a>
+file.out文件</h2>
+<p ><code>file.out</code>文件用于定义基于SEIMS的流域模型的输出内容。格式与<a class="el" href="getstart_data_preparation.html#dataprep_basic_plaintest">此处</a>描述的纯文本格式相同。每行对应一个输出变量。表 1列出了各行的可用字段。</p>
+<p >表 1 <code>file.out</code> 配置文件的可用字段</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段名称   </th><th class="markdownTableHeadNone">数据类型   </th><th class="markdownTableHeadNone">描述    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">OUTPUTID   </td><td class="markdownTableBodyNone">字符串   </td><td class="markdownTableBodyNone">唯一输出标识符，例如QRECH表示河道出口的流量。    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">TYPE   </td><td class="markdownTableBodyNone">字符串   </td><td class="markdownTableBodyNone">空间数据输出的聚合类型，包括SUM、AVE、MAX和MIN。多个类型用短横线连接，例如SUM-AVE表示同时输出总和和平均值。对于时间序列输出，TYPE可以为NONE。    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">STARTTIME   </td><td class="markdownTableBodyNone">日期时间字符串   </td><td class="markdownTableBodyNone">当前输出的起始时间，格式为YYYY-MM-DD HH:MM:SS    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">ENDTIME   </td><td class="markdownTableBodyNone">日期时间字符串   </td><td class="markdownTableBodyNone">当前输出的结束时间，格式为 YYYY-MM-DD HH:MM:SS    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">INTERVAL   </td><td class="markdownTableBodyNone">整型   </td><td class="markdownTableBodyNone">输出的时间步长，默认值为 -9999，表示与模拟的时间步长相同。    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">INTERVAL_UNIT   </td><td class="markdownTableBodyNone">字符串   </td><td class="markdownTableBodyNone">时间步长的单位，可以为DAY或SEC。默认值为 -9999，表示与模拟的单位相同。    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">FILENAME   </td><td class="markdownTableBodyNone">字符串   </td><td class="markdownTableBodyNone">输出文件名及后缀，例如 Q.txt 和 PET.tif。    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SUBBASIN   </td><td class="markdownTableBodyNone">字符串或整型   </td><td class="markdownTableBodyNone">指定输出的子流域，可为ALL、OUTLET或用短横线连接的子流域编号，例如1-4-5。   </td></tr>
+</table>
+<p >在这些字段中，只有 <code>OUTPUTID</code> 是必填项。未指定字段的值将采用用户可扩展的输出数据库中的默认值（位于<code>SEIMS\seims\preprocess\database\AvailableOutputs.csv</code>）。因此，用户可以通过仅指定输出 ID 来定义<code>QRECH</code>（每个时间步长的河段出口流量，单位为m3/s）和 <code>PET</code> （潜在蒸散量，单位为mm）的输出，如： </p><div class="fragment"><div class="line">OUTPUTID</div>
+<div class="line">QRECH</div>
+<div class="line">PET</div>
+</div><!-- fragment --><p> 或者可以指定更详细的信息，如：</p>
+<div class="fragment"><div class="line">OUTPUTID,TYPE,STARTTIME,ENDTIME,INTERVAL,INTERVAL_UNIT,SUBBASIN</div>
+<div class="line">QRECH,NONE,2012-01-01 00:00:00,2015-12-31 23:59:59,1,DAY,OUTLET</div>
+<div class="line">PET,SUM-AVE,2012-01-01 00:00:00,2015-12-31 23:59:59,-9999,-9999,ALL</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md73"></a>
+param.cali文件</h2>
+<p ><code>param.cali</code>文件用于定义率定参数。该文件可以不存在或为空，此时模型将使用默认的参数值。文件格式**必须**包含<code>NAME</code>、<code>IMPACT</code>和<code>CHANGE</code>。 <code>CHANGE</code>是可选的，不允许有标题行。 <code>NAME</code> **必须**是预定义参数列表中的一个，用户可以通过修改<code>SEIMS\seims\preprocess\database\model_param_ini.csv</code>文件进行拓展。 <code>CHANGE</code> 表示参数的影响类型，可为 <code>RC</code> （相对变化）或 <code>AC</code>（绝对变化）。<code>IMPACT</code>是浮点变化值，对于 <code>RC</code>，新参数值将是<code>initial_value * impact</code>，对于<code>AC</code>，则是<code>initial_value + impact</code>。</p>
+<p >因此，<code>param.cali</code>文件支持以下三种格式：</p>
+<div class="fragment"><div class="line">Runoff_co,1.5</div>
+<div class="line">gw0,-50,</div>
+<div class="line">K_pet,-0.3,AC</div>
+</div><!-- fragment --><p >注意，修改<code>param.cali</code>文件后需要重新执行<code>db_import_model_parameters.py</code>来更新数据库。</p>
+<h2><a class="anchor" id="autotoc_md74"></a>
+config.fig文件</h2>
+<p ><code>config.fig</code> 文件用于定义基于SEIMS的流域模型中使用的SEIMS模块。**模块的排列顺序决定了模拟过程中模块的执行顺序。**SEIMS模块的基本执行顺序应为与驱动因子（如气候数据）相关的模块，坡面过程相关的模块，河道和地下水汇流过程。例如，游屋圳流域模型的<code>config.fig</code> 文件内容如图 2:4 3所示，详细信息请参见Qin等(2018)。</p>
+<div class="fragment"><div class="line">01 ### Driver factors, including meteorological data and precipitation</div>
+<div class="line">02 0 | TimeSeries | | TSD_RD</div>
+<div class="line">03 0 | Interpolation_0 | Thiessen | ITP</div>
+<div class="line">04 ### Surface processes</div>
+<div class="line">05 0 | Soil temperature | Finn Plauborg | STP_FP</div>
+<div class="line">06 0 | PET | PenmanMonteith | PET_PM</div>
+<div class="line">07 0 | Interception | Maximum Canopy Storage | PI_MCS</div>
+<div class="line">08 0 | Snow melt | Snowpeak Daily | SNO_SP</div>
+<div class="line">09 0 | Infiltration | Modified rational | SUR_MR</div>
+<div class="line">10 0 | Depression and Surface Runoff | Linsley | DEP_LINSLEY</div>
+<div class="line">11 0 | Hillslope erosion | MUSLE | SERO_MUSLE</div>
+<div class="line">12 0 | Plant Management Operation | SWAT | PLTMGT_SWAT</div>
+<div class="line">13 0 | Percolation | Storage routing | PER_STR</div>
+<div class="line">14 0 | Subsurface | Darcy and Kinematic | SSR_DA</div>
+<div class="line">15 0 | SET | Linearly Method from WetSpa | SET_LM</div>
+<div class="line">16 0 | PG | Simplified EPIC | PG_EPIC</div>
+<div class="line">17 0 | ATMDEP | Atomosphere deposition | ATMDEP</div>
+<div class="line">18 0 | NUTR_TF | Nutrient Transformation of C, N, and P | NUTR_TF</div>
+<div class="line">19 0 | Water overland routing | IUH | IUH_OL</div>
+<div class="line">20 0 | Sediment overland routing | IUH | IUH_SED_OL</div>
+<div class="line">21 0 | Nutrient | Attached nutrient loss | NUTRSED</div>
+<div class="line">22 0 | Nutrient | Soluble nutrient loss | NUTRMV</div>
+<div class="line">23 0 | Pothole | SWAT cone shape | IMP_SWAT</div>
+<div class="line">24 0 | Soil water | Water balance | SOL_WB</div>
+<div class="line">25 ### Route Modules, including water, sediment, and nutrient</div>
+<div class="line">26 0 | Groundwater | Linear reservoir | GWA_RE</div>
+<div class="line">27 0 | Nutrient | groundwater nutrient transport | NUTRGW</div>
+<div class="line">28 0 | Water channel routing | MUSK | MUSK_CH</div>
+<div class="line">29 0 | Sediment channel routing | Simplified Bagnold equation | SEDR_SBAGNOLD</div>
+<div class="line">30 0 | Nutrient | Channel routing | NutrCH_QUAL2E</div>
+</div><!-- fragment --><p >如上所述，与 <a class="el" href="getstart_data_preparation.html#dataprep_basic_plaintest">此处</a> 描述的纯文本格式不同，每个选定的 SEIMS 模块的基本格式为： <code>[MODULE NO.]|[PROCESS NAME]|[METHOD NAME]|[MODULE ID]</code>，其中</p><ul>
+<li><code>MODULE NO.</code> 可为任意数字</li>
+<li><code>PROCESS NAME</code> 是对应流域过程的名称</li>
+<li><code>METHOD NAME</code> 是用于模拟该流域过程的算法名称</li>
+<li><code>MODULE ID</code> 是SEIMS 模块的 ID，即对应动态链接库文件（<code>dll</code>、<code>so</code> 或 <code>dylib</code>文件）的名称。若模块无法找到活加载，SEIMS会退出并报告错误。</li>
+</ul>
+<p >SEIMS主程序仅使用<code>PROCESS NAME</code> 和 <code>MODULE ID</code>，而<code>MODULE NO.</code> 和 <code>METHOD NAME</code>仅用于提高可读性。<code>MODULE ID</code>应与SEIMS模块的ID完全匹配。某些模块的<code>PROCESS NAME</code>可能包含额外的配置信息。</p>
+<ul>
+<li>对于插值模块，必须在<code>PROCESS NAME</code>的后缀中指定垂直插值方法（0表示不基于垂直递减率进行垂直插值，1表示进行垂直插值），例如： <code>0 | Interpolation_1 | Thiessen | ITP</code></li>
+</ul>
+<blockquote class="doxtable">
+<p >TODO: 在当前版本的SEIMS中，降水和温度的垂直递减率被定义为常数，分别为0.03 mm/100 m（降水）和-0.65 degC/100（温度）。未来版本中，应允许用户根据研究区输入不同气象变量的垂直递减率。 </p>
+</blockquote>
+<h1><a class="anchor" id="autotoc_md75"></a>
+高级使用</h1>
+<p >SEIMS主程序包括一个OpenMP版本（<code>seims_omp</code>）和一个OpenMP和MPI混合版本（简称 MPI&amp;OpenMP 版本，<code>seims_mpi</code>）。在OpenMP版本中，基于OpenMP的每个模块的并行计算在基本单元层次（如网格单元或不规则多边形）进行。在MPI&amp;OpenMP 版本中，首先将流域分解为子流域，在子流域层次上进行基于MPI的并行计算。然后再每个子流域内，与OpenMP版本相同，基于OpenMP的并行计算在基本单元层次进行。</p>
+<blockquote class="doxtable">
+<p >注意：如果C/C++编译器不支持OpenMP，则OpenMP并行计算将不起作用，且SEIMS主程序的可执行文件名将为 <code>seims</code>。 </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md76"></a>
+在命令行界面运行</h2>
+<p >命令行界面（CLI）是运行基于SEIMS的流域模型的推荐方式。OpenMP版本和MPI&amp;OpenMP版本的调用命令略有不同。 </p>
+<h3><a class="anchor" id="autotoc_md77"></a>
+OpenMP版本</h3>
+<p >OpenMP版本的主程序饿完整推荐用法如下。</p>
+<div class="fragment"><div class="line">seims_omp -wp &lt;modelPath&gt; [-thread &lt;threadsNum&gt; -lyr &lt;layeringMethod&gt; -host &lt;hostname&gt; -port &lt;port&gt; -sce &lt;scenarioID&gt; -cali &lt;calibrationID&gt; -id &lt;subbasinID&gt;]</div>
+</div><!-- fragment --><p >其中，</p><ol type="1">
+<li><code>modelPath</code> 是基于SEIMS的流域模型的路径（参见数据预处理的配置文件中的<code>MODEL_DIR</code>，章节 2:3.2）。</li>
+<li><code>threadsNum</code> （可选）用于OpenMP并行计算的线程数量，必须大于或等于1（默认值）。</li>
+<li><code>layeringMethod</code> （可选）routing layering method，0表示the routing layering method based on flow direction algorithms of <code>UPDOWN</code>（默认，源头分层），1表示 <code>DOWNUP</code>（出口分层）</li>
+<li><code>hostname</code> 是MongoDB 服务器的 IP 地址，默认值为<code>127.0.0.1</code> （即<code>localhost</code>）。</li>
+<li><code>port</code> 是MongoDB 服务器的端口号，默认值为27017。</li>
+<li><code>scenarioID</code> 是BMP情景的ID，在情景数据库的<code>BMP_SCENARIOS</code> 集合中定义。默认值为-1，表示不应用场景。</li>
+<li><code>calibrationID</code> 率定数据的ID（即索引），在主数据库的 <code>PARAMETERS</code>集合中定义。默认值为-1，表示不应用率定。</li>
+<li><code>subbasinID</code> 是要执行的子流域ID。0表示整个流域。9999为Field版本保留。</li>
+<li>todo获取更多可用参数。</li>
+</ol>
+<p >对于游屋圳流域，一个完整的命令示例如下：</p>
+<div class="fragment"><div class="line">cd D:\demo\SEIMS\bin</div>
+<div class="line">D:</div>
+<div class="line">seims_omp -wp D:\demo\SEIMS\data\youwuzhen\demo_youwuzhen30m_longterm_model -thread 4 -lyr 1 -host 127.0.0.1 -port 27017 -sce 0</div>
+</div><!-- fragment --><p >OpenMP版本的运行日志如图2:4 1所示，其中包括数据输入/输出（IO）、各模块计算和整个模拟的耗时。</p>
+<p >输出文件夹将在模型目录中创建，其命名格式为<code>OUTPUT&lt;_MPI&gt;-&lt;FlowDir&gt;-&lt;LayerMethod&gt;-&lt;scenarioID&gt;-&lt;calibrationID&gt;</code>。</p>
+<h3><a class="anchor" id="autotoc_md78"></a>
+MPI&amp;OpenMP版本</h3>
+<p >SEIMS主程序的MPI&amp;OpenMP版本与OpenMP版本的参数相同，但调用方式不同（如图 3:1 1）。运行MPI程序的基本格式为：</p>
+<div class="fragment"><div class="line">mpiexec -&lt;hostsopt&gt; &lt;hostfile&gt; -n &lt;processNum&gt; seims_mpi -wp &lt;modelPath&gt; [-thread &lt;threadsNum&gt; -lyr &lt;layeringMethod&gt; -host &lt;hostname&gt; -port &lt;port&gt; -sce &lt;scenarioID&gt; -cali &lt;calibrationID&gt; -id &lt;subbasinID&gt;]</div>
+</div><!-- fragment --><p >其中，</p><ol type="1">
+<li><code>hostopt</code> （可选）是MPI的输入参数标识符，用于指定主机列表文件，其形式因MPI实现而异，例如，<code>-machinefile</code> 或 <code>-hostfile</code>。</li>
+<li><code>hostfile</code> （可选）是注记列表文件。其格式可能和MPI实现不同。例如，OpenMPI使用的格式为： <div class="fragment"><div class="line">b10n08.cluster.com slots=3 max-slots=3</div>
+<div class="line">b08n01.cluster.com slots=4 max-slots=4</div>
+<div class="line">b10n05.cluster.com slots=4 max-slots=4</div>
+</div><!-- fragment --> IntelMPI使用格式为： <div class="fragment"><div class="line">b10n08.cluster.com 3</div>
+<div class="line">b08n01.cluster.com 4</div>
+<div class="line">b10n05.cluster.com 4</div>
+</div><!-- fragment --></li>
+<li><code>processNum</code> （可选）是进程数量。</li>
+</ol>
+<p >对于游屋圳流域模型，在Windows平台上运行MPI&amp;OpenMP版本的完整命令示例为:</p>
+<div class="fragment"><div class="line">cd D:\demo\SEIMS\bin</div>
+<div class="line">D:</div>
+<div class="line">mpiexec -n 4 seims_mpi -wp D:\demo\SEIMS\data\youwuzhen\demo_youwuzhen30m_longterm_model -thread 1 -lyr 1 -host 127.0.0.1 -port 27017 -sce 0</div>
+</div><!-- fragment --><p >对应的运行日志如图 2:4 5。与OpenMP版本的输出信息（如图 2:4 1）不同，这里给出了每个进程（即本利中MPI的4个进程）的数据IO、所有模块计算和整个模拟的最大耗时（<code>[TIMESPAN][MAX]</code>）、最小耗时（<code>[TIMESPAN][MIN]</code>）和平均耗时（<code>[TIMESPAN][AVG]</code>）。最大耗时是评估并行性能时最常用的统计数据。</p>
+<h2><a class="anchor" id="autotoc_md79"></a>
+使用Python运行</h2>
+<p >除了通过命令行界面（CLI）运行，SEIMS还提供了基于配置文件的方法使用Python执行模型。与数据预处理的简单方法（2:3.2）类似，运行游屋圳流域模型的简单使用方式会根据本地的SEIMS路径生成一个配置文件，例如 <code>SEIMS\data\youwuzhen\workspace\runmodel.ini</code> （如图2:4 7）。</p>
+<p >基于SEIMS的流域模型的配置文件，例如图 2:4 7展示的游屋圳流域模型的配置文件，在一节（即 <code>SEIMS_Model</code>）中包含多个选项来指定前面章节介绍的SEIMS主程序参数。以下是完整参数列表。</p>
+<ul>
+<li><code>SEIMS_Model</code>：<ol type="1">
+<li><code>MODEL_DIR</code>： 研究区的模型路径，包含流域建模所需的多个配置文件。</li>
+<li><code>BIN_DIR</code>： SEIMS模块和主程序路径，默认与数据预处理配置文件（<code>preprocess.ini</code>，参见章节 2:3.2）中的<code>CPP_PROGRAM_DIR</code>相同。</li>
+<li><code>HOSTNAME</code>： MongoDB服务器的IP地址，例如 <code>127.0.0.1</code> （即 <code>localhost</code>）。</li>
+<li><code>PORT</code>： MongoDB服务器端口号，默认值为27017。</li>
+<li><code>VERSION</code>： （可选）SEIMS主程序版本，可为<code>OMP</code>（OpenMP版本）和 <code>MPI</code>（MPI&amp;OpenMP版本），默认值为<code>OMP</code>。</li>
+<li><code>MPI_BIN</code>： （可选）MPI可执行文件的完整路径，例如 <code>C:\Program Files\Microsoft MPI\Bin\mpiexec.exe</code>。</li>
+<li><code>hostopt</code>： （可选）MPI输入参数标识符，用于指定主机列表文件，不同MPI实现有不同的标识符，例如<code>-machinefile</code> 或 <code>-hostfile</code>。 <code>hostfile</code>： （可选）主机列表文件，其格式可能因MPI实现不同。</li>
+<li><code>processNum</code>： （可选）进程数，默认值为1.</li>
+<li><code>threadsNum</code>： （可选）每个进程的线程数，默认值为4。</li>
+<li><code>layeringMethod</code>： （可选）基于流向算法的Routing layering method ，可为0或1。</li>
+<li><code>scenarioID</code>： （可选）BMP情景的ID。</li>
+<li><code>calibrationID</code>： （可选）率定数据的ID（即索引）。</li>
+<li><code>subbasinID</code>： （可选）子流域的ID，0表示整个流域，9999为Field版本保留。</li>
+<li><code>Sim_Time_start</code>： （可选）模拟起始时间，格式为 <code>YYYY-MM-DD HH:MM:SS</code>。</li>
+<li><code>Sim_Time_end</code>： （可选）模拟结束时间，格式为 <code>YYYY-MM-DD HH:MM:SS</code>。如果未指定，将使用数据库中 <code>FILE_IN</code>集合准备的起始和结束时间。</li>
+<li><code>Output_Time_start</code>： （可选）输出项的起始时间，格式为 <code>YYYY-MM-DD HH:MM:SS</code>。</li>
+<li><code>Output_Time_end</code>： （可选）输出项的结束时间，格式为 <code>YYYY-MM-DD HH:MM:SS</code>。如果指定，将更新并应用于<code>FILE_OUT</code>集合中所有选定输出ID的时间段。</li>
+</ol>
+</li>
+</ul>
+<div class="fragment"><div class="line">[SEIMS_Model]</div>
+<div class="line">MODEL_DIR = D:\demo\SEIMS\data\youwuzhen\demo_youwuzhen30m_longterm_model</div>
+<div class="line">BIN_DIR = D:\demo\SEIMS\bin</div>
+<div class="line">HOSTNAME = 127.0.0.1</div>
+<div class="line">PORT = 27017</div>
+<div class="line">version = OMP</div>
+<div class="line">mpi_bin = mpiexec</div>
+<div class="line"># hostopt = ...</div>
+<div class="line"># hostfile = ...</div>
+<div class="line">processNum = 2</div>
+<div class="line">threadsNum = 4</div>
+<div class="line">layeringMethod = 1</div>
+<div class="line">scenarioID = 0</div>
+<div class="line">calibrationID = -1</div>
+<div class="line">subbasinID = 0</div>
+<div class="line"># Simulation period (UTCTIME)</div>
+<div class="line">Sim_Time_start = 2012-01-01 00:00:00</div>
+<div class="line">Sim_Time_end = 2015-12-31 23:59:59</div>
+<div class="line"># Time period of ALL selected outputs</div>
+<div class="line">Output_Time_start = 2012-01-01 00:00:00</div>
+<div class="line">Output_Time_end = 2015-12-31 00:00:00</div>
+</div><!-- fragment --><p >要运行上述配置文件定义的基于SEIMS的流域模型，请按照统一的SEIMS Python脚本格式，例如，</p>
+<div class="fragment"><div class="line">cd D:\demo\SEIMS\seims</div>
+<div class="line">python run_seims.py -ini D:\demo\SEIMS\data\youwuzhen\workspace\runmodel.ini</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md80"></a>
+自定义游屋圳流域模型</h2>
+<p >为了展示SEIMS构建不同流域模型的能力，我们对游屋圳流域模型进行了一个简单的修改：将用于潜在蒸散量模拟的Penman-Monteith method 方法（<code>PET_PM</code>）替换为Priestley-Taylor方法（<code>PET_PT</code>）。需要注意的是，除了潜在蒸散量的计算外， <code>PET_PM</code>模块还模拟了潜在植物蒸腾量，而<code>PET_PT</code> 没有。因此，我们添加了一个名为AET_PTH的模块，用于模拟潜在植物蒸腾量、潜在土壤蒸发量和实际土壤蒸发量。同时，原本的土壤蒸发模块（<code><a class="el" href="group___s_e_t___l_m.html#class_s_e_t___l_m" title="Calculate soil Temperature according to the linearly relationship with actual soil moisture">SET_LM</a></code>）不再需要。以下是新的自定义游屋圳流域模型的<code>config.fig</code>文件内容：</p>
+<div class="fragment"><div class="line">01 ### Driver factors, including climate and precipitation</div>
+<div class="line">02 0 | TimeSeries | | TSD_RD</div>
+<div class="line">03 0 | Interpolation_0 | Thiessen | ITP</div>
+<div class="line">04 ### Surface processes</div>
+<div class="line">05 0 | Soil temperature | Finn Plauborg | STP_FP</div>
+<div class="line">06 0 | PET | PriestleyTaylor | PET_PT</div>
+<div class="line">07 #0 | PET | PenmanMonteith | PET_PM</div>
+<div class="line">08 0 | Interception | Maximum Canopy Storage | PI_MCS</div>
+<div class="line">09 0 | Snow melt | Snowpeak Daily | SNO_SP</div>
+<div class="line">10 0 | Infiltration | Modified rational | SUR_MR</div>
+<div class="line">11 0 | Depression and Surface Runoff | Linsley | DEP_LINSLEY</div>
+<div class="line">12 0 | Hillslope erosion | MUSLE | SERO_MUSLE</div>
+<div class="line">13 0 | Plant Management Operation | SWAT | PLTMGT_SWAT</div>
+<div class="line">14 0 | Percolation | Storage routing | PER_STR</div>
+<div class="line">15 0 | Subsurface | Darcy and Kinematic | SSR_DA</div>
+<div class="line">16 0 | AET | Hargreaves and PriestleyTaylor | AET_PTH</div>
+<div class="line">17 #0 | SET | Linearly Method from WetSpa | SET_LM</div>
+<div class="line">18 0 | PG | Simplified EPIC | PG_EPIC</div>
+<div class="line">19 0 | ATMDEP | Atomosphere deposition | ATMDEP</div>
+<div class="line">20 0 | NUTR_TF | Nutrient Transformation of C, N, and P | NUTR_TF</div>
+<div class="line">21 0 | Water overland routing | IUH | IUH_OL</div>
+<div class="line">22 0 | Sediment overland routing | IUH | IUH_SED_OL</div>
+<div class="line">23 0 | Nutrient | Attached nutrient loss | NUTRSED</div>
+<div class="line">24 0 | Nutrient | Soluble nutrient loss | NUTRMV</div>
+<div class="line">25 0 | Pothole | SWAT cone shape | IMP_SWAT</div>
+<div class="line">26 0 | Soil water | Water balance | SOL_WB</div>
+<div class="line">27 ### Route Modules, including water, sediment, and nutrient</div>
+<div class="line">28 0 | Groundwater | Linear reservoir | GWA_RE</div>
+<div class="line">29 0 | Nutrient | groundwater nutrient transport | NUTRGW</div>
+<div class="line">30 0 | Water channel routing | MUSK | MUSK_CH</div>
+<div class="line">31 0 | Sediment channel routing | Simplified Bagnold equation | SEDR_SBAGNOLD</div>
+<div class="line">32 0 | Nutrient | Channel routing | NutrCH_QUAL2E</div>
+</div><!-- fragment --><p >在所有模型参数保持默认的情况下，分别运行了原始游屋圳流域模型和新的自定义模型。图 2:4 9显示了Penman-Monteith法（图 2:4 9a）和 Priestley-Taylor法（图 2:4 9b）模拟的平均潜在蒸散量的空间分布。两种方法模拟的空间模式非常相似，但具体数值有所不同。模拟潜在蒸散量的差异也反映在模拟的流域出口的流量上（图 2:4 10）。 </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+  </ul>
+</div>
+</body>
+</html>

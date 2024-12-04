@@ -1,0 +1,178 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: seims/src/seims_main/base/common_algorithm/PlantGrowthCommon.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_plant_growth_common_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">PlantGrowthCommon.h 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Define some common used function in Plant growth module, e.g., PG_EPIC  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="basic_8h_source.html">basic.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_b_m_p_text_8h_source.html">BMPText.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="seims_8h_source.html">seims.h</a>&quot;</code><br />
+</div>
+<p><a href="_plant_growth_common_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gae0443671f978560d959eb2322e74c9e5"><td class="memItemLeft" align="right" valign="top">
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GetNPShapeParameter</b> (FLTPT fr1, FLTPT fr2, FLTPT fr3, FLTPT *shape1, FLTPT *shape2)</td></tr>
+<tr class="memdesc:gae0443671f978560d959eb2322e74c9e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get N/P shape parameter, See readplant.f of SWAT <br /></td></tr>
+<tr class="separator:gae0443671f978560d959eb2322e74c9e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga98714306d0043e4360f043edcd9592b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plant_growth_common.html#ga98714306d0043e4360f043edcd9592b9">GetScurveShapeParameter</a> (FLTPT x_mid, FLTPT x_end, FLTPT y_mid, FLTPT y_end, FLTPT *shape1, FLTPT *shape2)</td></tr>
+<tr class="memdesc:ga98714306d0043e4360f043edcd9592b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes shape parameters <em>shape1</em> and <em>shape2</em> for the S curve.  <a href="group___plant_growth_common.html#ga98714306d0043e4360f043edcd9592b9">更多...</a><br /></td></tr>
+<tr class="separator:ga98714306d0043e4360f043edcd9592b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabdc404d2ccad3065de8c6c747f8f4e02"><td class="memItemLeft" align="right" valign="top">
+FLTPT&#160;</td><td class="memItemRight" valign="bottom"><b>NPBiomassFraction</b> (FLTPT x1, FLTPT x2, FLTPT x3, FLTPT fr_phu)</td></tr>
+<tr class="memdesc:gabdc404d2ccad3065de8c6c747f8f4e02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Biomass fraction <br /></td></tr>
+<tr class="separator:gabdc404d2ccad3065de8c6c747f8f4e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga55680c1de98c9db1ecf494ce67ced841"><td class="memItemLeft" align="right" valign="top">FLTPT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plant_growth_common.html#ga55680c1de98c9db1ecf494ce67ced841">GetNPFraction</a> (FLTPT fr1, FLTPT fr3, FLTPT shape1, FLTPT shape2, FLTPT fr_phu)</td></tr>
+<tr class="memdesc:ga55680c1de98c9db1ecf494ce67ced841"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate the fraction of nitrogen/phosphorus in the plant biomass  <a href="group___plant_growth_common.html#ga55680c1de98c9db1ecf494ce67ced841">更多...</a><br /></td></tr>
+<tr class="separator:ga55680c1de98c9db1ecf494ce67ced841"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6e2ad58761626e7fc1110a02a8581ddf"><td class="memItemLeft" align="right" valign="top">
+FLTPT&#160;</td><td class="memItemRight" valign="bottom"><b>DoHeatUnitAccumulation</b> (FLTPT potential_heat_unit, FLTPT t_min, FLTPT t_max, FLTPT t_base)</td></tr>
+<tr class="memdesc:ga6e2ad58761626e7fc1110a02a8581ddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heat unit accumulation <br /></td></tr>
+<tr class="separator:ga6e2ad58761626e7fc1110a02a8581ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaff3a7b5d9dd119ffed8852ac102b2bb2"><td class="memItemLeft" align="right" valign="top">
+FLTPT&#160;</td><td class="memItemRight" valign="bottom"><b>RadiationUseEfficiencyAdjustByVPD</b> (FLTPT vpd, FLTPT rad_use_eff_dec_rate_with_vpd)</td></tr>
+<tr class="memdesc:gaff3a7b5d9dd119ffed8852ac102b2bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">the adjusted radiation-use efficiency by vapor pressure deficit <br /></td></tr>
+<tr class="separator:gaff3a7b5d9dd119ffed8852ac102b2bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6198cfe27579b1f01a6b50d0d4fbb5d0"><td class="memItemLeft" align="right" valign="top">
+FLTPT&#160;</td><td class="memItemRight" valign="bottom"><b>GetNormalization</b> (FLTPT distribution)</td></tr>
+<tr class="memdesc:ga6198cfe27579b1f01a6b50d0d4fbb5d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalization <br /></td></tr>
+<tr class="separator:ga6198cfe27579b1f01a6b50d0d4fbb5d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga886fc1cfc3ed05ce5493848981e06dd8"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsTree</b> (const int classification)</td></tr>
+<tr class="memdesc:ga886fc1cfc3ed05ce5493848981e06dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is tree or not <br /></td></tr>
+<tr class="separator:ga886fc1cfc3ed05ce5493848981e06dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga724cfddd83b1bfb4bd125df3c0da0296"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsAnnual</b> (const int classification)</td></tr>
+<tr class="memdesc:ga724cfddd83b1bfb4bd125df3c0da0296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is annual plant or not <br /></td></tr>
+<tr class="separator:ga724cfddd83b1bfb4bd125df3c0da0296"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaefefdda13fd09d03d2ca7e311ef65914"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsLegume</b> (const int classification)</td></tr>
+<tr class="memdesc:gaefefdda13fd09d03d2ca7e311ef65914"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is legume or not <br /></td></tr>
+<tr class="separator:gaefefdda13fd09d03d2ca7e311ef65914"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga94759903e8b9a8443953ea332a294e84"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsPerennial</b> (const int classification)</td></tr>
+<tr class="memdesc:ga94759903e8b9a8443953ea332a294e84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is perennial plant or not <br /></td></tr>
+<tr class="separator:ga94759903e8b9a8443953ea332a294e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga25cb6eab368cb0ccff40936ba82732e3"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsCoolSeasonAnnual</b> (const int classification)</td></tr>
+<tr class="memdesc:ga25cb6eab368cb0ccff40936ba82732e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is cool seanon annual plant or not <br /></td></tr>
+<tr class="separator:ga25cb6eab368cb0ccff40936ba82732e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0298f3a263af40159742e28eb6316771"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsGrain</b> (const int classification)</td></tr>
+<tr class="memdesc:ga0298f3a263af40159742e28eb6316771"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is grain or not <br /></td></tr>
+<tr class="separator:ga0298f3a263af40159742e28eb6316771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad5d36585df336654d6914a3628431969"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsPlant</b> (const int lu_id)</td></tr>
+<tr class="memdesc:gad5d36585df336654d6914a3628431969"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is plant or not <br /></td></tr>
+<tr class="separator:gad5d36585df336654d6914a3628431969"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaafd841804099dc5596deffcde3f04a97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plant_growth_common.html#gaafd841804099dc5596deffcde3f04a97">CalPlantStressByLimitedNP</a> (FLTPT u1, FLTPT u2, FLTPT *uu)</td></tr>
+<tr class="memdesc:gaafd841804099dc5596deffcde3f04a97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the plant stress factor caused by limited supply of nitrogen or phosphorus.  <a href="group___plant_growth_common.html#gaafd841804099dc5596deffcde3f04a97">更多...</a><br /></td></tr>
+<tr class="separator:gaafd841804099dc5596deffcde3f04a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p >Define some common used function in Plant growth module, e.g., PG_EPIC </p>
+<dl class="section author"><dt>作者</dt><dd>Zhiqiang Yu, Liang-Jun Zhu </dd></dl>
+<dl class="section date"><dt>日期</dt><dd>June, 2016 </dd></dl>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_ce650b3ee6c8ee1902ad5d9b217fa743.html">seims</a></li><li class="navelem"><a class="el" href="dir_f9d338a7544abb673b2d39dcadbe364c.html">src</a></li><li class="navelem"><a class="el" href="dir_64f8a13685b9f2f1d5623a66b281a23c.html">seims_main</a></li><li class="navelem"><a class="el" href="dir_d9d8c03d94c229237348b60b53b769ac.html">base</a></li><li class="navelem"><a class="el" href="dir_282b666f536972a224e9d4f4cbb22809.html">common_algorithm</a></li><li class="navelem"><a class="el" href="_plant_growth_common_8h.html">PlantGrowthCommon.h</a></li>
+  </ul>
+</div>
+</body>
+</html>

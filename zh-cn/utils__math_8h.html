@@ -1,0 +1,201 @@
+<!-- HTML header for doxygen 1.8.7-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<title>SEIMS: seims/src/ccgl/src/utils_math.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygenextra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="topbanner"><a href="https://github.com/lreis2415/SEIMS" title="SEIMS GitHub"><i class="githublogo"></i></a></div>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('utils__math_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">命名空间</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">utils_math.h 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Useful math equations in CCGL.  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<code>#include &quot;<a class="el" href="basic_8h_source.html">basic.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils__array_8h_source.html">utils_array.h</a>&quot;</code><br />
+</div>
+<p><a href="utils__math_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+命名空间</h2></td></tr>
+<tr class="memitem:namespaceccgl"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl.html">ccgl</a></td></tr>
+<tr class="memdesc:namespaceccgl"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common Cross-platform Geographic Library (CCGL) <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceccgl_1_1utils__math"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__math.html">ccgl::utils_math</a></td></tr>
+<tr class="memdesc:namespaceccgl_1_1utils__math"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic mathematics related functions <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:a4886a8f966a69949cefc46a6a3468006"><td class="memItemLeft" align="right" valign="top"><a id="a4886a8f966a69949cefc46a6a3468006" name="a4886a8f966a69949cefc46a6a3468006"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Max</b>(a,  b)&#160;&#160;&#160;((a) &gt;= (b) ? (a) : (b))</td></tr>
+<tr class="memdesc:a4886a8f966a69949cefc46a6a3468006"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return maximum value <br /></td></tr>
+<tr class="separator:a4886a8f966a69949cefc46a6a3468006"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e04209162ea72f9985338596262b657"><td class="memItemLeft" align="right" valign="top"><a id="a9e04209162ea72f9985338596262b657" name="a9e04209162ea72f9985338596262b657"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Min</b>(a,  b)&#160;&#160;&#160;((a) &gt;= (b) ? (b) : (a))</td></tr>
+<tr class="memdesc:a9e04209162ea72f9985338596262b657"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return minimum value <br /></td></tr>
+<tr class="separator:a9e04209162ea72f9985338596262b657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6e7032f5dccdc69d2946c33a916b323"><td class="memItemLeft" align="right" valign="top"><a id="aa6e7032f5dccdc69d2946c33a916b323" name="aa6e7032f5dccdc69d2946c33a916b323"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Abs</b>(x)&#160;&#160;&#160;((x) &gt;= 0 ? (x) : -(x))</td></tr>
+<tr class="memdesc:aa6e7032f5dccdc69d2946c33a916b323"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return absolute value <br /></td></tr>
+<tr class="separator:aa6e7032f5dccdc69d2946c33a916b323"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:af20e7b88a1be2b79ba671870dbc488f6"><td class="memTemplParams" colspan="2">template&lt;typename T1 , typename T2 &gt; </td></tr>
+<tr class="memitem:af20e7b88a1be2b79ba671870dbc488f6"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__math.html#af20e7b88a1be2b79ba671870dbc488f6">ccgl::utils_math::FloatEqual</a> (T1 v1, T2 v2)</td></tr>
+<tr class="memdesc:af20e7b88a1be2b79ba671870dbc488f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether v1 is equal to v2  <a href="namespaceccgl_1_1utils__math.html#af20e7b88a1be2b79ba671870dbc488f6">更多...</a><br /></td></tr>
+<tr class="separator:af20e7b88a1be2b79ba671870dbc488f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24abb95c342bc73b72c4ca2be07e358d"><td class="memItemLeft" align="right" valign="top"><a id="a24abb95c342bc73b72c4ca2be07e358d" name="a24abb95c342bc73b72c4ca2be07e358d"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>ccgl::utils_math::Expo</b> (float xx, float upper=20.f, float lower=-20.f)</td></tr>
+<tr class="memdesc:a24abb95c342bc73b72c4ca2be07e358d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the argument against upper and lower boundary values prior to doing Exponential function <br /></td></tr>
+<tr class="separator:a24abb95c342bc73b72c4ca2be07e358d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcc5c61d95bb66d927efcc538f280b01"><td class="memItemLeft" align="right" valign="top"><a id="adcc5c61d95bb66d927efcc538f280b01" name="adcc5c61d95bb66d927efcc538f280b01"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>ccgl::utils_math::Power</b> (float a, float n)</td></tr>
+<tr class="memdesc:adcc5c61d95bb66d927efcc538f280b01"><td class="mdescLeft">&#160;</td><td class="mdescRight">deal with positive and negative float numbers <br /></td></tr>
+<tr class="separator:adcc5c61d95bb66d927efcc538f280b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03b1292dfa399f8aab3748d7a881e2fb"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a03b1292dfa399f8aab3748d7a881e2fb"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__math.html#a03b1292dfa399f8aab3748d7a881e2fb">ccgl::utils_math::MaxInArray</a> (const T *a, int n)</td></tr>
+<tr class="memdesc:a03b1292dfa399f8aab3748d7a881e2fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get maximum value in a numeric array with size n.  <a href="namespaceccgl_1_1utils__math.html#a03b1292dfa399f8aab3748d7a881e2fb">更多...</a><br /></td></tr>
+<tr class="separator:a03b1292dfa399f8aab3748d7a881e2fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa076e543632f34d1a08819181d025c86"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aa076e543632f34d1a08819181d025c86"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__math.html#aa076e543632f34d1a08819181d025c86">ccgl::utils_math::MinInArray</a> (const T *a, int n)</td></tr>
+<tr class="memdesc:aa076e543632f34d1a08819181d025c86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get minimum value in a numeric array with size n.  <a href="namespaceccgl_1_1utils__math.html#aa076e543632f34d1a08819181d025c86">更多...</a><br /></td></tr>
+<tr class="separator:aa076e543632f34d1a08819181d025c86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae000fe6178a38d7aaf285a20c5c31f0"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aae000fe6178a38d7aaf285a20c5c31f0"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__math.html#aae000fe6178a38d7aaf285a20c5c31f0">ccgl::utils_math::Sum</a> (int row, const T *data)</td></tr>
+<tr class="memdesc:aae000fe6178a38d7aaf285a20c5c31f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sum of a numeric array Get sum value of a double array with size row.  <a href="namespaceccgl_1_1utils__math.html#aae000fe6178a38d7aaf285a20c5c31f0">更多...</a><br /></td></tr>
+<tr class="separator:aae000fe6178a38d7aaf285a20c5c31f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a520d9b584111701390e96fcc37a440e6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a520d9b584111701390e96fcc37a440e6"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__math.html#a520d9b584111701390e96fcc37a440e6">ccgl::utils_math::Sum</a> (int row, int *&amp;idx, const T *data)</td></tr>
+<tr class="memdesc:a520d9b584111701390e96fcc37a440e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sum of a numeric array Get sum value of a double array with size row and real index idx.  <a href="namespaceccgl_1_1utils__math.html#a520d9b584111701390e96fcc37a440e6">更多...</a><br /></td></tr>
+<tr class="separator:a520d9b584111701390e96fcc37a440e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae844cf1f68f4264f23f3a1a9fd3abfc9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae844cf1f68f4264f23f3a1a9fd3abfc9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__math.html#ae844cf1f68f4264f23f3a1a9fd3abfc9">ccgl::utils_math::BasicStatistics</a> (const T *values, int num, double **derivedvalues, T exclude=static_cast&lt; T &gt;(<a class="el" href="basic_8h.html#a7f9a29dd05181e9150cc9a1c157ee228">NODATA_VALUE</a>))</td></tr>
+<tr class="memdesc:ae844cf1f68f4264f23f3a1a9fd3abfc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate basic statistics at one time_funcs  <a href="namespaceccgl_1_1utils__math.html#ae844cf1f68f4264f23f3a1a9fd3abfc9">更多...</a><br /></td></tr>
+<tr class="separator:ae844cf1f68f4264f23f3a1a9fd3abfc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2b8ea660e592bdea483b0a04ed2605b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac2b8ea660e592bdea483b0a04ed2605b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__math.html#ac2b8ea660e592bdea483b0a04ed2605b">ccgl::utils_math::BasicStatistics</a> (const T *const *values, int num, int lyrs, double ***derivedvalues, T exclude=static_cast&lt; T &gt;(<a class="el" href="basic_8h.html#a7f9a29dd05181e9150cc9a1c157ee228">NODATA_VALUE</a>))</td></tr>
+<tr class="memdesc:ac2b8ea660e592bdea483b0a04ed2605b"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate basic statistics at one time_funcs for 2D raster data  <a href="namespaceccgl_1_1utils__math.html#ac2b8ea660e592bdea483b0a04ed2605b">更多...</a><br /></td></tr>
+<tr class="separator:ac2b8ea660e592bdea483b0a04ed2605b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf64a341f9775f563a9719d0ae85846a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__math.html#acf64a341f9775f563a9719d0ae85846a">ccgl::utils_math::ApprSqrt</a> (float z)</td></tr>
+<tr class="memdesc:acf64a341f9775f563a9719d0ae85846a"><td class="mdescLeft">&#160;</td><td class="mdescRight">approximate sqrt  <a href="namespaceccgl_1_1utils__math.html#acf64a341f9775f563a9719d0ae85846a">更多...</a><br /></td></tr>
+<tr class="separator:acf64a341f9775f563a9719d0ae85846a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae80ebec731aec6f01200c34293b69925"><td class="memItemLeft" align="right" valign="top"><a id="ae80ebec731aec6f01200c34293b69925" name="ae80ebec731aec6f01200c34293b69925"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>ccgl::utils_math::ApprLn</b> (float z)</td></tr>
+<tr class="memdesc:ae80ebec731aec6f01200c34293b69925"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximates the natural logarithm, (where the base is 'e'=2.71828) <br /></td></tr>
+<tr class="separator:ae80ebec731aec6f01200c34293b69925"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f239424286bb410c1575124aa7feed3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__math.html#a3f239424286bb410c1575124aa7feed3">ccgl::utils_math::pow_lookup</a> (const float exp, const float log_base)</td></tr>
+<tr class="memdesc:a3f239424286bb410c1575124aa7feed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">lookup for pow(a, b) function  <a href="namespaceccgl_1_1utils__math.html#a3f239424286bb410c1575124aa7feed3">更多...</a><br /></td></tr>
+<tr class="separator:a3f239424286bb410c1575124aa7feed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04a072a20921bc79f055ee351910ca41"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceccgl_1_1utils__math.html#a04a072a20921bc79f055ee351910ca41">ccgl::utils_math::ApprPow</a> (float a, float b)</td></tr>
+<tr class="memdesc:a04a072a20921bc79f055ee351910ca41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Approximates pow(a, b) based on the work of Harrison Ainsworth.  <a href="namespaceccgl_1_1utils__math.html#a04a072a20921bc79f055ee351910ca41">更多...</a><br /></td></tr>
+<tr class="separator:a04a072a20921bc79f055ee351910ca41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p >Useful math equations in CCGL. </p>
+<dl class="section remark"><dt>备注</dt><dd><ul>
+<li>1. 2018-05-02 - lj - Make part of CCGL.</li>
+<li>2. 2021-07-15 - lj - Integrate pal.math for fast pow, exp, and ln</li>
+</ul>
+</dd></dl>
+<dl class="section author"><dt>作者</dt><dd>Liangjun Zhu, zlj(a)lreis.ac.cn </dd></dl>
+<dl class="section version"><dt>版本</dt><dd>1.1 </dd></dl>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.7-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_ce650b3ee6c8ee1902ad5d9b217fa743.html">seims</a></li><li class="navelem"><a class="el" href="dir_f9d338a7544abb673b2d39dcadbe364c.html">src</a></li><li class="navelem"><a class="el" href="dir_1635fbfac89ac2806d51d330c1bf9d4d.html">ccgl</a></li><li class="navelem"><a class="el" href="dir_0346555d3ab8b65a5051eedf2d137b94.html">src</a></li><li class="navelem"><a class="el" href="utils__math_8h.html">utils_math.h</a></li>
+  </ul>
+</div>
+</body>
+</html>
