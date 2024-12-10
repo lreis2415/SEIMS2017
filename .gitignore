@@ -83,6 +83,8 @@ CALI_*/
 PSA_*/
 SA_*/
 logs
+DataValues
+DataValuesAll
 
 # ignore configuration files of demo watershed which should be created during preprocessing
 data/*/*/connected_field_units_updown*.json
